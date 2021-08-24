@@ -24,7 +24,7 @@ parse:
   myst_extended_syntax: true
 
 repository:
-  url: https://github.com/gureckis/nyu_lab_in_cognition
+  url: https://github.com/brendenlake/lab-cognition-perception
   path_to_book: /
   branch: main
 
