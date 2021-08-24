@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>18. Magnetic Resonance Imaging &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="19. What Next?" href="../24/00-what-next.html" />
+    <link rel="prev" title="17. Mental Imagery, Mental Simulation, and Mental Rotation" href="../16/00-mentalsimulation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/17/00-mri.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/chapters/17/00-mri.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   18.1. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mri-physics-and-the-physiological-basis-of-the-bold-signal">
+   18.2. MRI physics and the physiological basis of the BOLD signal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structural-and-functional-imaging-of-the-human-brain">
+   18.3. Structural and functional imaging of the human brain
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-bold-signal">
+   18.4. The BOLD signal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-simple-visual-perception-experiment">
+   18.5. A simple visual perception experiment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-hemodynamic-response-function">
+   18.6. The hemodynamic response function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-together">
+   18.7. Putting it together
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assigned-readings-and-viewings">
+   18.8. Assigned Readings (and viewings)
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="magnetic-resonance-imaging">
+<h1><span class="section-number">18. </span>Magnetic Resonance Imaging<a class="headerlink" href="#magnetic-resonance-imaging" title="Permalink to this headline">¶</a></h1>
+<div class="cell tag_remove_input docutils container">
+</div>
+<p>This chapter authored by Shannon Tubridy and <a class="reference external" href="http://gureckislab.org/~gureckis">Todd M. Gureckis</a> and is released under the <span class="xref myst">license</span> for the book. Some materials courtesy of Luke Chang’s <a class="reference external" href="https://dartbrains.org/intro.html">Introduction to fMRI Data Analysis</a>.</p>
+<img src="../../images/brain_mapping.svg" width="500"><div class="section" id="introduction">
+<h2><span class="section-number">18.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter we will turn to an introduction to neuroimaging data and specifically to functional magnetic resonance imaging (fMRI).</p>
+<p>Functional MRI is an important tool in contemporary psychological research. The development of MRI scanners that can take advantage of nuclear magnetic resonance to peer inside the human body as it lives and acts is a staggering achievement of human ingenuity, involving decades of work from physicists, engineers, radiologists, neuroscientists, and statisticians.</p>
+<p>Although we will spend some time in this section learning about how MRI scanners work and the physiological basis of the Blood Oxygenation Level Depending (BOLD) signal that is usually measured in fMRI experiments, our primary focus will be on applying and what we have learned in previous chapters to a new kind of data.</p>
+<p>A psychologist or cognitive neuroscientist considering an fMRI experiment is faced with a task that is becoming familiar to us: what kinds of questions can be asked with these data and by what techniques can we obtain satisfactory answers?  Building on previous chapters we will find ourselves with large amounts of data.</p>
+<p>Functional MRI measures the signal level from thousands of locations in the brain at repeating times throughout the course of an experiment and our goal is to understand how that signal relates to cognitive and perceptual processing. At the core of our endeavor is the goal of understanding or explaining how a measured outcome – the signal change over time – is related to known aspects of the experiment like the timing of stimulus presentation or the observed behavior of a participant.</p>
+<p>To achieve this goal we can turn to a familiar friend: regression.</p>
+<p>In previous chapters we learned how to quantify the relationship (the <em>correlation</em> or <em>covariation</em>) between two sets of observations. We also learned how to conduct a regression analysis to assess whether a <em>predictor</em> variable like amount of sleep each night could explain the variation in another variable like the amount of grumpiness each day. Doing this involved finding the best values for <span class="math notranslate nohighlight">\(B_1\)</span> and <span class="math notranslate nohighlight">\(B_0\)</span> so that we could minimize the residual error <span class="math notranslate nohighlight">\(\epsilon\)</span> in the regression equation:</p>
+<div class="math notranslate nohighlight">
+\[
+Y = b_1 X + b_0 + \epsilon
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y\)</span> was a vector of outcome measurements (grumpiness) and <span class="math notranslate nohighlight">\(X\)</span> was a vector of possible predictor values (amount of sleep).</p>
+<p>The <em>best fitting line</em> reflects the relationship between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> and the optimal values of <span class="math notranslate nohighlight">\(b_1\)</span> and <span class="math notranslate nohighlight">\(b_0\)</span> for a particular regression model (i.e., for a particular set of input and output measurements) are those values that when combined with the values in <span class="math notranslate nohighlight">\(X\)</span> produce a set of predicted data values <span class="math notranslate nohighlight">\(\hat{Y}_i\)</span> whose summed difference from the true values in <span class="math notranslate nohighlight">\(y\)</span> is minimized.</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">mtcars_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://gureckislab.org/courses/fall19/labincp/data/mtcars.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">)</span>
+
+<span class="c1"># fit a linear regression to the mpg column given hp</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;mpg ~ hp&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">mtcars_df</span><span class="p">)</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span> <span class="c1"># fit</span>
+<span class="n">params</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">resid</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">resid</span>
+<span class="c1">#display(fit.summary())</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mtcars_df</span><span class="o">.</span><span class="n">hp</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="n">mtcars_df</span><span class="o">.</span><span class="n">hp</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;hp&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">x1</span><span class="o">+</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mtcars_df</span><span class="o">.</span><span class="n">hp</span><span class="p">,</span> <span class="n">mtcars_df</span><span class="o">.</span><span class="n">mpg</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mtcars_df</span><span class="o">.</span><span class="n">hp</span><span class="p">,</span> <span class="n">mtcars_df</span><span class="o">.</span><span class="n">mpg</span><span class="o">-</span><span class="n">resid</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mf">.4</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">mtcars_df</span><span class="o">.</span><span class="n">hp</span><span class="p">,</span> <span class="n">mtcars_df</span><span class="o">.</span><span class="n">mpg</span><span class="p">,</span> <span class="n">mtcars_df</span><span class="o">.</span><span class="n">mpg</span><span class="o">-</span><span class="n">resid</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">Caption</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Black dots represent data points. The blue line is the best fit regression line. The white dots repesent the predicted location of each black dot. The red lines show the error between each black dot and the regression line. The blue line is the best fit line because it minimizes the error shown by the red lines.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mri_6_0.png" src="../../_images/00-mri_6_0.png" />
+<div class="output text_html"><div class="alert alert-info" role="alert"><b>Figure 1.0</b>. Black dots represent data points. The blue line is the best fit regression line. The white dots repesent the predicted location of each black dot. The red lines show the error between each black dot and the regression line. The blue line is the best fit line because it minimizes the error shown by the red lines.</div></div></div>
+</div>
+<p>We will use the same approach to understanding fMRI data: we identify factors such as which stimuli were being presented at different points in time that we believe might impact the measured fMRI signal for some parts of the brain.</p>
+<p>We then use the timing of stimulus presentation as our predictor, <span class="math notranslate nohighlight">\(X\)</span>, and conduct a regression analysis <em>for each part of the brain</em>, putting the timecourse of activation for that region into <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<img src="../../images/mri_regression_overview.svg" width="500"><p>By assessing which parts of the brain are well explained by the “model” of the response specified by the regression we can then make inferences about how different parts of the brain are related to different kinds of perception and cognition.</p>
+<p>From there we can make beautiful maps like in the figure above that shows <em>voxels</em>, or 3D pixels, located in the primary visual cortex of the brain whose timeseries of BOLD signal activation is significantly related our cognitive or perceptual predictor which in this case is the presence or absence of visual stimulation.</p>
+<p>There are a number of steps to go through before we get to that point, but at the core of our approach are many of same tools we have seen already.</p>
+<p>Let’s go!</p>
+</div>
+<div class="section" id="mri-physics-and-the-physiological-basis-of-the-bold-signal">
+<h2><span class="section-number">18.2. </span>MRI physics and the physiological basis of the BOLD signal<a class="headerlink" href="#mri-physics-and-the-physiological-basis-of-the-bold-signal" title="Permalink to this headline">¶</a></h2>
+<p>We could spend a whole semester (or all of graduate school, or a whole career!) acquiring a deep understanding of the physics underlying MRI.</p>
+<p>In this class we are primarily concerned with learning about concepts and tools that are commonly used to understand cognitive psychological questions so we will spend the bulk of our time in this unit focused on what to do once we have fMRI data, but there is a wealth of information available for people interested in other aspects of the MRI signal and how it is measured.</p>
+<p>In particular there are excellent videos from Tor Wager and Martin Lindquist’s Principles of fMRI Coursera class.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=XsDXxgjEJVY">Basic MRI Physics</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=jG2WQpgpnMs">fMRI Signal and BOLD Physiology</a></p></li>
+</ul>
+<p>Nonetheless, let’s introduce some key ideas around the workings of MRI scanners in general and the BOLD signal, which is the basis for functional MRI, in particular.</p>
+<img src="../../images/scanner_equipment.png" width="500"><p>Obtaining MRI images requires a dedicated MRI center filled with equipment centered around the MRI scanner itself. The basic procedure is to put a person inside of a big magnet where the protons in their body align with the magnetic field, apply energy in the form of radio waves which is absorbed by specific parts of the body, and then measure that energy as it is released from the system.</p>
+<img src="../../images/scanner_schematic.png" width="500"><p>You will find more information in the lectures linked above, but at the core of MRI scanning is nuclear magnetic resonance (<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/B9780123848628000042">NMR</a>).</p>
+<p>The key insight is that when some object (like a brain) is in a strong magnetic field, the protons in that material tend to align themselves with the orientation of the magnetic field. In the image below the strong magnetic field (corresponding to the tube in the MRI scanner) is in the <span class="math notranslate nohighlight">\(z\)</span> direction and the red arrow indicates the “net magnetization” pointing in this direction which can be thought of as reflecting the overall direction of magnetic alignment for the billions of atomic nuclei in that area.</p>
+<p>By introducing a pulse of radio frequency energy at a specific, carefully chosen frequency, the MRI scanner pushes some number of atoms out of alignment with the primary magnetic field, moving the net magnetization out of alignment with the <span class="math notranslate nohighlight">\(z\)</span> axis.</p>
+<img src="../../images/RF_pulse.png" width="500"><p>After the RF pulse is turned off, the out-of-alignment protons are pointing into the <span class="math notranslate nohighlight">\(xy\)</span> plane, but as they release absorbed energy, they move back into aligment with the primary magnetic field pointing in the <span class="math notranslate nohighlight">\(z\)</span> direction. Measuring this chacteristic move back into alignment with the primary magnetic field is the basis of MRI measurements.</p>
+<p>A key to MRI is the knowledge that different kinds of atomic nuclei have different <em>resonant frequencies</em>. This knowledge guides the choise of RF pulse frequency described above, allowing researchers to target different kinds of materials. The resonant frequency is also known as the <a class="reference external" href="https://www.mr-tip.com/serv1.php?type=db1&amp;dbs=Larmor%20Frequency">Larmor frequency</a> and is given by the Larmor equation <span class="math notranslate nohighlight">\(f_0 = \gamma B_0\)</span> with <span class="math notranslate nohighlight">\(\gamma\)</span> corresponding to the gyromagnetic ratio and <span class="math notranslate nohighlight">\(B_0\)</span> the strength of the magnetic field. The gyromagnetic ratio is different for different kinds of atomic nuclei (e.g. Hydrogen vs Helium vs Carbon) and these values are known.</p>
+<p>Combining the known gyromagnetic ratio <span class="math notranslate nohighlight">\(\gamma\)</span> with the known magnet strength <span class="math notranslate nohighlight">\(B_0\)</span>, a resonant frequency can be chosen to target a specific kind of atom. By introducing energy into the system at that frequency and then measuring the release of that energy an MRI scanner can record how much of that kind of atom was present at the time of the measurement. This procedure is repeated for many locations in the 3D space occupied by the object being scanned, resulting in a 3D image where each <em>voxel</em>, or 3D pixel, has an intensity corresponding to the measurement just described.</p>
+<p>Although we will be talking about MRI in the context of imaging the structure and activity in the human brain, the principles of NMR leveraged by MRI can be used to image many kinds of material. Many people have MRI scans taken of other parts of their body in a medical context in order to detect damage to soft tissue. Other people do things like make cool pictures of the inside of fruits (image from the <a class="reference external" href="http://insideinsides.blogspot.com/">Inside Insides</a> blog).</p>
+<p>Here is an MRI scan of a pear.</p>
+<img src="http://1.bp.blogspot.com/-hss278rTMjk/VZK6ddHIIlI/AAAAAAAArlI/bwgnqZucNVI/s1600/PearHIRES.gif" width="400">
+<p>Or maybe you prefer papaya?</p>
+<img src="../../images/papayafmri.gif" width="400"></div>
+<div class="section" id="structural-and-functional-imaging-of-the-human-brain">
+<h2><span class="section-number">18.3. </span>Structural and functional imaging of the human brain<a class="headerlink" href="#structural-and-functional-imaging-of-the-human-brain" title="Permalink to this headline">¶</a></h2>
+<p>Fruits are interesting and it’s fun to see them in the scanner, but you’re in this class because you are (hopefully) interested in how human cognition and perception, so let’s talk about the brain.</p>
+<p>There are two primary kinds of MR images that make up the bulk of data collected in human neuroimaging. This figure shows a structural and a functional image of the same brain.</p>
+<img src="../../images/struct_func.svg" width="500">
+<p><em><strong>Structural</strong></em> images give a static, meaning no change over time, image that is tuned to detect differences between gray matter and white matter in the brain. These structural images do not give any information about what was happening at each location in the brain but they provide high spatial resolution that enables analysis of the anatomy of that brain.</p>
+<p><em><strong>Functional</strong></em> images are the data acquired in <em><strong>f</strong></em>MRI. Functional MRI is tuned to detect changes in the Blood Oxygenation Level Dependent (BOLD) signal (discussed below). The BOLD signal derives from changes in the oxygen level of blood that are related to neural activity. Although the spatial resolution of fMRI is much worse than structural MRI, fMRI measures a signal that changes from moment to moment as neural activity waxes and wanes and so it provides an indirect measurement of neural activity over time.</p>
+<img src="../../images/brain_basics.svg" width="500">
+<p>The data obtained from these two types of scans differ in several ways. Structural MRI results in a single <em><strong>volume</strong></em> which is the 3D box corresponding to the area scanned by the MRI machine. This volume is composed of individual <em><strong>voxels</strong></em> which are like three-dimensional pixels (the green and blue boxes in the image above). Voxels are the basic spatial unit of measurement in MRI and in structural MRI like the image above they are usually around 1mm x 1mm x 1mm. The MRI machine measures one number per voxel, and in structural MRI there is a single volume because we do not expect the anatomy to change across the timescale of the scanning session. This results in a three-dimensional dataset.</p>
+<p>Functional MRI data also contains volumes composed of individual voxels. In fMRI these voxels tend to be in the size range of 3mm x 3mm x 3mm, but unlike structural MRI we get a measurement from each voxel at each timestep of the experiment. The unit of time in MRI is a <em><strong>TR</strong></em> (time to repetition) which is the time it takes to make a single measurement from each voxel in the volume. In fMRI this is usually in the range of 1 to 3 seconds.</p>
+<p>In contrast to structural MRI which is measuring signal that distinguishes different tissue types from each other, fMRI is measuring the BOLD signal which changes at each moment in time in response to nearby neural activity. This means an fMRI dataset is four-dimensional, containing a volume of <span class="math notranslate nohighlight">\(N\)</span> voxels measured at each of <span class="math notranslate nohighlight">\(T\)</span> timepoints. Then, for each voxel (corresponding to an <span class="math notranslate nohighlight">\(x,y,z\)</span> coordinate in the 3D volume) there is a timeseries of BOLD activation measured during the course of the experiment.</p>
+</div>
+<div class="section" id="the-bold-signal">
+<h2><span class="section-number">18.4. </span>The BOLD signal<a class="headerlink" href="#the-bold-signal" title="Permalink to this headline">¶</a></h2>
+<p>The development of Blood Oxygination Level Depending (BOLD) fMRI, based on work by Seiji Ogawa, was a major advance in MRI scanning. The key to BOLD imaging is the insight that the magnetic properties of blood change depending on the level of oxygen in the blood and that the level of oxygen in a given quantity of blood is related to metabolic activity.</p>
+<p>For brain imaging this enables an indirect measurement of neural activity because neural activity is <em>very</em> energy dependent, requiring ATP for ion transport channels at the synapse level. Blood vessels innervate the brain in order to support these energy needs by delivering oxygen to facililtate ATP production. Neural activity causes consumption of oxygen from the blood in the immediate area of the active neurons. This causes a change to the magnetic properties of that blood. This is followed by an increase of oxygenated blood flowing into the area, leading to further changes in the magnetic properties of the blood. These changing mangetic properties of blood associated with neural activity are the changes in BOLD signal we measure over time for each voxel.</p>
+<img src="../../images/hemo_bold.svg" width="500">
+<p>Although the BOLD signal is an indirect measurement of neural activity – we aren’t measuring neurons themselves – these magnetic properties of de/oxygenated blood and its’ proximity to neural activity is what enables scientists to use fMRI to probe the engagement of different parts of the brain as people engage in cognition and perception.</p>
+</div>
+<div class="section" id="a-simple-visual-perception-experiment">
+<h2><span class="section-number">18.5. </span>A simple visual perception experiment<a class="headerlink" href="#a-simple-visual-perception-experiment" title="Permalink to this headline">¶</a></h2>
+<p>Let’s take a look at an example of how one might conduct an experiment measuring how the brain responds to visual stimulation (<a class="reference external" href="https://www.pnas.org/content/89/12/5675.long">Kwong et al., PNAS, 1992</a>).</p>
+<img src="../../images/BOLD_V1.svg" width="500">
+<p>The pattern on the left shows a salient visual stimulus that was presented to the participant. The stimulus presentation alternated with periods of blank screen.</p>
+<p>The center of the figure shows example <em>slices</em> through the middle of the 3D BOLD data volume during periods of no visual stimulation (“off”) and during the times when the visual pattern was shown (“on”). The brain slices are oriented as if you were looking down at the top of the head, with the front of the head pointing to the top of the image. If you examine the intensity of the voxels near the back of the head (bottom of the slices) you might notice that they are brighter in the “on” periods than during the “off” periods.</p>
+<p>Another way to look at the data is to take the activation from one or several voxels and plot the timeseries of activation through the course of the experiment as is shown in the right side of the figure. Overlaid on the timecourse are indications of when the visual stimulation was off and when it was on.</p>
+<p>From this figure it is clear that the plotted voxel timecourse seems to have a relationship with the visual stimulation. In particular we can see that when the visual stimulation was on the signal was high and when it was off the signal was low.</p>
+<p>Put another way, it seems like the variation in the timecourse of the visual stimulation is related to the variation of the signal in the voxel timecourse. One might even say that there seems to be some <em>covariation</em> in the two timecourses.</p>
+</div>
+<div class="section" id="the-hemodynamic-response-function">
+<h2><span class="section-number">18.6. </span>The hemodynamic response function<a class="headerlink" href="#the-hemodynamic-response-function" title="Permalink to this headline">¶</a></h2>
+<p>In the simple visual experiment example we just saw it seems clear that there is a relationship between the visual stimulation (“on” or “off”) and the level of signal in voxels from the visual cortex. But if you look closely at the figure you might also notice that there is a delay between the onset of a visual stimulus (like at timepoint 60) and the rise in signal intensity measured in the brain. This delay looks to be on the order of seconds, but we know that neurons in the visual cortex respond to visual stimulation within milliseconds of it appearing on the retina.</p>
+<p>This lag between stimulus onset (and presumed neural response to the stimulus) and the measured BOLD signal results from what is known as the Hemodynamic Response Function (HRF).</p>
+<img src="../../images/stim_bold_lag.png" width=500>
+<p>The HRF is the timecourse of BOLD activation in response to a brief neural event. It was originally derived empirically as the measured BOLD response in visual cortex to a brief <em>impulse</em> of stimulation: researchers flashed extremely brief visual stimulation which is known to lead to action potentials in primary visual cortex (V1) within milliseconds of stimulus onset and this neural activity stops when the visual input stops. By measuring the BOLD response in visual cortex in response to this visual stimulation researchers determined that neural activity leads to BOLD signal that has a characteristic shape and timing.</p>
+<img src="../../images/hrf_wiki_plus_labels.svg" width=500>
+<p>The interpretation of the HRF is that whenever there is neural activity above some threshold we should expect changes in the BOLD signal to be measurable in that area and this BOLD measurement will follow a characteristic shape, beginning to rise several seconds after the neural activity (stimulus presentation), peaking approximately 4-8 seconds after stimulus onset.</p>
+<p>If you look back at the visual stimulation experiment figure and focus on the line indicating “on” for a stimulus and then look at the shape of the rising signal intensity during that period you’ll see that it looks similar to our HRF schematic here where the stimulus onset is followed several seconds later by a slow rise to the peak response.</p>
+</div>
+<div class="section" id="putting-it-together">
+<h2><span class="section-number">18.7. </span>Putting it together<a class="headerlink" href="#putting-it-together" title="Permalink to this headline">¶</a></h2>
+<p>In this reading we saw an introduction to how MRI images are created, the kinds of signals we can measure from the brain, and how we might begin to relate stimulus presentation to the measured BOLD signal to understand what different brain areas are doing.</p>
+<p>But there are thousands of voxels in the brain and we would like a way to quantitatively assess whether their activation can be explained by the experimental protocol.</p>
+<p>The primary way of doing this is using regression, where the timecourse of activation from each voxel is regressed on the timeseries of stimulus presentation (taking into consideration the delay caused by the HRF).</p>
+<img src="../../images/mri_regression_overview.svg" width="500">
+<p>This procedure results in a best fitting <span class="math notranslate nohighlight">\(b_1\)</span> estimate for each voxel – indicating how much a change in the <span class="math notranslate nohighlight">\(X\)</span> values (stimulus off or on in the visual experiment example) causes a change in the <span class="math notranslate nohighlight">\(Y\)</span> values (the activation at each timepoint for a voxel) – and the sum of the squared residuals telling us how much of that voxel’s activation was explained by the best fitting prediction.</p>
+<p>We can then generate maps showing which parts of the brain might be related to a cognitive or perceptual task by using the structural MRI image and coloring those voxels for which the regression model provided a good explanation of the data.</p>
+<p>In the example here you can see primary visual cortex highlighted on a structural scan oriented so that the person is facing to the right of the screen and their visual cortex is on the left of the screen. The orange color reflects how well the voxel timecourse was fit by the predictor timecourse, and the image is thresholded to only show those voxels for which the regression provided a good fit.</p>
+<p>This week in lab we will dive into the details of this procedure, fitting our own regression model to a dataset obtained during an auditory perception experiment.</p>
+</div>
+<div class="section" id="assigned-readings-and-viewings">
+<h2><span class="section-number">18.8. </span>Assigned Readings (and viewings)<a class="headerlink" href="#assigned-readings-and-viewings" title="Permalink to this headline">¶</a></h2>
+<p>Watch the “Basic MR Physics” and “fMRI Signal and BOLD Physiology” lectures from Lindquist and Wager’s Coursera course (they’re about 12 minutes each):</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=XsDXxgjEJVY">Basic MRI Physics</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=jG2WQpgpnMs">fMRI Signal and BOLD Physiology</a></p></li>
+</ul>
+<p>We are going to carry on with what we learned about regression, so please review (or catch up on…) the Regression chapter from this course:</p>
+<ul class="simple">
+<li><p>http://gureckislab.org/courses/fall19/labincp/chapters/06/00-linearregression.html</p></li>
+</ul>
+<p>When we begin analyzing fMRI data ourselves we will confront the issue of multiple comparisons.</p>
+<p>Briefly, the issue is that when we do a separate regression analysis for each voxel we are doing thousands of statistical comparisons or tests.</p>
+<p>If we consider the conventional statistical signficicance approach where we accept a statistical test as showing a real result if it has less than 5% chance of showing a type 1 error (aka a false positive aka less than 5% chance of being due to chance) we have a problem. If there are 10,000 voxels in the brain, a 5% false positive rate would mean we could expect around 500 voxels to be falsely indentified as related to the <span class="math notranslate nohighlight">\(X\)</span> predictor.</p>
+<p>During the next part of lab we will consider this issue and ways to overcome it. As a warm up take a look at this short article:</p>
+<ul class="simple">
+<li><p>https://towardsdatascience.com/the-multiple-comparisons-problem-e5573e8b9578</p></li>
+</ul>
+<p>As well as review the “Correlation and Random chance” section in the Correlation chapter from this course:</p>
+<ul class="simple">
+<li><p>http://gureckislab.org/courses/fall19/labincp/chapters/05/00-correlation.html#Correlation-and-Random-chance</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/17"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../16/00-mentalsimulation.html" title="previous page"><span class="section-number">17. </span>Mental Imagery, Mental Simulation, and Mental Rotation</a>
+    <a class='right-next' id="next-link" href="../24/00-what-next.html" title="next page"><span class="section-number">19. </span>What Next?</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

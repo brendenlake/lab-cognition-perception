@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>19. What Next? &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Intro to Cognitive Science ICA" href="../00/cogsci-ica.html" />
+    <link rel="prev" title="18. Magnetic Resonance Imaging" href="../17/00-mri.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/24/00-what-next.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/chapters/24/00-what-next.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#this-website">
+   19.1. This website
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#downloading-your-files">
+   19.2. Downloading your files
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-more-about-cognitive-science">
+   19.3. Learning more about Cognitive Science
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#research-opportunities-at-nyu-in-the-psychology-department">
+   19.4. Research Opportunities at NYU in the Psychology Department
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-undergrad-educational-programs">
+   19.5. Post-Undergrad Educational Programs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-python-learning">
+   19.6. More Python learning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cool-things-you-can-do-with-python-that-aren-t-just-statistical-analyses">
+   19.7. Cool things you can do with Python that aren’t just statistical analyses
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cheat-sheets">
+   19.8. Cheat Sheets
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="what-next">
+<h1><span class="section-number">19. </span>What Next?<a class="headerlink" href="#what-next" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This chapter authored by <a class="reference external" href="http://gureckislab.org/~gureckis">Todd M. Gureckis</a> is released under the <span class="xref myst">license</span> for the book.</p>
+</div>
+<p>Congratulations! You made it through <strong>Lab in Cognition and Perception</strong>.  Hopefully you learned some new skills as well as got to know more about psychological research in cognition, perception, and cognitive science.  At the end of the semester, I frequently get requests from students looking for what they can do in the future to continue to develop their skills. The good news is that in this course you learned a little bit of Python programming and this opens up and world of fun things you can play with and learn.</p>
+<div class="section" id="this-website">
+<h2><span class="section-number">19.1. </span>This website<a class="headerlink" href="#this-website" title="Permalink to this headline">¶</a></h2>
+<p>Feel free to bookmark this class website and refer back to the readings and videos anytime!  I will aim to keep these materials alive at this link for as long as I can and all the materials are free to everyone to download.  Remember that every chapter of the book/readings is itself a Jupyter notebook (with a bit of extra “book” formatting) and you can download it and run it yourself.  Refer back to the chapter “<a class="reference external" href="../02/00-jupyter.html#every-chapter-of-the-class-website-textbook-is-a-notebook">Introduction to Jupyter</a>” for a remind of how you can access and make the chapters computable.</p>
+<p>Although at the end of the semester the university will delete your personal Jupyterhub instance, free Jupyter computing nodes are available on several places:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://colab.research.google.com">Google Collaboratory</a></p></li>
+<li><p><a class="reference external" href="https://mybinder.org">Mybinder.org</a></p></li>
+<li><p><a class="reference external" href="https://www.kaggle.com/kernels">Kaggle Kernels</a></p></li>
+<li><p><a class="reference external" href="https://cocalc.com/doc/jupyter-notebook.html">CoCalc</a></p></li>
+</ul>
+<p>You can simply download the notebooks from this book or the exercises we did this semester and you can uploading them these services and run them (although you might need to install some of the specialized statistics packages which are also free).
+You can also install Python and Jupyter on your own computer.  <a class="reference external" href="https://www.anaconda.com">Anaconda</a> is a popular way to do this.</p>
+</div>
+<div class="section" id="downloading-your-files">
+<h2><span class="section-number">19.2. </span>Downloading your files<a class="headerlink" href="#downloading-your-files" title="Permalink to this headline">¶</a></h2>
+<p>Speaking of, some students would like to download all the work they did this semester.  To make this easier I have shared <a class="reference internal" href="zipall.html"><span class="doc std std-doc">this simple Jupyter notebook</span></a> which was provided by a previous student in this class!  Download it and upload it to the class Jupyterhub using the “upload” option in the file browser menu.  Then run the cell in the notebook and it will create a .zip file of all the files in your personal directory.  You can then download this zip file in the Jupyter file browser interface.</p>
+</div>
+<div class="section" id="learning-more-about-cognitive-science">
+<h2><span class="section-number">19.3. </span>Learning more about Cognitive Science<a class="headerlink" href="#learning-more-about-cognitive-science" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned at the start of the course, Cognitive Science is a dynamic, interdisciplinary field working on some of the hardest problems in the sciences.  Research in cognitive science touches on issues in artificial intelligence, education, human-computer interaction, data analysis and statistics, computer science, neuroscience, evolution, anthropology, linguistics, and more.  There are several resources for learning more about cognitive science.</p>
+<p>First, I run a web page about <a class="reference external" href="http://gureckislab.org/cogsci/index.html">Computational Cognitive Science at NYU</a>.  This includes resources and links to faculty who do research on cognitive science topics.  Check here to learn about about the NYU faculty working in this area.  Most faculty have a website which lists their publications, and reading these papers can be an excellent way to familiarize yourself with the field.</p>
+<p>Sam Gershman has a great <a class="reference external" href="http://gershmanlab.webfactional.com/docs/Getting_started_cogsci.pdf">reading list</a> for students looking to learn more about Cognitive Science.</p>
+<p>This is the website of the <a class="reference external" href="https://cognitivesciencesociety.org">Cognitive Science Society</a>.  A related society devoted the experimental psychology is the <a class="reference external" href="https://www.psychonomic.org">Psychonomic Society</a>.  The <a class="reference external" href="https://www.visionsciences.org">Vision Sciences Society</a> focuses on perception and vision.  All of these organizations have resources to support new students interested in the field including videos and other resources for learning more about the field (and scholarship to attend the annual conferences and workshops).</p>
+</div>
+<div class="section" id="research-opportunities-at-nyu-in-the-psychology-department">
+<h2><span class="section-number">19.4. </span>Research Opportunities at NYU in the Psychology Department<a class="headerlink" href="#research-opportunities-at-nyu-in-the-psychology-department" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the <a class="reference external" href="http://gureckislab.org/cogsci/index.html">Computational Cognitive Science at NYU</a> website, the Psychology department has a <a class="reference external" href="https://as.nyu.edu/content/nyu-as/as/departments/psychology/undergraduate/research-opportunities.html">webpage</a> about how to get involved in research.</p>
+</div>
+<div class="section" id="post-undergrad-educational-programs">
+<h2><span class="section-number">19.5. </span>Post-Undergrad Educational Programs<a class="headerlink" href="#post-undergrad-educational-programs" title="Permalink to this headline">¶</a></h2>
+<p>Many students who take the lab course are junior or seniors in the Psychology major.  As a result, the looming pressure of “what do I want to do with my life when I grow up?” is settling in.  There are several different avenues you might consider if you enjoyed this course:</p>
+<ol class="simple">
+<li><p>A Masters (MA) degree.  A MA degree is typically a two year program which gives graduate training in a field.  NYU has two very relevant MA programs for students who enjoyed this class.  One is the NYU Psychology <a class="reference external" href="https://as.nyu.edu/content/nyu-as/as/departments/psychology/graduate/ma-psychology.html">MA program</a> which has a focus for Cognition/Perception and Neuroscience among other subfields.  In addition the NYU Center for Data Science <a class="reference external" href="https://cds.nyu.edu/masters-program/">MA program</a> is one of the most selective and successful programs in Data Science in the world.</p></li>
+<li><p>A Phd degree: For those that really have passion and who earned a top grade in the class I might expect a PhD could be well suited.  A PhD will spend a lot of time working on data analysis and exploring the topics we covered in class.  There isn’t enough room here to give a full summary of what is required to consider a PhD but happy to chat about it.</p></li>
+</ol>
+</div>
+<div class="section" id="more-python-learning">
+<h2><span class="section-number">19.6. </span>More Python learning<a class="headerlink" href="#more-python-learning" title="Permalink to this headline">¶</a></h2>
+<p>This is a collection of useful python resources including videos and online tutorials.  This can help student how have less familiarity with programming in general or with python specifically.</p>
+<ul class="simple">
+<li><p>A nice, free textbook <a href="https://www.digitalocean.com/community/tutorials/digitalocean-ebook-how-to-code-in-python?refcode=4d2af78748bd&utm_source=ebook&utm_medium=ebook&utm_campaign=pythonebook">”How to Code in Python”</a> by Lisa Tagliaferri</p></li>
+<li><p>CodeAcademy has a variety of courses on data analysis with Python.  There is a free tutorial on Python 2.0.  Although this class uses Python 3.0 and there are minor difference, a beginning programmer who didn’t want to pay for the code academy content might benefit from these tutorials on basic python syntax: <a class="reference external" href="https://www.codecademy.com/learn/learn-python">Python 2.0 tutorial</a></p></li>
+<li><p>Microsoft has an <a class="reference external" href="https://docs.microsoft.com/en-us/learn/modules/intro-to-python/?WT.mc_id=python-c9-niner">Introduction to Python</a> video series.  Each video is about 10 minutes long and introduces very basic python features.</p></li>
+<li><p>A nice multi-part tutorial on <a class="reference external" href="https://medium.com/&#64;neuralnets/statistical-data-visualization-series-with-python-and-seaborn-for-data-science-5a73b128851d">Data Visualization with Python and Seaborn</a> that gets into many more details about Seaborn than we have time to cover in class.</p></li>
+<li><p>A six hour (free) video course on <a href="https://www.youtube.com/watch?v=_uQrJ0TkZlc">basic Python programming</a> on youtube</p></li>
+</ul>
+</div>
+<div class="section" id="cool-things-you-can-do-with-python-that-aren-t-just-statistical-analyses">
+<h2><span class="section-number">19.7. </span>Cool things you can do with Python that aren’t just statistical analyses<a class="headerlink" href="#cool-things-you-can-do-with-python-that-aren-t-just-statistical-analyses" title="Permalink to this headline">¶</a></h2>
+<p>In this class we emphasized data analysis and statistical analysis with Python.  However, Python is used for much more than this!  Here are some example skills you can build upon what you learned this semester:</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython">Program a robot with Python</a></p></li>
+<li><p><a class="reference external" href="http://jakobglock.me/projects/2018-11-24/selected-generative-art">Make art!</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=AGpKm0pdTMM">Make a bot to buy Supreme stuff</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/how-to-build-your-own-neural-network-from-scratch-in-python-68998a08e4f6">Build a neural network</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/better-programming/building-your-first-website-with-flask-part-1-903a8b44e806">Build a custom website</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/dp/1593275994/?tag=devdetailpage02-20">Automate your life with python</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/swlh/using-python-to-connect-to-stravas-api-and-analyse-your-activities-dummies-guide-5f49727aac86">Download your workout data from Strava and analyze it</a></p></li>
+<li><p><a class="reference external" href="https://www.pygame.org/docs/">Write your own video game</a></p></li>
+<li><p><a class="reference external" href="http://www.pythonchallenge.com">Give yourself a Python challenge</a></p></li>
+<li><p><a class="reference external" href="https://www.classcentral.com/course/independent-python-for-data-journalists-analyzing-money-in-politics-9092">Become a data journalist and use python to explore political issues</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=HAOduvba7mE">Learn Python and computer modeling of climate change</a></p></li>
+<li><p><a class="reference external" href="https://pvlib-python.readthedocs.io/en/stable/index.html">Design a solar system for your house</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/analytics-vidhya/how-to-scrape-thousands-of-adoptable-pet-photos-from-petfinder-using-petpy-api-part-1-b55e3a890845">Find a new pet</a></p></li>
+</ol>
+</div>
+<div class="section" id="cheat-sheets">
+<h2><span class="section-number">19.8. </span>Cheat Sheets<a class="headerlink" href="#cheat-sheets" title="Permalink to this headline">¶</a></h2>
+<p>Cheat sheets are short 1-2 page PDF documents that give a quick visual summary of the many options or commands within a library.  A few examples relevant for data analysis in psychology are provided here:</p>
+<ul class="simple">
+<li><p><a href="images/Pandas_Cheat_Sheet.pdf">Pandas Cheat Sheet</a></p></li>
+<li><p><a href="images/Python_Seaborn_Cheat_Sheet.pdf">Seaborn Cheat Sheet</a></p></li>
+<li><p><a href="images/beginners_python_cheat_sheet_pcc_all.pdf">Beginner Python Cheat Sheet</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/24"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../17/00-mri.html" title="previous page"><span class="section-number">18. </span>Magnetic Resonance Imaging</a>
+    <a class='right-next' id="next-link" href="../00/cogsci-ica.html" title="next page">Intro to Cognitive Science ICA</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

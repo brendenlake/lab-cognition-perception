@@ -1,0 +1,486 @@
+from IPython.core.display import HTML, Markdown, display
+
+import numpy.random as npr
+import numpy as np
+import pandas as pd
+import pingouin as pg
+import seaborn as sns
+#from cycler import cycler
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+#import statsmodels.formula.api as smf
+import ipywidgets as widgets
+# from matplotlib.patches import Polygon
+# from matplotlib.gridspec import GridSpec
+
+from myst_nb import glue # for the Jupyter book chapter
+
+zeppo_df=pd.read_csv('http://gureckislab.org/courses/fall19/labincp/data/zeppo.csv',index_col=0)
+zeppo_df.columns=["grades"]
+zeppo_df.grades
+
+zeppo_df.grades.mean()
+
+sns_fig=sns.displot(zeppo_df.grades,bins=np.arange(31,101,5),kde=False)
+
+x=np.arange(20,101)
+y=stats.norm.pdf(x,67.5,9.5)
+plt.plot(x,y*100)  # just for display purposes scaling the size of the normal distribution
+#plt.show()
+
+glue("zeppo_fig",sns_fig.fig,display=False)
+
+fig, ax = plt.subplots(1,2,figsize=(10,4))
+
+
+x = np.linspace(-5,30,100)
+x2 = np.linspace(-5,30,100)
+y=stats.norm.pdf(x, 12,3.5)
+y2=stats.norm.pdf(x2,15,3.5)
+
+ax[0].plot(x,y)
+ax[0].set_ylabel("probability")
+ax[0].set_xlabel("value of X")
+ax[0].set_title("null hypothesis")
+ax[0].set_ylim(0,0.13)
+ax[0].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[0].plot([12,12],[0,0.113],color='k')
+ax[0].plot([8,12],[0.06,0.06],color='r')
+ax[0].set_xticklabels([])
+ax[0].set_yticklabels([])
+ax[0].annotate("$\sigma$ = $\sigma_0$", xy=(2,0.06),xytext=(2,0.06))
+ax[0].annotate("$\mu$ = $\mu_0$", xy=(10,0.12),xytext=(10,0.12))
+
+
+
+
+
+ax[1].plot(x,y)
+ax[1].set_ylabel("probability")
+ax[1].set_xlabel("value of X")
+ax[1].set_title("alternative hypothesis")
+ax[1].set_ylim(0,0.13)
+ax[1].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[1].plot([8,12],[0.06,0.06],color='r')
+ax[1].plot([18,18],[0,0.113],color='k')
+ax[1].annotate("$\sigma$ = $\sigma_0$", xy=(2,0.06),xytext=(2,0.06))
+ax[1].annotate("$\mu \\neq \mu_0$", xy=(16,0.12),xytext=(16,0.12))
+ax[1].set_xticklabels([])
+ax[1].set_yticklabels([])
+
+sns.despine(top=True, right=True)
+
+#plt.show()
+glue("ztest_hypo_fig",fig,display=False)
+
+pd.DataFrame({"desired alpha level": [.1, 0.05, 0.01, 0.001], "two-sided test": [1.644854,1.959964,2.575829,3.290527],"one-sided test":[1.281552,1.644854,2.326348,3.090232]})
+
+fig, ax = plt.subplots(1,1,figsize=(10,6))
+x=np.linspace(-3.5,3.5,100)
+y=stats.norm.pdf(x,0,1.0)
+
+ax.plot(x,y)
+ax.set_ylabel("probability")
+ax.set_xlabel("value of z statistic")
+ax.set_title("Two Sided Test")
+#ax.set_ylim(0,0.5)
+#ax.set_xlim(-3,3)
+ax.fill_between(x,y,where=x<-1.96,interpolate=True,facecolor='lightblue',alpha=0.2,hatch='/',edgecolor='b')
+ax.fill_between(x,y,where=x>1.96,interpolate=True,facecolor='lightblue',alpha=0.2,hatch='/',edgecolor='b')
+ax.set_xticks([-1.96, 0, 1.96])
+#ax.set_yticklabels([])
+
+
+sns.despine(top=True, right=True, left=True)
+
+#plt.show()
+glue("ztest_twoside_fig",fig,display=False)
+
+fig, ax = plt.subplots(1,1,figsize=(10,6))
+
+
+x=np.linspace(-3.5,3.5,100)
+y=stats.norm.pdf(x,0,1.0)
+
+ax.plot(x,y)
+ax.set_ylabel("probability")
+ax.set_xlabel("value of z statistic")
+ax.set_title("One Sided Test")
+ax.fill_between(x,y,where=x>1.64,interpolate=True,facecolor='lightblue',alpha=0.2,hatch='/',edgecolor='b')
+ax.set_xticks([0, 1.64])
+#ax.set_yticklabels([])
+
+
+sns.despine(top=True, right=True, left=True)
+
+#plt.show()
+glue("ztest_oneside_fig",fig,display=False)
+
+zeppo_df=pd.read_csv('http://gureckislab.org/courses/fall19/labincp/data/zeppo.csv',index_col=0)
+zeppo_df.columns=["grades"]
+sample_mean = zeppo_df.grades.mean()
+print(sample_mean)
+
+mu_null = 67.5
+sd_true = 9.5 
+
+N = len( zeppo_df.grades )
+print( N )
+
+sem_true = sd_true / np.sqrt(N)
+print(sem_true)
+
+z_score = (sample_mean - mu_null) / sem_true
+print( z_score )
+
+upper_area = 1.0-stats.norm.cdf(z_score)
+print(upper_area)
+
+lower_area = stats.norm.cdf(-z_score)
+print(lower_area)
+
+p_value = lower_area + upper_area
+print( p_value )
+
+zeppo_df['grades'].std(ddof=1)
+
+fig, ax = plt.subplots(1,2,figsize=(10,4))
+
+
+x = np.linspace(-5,30,100)
+x2 = np.linspace(-5,30,100)
+y=stats.norm.pdf(x, 12,3.5)
+y2=stats.norm.pdf(x2,15,3.5)
+
+ax[0].plot(x,y)
+ax[0].set_ylabel("probability")
+ax[0].set_xlabel("value of X")
+ax[0].set_title("null hypothesis")
+ax[0].set_ylim(0,0.13)
+ax[0].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[0].plot([12,12],[0,0.113],color='k')
+ax[0].plot([8,12],[0.06,0.06],color='r')
+ax[0].set_xticklabels([])
+ax[0].set_yticklabels([])
+ax[0].annotate("$\sigma$ = ??", xy=(2,0.06),xytext=(2,0.06))
+ax[0].annotate("$\mu$ = $\mu_0$", xy=(10,0.12),xytext=(10,0.12))
+
+
+
+
+
+ax[1].plot(x,y)
+ax[1].set_ylabel("probability")
+ax[1].set_xlabel("value of X")
+ax[1].set_title("alternative hypothesis")
+ax[1].set_ylim(0,0.13)
+ax[1].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[1].plot([8,12],[0.06,0.06],color='r')
+ax[1].plot([18,18],[0,0.113],color='k')
+ax[1].annotate("$\sigma$ = ??", xy=(2,0.06),xytext=(2,0.06))
+ax[1].annotate("$\mu \\neq \mu_0$", xy=(16,0.12),xytext=(16,0.12))
+ax[1].set_xticklabels([])
+ax[1].set_yticklabels([])
+
+sns.despine(top=True, right=True)
+
+#plt.show()
+glue("ttest_hypo_fig",fig,display=False)
+
+fig, ax = plt.subplots(1,2,figsize=(10,4))
+
+
+x = np.linspace(-5,5,100)
+y= stats.norm.pdf(x, 0,1)
+y2= stats.t.pdf(x,df=2,loc=0,scale=1)
+
+ax[0].plot(x,y,label='N($\mu$=0,sd=1)')
+ax[0].plot(x,y2,'r',label='t (2)')
+ax[0].set_ylabel("probability")
+ax[0].set_xlabel("value of X")
+#ax[0].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[0].fill_between(x,y2, where=y>0.0,interpolate=True,facecolor='pink',alpha=0.2)
+ax[0].legend(loc='best', frameon=False)
+#ax[0].set_xticklabels([])
+#ax[0].set_yticklabels([])
+
+
+x = np.linspace(-5,5,100)
+y=stats.norm.pdf(x,0,1)
+y2=stats.t.pdf(x,10,0,1)
+
+ax[1].plot(x,y,label='N($\mu$=0,sd=1)')
+ax[1].plot(x,y2,'r',label='t (10)')
+ax[1].set_ylabel("probability")
+ax[1].set_xlabel("value of X")
+#ax[1].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[1].fill_between(x,y2, where=y>0.0,interpolate=True,facecolor='pink',alpha=0.2)
+ax[1].legend(loc='best', frameon=False)
+sns.despine(top=True, right=True)
+
+glue("ttestdist_fig",fig,display=False)
+
+import pingouin as pg
+
+pg.ttest(x=zeppo_df.grades,y=67.5)
+
+harpo_df=pd.read_csv('http://gureckislab.org/courses/fall19/labincp/data/harpo.csv',index_col=0)
+harpo_df.head()
+
+harpo_df.groupby('tutor').describe()
+
+p1=sns.displot(harpo_df[harpo_df['tutor']=="Anastasia"].grade,bins=np.arange(40,100,5))
+p1.ax.set_title("Anastasia students")
+glue("anastasia_fig",p1.fig,display=False)
+
+p2=sns.displot(harpo_df[harpo_df['tutor']=="Bernadette"].grade,bins=np.arange(40,100,5))
+p2.ax.set_title("Bernadette students")
+glue("bernadette_fig",p2.fig,display=False)
+
+p1=sns.catplot(x="tutor", y="grade", data=harpo_df, kind='bar',ci=95)
+glue("teachers_fig",p1.fig,display=False)
+
+fig, ax = plt.subplots(1,2,figsize=(10,4))
+
+
+x = np.linspace(-5,30,100)
+y=stats.norm.pdf(x, 12,3.5)
+y2=stats.norm.pdf(x,15,3.5)
+
+ax[0].plot(x,y)
+ax[0].set_ylabel("probability")
+ax[0].set_xlabel("value of X")
+ax[0].set_title("null hypothesis")
+ax[0].set_ylim(0,0.13)
+ax[0].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[0].set_xticklabels([])
+ax[0].set_yticklabels([])
+ax[0].annotate("$\mu$", xy=(12,0.12),xytext=(12,0.12))
+
+x = np.linspace(-5,30,100)
+y=stats.norm.pdf(x, 10,3.5)
+y2=stats.norm.pdf(x,15,3.5)
+
+
+ax[1].plot(x,y)
+ax[1].plot(x,y2)
+ax[1].set_ylabel("probability")
+ax[1].set_xlabel("value of X")
+ax[1].set_title("alternative hypothesis")
+ax[1].set_ylim(0,0.13)
+ax[1].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[1].fill_between(x,y2, where=y>0.0,interpolate=True,facecolor='orange',alpha=0.2)
+ax[1].annotate("$\mu_0$", xy=(10,0.12),xytext=(10,0.12))
+ax[1].annotate("$\mu_1$", xy=(15,0.12),xytext=(15,0.12))
+ax[1].set_xticklabels([])
+ax[1].set_yticklabels([])
+
+sns.despine(top=True, right=True)
+glue("twosamplettestdist_fig",fig,display=False)
+
+group1 = harpo_df[harpo_df['tutor']=="Bernadette"].grade
+group2 = harpo_df[harpo_df['tutor']=="Anastasia"].grade
+
+pg.ttest(x=group1, y=group2, correction=False).round(2)
+
+group1.mean(), group2.mean()
+
+pg.ttest(x=group1, y=group2, correction=False).round(2)
+
+pg.ttest(x=group2, y=group1, correction=False).round(2)
+
+fig, ax = plt.subplots(1,2,figsize=(10,4))
+
+x = np.linspace(-5,30,100)
+y=stats.norm.pdf(x, 12,3.5)
+y2=stats.norm.pdf(x,15,3.5)
+
+ax[0].plot(x,y)
+ax[0].set_ylabel("probability")
+ax[0].set_xlabel("value of X")
+ax[0].set_title("null hypothesis")
+ax[0].set_ylim(0,0.13)
+ax[0].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[0].set_xticklabels([])
+ax[0].set_yticklabels([])
+ax[0].annotate("$\mu$", xy=(12,0.12),xytext=(12,0.12))
+
+x = np.linspace(-5,30,100)
+y=stats.norm.pdf(x, 10,3.5)
+y2=stats.norm.pdf(x,15,5.5)
+
+
+ax[1].plot(x,y)
+ax[1].plot(x,y2)
+ax[1].set_ylabel("probability")
+ax[1].set_xlabel("value of X")
+ax[1].set_title("alternative hypothesis")
+ax[1].set_ylim(0,0.13)
+ax[1].fill_between(x,y, where=y>0.0,interpolate=True,facecolor='lightblue',alpha=0.2)
+ax[1].fill_between(x,y2, where=y>0.0,interpolate=True,facecolor='orange',alpha=0.2)
+ax[1].annotate("$\mu_0$", xy=(10,0.12),xytext=(10,0.12))
+ax[1].annotate("$\mu_1$", xy=(15,0.12),xytext=(15,0.12))
+ax[1].set_xticklabels([])
+ax[1].set_yticklabels([])
+
+sns.despine(top=True, right=True)
+glue("twosamplewelchtestdist_fig",fig,display=False)
+
+pg.ttest(x=group1, y=group2, correction=True).round(3)
+
+chico_df=pd.read_csv('http://gureckislab.org/courses/fall19/labincp/data/chico.csv',index_col=0)
+chico_df.head()
+
+chico_df.describe()
+
+chico_tidy_df = chico_df.melt(id_vars='id', var_name="testgrade", value_name='grade')
+fig=sns.catplot(x='testgrade',y='grade',kind='point',data=chico_tidy_df)
+glue("chicogrades_fig",fig.fig,display=False)
+
+chico_df.head()
+
+fig=sns.relplot(x=chico_df['grade_test1'],y=chico_df['grade_test2'])
+x=np.linspace(40,73,100)
+plt.plot(x,x)
+glue("chicogradesscatter_fig",fig.fig,display=False)
+
+chico_df['improvement']=chico_df['grade_test2']-chico_df['grade_test1']
+
+chico_df.head()
+
+fig=sns.displot(chico_df.improvement,kde=False)
+glue("chicoimprove_fig",fig.fig,display=False)
+
+def mean_confidence_interval(data, confidence=0.95):
+    a = data
+    n = len(a)
+    m, se = np.mean(a), stats.sem(a)
+    h = se * stats.t.ppf((1 + confidence) / 2., n-1)
+    return pd.DataFrame({"mean":[m], "lower 95CI": [m-h], "upper 95CI":[m+h]})
+
+chico_df.improvement.aggregate(mean_confidence_interval).round(2)
+
+pg.ttest(x=chico_df['improvement'], y=0).round(2)
+
+group1 = chico_df.grade_test1
+group2 = chico_df.grade_test2
+pg.ttest(x=group1, y=group2, paired=True).round(2)
+
+# old version
+pg.ttest(x=zeppo_df.grades,y=67.5)
+
+pg.ttest(x=zeppo_df.grades,y=67.5,tail='greater')
+
+group1 = harpo_df[harpo_df['tutor']=="Bernadette"].grade
+group2 = harpo_df[harpo_df['tutor']=="Anastasia"].grade
+
+pg.ttest(x=group1, y=group2, correction=False, tail='one-sided').round(2)
+
+group1 = harpo_df[harpo_df['tutor']=="Bernadette"].grade
+group2 = harpo_df[harpo_df['tutor']=="Anastasia"].grade
+
+pg.ttest(x=group2, y=group1, correction=False, tail='one-sided').round(2)
+
+group1 = chico_df.grade_test1
+group2 = chico_df.grade_test2
+pg.ttest(x=group1, y=group2, paired=True, tail='one-sided').round(2)
+
+effect_size_df=pd.DataFrame({"d-value": ['about 0.2', 'about 0.5', 'about 0.8'], "rough interpretation": ['small effect', 'moderate effect', 'large effect']}).set_index("d-value")
+glue("effect_size_tab", effect_size_df, display=False)
+
+pg.ttest(x=zeppo_df.grades,y=67.5)
+
+pg.compute_effsize(x=zeppo_df.grades,y=67.5, eftype='cohen')
+
+group1 = harpo_df[harpo_df['tutor']=="Bernadette"].grade
+group2 = harpo_df[harpo_df['tutor']=="Anastasia"].grade
+
+pg.ttest(x=group1, y=group2, correction=False).round(2)
+
+group1 = harpo_df[harpo_df['tutor']=="Bernadette"].grade
+group2 = harpo_df[harpo_df['tutor']=="Anastasia"].grade
+
+print("Different versions")
+print("----")
+print("Cohens:",pg.compute_effsize(x=group1,y=group2, eftype='cohen'))
+print("Hedges:",pg.compute_effsize(x=group1,y=group2, eftype='hedges'))
+print("Glass (using minimum variance group):",pg.compute_effsize(x=group1,y=group2, eftype='glass'))
+
+pg.ttest(x=group1,y=group2, correction=True)
+
+chico_df.improvement.mean()/chico_df.improvement.std()
+
+pg.ttest(x=chico_df.improvement, y=0).round(2)
+
+print("Different versions")
+print("----")
+print("Cohens:",pg.compute_effsize(x=chico_df.improvement,y=0, eftype='cohen'))
+print("Hedges:",pg.compute_effsize(x=chico_df.improvement,y=0, eftype='hedges'))
+print("Glass (using minimum variance group):",pg.compute_effsize(x=chico_df.improvement,y=0, eftype='glass'))
+
+pg.compute_effsize(x=chico_df.grade_test2,  y=chico_df.grade_test1, paired=True)
+
+normal_data = np.random.normal(0,1,100)
+fig=sns.displot(normal_data,kde=False)
+glue("normaldata_fig",fig.fig,display=False)
+
+import statsmodels.api as sm
+sm.qqplot(normal_data)
+glue("qqplot_fig",fig.fig,display=False)
+
+W, p=stats.shapiro(x=normal_data)
+
+print(f"The value of W is {W}, p={p}")
+
+fig, ax = plt.subplots(1,2, figsize=(20,6))
+ax = ax.ravel()
+
+normal_data = np.random.normal(0,1,100)
+sns.histplot(normal_data,kde=False,ax=ax[0])
+
+sm.qqplot(normal_data, ax=ax[1])
+
+W, p=stats.shapiro(x=normal_data)
+
+print(f"The value of W is {W}, p={p}")
+
+glue("exp1_fig",fig,display=False)
+
+fi6, ax = plt.subplots(1,2, figsize=(20,6))
+ax = ax.ravel()
+
+skewed_data = np.random.gamma(1,2,100)
+sns.histplot(skewed_data,kde=False,ax=ax[0])
+
+sm.qqplot(skewed_data, ax=ax[1])
+
+W, p=stats.shapiro(x=skewed_data)
+
+print(f"The value of W is {W}, p={p}")
+glue("exp2_fig",fig,display=False)
+
+fig, ax = plt.subplots(1,2, figsize=(20,6))
+ax = ax.ravel()
+
+heavy_tailed_data = np.concatenate((np.random.normal(0,1,80), np.random.normal(1,5,20)))
+sns.histplot(heavy_tailed_data,kde=False,ax=ax[0])
+
+sm.qqplot(heavy_tailed_data, ax=ax[1])
+
+W, p=stats.shapiro(x=heavy_tailed_data)
+
+print(f"The value of W is {W}, p={p}")
+glue("exp3_fig",fig,display=False)
+
+awesome_df=pd.read_csv('http://gureckislab.org/courses/fall19/labincp/data/awesome.csv',index_col=0)
+awesome_df
+
+group1=awesome_df.groupby('group').get_group('A').scores
+group2=awesome_df.groupby('group').get_group('B').scores
+pg.mwu(x=group1, y=group2, tail='two-sided')
+
+group1=awesome_df.groupby('group').get_group('A').scores
+group2=awesome_df.groupby('group').get_group('B').scores
+pg.wilcoxon(x=group1, y=group2, tail='two-sided')
+
+

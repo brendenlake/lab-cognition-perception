@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9. Samples, populations and sampling &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10. Hypothesis testing" href="../09/00-hypothesistesting.html" />
+    <link rel="prev" title="8. Describing Data" href="../07/00-describingdata.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/08/01-sampling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/chapters/08/01-sampling.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-a-population">
+   9.1. Defining a population
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-random-samples">
+   9.2. Simple random samples
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#most-samples-are-not-simple-random-samples">
+   9.3. Most samples are not simple random samples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-issues-in-political-polling-sampling-and-bias">
+     9.3.1. Example: Issues in Political Polling, Sampling and Bias
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-much-does-it-matter-if-you-don-t-have-a-simple-random-sample">
+   9.4. How much does it matter if you don’t have a simple random sample?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#weird-samples-in-psychological-research">
+   9.5. WEIRD Samples in Psychological Research
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling-stimuli">
+   9.6. Sampling stimuli
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-sampling-of-extraneous-experiment-details">
+     9.6.1. Random Sampling of “extraneous experiment details”
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#population-parameters-and-sample-statistics">
+   9.7. Population parameters and sample statistics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-law-of-large-numbers">
+   9.8. The law of large numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimating-aspects-of-the-population">
+   9.9. Estimating aspects of the population
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimating-the-standard-deviation-of-the-population">
+     9.9.1. Estimating the standard deviation of the population
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   9.10. References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="samples-populations-and-sampling">
+<h1><span class="section-number">9. </span>Samples, populations and sampling<a class="headerlink" href="#samples-populations-and-sampling" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This chapter by <a class="reference external" href="https://gureckislab.org/~gureckis">Todd M. Gureckis</a> and is released under the <a class="reference internal" href="../../LICENSE.html"><span class="doc std std-doc">license for this book</span></a>. Elements of this chapter are adapted from Matthew Crump’s excellent <a class="reference external" href="https://crumplab.github.io/statistics/">Answering questions with data</a> book <span id="id1">[<a class="reference internal" href="#id58">Crump <em>et al.</em>, 2019</a>]</span> which also draws from from Danielle Navarro’s excellent <a class="reference external" href="https://learningstatisticswithr.com">Learning Statistics with R</a> book <span id="id2">[<a class="reference internal" href="#id59">Navarro, 2011</a>]</span>.  One major change is the code was adapted to use python and jupyter.  Additional sections were added about counter balancing and stimulus sampling and WEIRD issues in psychological science.</p>
+</div>
+<p>The role of descriptive statistics is to concisely summarize what we <strong>do</strong> know. In contrast, the purpose of inferential statistics is to “learn what we do not know from what we do”. What kinds of things would we like to learn about? And how do we learn them? These are the questions that lie at the heart of inferential statistics, and they are traditionally divided into two “big ideas”: estimation and hypothesis testing. The goal in this chapter is to introduce sampling theory first because estimation theory doesn’t make sense until you understand sampling. So, this chapter dives into the issues of using a sample to learn something more general about the world.</p>
+<p><strong>Sampling theory</strong> plays a huge role in specifying the assumptions upon which your statistical inferences rely. And in order to talk about “making inferences” the way statisticians think about it, we need to be a bit more explicit about what it is that we’re drawing inferences <strong>from</strong> (the sample) and what it is that we’re drawing inferences <strong>about</strong> (the population).</p>
+<p>In almost every situation of interest, what we have available to us as researchers is a <strong>sample</strong> of data. We might have run experiment with some number of participants; a polling company might have phoned some number of people to ask questions about voting intentions; etc. Regardless: the data set available to us is finite, and incomplete. We can’t possibly get every person in the world to do our experiment; a polling company doesn’t have the time or the money to ring up every voter in the country etc. In our earlier discussion of descriptive statistics, this sample was the only thing we were interested in. Our only goal was to find ways of describing, summarizing and graphing that sample. This is about to change.</p>
+<div class="section" id="defining-a-population">
+<h2><span class="section-number">9.1. </span>Defining a population<a class="headerlink" href="#defining-a-population" title="Permalink to this headline">¶</a></h2>
+<p>A sample is a concrete thing. You can open up a data file, and there’s the data from your sample. A <strong>population</strong>, on the other hand, is a more abstract idea. It refers to the set of all possible people, or all possible observations, that you want to draw conclusions about, and is generally <strong>much</strong> bigger than the sample. In an ideal world, the researcher would begin the study with a clear idea of what the population of interest is, since the process of designing a study and testing hypotheses about the data that it produces does depend on the population about which you want to make statements. However, that doesn’t always happen in practice: usually the researcher has a fairly vague idea of what the population is and designs the study as best he/she can on that basis.</p>
+<p>Sometimes it’s easy to state the population of interest. For instance, in the “polling company” example, the population consisted of all voters enrolled at the a time of the study – millions of people. The sample was a set of 1000 people who all belong to that population. In most situations the situation is much less simple. Suppose I run an experiment using 100 undergraduate students as my participants. My goal, as a cognitive scientist, is to try to learn something about how the mind works. So, which of the following would count as “the population”:</p>
+<ul class="simple">
+<li><p>All of the undergraduate psychology students at New York University?</p></li>
+<li><p>Undergraduate psychology students in general, anywhere in the world?</p></li>
+<li><p>Americans currently living?</p></li>
+<li><p>Americans of similar ages to my sample?</p></li>
+<li><p>Anyone currently alive?</p></li>
+<li><p>Any human being, past, present or future?</p></li>
+<li><p>Any biological organism with a sufficient degree of intelligence operating in a terrestrial environment?</p></li>
+<li><p>Any intelligent being?</p></li>
+</ul>
+<p>Each of these defines a real group of mind-possessing entities, all of which might be of interest to me as a cognitive scientist, and it’s not at all clear which one ought to be the true population of interest.</p>
+</div>
+<div class="section" id="simple-random-samples">
+<h2><span class="section-number">9.2. </span>Simple random samples<a class="headerlink" href="#simple-random-samples" title="Permalink to this headline">¶</a></h2>
+<p>Irrespective of how we define the population, the critical point is that the sample is a subset of the population, and our goal is to use our knowledge of the sample to draw inferences about the properties of the population. The relationship between the two depends on the <strong>procedure</strong> by which the sample was selected. This procedure is referred to as a <strong>sampling method</strong>, and it is important to understand why it matters.</p>
+<p>To keep things simple, imagine we have a bag containing 10 chips. Each chip has a unique letter printed on it, so we can distinguish between the 10 chips. The chips come in two colors, black and white.</p>
+<div class="figure align-default" id="fig-srs1">
+<a class="reference internal image-reference" href="../../_images/srs1.pdf"><img alt="../../_images/srs1.pdf" src="../../_images/srs1.pdf" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9.1 </span><span class="caption-text">Simple random sampling without replacement from a finite population.</span><a class="headerlink" href="#fig-srs1" title="Permalink to this image">¶</a></p>
+</div>
+<p>This set of chips is the population of interest, and it is depicted graphically on the left of <a class="reference internal" href="#fig-srs1"><span class="std std-numref">Fig. 9.1</span></a>.</p>
+<p>As you can see from looking at the picture, there are 4 black chips and 6 white chips, but of course in real life we wouldn’t know that unless we looked in the bag. Now imagine you run the following “experiment”: you shake up the bag, close your eyes, and pull out 4 chips without putting any of them back into the bag. First out comes the <span class="math notranslate nohighlight">\(a\)</span> chip (black), then the <span class="math notranslate nohighlight">\(c\)</span> chip (white), then <span class="math notranslate nohighlight">\(j\)</span> (white) and then finally <span class="math notranslate nohighlight">\(b\)</span> (black). If you wanted, you could then put all the chips back in the bag and repeat the experiment, as depicted on the right hand side of <a class="reference internal" href="#fig-srs1"><span class="std std-numref">Fig. 9.1</span></a>. Each time you get different results, but the procedure is identical in each case. The fact that the same procedure can lead to different results each time, we refer to it as a <strong>random</strong> process. However, because we shook the bag before pulling any chips out, it seems reasonable to think that every chip has the same chance of being selected. A procedure in which every member of the population has the same chance of being selected is called a <strong>simple random sample</strong>. The fact that we did <strong>not</strong> put the chips back in the bag after pulling them out means that you can’t observe the same thing twice, and in such cases the observations are said to have been sampled <strong>without replacement</strong>.</p>
+<p>To help make sure you understand the importance of the sampling procedure, consider an alternative way in which the experiment could have been run. A 5-year old had opened the bag, and decided to pull out four black chips without putting any of them back in the bag. This <strong>biased</strong> sampling scheme is depicted in <a class="reference internal" href="#fig-brs"><span class="std std-numref">Fig. 9.2</span></a>.</p>
+<div class="figure align-default" id="fig-brs">
+<a class="reference internal image-reference" href="../../_images/brs.pdf"><img alt="../../_images/brs.pdf" src="../../_images/brs.pdf" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9.2 </span><span class="caption-text">Biased sampling without replacement from a finite population.</span><a class="headerlink" href="#fig-brs" title="Permalink to this image">¶</a></p>
+</div>
+<p>Now consider the evidentiary value of seeing 4 black chips and 0 white chips. Clearly, it depends on the sampling scheme, does it not? If you know that the sampling scheme is biased to select only black chips, then a sample that consists of only black chips doesn’t tell you very much about the population! For this reason, statisticians really like it when a data set can be considered a simple random sample, because it makes the data analysis <strong>much</strong> easier.</p>
+<p>A third procedure is worth mentioning. This time around we close our eyes, shake the bag, and pull out a chip. This time, however, we record the observation and then put the chip back in the bag. Again we close our eyes, shake the bag, and pull out a chip. We then repeat this procedure until we have 4 chips. Data sets generated in this way are still simple random samples, but because we put the chips back in the bag immediately after drawing them it is referred to as a sample <strong>with replacement</strong>. The difference between this situation and the first one is that it is possible to observe the same population member multiple times, as illustrated in <a class="reference internal" href="#fig-srs2"><span class="std std-numref">Fig. 9.3</span></a>.</p>
+<div class="figure align-default" id="fig-srs2">
+<a class="reference internal image-reference" href="../../_images/srs2.pdf"><img alt="../../_images/srs2.pdf" src="../../_images/srs2.pdf" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9.3 </span><span class="caption-text">Simple random sampling with replacement from a finite population.</span><a class="headerlink" href="#fig-srs2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Most psychology experiments tend to be sampling without replacement, because the same person is not allowed to participate in the experiment twice. However, most statistical theory is based on the assumption that the data arise from a simple random sample <strong>with</strong> replacement. In real life, this very rarely matters. If the population of interest is large (e.g., has more than 10 entities!) the difference between sampling with- and without- replacement is too small to be concerned with. The difference between simple random samples and biased samples, on the other hand, is not such an easy thing to dismiss.</p>
+</div>
+<div class="section" id="most-samples-are-not-simple-random-samples">
+<h2><span class="section-number">9.3. </span>Most samples are not simple random samples<a class="headerlink" href="#most-samples-are-not-simple-random-samples" title="Permalink to this headline">¶</a></h2>
+<p>As you can see from looking at the list of possible populations that I showed above, it is almost impossible to obtain a simple random sample from most populations of interest. When I run experiments, I’d consider it a minor miracle if my participants turned out to be a random sampling of the undergraduate psychology students at New York University, even though this is by far the narrowest population that I might want to generalize to. A thorough discussion of other types of sampling schemes is beyond the scope of this book, but to give you a sense of what’s out there I’ll list a few of the more important ones:</p>
+<ul class="simple">
+<li><p><strong>Stratified sampling</strong>. Suppose your population is (or can be) divided into several different sub-populations, or <strong>strata</strong>. Perhaps you’re running a study at several different sites, for example. Instead of trying to sample randomly from the population as a whole, you instead try to collect a separate random sample from each of the strata. Stratified sampling is sometimes easier to do than simple random sampling, especially when the population is already divided into the distinct strata. It can also be more efficient that simple random sampling, especially when some of the sub-populations are rare. For instance, when studying schizophrenia it would be much better to divide the population into two strata (schizophrenic and not-schizophrenic), and then sample an equal number of people from each group. If you selected people randomly, you would get so few schizophrenic people in the sample that your study would be useless. This specific kind of of stratified sampling is referred to as <strong>oversampling</strong> because it makes a deliberate attempt to over-represent rare groups.</p></li>
+<li><p><strong>Snowball sampling</strong> is a technique that is especially useful when sampling from a “hidden” or hard to access population, and is especially common in social sciences. For instance, suppose the researchers want to conduct an opinion poll among transgender people. The research team might only have contact details for a few trans folks, so the survey starts by asking them to participate (stage 1). At the end of the survey, the participants are asked to provide contact details for other people who might want to participate. In stage 2, those new contacts are surveyed. The process continues until the researchers have sufficient data. The big advantage to snowball sampling is that it gets you data in situations that might otherwise be impossible to get any. On the statistical side, the main disadvantage is that the sample is highly non-random, and non-random in ways that are difficult to address. On the real life side, the disadvantage is that the procedure can be unethical if not handled well, because hidden populations are often hidden for a reason. I chose transgender people as an example here to highlight this: if you weren’t careful you might end up outing people who don’t want to be outed (very, very bad form), and even if you don’t make that mistake it can still be intrusive to use people’s social networks to study them. It’s certainly very hard to get people’s informed consent <strong>before</strong> contacting them, yet in many cases the simple act of contacting them and saying “hey we want to study you” can be hurtful. Social networks are complex things, and just because you can use them to get data doesn’t always mean you should.</p></li>
+<li><p><strong>Convenience sampling</strong> is more or less what it sounds like. The samples are chosen in a way that is convenient to the researcher, and not selected at random from the population of interest. Snowball sampling is one type of convenience sampling, but there are many others. A common example in psychology are studies that rely on undergraduate psychology students. These samples are generally non-random in two respects: firstly, reliance on undergraduate psychology students automatically means that your data are restricted to a single sub-population. Secondly, the students usually get to pick which studies they participate in, so the sample is a self selected subset of psychology students not a randomly selected subset. In real life, most studies are convenience samples of one form or another. This is sometimes a severe limitation, but not always.</p></li>
+</ul>
+<div class="section" id="example-issues-in-political-polling-sampling-and-bias">
+<h3><span class="section-number">9.3.1. </span>Example: Issues in Political Polling, Sampling and Bias<a class="headerlink" href="#example-issues-in-political-polling-sampling-and-bias" title="Permalink to this headline">¶</a></h3>
+<p>Take a moment here to watch this this fun video by <a class="reference external" href="https://wethevoters.com">We the Voters</a> “the science of political polling.” After you watch, test your understanding with the questions below:</p>
+<iframe title="vimeo-player" src="https://player.vimeo.com/video/179463114" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<div class="hint admonition">
+<p class="admonition-title">What is the problem with sampling “likely” voters?</p>
+<ul class="simple">
+<li><p>Defining the sample based on a future behavior which might not be accurate</p></li>
+<li><p>There is no good way to tell if someone is a likely voter</p></li>
+<li><p>It is not representative.</p></li>
+</ul>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Click the button to reveal the answer!</p>
+<p>The first answer seems more correct.  Likely voting behavior is assessed with several questions about political engagement, and often can be checked later to see it is right.  However it isn’t perfect.  Sometimes a particular candidate is really inspiring to people who otherwise don’t usually vote and they might be missed by trying to sample “likely voters.”</p>
+</div>
+<div class="hint admonition">
+<p class="admonition-title">Polls released by a candidate tend to have “spin” favoring their client.  Why is that?</p>
+<ul class="simple">
+<li><p>the samples might be stratified and weighted in strange ways.</p></li>
+<li><p>they act as a public relations point</p></li>
+<li><p>the candidate samples different voters</p></li>
+</ul>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Click the button to reveal the answer!</p>
+<p>All three of these answer might be partially correct.  Pollsters have some “flexibility” in how the collect samples.  Some pollsters talk of their sampling methods as the “special sauce” that they use to get more accurate and they don’t release information to the public.  In those cases several decisions might be made about how a sample is constructed that might slant to favor of a viewpoint.  In addition, the way a question is phrased in a survey can influence the answer.</p>
+</div>
+</div>
+</div>
+<div class="section" id="how-much-does-it-matter-if-you-don-t-have-a-simple-random-sample">
+<h2><span class="section-number">9.4. </span>How much does it matter if you don’t have a simple random sample?<a class="headerlink" href="#how-much-does-it-matter-if-you-don-t-have-a-simple-random-sample" title="Permalink to this headline">¶</a></h2>
+<p>Okay, so real world data collection tends not to involve nice simple random samples. Does that matter? A little thought should make it clear to you that it <strong>can</strong> matter if your data are not a simple random sample: just think about the difference between Figures <a class="reference internal" href="#fig-srs1"><span class="std std-numref">Fig. 9.1</span></a> and <a class="reference internal" href="#fig-brs"><span class="std std-numref">Fig. 9.2</span></a>. However, it’s not quite as bad as it sounds. Some types of biased samples are entirely unproblematic. For instance, when using a stratified sampling technique you actually <strong>know</strong> what the bias is because you created it deliberately, often to <strong>increase</strong> the effectiveness of your study, and there are statistical techniques that you can use to adjust for the biases you’ve introduced (not covered in this book!). So in those situations it’s not a problem.</p>
+<p>More generally though, it’s important to remember that random sampling is a means to an end, not the end in itself. Let’s assume you’ve relied on a convenience sample, and as such you can assume it’s biased. A bias in your sampling method is only a problem if it causes you to draw the wrong conclusions. When viewed from that perspective, I’d argue that we don’t need the sample to be randomly generated in <strong>every</strong> respect: we only need it to be random with respect to the psychologically-relevant phenomenon of interest. Suppose I’m doing a study looking at working memory capacity. In study 1, I actually have the ability to sample randomly from all human beings currently alive, with one exception: I can only sample people born on a Monday. In study 2, I am able to sample randomly from the New York City population. I want to generalize my results to the population of all living humans. Which study is better? The answer, obviously, is study 1. Why? Because we have no reason to think that being “born on a Monday” has any interesting relationship to working memory capacity. In contrast, I can think of several reasons why “being a New Yorker” might matter. New York City is a wealthy, industrialized city with a very well-developed education system. People growing up in that system will have had life experiences much more similar to the experiences of the people who designed the tests for working memory capacity. This shared experience might easily translate into similar beliefs about how to “take a test”, a shared assumption about how psychological experimentation works, and so on. These things might actually matter. For instance, “test taking” style might have taught the New York City participants how to direct their attention exclusively on fairly abstract test materials relative to people that haven’t grown up in a similar environment; leading to a misleading picture of what working memory capacity is.</p>
+<p>There are two points hidden in this discussion. Firstly, when designing your own studies, it’s important to think about what population you care about, and try hard to sample in a way that is appropriate to that population. In practice, you’re usually forced to put up with a “sample of convenience” (e.g., psychology lecturers sample psychology students because that’s the least expensive way to collect data, and our coffers aren’t exactly overflowing with gold), but if so you should at least spend some time thinking about what the dangers of this practice might be.</p>
+<p>Secondly, if you’re going to criticize someone else’s study because they’ve used a sample of convenience rather than laboriously sampling randomly from the entire human population, at least have the courtesy to offer a specific theory as to <strong>how</strong> this might have distorted the results. Remember, everyone in science is aware of this issue, and does what they can to alleviate it. Merely pointing out that “the study only included people from group BLAH” is entirely unhelpful, and borders on being insulting to the researchers, who are aware of the issue. They just don’t happen to be in possession of the infinite supply of time and money required to construct the perfect sample. In short, if you want to offer a responsible critique of the sampling process, then be <strong>helpful</strong>. Rehashing the blindingly obvious truisms that I’ve been rambling on about in this section isn’t helpful.</p>
+</div>
+<div class="section" id="weird-samples-in-psychological-research">
+<h2><span class="section-number">9.5. </span>WEIRD Samples in Psychological Research<a class="headerlink" href="#weird-samples-in-psychological-research" title="Permalink to this headline">¶</a></h2>
+<p>One important consequence of psychologists working in universities depending on “convenience samples” is that almost all published research on human thinking, reasoning, visual perception, memory, IQ, etc… have been conducted on people from what <span id="id3">[<a class="reference internal" href="#id55">Henrich <em>et al.</em>, 2010</a>]</span> call Western, educated, industrialized, rich, and democratic (WEIRD) societies.  Under some accounts American undergraduate students are among the “WEIRD”est people in the world (no offense).  There are several reasons to think that conclusions drawn from research utilizing WEIRD samples does not generalize to the rest of the world.  For example, other cultures have different emphases on moral reasoning, the use of analytical reasoning, and even subtle differences in perception (<span id="id4">[<a class="reference internal" href="#id55">Henrich <em>et al.</em>, 2010</a>]</span>).</p>
+<p>The concern about this has lead to attempt to create more diverse samples in psychological research including cross cultural studies of cognition and perception, as well as research using the Internet to collect more diverse samples than simple American undergraduates (although admittedly Internet based research may mimic some aspect of the WIERDness of college students).</p>
+<p>This is a huge problem and blends with several other types of biases.  However, this is also positive because the recognition of these issues has resulted in entire new fields of psychological research focused on cross-cultural psychology.  In the end it is interesting to note that given the cost of collecting samples, the field has <strong>not</strong> moved to randomly sampling across countries and cultures.  Instead, what has happened is that people are effectively stratifying their samples by repeating experiments multiple times in different parts of the world and checking if the results line up.  Some do and some don’t and together they give us a better picture about the nature of human cognition and perception - specifically which things are seemingly cognitive universals (shared by almost all humans) and which are strongly influenced by culture.</p>
+</div>
+<div class="section" id="sampling-stimuli">
+<h2><span class="section-number">9.6. </span>Sampling stimuli<a class="headerlink" href="#sampling-stimuli" title="Permalink to this headline">¶</a></h2>
+<p>In the discussion so far we have talked about samples applying to people.  We sample from the population of “humans” by recruiting small subsets of humans to take part in our study.  However in many experiment designs we also have to sample stimuli.</p>
+<p>For example, imagine a study on lexical decision making.  In such experiments, participants are shown letter string that either form words (e.g., “DOG”) or non words (e.g., “XUNFM”) and we measure the time to make the word or non-word judgment.  Often times people are faster with word judgments for familiar or frequent words, etc… However, we can’t possibly show each subject every known English word and ever possible non-word string.  Instead we have to sample a subset of words and show them to participants.  This causes a second generalization problem because often we want to know about how a population of humans reacts to a population of stimuli.  We sample both the people we test but also the stimuli we can practically to show in an experiment.</p>
+<p>How do we deal with the sampling of stimuli?</p>
+<p>In an ideal case we apply the same logic as above - we can use simple random sampling to determine stimuli.  For example, if we had a very large dictionary of English words we could use the computer to pseudo-randomly select a word to show on each trial.  However, in many experiments listing all possible stimuli is not possible.  For example, we can’t randomly sample from all possible photographs of a dog.  In these cases we, the experimenter, usually select a set of stimuli to use in the experiment.  This is a bit akin to the “convienience sampling” idea.  Perhaps we have a database on images and so we will sample from that.</p>
+<p>Alternatively we can take something akin to a “stratified” sampling approach where we specifically choose stimuli that vary in certain ways.  For instance in a lexical decision task we might choose several words that are low, medium, and high frequency in the language.  We might then show each subject an even number of those stimuli and record their reaction time.  At the end of the study we might be interested in median reaction time as a function of these categories.  However, we would need to remember that even if reaction time is faster for high frequency words, we can’t necessarily generalize to the statement that “people respond faster to high frequency words” because our experiment would have only included a <strong>subset</strong> of all possible high frequency words, not randomly sampled words, and even discretized the variable “frequency” into three bin (low, medium, high).</p>
+<p>There are several interesting issues involved in the statistical analysis of experiments where stimuli are also randomly sampled from a distribution <span id="id5">[<a class="reference internal" href="#id53">Clark, 1973</a>, <a class="reference internal" href="#id54">Westfall <em>et al.</em>, 2017</a>]</span>.</p>
+<div class="section" id="random-sampling-of-extraneous-experiment-details">
+<h3><span class="section-number">9.6.1. </span>Random Sampling of “extraneous experiment details”<a class="headerlink" href="#random-sampling-of-extraneous-experiment-details" title="Permalink to this headline">¶</a></h3>
+<p>Another place the issue of sampling comes up is with respect to all other aspects of an experiment that you have to specify but aren’t really committed to.  For instance, what color is the font?  Is the ‘yes’ button on the left or right of the ‘no’ button?  Is the text in 12pt font or 16 pt font.  All of these variables <strong>could</strong> have an effect, although intuition says they are unlikely to be systematically biasing the results for most experiments.  The problem with social sciences and psychology in general is that the number of the “other” variables is huge.  One approach is just to set them to reasonable values (e.g., make a font clear and readable by most people) and ensure that the setting doesn’t change across different treatments in your experiment.  Another approach is – you guessed it – simple random assignment.  You can essentially randomly sample a color or randomly sample a font size for each subject so that this variable will “wash out” across many participants.  Generally speaking most people just set these variables to a fixed value because the choices here rarely have a substantial effect (this is not to say they have no effect… if you make the font so small noone can read the instructions, then you probably will observe a change in behavior).  However, rarely is the question “how does font size affect cognition?” but instead questions like “what is the effect of working memory load on performance in a learning task?” in which case one doesn’t expect font size to be the most important possible confound.</p>
+</div>
+</div>
+<div class="section" id="population-parameters-and-sample-statistics">
+<h2><span class="section-number">9.7. </span>Population parameters and sample statistics<a class="headerlink" href="#population-parameters-and-sample-statistics" title="Permalink to this headline">¶</a></h2>
+<p>Up to this point we have been talking about populations the way a scientist might. To a psychologist, a population might be a group of people. To an ecologist, a population might be a group of bears. In most cases the populations that scientists care about are concrete things that actually exist in the real world.</p>
+<p>Statisticians, however, are a funny lot. On the one hand, they <strong>are</strong> interested in real world data and real science in the same way that scientists are. On the other hand, they also operate in the realm of pure abstraction in the way that mathematicians do. As a consequence, statistical theory tends to be a bit abstract in how a population is defined. In much the same way that psychological researchers operationalize our abstract theoretical ideas in terms of concrete measurements, statisticians operationalize the concept of a “population” in terms of mathematical objects that they know how to work with.</p>
+<p>The idea is quite simple. Let’s say we’re talking about IQ scores. To a psychologist, the population of interest is a group of actual humans who have IQ scores. A statistician “simplifies” this by operationally defining the population as the probability distribution depicted in <a class="reference internal" href="#fig-iqdist"><span class="std std-numref">Fig. 9.4</span></a>a.</p>
+<div class="figure align-default" id="fig-iqdist">
+<a class="reference internal image-reference" href="../../_images/navIQ.png"><img alt="../../_images/navIQ.png" src="../../_images/navIQ.png" style="width: 650px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9.4 </span><span class="caption-text">The population distribution of IQ scores (panel a) and two samples drawn randomly from it. In panel b we have a sample of 100 observations, and panel c we have a sample of 10,000 observations.</span><a class="headerlink" href="#fig-iqdist" title="Permalink to this image">¶</a></p>
+</div>
+<p>IQ tests are designed so that the average IQ is 100, the standard deviation of IQ scores is 15, and the distribution of IQ scores is normal. These values are referred to as the <strong>population parameters</strong> because they are characteristics of the entire population. That is, we say that the population mean <span class="math notranslate nohighlight">\(\mu\)</span> is 100, and the population standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> is 15.</p>
+<p>Now suppose we collect some data. We select 100 people at random and administer an IQ test, giving a simple random sample from the population. The sample would consist of a collection of numbers like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">106</span> <span class="pre">101</span> <span class="pre">98</span> <span class="pre">80</span> <span class="pre">74</span> <span class="pre">...</span> <span class="pre">107</span> <span class="pre">72</span> <span class="pre">100</span></code></p>
+<p>Each of these IQ scores is sampled from a normal distribution with mean 100 and standard deviation 15. So if I plot a histogram of the sample, I get something like the one shown in <a class="reference internal" href="#fig-iqdist"><span class="std std-numref">Fig. 9.4</span></a>b. As you can see, the histogram is <strong>roughly</strong> the right shape, but it’s a very crude approximation to the true population distribution shown in <a class="reference internal" href="#fig-iqdist"><span class="std std-numref">Fig. 9.4</span></a>a. The mean of the sample is fairly close to the population mean 100 but not identical. In this case, it turns out that the people in the sample have a mean IQ of 98.5, and the standard deviation of their IQ scores is 15.9. These <strong>sample statistics</strong> are properties of the data set, and although they are fairly similar to the true population values, they are not the same. <strong>In general, sample statistics are the things you can calculate from your data set, and the population parameters are the things you want to learn about.</strong> Later we’ll talk about how you can estimate population parameters using your sample statistics and how to work out how confident you are in your estimates but before we get to that there’s a few more ideas in sampling theory that you need to know about.</p>
+</div>
+<div class="section" id="the-law-of-large-numbers">
+<h2><span class="section-number">9.8. </span>The law of large numbers<a class="headerlink" href="#the-law-of-large-numbers" title="Permalink to this headline">¶</a></h2>
+<p>We just looked at the results of one fictitious IQ experiment with a sample size of <span class="math notranslate nohighlight">\(N=100\)</span>. The results were somewhat encouraging: the true population mean is 100, and the sample mean of 98.5 is a pretty reasonable approximation to it. In many scientific studies that level of precision is perfectly acceptable, but in other situations you need to be a lot more precise. If we want our sample statistics to be much closer to the population parameters, what can we do about it?</p>
+<p>The obvious answer is to collect more data. Suppose that we ran a much larger experiment, this time measuring the IQ’s of 10,000 people. We can simulate the results of this experiment using Python, using the numpy <code class="docutils literal notranslate"><span class="pre">normal()</span></code> function which I usually import from the <code class="docutils literal notranslate"><span class="pre">numppy.random</span></code> submodule using <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy.random</span> <span class="pre">as</span> <span class="pre">npr</span></code>, which generates random numbers sampled from a normal distribution. For an experiment with a sample size of <code class="docutils literal notranslate"><span class="pre">size</span> <span class="pre">=</span> <span class="pre">10000</span></code>, and a population with <code class="docutils literal notranslate"><span class="pre">loc</span> <span class="pre">=</span> <span class="pre">100</span></code> (i.e, the location of the mean) and <code class="docutils literal notranslate"><span class="pre">sd</span> <span class="pre">=</span> <span class="pre">15</span></code> (referred to as scale here), python produces our fake IQ data using these commands:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
+
+<span class="n">IQ</span> <span class="o">=</span> <span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> <span class="c1"># generate iq scores</span>
+<span class="n">IQ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">IQ</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cool, we just generated 10,000 fake IQ scores. Where did they go? Well, they went into the variable IQ on my computer. You can do the same on your computer too by copying the above code. 10,000 numbers is too many numbers to look at. We can look at the first 100 like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">IQ</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 92.  93. 127. 109. 110. 110.  98. 109. 104.  97.  76.  89.  85. 129.
+  99. 104. 111. 110.  99.  97. 111.  94. 111. 103.  92.  97. 105.  80.
+  78.  98. 108.  79.  83. 108.  92. 111.  99.  96. 105.  81.  92. 105.
+  99. 114. 118. 104. 116. 119. 100. 100. 100.  82.  96.  80.  72. 114.
+ 119. 110. 114. 105.  74.  96. 114. 112. 104. 114. 103. 100. 100.  71.
+  83. 114.  96. 113.  99. 102. 103.  85. 103. 111.  81. 112. 125. 106.
+  86. 115.  68. 101. 114. 100.  73. 100. 121. 101.  95. 107. 104.  94.
+  82.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can compute the mean IQ using the command <code class="docutils literal notranslate"><span class="pre">np.mean(IQ)</span></code> and the standard deviation using the command <code class="docutils literal notranslate"><span class="pre">np.std(IQ)</span></code>, and draw a histogram using <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">IQ</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">IQ</span><span class="p">))</span>
+
+<span class="n">n</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">IQ</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100.0015
+15.05928609695692
+</pre></div>
+</div>
+<img alt="../../_images/01-sampling_16_1.png" src="../../_images/01-sampling_16_1.png" />
+</div>
+</div>
+<p>The histogram of this much larger sample is shown in Figure above. Even a moment’s inspections makes clear that the larger sample is a much better approximation to the true population distribution than the smaller one. This is reflected in the sample statistics: the mean IQ for the larger sample turns out to be 99.9, and the standard deviation is 15.1. These values are now very close to the true population.</p>
+<p>I feel a bit silly saying this, but the thing I want you to take away from this is that large samples generally give you better information. The question is, why is this so? Not surprisingly, this intuition that we all share turns out to be correct, and statisticians refer to it as the <strong>law of large numbers</strong>. The law of large numbers is a mathematical law that applies to many different sample statistics, but the simplest way to think about it is as a law about averages. The sample mean is the most obvious example of a statistic that relies on averaging (because that’s what the mean is… an average), so let’s look at that. <strong>When applied to the sample mean, what the law of large numbers states is that as the sample gets larger, the sample mean tends to get closer to the true population mean.</strong> Or, to say it a little bit more precisely, as the sample size “approaches” infinity (written as <span class="math notranslate nohighlight">\(N \rightarrow \infty\)</span>) the sample mean approaches the population mean (<span class="math notranslate nohighlight">\(\bar{X} \rightarrow \mu\)</span>).</p>
+<p>I don’t intend to subject you to a proof that the law of large numbers is true, but it’s one of the most important tools for statistical theory. The law of large numbers is the thing we can use to justify our belief that collecting more and more data will eventually lead us to the truth. For any particular data set, the sample statistics that we calculate from it will be wrong, but the law of large numbers tells us that if we keep collecting more data those sample statistics will tend to get closer and closer to the true population parameters.</p>
+</div>
+<div class="section" id="estimating-aspects-of-the-population">
+<h2><span class="section-number">9.9. </span>Estimating aspects of the population<a class="headerlink" href="#estimating-aspects-of-the-population" title="Permalink to this headline">¶</a></h2>
+<p>So far we have talked about sampling from a population – the reasons we do it, how to do it, etc… Given a sample we use compute various descriptive statistics (covered in the previous chapter) that characterize the central tendency or variability of the sample.  However, while descriptive statistics are nice they are usually not what we want to know when we conduct a research study.  Instead we are interested in <strong>estimation</strong> of aspects (we’ll call them parameters) of the population.</p>
+<p>Suppose we go to Brooklyn and 100 of the locals are kind enough to sit through an IQ test. The average IQ score among these people turns out to be <span class="math notranslate nohighlight">\(\bar{X}=98.5\)</span>. Although it is nice to know that <em>this specific</em> group of people has this average IQ that isn’t very general.  Can we say anything more broad?  Like given this information what is the true mean IQ for the entire population of Brooklyn? Obviously, we don’t know the answer to that question. It could be <span class="math notranslate nohighlight">\(97.2\)</span>, but if could also be <span class="math notranslate nohighlight">\(103.5\)</span>. Our sampling isn’t exhaustive so we cannot give a definitive answer. Nevertheless if forced to give a “best guess” we’d probably have to say <span class="math notranslate nohighlight">\(98.5\)</span>. That’s the essence of statistical estimation: giving a best guess. We’re using the <em>sample</em> mean as the best guess of the <em>population</em> mean.</p>
+<p>For the moment let’s make sure you recognize that the sample statistic and the estimate of the population parameter are conceptually different things. A sample statistic is a description of your data, whereas the estimate is a guess about the population. With that in mind, statisticians often use different notation to refer to them. For instance, if true population mean is denoted <span class="math notranslate nohighlight">\(\mu\)</span>, then we would use <span class="math notranslate nohighlight">\(\hat\mu\)</span> to refer to our estimate of the population mean. In contrast, the sample mean is denoted <span class="math notranslate nohighlight">\(\bar{X}\)</span> or sometimes <span class="math notranslate nohighlight">\(m\)</span>. However, in simple random samples, the estimate of the population mean is identical to the sample mean: if I observe a sample mean of <span class="math notranslate nohighlight">\(\bar{X} = 98.5\)</span>, then my estimate of the population mean is also <span class="math notranslate nohighlight">\(\hat\mu = 98.5\)</span>. To help keep the notation clear, here’s a handy table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>What is it?</p></th>
+<th class="head"><p>Do we know what it is?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\bar{X}\)</span></p></td>
+<td><p>Sample mean</p></td>
+<td><p>Yes, calculated from the raw data</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mu\)</span></p></td>
+<td><p>True population mean</p></td>
+<td><p>Almost never known for sure</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{\mu}\)</span></p></td>
+<td><p>Estimate of the population mean</p></td>
+<td><p>Yes, identical to the sample mean</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="estimating-the-standard-deviation-of-the-population">
+<h3><span class="section-number">9.9.1. </span>Estimating the standard deviation of the population<a class="headerlink" href="#estimating-the-standard-deviation-of-the-population" title="Permalink to this headline">¶</a></h3>
+<p>In the case of the mean, our estimate of the population parameter (i.e. <span class="math notranslate nohighlight">\(\hat\mu\)</span>) turned out to identical to the corresponding sample statistic (i.e. <span class="math notranslate nohighlight">\(\bar{X}\)</span>). However, that’s not always true. To see this, let’s have a think about how to construct an <strong>estimate of the population standard deviation</strong>, which we’ll denote <span class="math notranslate nohighlight">\(\hat\sigma\)</span>. What shall we use as our estimate in this case? Your first thought might be that we could do the same thing we did when estimating the mean, and just use the sample statistic as our estimate. That’s almost the right thing to do, but not quite.</p>
+<p>Here’s why. Suppose I have a sample that contains a single observation. For this example, it helps to consider a sample where you have no intuitions at all about what the true population values might be, so let’s use something completely fictitious. Suppose the observation in question measures the <strong>cromulence</strong> of my shoes. It turns out that my shoes have a cromulence of 20. So here’s my sample:</p>
+<p><code class="docutils literal notranslate"><span class="pre">20</span></code></p>
+<p>This is a perfectly legitimate sample, even if it does have a sample size of <span class="math notranslate nohighlight">\(N=1\)</span>. It has a sample mean of 20, and because every observation in this sample is equal to the sample mean (obviously!) it has a sample standard deviation of 0. As a description of the <strong>sample</strong> this seems quite right: the sample contains a single observation and therefore there is no variation observed within the sample. A sample standard deviation of <span class="math notranslate nohighlight">\(s = 0\)</span> is the right answer here. But as an estimate of the <strong>population</strong> standard deviation, it feels completely insane, right? Admittedly, you and I don’t know anything at all about what “cromulence” is, but we know something about data: the only reason that we don’t see any variability in the <strong>sample</strong> is that the sample is too small to display any variation! So, if you have a sample size of <span class="math notranslate nohighlight">\(N=1\)</span>, it <strong>feels</strong> like the right answer is just to say “no idea at all”.</p>
+<p>Notice that you <strong>don’t</strong> have the same intuition when it comes to the sample mean and the population mean. If forced to make a best guess about the population mean, it doesn’t feel completely insane to guess that the population mean is 20. Sure, you probably wouldn’t feel very confident in that guess, because you have only the one observation to work with, but it’s still the best guess you can make.</p>
+<p>Let’s extend this example a little. Suppose I now make a second observation. My data set now has <span class="math notranslate nohighlight">\(N=2\)</span> observations of the cromulence of shoes, and the complete sample now looks like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">20,</span> <span class="pre">22</span></code></p>
+<p>This time around, our sample is <strong>just</strong> large enough for us to be able to observe some variability: two observations is the bare minimum number needed for any variability to be observed! For our new data set, the sample mean is <span class="math notranslate nohighlight">\(\bar{X}=21\)</span>, and the sample standard deviation is <span class="math notranslate nohighlight">\(s=1\)</span>. What intuitions do we have about the population? Again, as far as the population mean goes, the best guess we can possibly make is the sample mean: if forced to guess, we’d probably guess that the population mean cromulence is 21. What about the standard deviation? This is a little more complicated. The sample standard deviation is only based on two observations, and if you’re at all like me you probably have the intuition that, with only two observations, we haven’t given the population “enough of a chance” to reveal its true variability to us. It’s not just that we suspect that the estimate is <strong>wrong</strong>: after all, with only two observations we expect it to be wrong to some degree. The worry is that the error is <strong>systematic</strong>.</p>
+<p>If the error is systematic, that means it is <strong>biased</strong>. For example, imagine if the sample mean was always smaller than the population mean. If this was true (it’s not), then we couldn’t use the sample mean as an estimator. It would be biased, we’d be using the wrong number.</p>
+<p>It turns out the sample standard deviation is a <strong>biased estimator</strong> of the population standard deviation. We can sort of anticipate this by what we’ve been discussing. When the sample size is 1, the standard deviation is 0, which is obviously to small. When the sample size is 2, the standard deviation becomes a number bigger than 0, but because we only have two sample, we suspect it might still be too small. Turns out this intuition is correct.</p>
+<p>It would be nice to demonstrate this somehow. There are in fact mathematical proofs that confirm this intuition, but unless you have the right mathematical background they don’t help very much. Instead, what I’ll do is use Python to simulate the results of some experiments. With that in mind, let’s return to our IQ studies. Suppose the true population mean IQ is 100 and the standard deviation is 15. I can use the <code class="docutils literal notranslate"><span class="pre">npr.normal()</span></code>* function to generate the the results of an experiment in which I measure <span class="math notranslate nohighlight">\(N=2\)</span> IQ scores, and calculate the sample standard deviation. If I do this over and over again, and plot a histogram of these sample standard deviations, what I have is the <strong>sampling distribution of the standard deviation</strong>. I’ve plotted this distribution in <a class="reference internal" href="#fig-sampdistsd"><span class="std std-numref">Fig. 9.5</span></a>.</p>
+<div class="figure align-default" id="fig-sampdistsd">
+<a class="reference internal image-reference" href="../../_images/sampdistsd.pdf"><img alt="../../_images/sampdistsd.pdf" src="../../_images/sampdistsd.pdf" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9.5 </span><span class="caption-text">The sampling distribution of the sample standard deviation for a two IQ scores experiment. The true population standard deviation is 15 (dashed line), but as you can see from the histogram, the vast majority of experiments will produce a much smaller sample standard deviation than this. On average, this experiment would produce a sample standard deviation of only 8.5, well below the true value! In other words, the sample standard deviation is a biased estimate of the population standard deviation.</span><a class="headerlink" href="#fig-sampdistsd" title="Permalink to this image">¶</a></p>
+</div>
+<p>Even though the true population standard deviation is 15, the average of the <strong>sample</strong> standard deviations is only 8.5. Now let’s extend the simulation. Instead of restricting ourselves to the situation where we have a sample size of <span class="math notranslate nohighlight">\(N=2\)</span>, let’s repeat the exercise for sample sizes from 1 to 10. If we plot the average sample mean and average sample standard deviation as a function of sample size, you get the following results.</p>
+<p><a class="reference internal" href="#fig-estimatorbiasa"><span class="std std-numref">Fig. 9.6</span></a> shows the sample mean as a function of sample size. Notice it’s a flat line. The sample mean doesn’t underestimate or overestimate the population mean. It is an unbiased estimate!</p>
+<div class="figure align-default" id="fig-estimatorbiasa">
+<a class="reference internal image-reference" href="../../_images/biasMean-eps-converted-to.pdf"><img alt="../../_images/biasMean-eps-converted-to.pdf" src="../../_images/biasMean-eps-converted-to.pdf" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9.6 </span><span class="caption-text">An illustration of the fact that the sample mean is an unbiased estimator of the population mean.</span><a class="headerlink" href="#fig-estimatorbiasa" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#fig-estimatorbiasb"><span class="std std-numref">Fig. 9.7</span></a> shows the sample standard deviation as a function of sample size. Notice it is not a flat line. The sample standard deviation systematically underestimates the population standard deviation!</p>
+<div class="figure align-default" id="fig-estimatorbiasb">
+<a class="reference internal image-reference" href="../../_images/biasSD-eps-converted-to.pdf"><img alt="../../_images/biasSD-eps-converted-to.pdf" src="../../_images/biasSD-eps-converted-to.pdf" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 9.7 </span><span class="caption-text">An illustration of the fact that the the sample standard deviation is a biased estimator of the population standard deviation.</span><a class="headerlink" href="#fig-estimatorbiasb" title="Permalink to this image">¶</a></p>
+</div>
+<p>In other words, if we want to make a “best guess” (<span class="math notranslate nohighlight">\(\hat\sigma\)</span>, our estimate of the population standard deviation) about the value of the population standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>, we should make sure our guess is a little bit larger than the sample standard deviation <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<p>The fix to this systematic bias turns out to be very simple. Here’s how it works. Before tackling the standard deviation, let’s look at the variance. If you recall from the second chapter, the sample variance is defined to be the average of the squared deviations from the sample mean. That is:</p>
+<p><span class="math notranslate nohighlight">\(s^2 = \frac{1}{N} \sum_{i=1}^N (X_i - \bar{X})^2\)</span></p>
+<p>The sample variance <span class="math notranslate nohighlight">\(s^2\)</span> is a biased estimator of the population variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. But as it turns out, we only need to make a tiny tweak to transform this into an unbiased estimator. All we have to do is divide by <span class="math notranslate nohighlight">\(N-1\)</span> rather than by <span class="math notranslate nohighlight">\(N\)</span>. If we do that, we obtain the following formula:
+<span class="math notranslate nohighlight">\(\hat\sigma^2 = \frac{1}{N-1} \sum_{i=1}^N (X_i - \bar{X})^2\)</span>
+This is an unbiased estimator of the population variance <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>A similar story applies for the standard deviation. If we divide by <span class="math notranslate nohighlight">\(N-1\)</span> rather than <span class="math notranslate nohighlight">\(N\)</span>, our estimate of the population standard deviation becomes: <span class="math notranslate nohighlight">\(\hat\sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (X_i - \bar{X})^2}\)</span>.</p>
+<p>It is worth pointing out that software programs make assumptions <strong>for you</strong>, about which variance and standard deviation <strong>you</strong> are computing. Some programs automatically divide by <span class="math notranslate nohighlight">\(N-1\)</span>, some do not. You need to check to figure out what they are doing. Don’t let the software tell you what to do. Software is for you telling it what to do.m</p>
+<p>One final point: in practice, a lot of people tend to refer to <span class="math notranslate nohighlight">\(\hat{\sigma}\)</span> (i.e., the formula where we divide by <span class="math notranslate nohighlight">\(N-1\)</span>) as the <strong>sample</strong> standard deviation. Technically, this is incorrect: the <strong>sample</strong> standard deviation should be equal to <span class="math notranslate nohighlight">\(s\)</span> (i.e., the formula where we divide by <span class="math notranslate nohighlight">\(N\)</span>). These aren’t the same thing, either conceptually or numerically. One is a property of the sample, the other is an estimated characteristic of the population. However, in almost every real life application, what we actually care about is the estimate of the population parameter, and so people always report <span class="math notranslate nohighlight">\(\hat\sigma\)</span> rather than <span class="math notranslate nohighlight">\(s\)</span>.</p>
+</div>
+</div>
+<div class="section" id="references">
+<h2><span class="section-number">9.10. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id6"><dl class="citation">
+<dt class="label" id="id53"><span class="brackets"><a class="fn-backref" href="#id5">Cla73</a></span></dt>
+<dd><p>H.H. Clark. The language-as-fixed-effect fallacy: a critique of language statistics. <em>Journal of Verbal Learning and Verbal Behavior</em>, 16(6):335–359, 1973.</p>
+</dd>
+<dt class="label" id="id58"><span class="brackets"><a class="fn-backref" href="#id1">CNS19</a></span></dt>
+<dd><p>M.J.C. Crump, D. Navarro, and J. Suzuki. <em>Answering Questions with Data (Textbook): Introductory Statistics for Psychology Students</em>. 2019. <a class="reference external" href="https://doi.org/https://doi.org/10.17605/OSF.IO/JZE52">doi:https://doi.org/10.17605/OSF.IO/JZE52</a>.</p>
+</dd>
+<dt class="label" id="id55"><span class="brackets">HHN10</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>)</span></dt>
+<dd><p>J. Henrich, S. Heine, and A. Norenzayan. Most people are not weird. <em>Nature</em>, 2010.</p>
+</dd>
+<dt class="label" id="id59"><span class="brackets"><a class="fn-backref" href="#id2">Nav11</a></span></dt>
+<dd><p>D. Navarro. <em>Learning Statistics with R</em>. 2011. URL: <a class="reference external" href="https://learningstatisticswithr.com">https://learningstatisticswithr.com</a>.</p>
+</dd>
+<dt class="label" id="id54"><span class="brackets"><a class="fn-backref" href="#id5">WNY17</a></span></dt>
+<dd><p>J. Westfall, T.E. Nichols, and T. Yarkoni. Fixing the stimulus-as-fixed-effect fallacy in task fmri. <em>Wellcome Open Reearch</em>, pages 1–23, 2017.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/08"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../07/00-describingdata.html" title="previous page"><span class="section-number">8. </span>Describing Data</a>
+    <a class='right-next' id="next-link" href="../09/00-hypothesistesting.html" title="next page"><span class="section-number">10. </span>Hypothesis testing</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

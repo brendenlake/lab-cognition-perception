@@ -1,0 +1,1161 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Ultimate (Concise) Guide to t-test type things in Python &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="License for this book" href="../LICENSE.html" />
+    <link rel="prev" title="NYU JupyterHub Setup" href="nyu-jupyterhub.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/tips/ultimate-guide-ttest-python.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/tips/ultimate-guide-ttest-python.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-some-libraries">
+   Import some libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-some-data">
+   Define some data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-group-independent-samples-t-test-student-test">
+   Two-group independent samples t-test (Student test)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-group-independent-samples-unequal-variance-welch-test">
+   Two Group Independent Samples unequal variance (Welch test)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paired-samples-t-test">
+   Paired samples t-test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-sample-t-test">
+   One sample t-test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-normal-data-wilcoxon-or-mann-whitney-test">
+   Non-normal data (Wilcoxon or Mann-Whitney test)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#be-bayesian-the-best-test">
+   Be Bayesian! The BEST test
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#watermark">
+     Watermark
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="the-ultimate-concise-guide-to-t-test-type-things-in-python">
+<h1>The Ultimate (Concise) Guide to t-test type things in Python<a class="headerlink" href="#the-ultimate-concise-guide-to-t-test-type-things-in-python" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This chapter authored by <a class="reference external" href="http://gureckislab.org/~gureckis">Todd M. Gureckis</a> and is released under the <a class="reference internal" href="../LICENSE.html"><span class="doc std std-doc">license for this book</span></a>.</p>
+</div>
+<p>So you have a dataset with two groups in it.  Might be and “experimental” group and a “control” group, or “treatment 1” versus “treatment 2” and you want to know if they are different.  First you have to define different.  Obviously if this is real data unlike that both groups have the exact same values in them.  Often you are interested in if the mean of the two groups is different.</p>
+<p>The statistical test most often used to do this is a “Students t-test”.  This notebook does not bother too much with explaining the theory behind t-tests, particularly in the traditional form.  Instead this is a guide to like “how do I do this in python?”.  Other chapters of this course/book go into more of the theory.  It starts off with the most common situations for standard “null hypothesis significance testing” t-tests.  It ends with an example of an approach to replace the student t-test with the BEST test (Bayesian Estimation Supercedes the T-test) which is a fully Bayesian approach to comparing two groups published by Kruschke (2013).  It mostly shows the code and libraries you need, how you typically report in a paper, and also checks to make sure you ran the right test.</p>
+<div class="section" id="import-some-libraries">
+<h2>Import some libraries<a class="headerlink" href="#import-some-libraries" title="Permalink to this headline">¶</a></h2>
+<p>First we need to load the relevant libraries.  These libraries don’t <em>all</em> need to be loaded depending on what you are doing but this will generally work.  See the end of this notebook for information about the versions of the packages used here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># basic datascience/data manipulation libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="c1"># graphs</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># formulat interface to statsmodels (standard linear models)</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="c1"># easy-to-use traditional psychological stats (t-test, anova)</span>
+<span class="kn">import</span> <span class="nn">pingouin</span> <span class="k">as</span> <span class="nn">pg</span>
+
+<span class="c1"># hate these things</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-some-data">
+<h2>Define some data<a class="headerlink" href="#define-some-data" title="Permalink to this headline">¶</a></h2>
+<p>For this example we’ll consider several datasets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span>
+        <span class="mi">109</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span>
+        <span class="mi">96</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">124</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">])</span>
+<span class="n">placebo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">99</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span>
+           <span class="mi">104</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span>
+           <span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">99</span><span class="p">])</span>
+
+
+<span class="c1"># packing the data into a tidy dataframe can be nice</span>
+<span class="n">exp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">drug</span><span class="p">)</span><span class="o">+</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">placebo</span><span class="p">),</span> <span class="n">score</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">drug</span><span class="p">,</span><span class="n">placebo</span><span class="p">]))</span>
+
+<span class="n">exp_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>group</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>104</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>102</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="two-group-independent-samples-t-test-student-test">
+<h2>Two-group independent samples t-test (Student test)<a class="headerlink" href="#two-group-independent-samples-t-test-student-test" title="Permalink to this headline">¶</a></h2>
+<p>Is the mean of the drug group different than the mean of the placebo group?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean of drug group:&quot;</span><span class="p">,</span> <span class="n">drug</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean of placebo group:&quot;</span><span class="p">,</span> <span class="n">placebo</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The difference in means is: &quot;</span><span class="p">,</span> <span class="n">drug</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">-</span><span class="n">placebo</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean of drug group: 101.91489361702128
+Mean of placebo group: 100.35714285714286
+The difference in means is:  1.5577507598784166
+</pre></div>
+</div>
+</div>
+</div>
+<p>The look close but not identical.  However, “look” isn’t enough.</p>
+<p>Lets begin with a two-sample, independent samples t-test.  We will assume that both groups have equal variance here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pg</span><span class="o">.</span><span class="n">ttest</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">drug</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">placebo</span><span class="p">,</span><span class="n">paired</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T</th>
+      <th>dof</th>
+      <th>tail</th>
+      <th>p-val</th>
+      <th>CI95%</th>
+      <th>cohen-d</th>
+      <th>BF10</th>
+      <th>power</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T-test</th>
+      <td>1.559</td>
+      <td>87</td>
+      <td>two-sided</td>
+      <td>0.122699</td>
+      <td>[-0.43, 3.54]</td>
+      <td>0.331</td>
+      <td>0.642</td>
+      <td>0.338</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We specified group <code class="docutils literal notranslate"><span class="pre">x</span></code> as <code class="docutils literal notranslate"><span class="pre">drug</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> as <code class="docutils literal notranslate"><span class="pre">placebo</span></code> (arbitrarily, you could flip that).  We used ‘two-sided’ which is the traditionally more conservative test which you use unless you have a strong a-priori belief one group is going to have a higher mean value.  We did not apply a correction known as the Welch-Satterthwaite correction for unequal variances.  We will try that later.</p>
+<p>The results show that the t-value for the mean difference is 1.599.  The test has 87 degrees of freedom.  The p-value is 0.122699 which is greater than the traditional “alpha” cut off at p=0.05.  Therefore this test is not significant.  The 95% confidence interval for the differences between the means is -0.43 on the low end to 3.54 with (1.5577 the center).  The effect size (Cohen’s d) is 0.331.  The Bayes Factor in favor of the alternative hypothesis (that the means are difference) is lower than one (0.642).  The post-hoc power of the test is 0.338.</p>
+<p>All of this is consistent with there being basically no differences between these two groups.</p>
+<div class="tip admonition">
+<p class="admonition-title">Example way to report this in a paper</p>
+<p>We conducted an independent sample t-test comparing the mean score in the drug and placebo group which failed to detect a  significant difference (<span class="math notranslate nohighlight">\(t(87)=1.56, p=0.12, d=0.331\)</span>).</p>
+</div>
+</div>
+<div class="section" id="two-group-independent-samples-unequal-variance-welch-test">
+<h2>Two Group Independent Samples unequal variance (Welch test)<a class="headerlink" href="#two-group-independent-samples-unequal-variance-welch-test" title="Permalink to this headline">¶</a></h2>
+<p>The assumption in the previous example was that the standard deviation of the data in the two groups was identical.  This assumption may be inappropriate.  To do a test where this is relaxed is not longer technically a t-test but a Welch test.   All we do is test correction to <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pg</span><span class="o">.</span><span class="n">ttest</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">drug</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">placebo</span><span class="p">,</span><span class="n">paired</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T</th>
+      <th>dof</th>
+      <th>tail</th>
+      <th>p-val</th>
+      <th>CI95%</th>
+      <th>cohen-d</th>
+      <th>BF10</th>
+      <th>power</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T-test</th>
+      <td>1.622</td>
+      <td>63.04</td>
+      <td>two-sided</td>
+      <td>0.109754</td>
+      <td>[-0.36, 3.48]</td>
+      <td>0.331</td>
+      <td>0.701</td>
+      <td>0.338</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example way to report this in a paper</p>
+<p>We conducted an independent sample Welch test comparing the mean score in the drug and placebo group which failed to detect a  significant difference (<span class="math notranslate nohighlight">\(t(63.04)=1.622, p=0.11, d=0.331\)</span>).</p>
+</div>
+<p>There can be some strong arguments that this should be the preferred indendent sample t-test because the assumption of equal variance is unlikely to be met.</p>
+</div>
+<div class="section" id="paired-samples-t-test">
+<h2>Paired samples t-test<a class="headerlink" href="#paired-samples-t-test" title="Permalink to this headline">¶</a></h2>
+<p>In the previous example the two groups were necessarily measuring different individuals (placebo versus a drug study).  However sometimes we measure the same person twice (pre-test, post-test) for instance.  In that case we use the “paired” samples t-test because there is a natural link between individual numbers in both groups (usually a person or some other unit of measurement).</p>
+<p>To perform this test we are going to create slightly different data set but you could copy-paste numbers into the <code class="docutils literal notranslate"><span class="pre">test_1</span></code> and <code class="docutils literal notranslate"><span class="pre">test_2</span></code> arrays as in the example above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">106</span><span class="p">,</span>
+        <span class="mi">109</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">102</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span>
+        <span class="mi">96</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">124</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">])</span>
+<span class="n">test_2</span> <span class="o">=</span> <span class="n">test_1</span> <span class="o">+</span> <span class="n">npr</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">test_1</span><span class="p">))</span>
+
+
+<span class="c1"># packing the data into a tidy dataframe can be nice</span>
+<span class="n">exp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">test_1</span><span class="p">)</span><span class="o">+</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">test_2</span><span class="p">),</span> <span class="n">score</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">test_1</span><span class="p">,</span> <span class="n">test_2</span><span class="p">]))</span>
+
+<span class="n">exp_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>group</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>101.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>100.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>102.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>104.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>102.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>To perform this test we set <code class="docutils literal notranslate"><span class="pre">paired</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pg</span><span class="o">.</span><span class="n">ttest</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">test_1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">test_2</span><span class="p">,</span><span class="n">paired</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T</th>
+      <th>dof</th>
+      <th>tail</th>
+      <th>p-val</th>
+      <th>CI95%</th>
+      <th>cohen-d</th>
+      <th>BF10</th>
+      <th>power</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T-test</th>
+      <td>-3.3</td>
+      <td>46</td>
+      <td>two-sided</td>
+      <td>0.001875</td>
+      <td>[-8.15, -1.97]</td>
+      <td>0.547</td>
+      <td>16.595</td>
+      <td>0.956</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example way to report this in a paper</p>
+<p>We conducted a paired t-test comparing the scores in the first and second test which was significant (<span class="math notranslate nohighlight">\(t(46)=3.3, p&lt;.002, d=0.547\)</span>).</p>
+</div>
+</div>
+<div class="section" id="one-sample-t-test">
+<h2>One sample t-test<a class="headerlink" href="#one-sample-t-test" title="Permalink to this headline">¶</a></h2>
+<p>What if you only have one sample and you just want to test if it is different than some specific “null” hypothesis.  For instance many of the scores seem to be about 100 in the <code class="docutils literal notranslate"><span class="pre">drug</span></code> group from the dataset above so we could test the hypothesis “is the mean of that group significantly different than 100?”.  A one-sample t-test is appropriate for this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pg</span><span class="o">.</span><span class="n">ttest</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">drug</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">paired</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T</th>
+      <th>dof</th>
+      <th>tail</th>
+      <th>p-val</th>
+      <th>CI95%</th>
+      <th>cohen-d</th>
+      <th>BF10</th>
+      <th>power</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T-test</th>
+      <td>2.18</td>
+      <td>46</td>
+      <td>two-sided</td>
+      <td>0.034387</td>
+      <td>[0.15, 3.68]</td>
+      <td>0.318</td>
+      <td>1.36</td>
+      <td>0.569</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example way to report this in a paper</p>
+<p>We conducted a one-sample t-test comparing the scores in the drug group against the null hypothesis of a mean of 100 which did not reach significance (<span class="math notranslate nohighlight">\(t(46)=2.18, p=.034, d=0.318\)</span>).</p>
+</div>
+</div>
+<div class="section" id="non-normal-data-wilcoxon-or-mann-whitney-test">
+<h2>Non-normal data (Wilcoxon or Mann-Whitney test)<a class="headerlink" href="#non-normal-data-wilcoxon-or-mann-whitney-test" title="Permalink to this headline">¶</a></h2>
+<p>All the tests above assume the data is normally distributed.  But we can’t just assume that.  How do you know for sure?  Well it is a bit of a longer topic but there are tests for <code class="docutils literal notranslate"><span class="pre">non-normality</span></code> you can uses which are summarized <a class="reference external" href="http://gureckislab.org/courses/fall20/labincp/chapters/10/00-ttest.html#checking-the-normality-of-a-sample">here</a>.</p>
+<p>In cases where there is strong suspicion your data are not normally distributed in one or the other group you can use a non-parametric test known as the Wilcoxon (paired samples/within subject) or Mann-Whitney (independent samples) test.  It also exists in <code class="docutils literal notranslate"><span class="pre">pingouin</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pg</span><span class="o">.</span><span class="n">mwu</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">drug</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">placebo</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>U-val</th>
+      <th>tail</th>
+      <th>p-val</th>
+      <th>RBC</th>
+      <th>CLES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>MWU</th>
+      <td>1267.5</td>
+      <td>two-sided</td>
+      <td>0.019609</td>
+      <td>-0.284</td>
+      <td>0.578</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example way to report this in a paper</p>
+<p>Since our data were non-normal, we conducted a two-side Mann-Whitney test comparing the scores in the drug group against the placebo group which was significant (<span class="math notranslate nohighlight">\(U=1267.5, p&lt;.02\)</span>).</p>
+</div>
+<p>The one paired samples version of this is the Wilcoxon test:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pg</span><span class="o">.</span><span class="n">wilcoxon</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">test_1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">test_2</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>W-val</th>
+      <th>tail</th>
+      <th>p-val</th>
+      <th>RBC</th>
+      <th>CLES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Wilcoxon</th>
+      <td>305.0</td>
+      <td>two-sided</td>
+      <td>0.006229</td>
+      <td>-0.459</td>
+      <td>0.638</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Example way to report this in a paper</p>
+<p>Since our data were non-normal, we conducted a two-sided Wilcoxon test comparing the scores at test time 1 with the scores at test time 2 which was significant (<span class="math notranslate nohighlight">\(W=305.0, p&lt;.007\)</span>).</p>
+</div>
+</div>
+<div class="section" id="be-bayesian-the-best-test">
+<h2>Be Bayesian! The BEST test<a class="headerlink" href="#be-bayesian-the-best-test" title="Permalink to this headline">¶</a></h2>
+<p>The examples above all show how to tell if two groups are different using traditional “null hypothesis significance testing.”  However there are several ways in which this is non ideal.  Instead, the best way to evaluate differences between groups it do dump the hypothesis testing framework all together and use Bayesian estimation of the differences between groups.  Kruschke (2013) describes a simplified/standardize work flow called the BEST test (Bayesian ESTimation) although I’ve also heard it call the Bayesian Estimation Superceeds the T-test!.</p>
+<p>Luckily there is a simplified python package that implements this test for you! https://best.readthedocs.io/en/latest/</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">best</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_out</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">analyze_two</span><span class="p">(</span><span class="n">drug</span><span class="p">,</span> <span class="n">placebo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-44-603f4fdeb269&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">best_out</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">analyze_two</span><span class="p">(</span><span class="n">drug</span><span class="p">,</span> <span class="n">placebo</span><span class="p">)</span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/best/model.py</span> in <span class="ni">analyze_two</span><span class="nt">(group1_data, group2_data, n_samples, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">438</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">439</span><span class="sd">     model = BestModelTwo(group1_data, group2_data)</span>
+<span class="ne">--&gt; </span><span class="mi">440</span><span class="sd">     trace = model.sample(n_samples, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span><span class="sd">     return BestResultsTwo(model, trace)</span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span><span class="sd"> </span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/best/model.py</span> in <span class="ni">sample</span><span class="nt">(self, n_samples, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="sd">         for r in range(max_rounds):</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="sd">             with self.model:</span>
+<span class="ne">---&gt; </span><span class="mi">73</span><span class="sd">                 trace = pm.sample(n_samples, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="sd">             if trace.report.ok:</span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/pymc3/sampling.py</span> in <span class="ni">sample</span><span class="nt">(draws, step, init, n_init, start, trace, chain_idx, chains, cores, tune, progressbar, model, random_seed, discard_tuned_samples, compute_convergence_checks, callback, jitter_max_retries, return_inferencedata, idata_kwargs, mp_ctx, pickle_backend, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span><span class="sd">                 progressbar=progressbar,</span>
+<span class="g g-Whitespace">    </span><span class="mi">502</span><span class="sd">                 jitter_max_retries=jitter_max_retries,</span>
+<span class="ne">--&gt; </span><span class="mi">503</span><span class="sd">                 **kwargs,</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span><span class="sd">             )</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span><span class="sd">             if start is None:</span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/pymc3/sampling.py</span> in <span class="ni">init_nuts</span><span class="nt">(init, chains, n_init, model, random_seed, progressbar, jitter_max_retries, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2184</span><span class="sd">         raise ValueError(f&quot;Unknown initializer: {init}.&quot;)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2185</span><span class="sd"> </span>
+<span class="ne">-&gt; </span><span class="mi">2186</span><span class="sd">     step = pm.NUTS(potential=potential, model=model, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2187</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">2188</span><span class="sd">     return start, step</span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/pymc3/step_methods/hmc/nuts.py</span> in <span class="ni">__init__</span><span class="nt">(self, vars, max_treedepth, early_max_treedepth, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span><span class="sd">         `pm.sample` to the desired number of tuning steps.</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span><span class="sd">         &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">168</span>         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">vars</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span> 
+<span class="g g-Whitespace">    </span><span class="mi">170</span>         <span class="bp">self</span><span class="o">.</span><span class="n">max_treedepth</span> <span class="o">=</span> <span class="n">max_treedepth</span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/pymc3/step_methods/hmc/base_hmc.py</span> in <span class="ni">__init__</span><span class="nt">(self, vars, scaling, step_scale, is_cov, model, blocked, potential, dtype, Emax, target_accept, gamma, k, t0, adapt_step_size, step_rand, **theano_kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span>         <span class="nb">vars</span> <span class="o">=</span> <span class="n">inputvars</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span> 
+<span class="ne">---&gt; </span><span class="mi">88</span>         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">vars</span><span class="p">,</span> <span class="n">blocked</span><span class="o">=</span><span class="n">blocked</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="o">**</span><span class="n">theano_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span> 
+<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="bp">self</span><span class="o">.</span><span class="n">adapt_step_size</span> <span class="o">=</span> <span class="n">adapt_step_size</span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/pymc3/step_methods/arraystep.py</span> in <span class="ni">__init__</span><span class="nt">(self, vars, model, blocked, dtype, logp_dlogp_func, **theano_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span> 
+<span class="g g-Whitespace">    </span><span class="mi">253</span>         <span class="k">if</span> <span class="n">logp_dlogp_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">254</span>             <span class="n">func</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">logp_dlogp_function</span><span class="p">(</span><span class="nb">vars</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="o">**</span><span class="n">theano_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span>             <span class="n">func</span> <span class="o">=</span> <span class="n">logp_dlogp_func</span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/pymc3/model.py</span> in <span class="ni">logp_dlogp_function</span><span class="nt">(self, grad_vars, tempered, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1001</span>         <span class="n">varnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">grad_vars</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1002</span>         <span class="n">extra_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_RVs</span> <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">varnames</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">1003</span>         <span class="k">return</span> <span class="n">ValueGradFunction</span><span class="p">(</span><span class="n">costs</span><span class="p">,</span> <span class="n">grad_vars</span><span class="p">,</span> <span class="n">extra_vars</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1004</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1005</span>     <span class="nd">@property</span>
+
+<span class="nn">~/.virtualenvs/science/lib/python3.7/site-packages/pymc3/model.py</span> in <span class="ni">__init__</span><span class="nt">(self, costs, grad_vars, extra_vars, dtype, casting, compute_grads, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">698</span>         <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_vars_joined</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">699</span> 
+<span class="ne">--&gt; </span><span class="mi">700</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_theano_function</span> <span class="o">=</span> <span class="n">theano</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">givens</span><span class="o">=</span><span class="n">givens</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span> 
+<span class="g g-Whitespace">    </span><span class="mi">702</span>     <span class="k">def</span> <span class="nf">set_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+
+<span class="ne">TypeError</span>: function() got an unexpected keyword argument &#39;nuts_kwargs&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best</span><span class="o">.</span><span class="n">plot_all</span><span class="p">(</span><span class="n">best_out</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="watermark">
+<h3>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">¶</a></h3>
+<p>The code here successfully ran with these versions of the packages:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The watermark extension is already loaded. To reload it, use:
+  %reload_ext watermark
+Last updated: Wed Mar 03 2021
+
+Python implementation: CPython
+Python version       : 3.7.3
+IPython version      : 6.2.1
+
+statsmodels: 0.12.1
+seaborn    : 0.11.0
+scipy      : 1.5.4
+pingouin   : 0.2.9
+json       : 2.0.9
+best       : 2.0.0.post0
+pandas     : 1.1.4
+numpy      : 1.19.4
+autopep8   : 1.4.4
+matplotlib : 3.3.3
+
+Watermark: 2.2.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./tips"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="nyu-jupyterhub.html" title="previous page">NYU JupyterHub Setup</a>
+    <a class='right-next' id="next-link" href="../LICENSE.html" title="next page">License for this book</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,720 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 1: Advanced Regression &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/labs/LabReg-AdvancedRegression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/labs/LabReg-AdvancedRegression.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#checking-assumptions">
+   Checking assumptions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-regression">
+   Multiple regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#colinearity">
+   Colinearity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datamunging-getting-the-data-together-for-next-time">
+   Datamunging!  Getting the data together for next time!
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="lab-1-advanced-regression">
+<h1>Lab 1: Advanced Regression<a class="headerlink" href="#lab-1-advanced-regression" title="Permalink to this headline">¶</a></h1>
+<p>Authored by <em>Todd Gureckis</em><br />
+Aspects borrowed from <a class="reference external" href="https://github.com/justmarkham/DAT4">General Assembly’s Data Science</a> course which claims to have <em>adapted materials from Chapter 3 of <a class="reference external" href="http://www-bcf.usc.edu/~gareth/ISL/">An Introduction to Statistical Learning</a></em></p>
+<p>Congratulations, you made it through the first part of the lab, and now understand the basic of simple linear regression!  Before we move onto the actual analyses in this lab we need to cover a little further background on what we will call “advanced” topics in regression.  However, don’t be afraid!  This is not really “advanced” but more like “nuance, details, and stuff you’ll need later”.  So this isn’t an exercise in math or abstraction but additional practical skills it is useful to know about in order to be a savvy psychological data scientist!</p>
+<img src="http://www.phdcomics.com/comics/archive/phd081310s.gif" width="500">
+<p>(replace years in grad school with “week in lab in cognition and perception”)</p>
+<div class="section" id="checking-assumptions">
+<h2>Checking assumptions<a class="headerlink" href="#checking-assumptions" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned in the reading, there are a variety of “assumptions” that need to be met in order for some of the interpretation of regression fits to be valid.  Mostly this has to do with interpreting things like the <span class="math notranslate nohighlight">\(p\)</span>-values associated with the regression line itself or with the estimated coefficients.  In the realm of just using a fitted model to make predictions, these assumptions matter somewhat less because it will be painfully obvious if your model is wrong: you’ll do poorly at prediction!  It is the interpretation of coefficients which always sounds kind of reasonable when you just report the p-value or 95% confidence intervals but can be completely wrong if the assumptions are not met.</p>
+<p>One of the more important assumption of linear regression is that the relationship between the predictor and outcome variable is roughly <strong>linear</strong>.  Seems obvious right?  But remember the exxamples mentioned in Chapter 4 called the anscomb quartet which were examples which have exactly the same correlation value (<span class="math notranslate nohighlight">\(r\)</span>) but are clearly showing quite different things?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the example dataset for Anscombe&#39;s quartet</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;anscombe&quot;</span><span class="p">)</span>
+
+<span class="c1"># Show the results of a linear regression within each dataset</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;dataset&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;dataset&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+           <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;muted&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+           <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x12aa23ac8&gt;
+</pre></div>
+</div>
+<img alt="../_images/LabReg-AdvancedRegression_8_1.png" src="../_images/LabReg-AdvancedRegression_8_1.png" />
+</div>
+</div>
+<p>In each of these examples, you can see a nice line fit to each one but the underlying data is quite different.  This illustrates a nice exmaple of data that might “violate” the assumptions of a regression in some way.</p>
+<div class="alert alert-info" role="alert">
+  <strong>Question 1</strong> <br>
+    The cell below shows how to extract the data for each of these examples from the larger data frame.  Using your statsmodels skills conduct a linear regression between x and y for each of these dataset and verify that they have the same overall R~2 value.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># as a reminder to select only data for dataset I we sub-select from the original data frame:</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">dataset</span><span class="o">==</span><span class="s1">&#39;I&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 2</strong> <br>
+    Dataset II, III, and IV have odd patterns which appear to violate one or more of the assumptions of the linear regression.  Referring back to the chapter on regression, provide python code to demonstrate at least one of these violations. As a reminder, the assumption appear in the section "Assumptions of regression" and include normality, linearity, homogeneity or variance, uncorrelated predictors, residuals are independent of each other, and no "bad" outlier. You will find it helpful to peek at the code provided in the textbook along with the various plots.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div></div>
+<div class="section" id="multiple-regression">
+<h2>Multiple regression<a class="headerlink" href="#multiple-regression" title="Permalink to this headline">¶</a></h2>
+<p>All of the examples we considered in the last notebook use a regression equation that looked something like this:</p>
+<div class="math notranslate nohighlight">
+\[y = \beta_0 + \beta_1x\]</div>
+<p>which is often known as simple linear regression.  What makes it simple is that there is a single predictor (<span class="math notranslate nohighlight">\(x\)</span>) and it enter into the linear equation in a very standard way.</p>
+<img src="https://pvsmt99345.i.lithium.com/t5/image/serverpage/image-id/9784i6F28C15930EDC179/image-dimensions/1700?v=1.0&px=-1" width="350"><p>As described in the text, simple linear regression can easily be extended to include multiple features. This is called <strong>multiple linear regression</strong>:</p>
+<p><span class="math notranslate nohighlight">\(y = \beta_0 + \beta_1x_1 + ... + \beta_nx_n\)</span></p>
+<p>Each <span class="math notranslate nohighlight">\(x\)</span> represents a different feature, and each feature has its own coefficient. For example, for the advertising data we considered in the previous lab:</p>
+<p><span class="math notranslate nohighlight">\(y = \beta_0 + \beta_1 \times TV + \beta_2 \times Radio + \beta_3 \times Newspaper\)</span></p>
+<p>Let’s use Statsmodels to estimate these coefficients:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://gureckislab.org/courses/fall19/labincp/data/advertising.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a fitted model with all three features</span>
+<span class="n">lm</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;sales ~ tv + radio + newspaper&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">ad_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># print the coefficients</span>
+<span class="n">lm</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept    2.938889
+tv           0.045765
+radio        0.188530
+newspaper   -0.001037
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>sales</td>      <th>  R-squared:         </th> <td>   0.897</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.896</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   570.3</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Mon, 21 Oct 2019</td> <th>  Prob (F-statistic):</th> <td>1.58e-96</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>00:43:27</td>     <th>  Log-Likelihood:    </th> <td> -386.18</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   200</td>      <th>  AIC:               </th> <td>   780.4</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   196</td>      <th>  BIC:               </th> <td>   793.6</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>    2.9389</td> <td>    0.312</td> <td>    9.422</td> <td> 0.000</td> <td>    2.324</td> <td>    3.554</td>
+</tr>
+<tr>
+  <th>tv</th>        <td>    0.0458</td> <td>    0.001</td> <td>   32.809</td> <td> 0.000</td> <td>    0.043</td> <td>    0.049</td>
+</tr>
+<tr>
+  <th>radio</th>     <td>    0.1885</td> <td>    0.009</td> <td>   21.893</td> <td> 0.000</td> <td>    0.172</td> <td>    0.206</td>
+</tr>
+<tr>
+  <th>newspaper</th> <td>   -0.0010</td> <td>    0.006</td> <td>   -0.177</td> <td> 0.860</td> <td>   -0.013</td> <td>    0.011</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>60.414</td> <th>  Durbin-Watson:     </th> <td>   2.084</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td> 151.241</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-1.327</td> <th>  Prob(JB):          </th> <td>1.44e-33</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 6.332</td> <th>  Cond. No.          </th> <td>    454.</td>
+</tr>
+</table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>What are a few key things we learn from this output?</p>
+<ul class="simple">
+<li><p>TV and Radio have significant <strong>p-values</strong>, whereas Newspaper does not. Thus we reject the null hypothesis for TV and Radio (that there is no association between those features and Sales), and fail to reject the null hypothesis for Newspaper.</p></li>
+<li><p>TV and Radio ad spending are both <strong>positively associated</strong> with Sales, whereas Newspaper ad spending is <strong>slightly negatively associated</strong> with Sales. (However, this is irrelevant since we have failed to reject the null hypothesis for Newspaper.)</p></li>
+<li><p>This model has a higher <strong>R-squared</strong> (0.897) than the simpler models we considered in the last lab section, which means that this model provides a better fit to the data than a model that only includes TV.  However, remember that this is a case where comparing <strong>adjusted R-squared</strong> values might be more appropriate.  This is because our more complex model (with more predictors) is more flexible too. The adjusted R-squared helps with this but trying to compare the quality of the fit, controlling for the number of predictors.</p></li>
+</ul>
+<div class="alert alert-info" role="alert">
+  <strong>Question 3</strong> <br>
+    Return to the parenthood data set we considered in the last lab (<b>http://gureckislab.org/courses/fall19/labincp/data/parenthood.csv</b>).  Re-read this data in (you have a new notebook and kernel now) and conduct a multiple regression that predict grumpiness using by dad sleep and baby sleep.  Following the text in the chapter and the example above interpret the coefficients and p-value for this model.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div></div>
+<div class="section" id="colinearity">
+<h2>Colinearity<a class="headerlink" href="#colinearity" title="Permalink to this headline">¶</a></h2>
+<p>Colinearity is a situation that arises only in multiple regression.  Here it means that some of the information contained in the various predictors you enter into your multiple regression model can be reconstructes as a linear combination of some of the other predictors.</p>
+<p>Remember that the coefficients in multiple regression measure the effect of a unit increase of predictor X with all other predictors held constant.  However, it is impossible to measure this effect if one of the other predictors is highly correlated or perhaps even identical to X.  The effect that this has on regression estimates is that the coefficients have more uncertainty about them (i.e., the 95% confidence intervals are wider).</p>
+<img src="https://pvsmt99345.i.lithium.com/t5/image/serverpage/image-id/9785i42EAC94692C75AD3/image-dimensions/1700?v=1.0&px=-1" width="400"><p>The following four dataset (provided in a nice blog post about colinearity by <a class="reference external" href="https://janhove.github.io/analysis/2019/09/11/collinearity">Jan Vanhove</a>) give examples of a strong, weak, non, or nonlinear pattern of colinearity between to predictors.  In each case we are interested in the multiple linear regression between the two predictors and the outcome.</p>
+<div class="math notranslate nohighlight">
+\[outcome=\beta_1×predictor1+\beta_2×predictor2+\beta_0\]</div>
+<p>Strong - “https://janhove.github.io/datasets/strong_collinearity.csv”<br />
+Weak - “https://janhove.github.io/datasets/weak_collinearity.csv”<br />
+None - “https://janhove.github.io/datasets/no_collinearity.csv”<br />
+Nonlinear - “https://janhove.github.io/datasets/nonlinearity.csv”</p>
+<div class="alert alert-info" role="alert">
+  <strong>Question 4</strong> <br>
+    This exercise asks you to use the internet to solve a problem which we haven't explicitly taught you how to solve yet.  Thus it is ok to have trouble but also you learn a lot by solving things yourself.  Read about the function `PairGrid()` on the seaborn website.  The PairGrid() is one method of showing the relationship between different variabels in a dataframe.  Plot a pairgrid for each of the four datasets above.  What do you notice about the relationship between the predictors.  Which ones are likely to have a problem with colinearity when the outcome variable is predicted using the predictors and why?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 5</strong> <br>
+    Fit a regression to each of the example and extract both the parameters/coefficients and the 95% confidence intervals.  Report them in a single table (you might find it helpful to create a new pandas dataframe to do this) comparing the estimates values and 95% confidence intervals.  What is different across the datasets?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div></div>
+<div class="section" id="datamunging-getting-the-data-together-for-next-time">
+<h2>Datamunging!  Getting the data together for next time!<a class="headerlink" href="#datamunging-getting-the-data-together-for-next-time" title="Permalink to this headline">¶</a></h2>
+<p>First, read about <a class="reference external" href="https://en.wikipedia.org/wiki/Data_wrangling">data wrangling</a> on wikipedia.</p>
+<p>We ran a mental rotation experiment on ourselves last time in class.  The data for this experiment is located in the data/ folder for this lab.  We can use the <code class="docutils literal notranslate"><span class="pre">os</span></code> library (stands for operating system) to access files our or local jupyterhub instance.</p>
+<div class="alert alert-info" role="alert">
+  <strong>Question 6</strong> <br>
+    The following command will list all the files we collected in class.  Using a for loop (gasp!) read each of the files from the list below into a pandas dataframe.  Then, using the pandas `concat` function (Refer back to the dataframes lab) combine them into a single data frame. 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;lab1-data&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;todd_MentalRotationFinal_2019-10-16_09h19.14.626.csv&#39;,
+ &#39;db12_MentalRotationFinal_2019-10-16_10h07.25.323.csv&#39;,
+ &#39;MC24_MentalRotationFinal_2019-10-16_10h07.00.765.csv&#39;,
+ &#39;iw44_MentalRotationFinal_2019-10-16_10h13.25.202.csv&#39;,
+ &#39;SK36_MentalRotationFinal_2019-10-16_10h06.46.723.csv&#39;,
+ &#39;nd24_MentalRotationFinal_2019-10-16_10h07.00.120.csv&#39;,
+ &#39;si13_MentalRotationFinal_2019-10-16_10h08.40.421.csv&#39;,
+ &#39;so30_MentalRotationFinal_2019-10-16_10h07.15.941.csv&#39;,
+ &#39;AB29_MentalRotationFinal_2019-10-16_10h06.57.151.csv&#39;,
+ &#39;bk90_MentalRotationFinal_2019-10-16_10h06.50.402.csv&#39;,
+ &#39;Monishee_Matin_MentalRotationFinal_2019-10-16_10h15.03.136.csv&#39;,
+ &#39;j98_MentalRotationFinal_2019-10-16_10h06.41.102.csv&#39;,
+ &#39;kc10_MentalRotationFinal_2019-10-16_10h07.21.070.csv&#39;,
+ &#39;ml98_MentalRotationFinal_2019-10-16_10h06.48.933.csv&#39;,
+ &#39;vt15_MentalRotationFinal_2019-10-16_10h06.53.044.csv&#39;,
+ &#39;Cc01_MentalRotationFinal_2019-10-16_10h07.35.155.csv&#39;,
+ &#39;de24_MentalRotationFinal_2019-10-16_10h06.42.945.csv&#39;,
+ &#39;ek87_MentalRotationFinal_2019-10-16_10h06.54.797.csv&#39;,
+ &#39;pr27_MentalRotationFinal_2019-10-16_10h06.55.109.csv&#39;,
+ &#39;kd27_MentalRotationFinal_2019-10-16_10h06.49.958.csv&#39;,
+ &#39;JL29_MentalRotationFinal_2019-10-16_10h06.52.100.csv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 7</strong> <br>
+    Take a look at the structure of the combined dataframe and try to write down a guide to all the columns using a markdown cell.  This can be your notes for future when you want to look up what a column means.  It is ok if you don't know what everything is as long as you get the main columns correct.  Next we want to check the data for 'sanity'.  This means things like how many trials did each subject perform?  Did any subjects perform considerable fewer or more trials (this might be a reason to exclude one of the people from the analysis).
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 8</strong> <br>
+    Using a `for` loop, for each subject in the data frame plot a histogram of their reaction time distributions using seaborn's distplot() command.  Is there any subjects that look odd or different from the rest on this measure?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,837 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3. Introduction to Jupyter &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Intro to Python for Psychology Undergrads" href="../03/00-python.html" />
+    <link rel="prev" title="2. Why do we have to learn statistics?" href="../01/00-whystats.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/02/00-jupyter.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/chapters/02/00-jupyter.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video-lecture">
+   3.1. Video Lecture
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   3.2. Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-data-with-computer-scripts">
+   3.3. Analyzing Data with Computer Scripts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#every-chapter-of-the-class-website-textbook-is-a-notebook">
+   3.4. Every chapter of the class website/textbook is a Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-notebook-and-kernel-concepts">
+   3.5. The “notebook” and “kernel” concepts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#caution-the-notebook-state-and-kernel-state-are-not-the-same">
+   3.6. Caution: The Notebook State and Kernel State are not the Same!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview-of-the-jupyter-notebook">
+   3.7. Overview of the Jupyter Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#command-mode-and-edit-mode">
+   3.8. Command mode and edit mode
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#markdown-cells">
+     3.8.1. Markdown cells
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-cells">
+     3.8.2. Code cells
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#executing-cells">
+   3.9. Executing cells
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-ipython-kernel">
+   3.10. The IPython kernel
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#restarting-the-kernel">
+     3.10.1. Restarting the kernel
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#markdown-and-latex-cheatsheet">
+   3.11. Markdown and LaTeX Cheatsheet
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-resources">
+   3.12. Additional Resources
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   3.13. References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-jupyter">
+<h1><span class="section-number">3. </span>Introduction to Jupyter<a class="headerlink" href="#introduction-to-jupyter" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This chapter authored by <a class="reference external" href="http://gureckislab.org/~gureckis">Todd M. Gureckis</a> is released under the <span class="xref myst">license</span> for the book.  Several of the sections on how to use the Jupyter Interface were developed and shared by <a href="http://www.jesshamrick.com">Jessica Hamrick</a> as part of a course developed at UC Berkeley.</p>
+</div>
+<div class="section" id="video-lecture">
+<h2><span class="section-number">3.1. </span>Video Lecture<a class="headerlink" href="#video-lecture" title="Permalink to this headline">¶</a></h2>
+<p>This video provides an complementary overview of this chapter.  There are things mentioned in the chapter not mentioned in the video and vice versa.  Together they give an overview of this unit so please read and watch.</p>
+<center>
+<iframe src="https://player.vimeo.com/video/501114991" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen align="center"></iframe>
+</center></div>
+<div class="section" id="introduction">
+<h2><span class="section-number">3.2. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>In this lab course you will spend a lot of time analyzing data using computer programs that you partially design yourself.  A least part of the toolkit for being a researcher these days involves knowing how to use computers to manipulate and analyze data.</p>
+<p>Rather than have everyone in class set up their home computer (which can be difficult across many different home computer types) we will instead use a web-based (or “cloud-based”) solution called <a class="reference external" href="https://jupyter.org/hub">JupyterHub</a>.   A link to the specific JupyterHub URL for our class this semester is provided in the sidebar of this website.</p>
+<div class="figure align-default" id="jupyterproject">
+<a class="reference internal image-reference" href="../../_images/jupyterlogo.png"><img alt="../../_images/jupyterlogo.png" src="../../_images/jupyterlogo.png" style="height: 300px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.1 </span><span class="caption-text">The Jupyter Project logo.</span><a class="headerlink" href="#jupyterproject" title="Permalink to this image">¶</a></p>
+</div>
+<p>JupyterHub lets everyone registered in the class log on to a website and access their own personal set of files. In addition, the instructor can distribute new files to students to work on.  Finally, the JupyterHub provides a computing backend which allows you to run several different computer languages.  We will focus primarily on Python in this class.  Future readings and assignments will introduce the Python programming language to you and also teach you how to use it to analyze data.</p>
+<p>However, for now we want to begin by understanding a bit more about Jupyter and the system we will be interacting with.</p>
+</div>
+<div class="section" id="analyzing-data-with-computer-scripts">
+<h2><span class="section-number">3.3. </span>Analyzing Data with Computer Scripts<a class="headerlink" href="#analyzing-data-with-computer-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Doing statistical data analysis using computer scripts written by the researcher is better than point-and-click interfaces such as SPSS that you might be familiar with.  If you use a point-and-click interface you have to write down the exact sequence of steps and even take screen-shots of the interface to help someone else perform the same analysis <a class="footnote-reference brackets" href="#spss" id="id1">1</a>.  This can lead to bugs and mistakes which hurt the progress of science.  In contrast, if your analysis is written in a programming language of some type, the sequence of commands  can easily be shared between researchers.  Running the sequence of instructions (also referred to as “code”) will allow anyone to repeat the same analysis and check it is correct.</p>
+<p>However, writing such code is often kind of limited.  Usually computer programs are entered into the computer using a plain text editor (similar to Notepad on the PC or TextEdit on the Mac).  This editor cannot display colors (sometimes) and usually also cannot display other types of media like figures, images, tables, movies, interactive animations, and so forth.  This makes code somewhat lifeless and also means that any outputs of the code that are  media have to be stored separately.  For example, if your analysis script outputs a graph, that graph will be saved to a different file and becomes “detached” the code that generated it.  This can make it hard to keep track of outputs and can lead to errors.</p>
+<p>The “notebook” interface is an approach to a programming and data analysis which combines programming/analysis code with text, images, figure, animations, and other multimedia in the same document (see <a class="reference internal" href="#jupyternotebook"><span class="std std-numref">Figure 3.2</span></a>).   The idea for computational notebooks has been around for a long time (e.g., <a class="reference external" href="https://www.wolfram.com/mathematica/">Mathematica</a> is a commercial product that has long provided a notebook interface for data analysis and programming).  However, Jupyter is now one of the leading tools that scientists, including psychological/cognitive scientists, use to analyze their data and write code.</p>
+<div class="figure align-default" id="jupyternotebook">
+<a class="reference internal image-reference" href="../../_images/jupyterpreview.png"><img alt="../../_images/jupyterpreview.png" src="../../_images/jupyterpreview.png" style="height: 300px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.2 </span><span class="caption-text">A screenshot of a Jupyter Notebook.  Notice how the document combines text, pictures and analysis code.</span><a class="headerlink" href="#jupyternotebook" title="Permalink to this image">¶</a></p>
+</div>
+<p>There are several reasons for the popularity of Jupyter:</p>
+<ol class="simple">
+<li><p>Jupyter is open source and free.  This means it is not owned by any one person or company.  Scientists and other programmers devote their time to improving Jupyter.  The code is readable by anyone which means it is easier to catch bugs.</p></li>
+<li><p>Jupyter works with several different programming languages including R, Python, Matlab and others which are popular for data analysis.</p></li>
+<li><p>Jupyter runs in a standard webbrowser.  This means you can use Jupyter often on any computing device you like including low-cost laptops like Chromebooks/Netbooks or even a tablet like an iPad.</p></li>
+<li><p>Jupyter has many extensions which provide interactive widgets, animations, beautiful graphics, etc…</p></li>
+<li><p>Jupyter is fun!  Once you get the hang of the notebook concept then it makes develping and debugging code a pretty fun experience.</p></li>
+<li><p>Many companies use Jupyter internally and are looking to hire people with this skill.</p></li>
+</ol>
+<div class="tip admonition">
+<p class="admonition-title">External Reading</p>
+<p>If you are registered for the course please <a class="reference external" href="https://www.nature.com/articles/d41586-018-07196-1">read this article</a> before continuing this chapter <span id="id2">[<a class="reference internal" href="#id75">Perkel, 2018</a>]</span>.</p>
+</div>
+</div>
+<div class="section" id="every-chapter-of-the-class-website-textbook-is-a-notebook">
+<h2><span class="section-number">3.4. </span>Every chapter of the class website/textbook is a Notebook<a class="headerlink" href="#every-chapter-of-the-class-website-textbook-is-a-notebook" title="Permalink to this headline">¶</a></h2>
+<p>One sort of interesting feature of this class is that more or less <strong>everything</strong> uses Jupyter notebooks.  This includes the class webpage and each chapter of the online textbook.  In fact the document you are reading was first entered in as a Jupyter notebook.  Using the <a class="reference external" href="https://jupyterbook.org/">Jupyterbook</a> these notebooks were converted to a webpage.  However, you can easily open the notebook the was used to write this chapter and check out the code and run it yourself <a class="footnote-reference brackets" href="#format" id="id3">2</a>.</p>
+<p>There are two key ways to do this.  First, in the top right of this webpage you should see a little menu option that looks like this:</p>
+<div class="figure align-default" id="jupyterbookmenu">
+<a class="reference internal image-reference" href="../../_images/jupyterbookmenu.png"><img alt="../../_images/jupyterbookmenu.png" src="../../_images/jupyterbookmenu.png" style="height: 50px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.3 </span><span class="caption-text">The JupyterBook menus for our online textbook.</span><a class="headerlink" href="#jupyterbookmenu" title="Permalink to this image">¶</a></p>
+</div>
+<p>The button with the little arrow pointing down will let you download the current chapter either as a .ipynb (i.e., a Jupyter notebook) or as a PDF.  If you download the notebook to your computer you can easily upload it to a running Jupyter/JupyterHub instance.  For example, if you login to the class JupyterHub you can upload the .ipynb, open it, and then begin interacting with is such as executing the cells, editing them, and interacting with widgets and other interactive animations.</p>
+<p>Even easier, if you are registered for the course (this will not work for people viewing these pages on line) you can launch any of the chapters of the textbook on your own Jupyter instance by clicking on the buttons shown here:</p>
+<div class="figure align-default" id="jupyterhublaunch">
+<a class="reference internal image-reference" href="../../_images/jupyterhublaunch.png"><img alt="../../_images/jupyterhublaunch.png" src="../../_images/jupyterhublaunch.png" style="height: 200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.4 </span><span class="caption-text">The JupyterBook menu to launch the current book notebook on your own personal Jupyterhub (registered students only).</span><a class="headerlink" href="#jupyterhublaunch" title="Permalink to this image">¶</a></p>
+</div>
+<p>Others viewing these pages can choose the <a class="reference external" href="https://colab.research.google.com">Google Colab</a> option.</p>
+<p>In addition, for most of the computer-generated graphs and tables in the book you can view the code used to create the figure.  Just look for something that looks like this:</p>
+<div class="figure align-default" id="jupyterviewcell">
+<a class="reference internal image-reference" href="../../_images/jupyterviewcell.png"><img alt="../../_images/jupyterviewcell.png" src="../../_images/jupyterviewcell.png" style="height: 150px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.5 </span><span class="caption-text">Click this button to reveal the python code used to generate the figure, table, graph or other output.</span><a class="headerlink" href="#jupyterviewcell" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="the-notebook-and-kernel-concepts">
+<h2><span class="section-number">3.5. </span>The “notebook” and “kernel” concepts<a class="headerlink" href="#the-notebook-and-kernel-concepts" title="Permalink to this headline">¶</a></h2>
+<p>The key to Jupyter is the concept of a <strong>computational notebook</strong>.  A computational notebook is a document-based approach to structuring data analysis and programming.  A notebook appears and acts similar to other programs you are familiar with like Excel or Google Sheets (spreadsheets) or Word or Google Docs (word processor).  These programs provide ways for you to enter information into documents and to save those file, send them to others, copy-paste, text, alter the formatting, etc…</p>
+<p>We will primarily use the “classic” Jupyter Notebook interface which consists of a single document which you interact with not unlike a word processor.  There is a newer interface called <a class="reference external" href="https://blog.jupyter.org/jupyterlab-is-ready-for-users-5a6f039b8906">JupyterLab</a> which looks more like Matlab or RStudio’s interface allowing multiple windows and views of the running code.  The traditional notebook interface is prefered here primarily because it simple and faciliates reading along.</p>
+<p>A computational notebook typically is made up of a set of elements called “cells” that group little bits of information together.  A notebook document (usually ending with the .ipynb extension on the file name) is a list of cells arranged from the top of the document to the bottom.  Cells can contain several types of information including code, text, images and so forth.  You develop your project by creating new cells, entering information, reordering cells, and saving the results.</p>
+<p>The key element which makes a notebook “computational” is that it can be linked to a computing engine known as a “kernel” which can run on the same computer or another computer using the Internet.  The kernel is separate from the notebook and can for instance be stopped and started independently from the program displaying the notebook itself. The magic happens when a cell is “executed.”  This sounds scary but refers simply to making the code in the cell “go”.  When this happens the code from the cell that was executed is sent to the computational kernel and this kernel will run the sequence of commands contained within the cell.  Any results such as figures or printouts from the results of that code running will be sent to the notebook from the kernel and will be inserted beneath the cell which was just executed.  A diagram of the basic conceptual idea is shown in <a class="reference internal" href="#jupyterflow"><span class="std std-numref">Figure 3.6</span></a>.</p>
+<div class="figure align-default" id="jupyterflow">
+<a class="reference internal image-reference" href="../../_images/jupyterflow.png"><img alt="../../_images/jupyterflow.png" src="../../_images/jupyterflow.png" style="height: 370px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.6 </span><span class="caption-text">The flow between the notebook and the kernel.  Cells when they are executed are sent to the computational kernel which is an independent piece of software which can be started and stopped independently from the notebook.</span><a class="headerlink" href="#jupyterflow" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="caution-the-notebook-state-and-kernel-state-are-not-the-same">
+<h2><span class="section-number">3.6. </span>Caution: The Notebook State and Kernel State are not the Same!<a class="headerlink" href="#caution-the-notebook-state-and-kernel-state-are-not-the-same" title="Permalink to this headline">¶</a></h2>
+<p>One somewhat confusing aspect of Jupyter for beginners is that the notebook is simply a way to organize information and the order of information in a notebook has nothing to do with the order in which code has been executed on the server.</p>
+<p>Instead, each time you execute a cell, the commands from that cell are sent to the kernel, run, and then returned.  Usually it make sense to organize your code so that multiple cells are arranged in order from the top of the document to the bottom.  You would then execute the first cell, then the second cell, and so forth.</p>
+<p>However, <strong>and this is really important</strong>, you don’t have to execute the cells in order.  You can execute the third cell before the second or first cell if you want.  This just means that the code in the third cell would be sent to the kernel first and then the other cells would be sent.  This means that the order of the cells in the notebook document are really just for presentation, and it is up to you to “run/execute” the cells in whatever order you want.</p>
+<p>This is mostly helpful because when you are doing and analysis you might want to go back up to the top and change something and then continue where you left off.  To do that you could scroll back to a earlier cell, change it, then execute it and then go back down to the beginning of the script.</p>
+<p>However, things can get confusing.  If you delete a cell it doesn’t mean the code was “undone”.  The kernel doesn’t know anything about any edits you make to the notebook interface.  All it does is receive code when you send it via the “execute cell” command and then it waits.  This can mean that the “state” or current status of the kernel can at times be different from what your cells or notebook look like.  One easy option to deal with this is that if things get too far out of wack you can simply restart the kernel.  This will erase it’s current state and set it back to a fresh start.  However, then you need to re-execute all of the cells in your notebook to get back to where you were.</p>
+<p>The best analogy is like telling your friend how to cook a meal for you over the phone.  You have the instructions in front of you (your notebook) and you tell your friend (the kernel) what to do.  If you read the instructions out of order your friend can’t tell the difference.  They just know each step you told them to do and follow it.  It is up to you to direct the instructions so they arrive to your friend (the kernel) in the right order.  And of course if things get confused you can just tell your friend to start over from stratch and begin again.</p>
+<p>At first this can be confusing but eventually you get the hang of it.  It is one source of bugs/errors in Jupyter programming though and some people don’t like using Jupyter for that reason.  In our case the upsides overweight this awkwardness.</p>
+<div class="figure align-default" id="jupyterwarning">
+<a class="reference internal image-reference" href="../../_images/jupyterwarning.png"><img alt="../../_images/jupyterwarning.png" src="../../_images/jupyterwarning.png" style="height: 300px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.7 </span><span class="caption-text">Important facts that the notebook interface and the order things are sent to the kernel is up to you.
+Also cells can be deleted or added in the notebook interface and the kernel doesn’t know this.</span><a class="headerlink" href="#jupyterwarning" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="overview-of-the-jupyter-notebook">
+<h2><span class="section-number">3.7. </span>Overview of the Jupyter Notebook<a class="headerlink" href="#overview-of-the-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>In the following section we will go over the basics of the Jupyter interface.  While you can easily read this file on the web as a reminder it can be helpful to actually open this file in Jupyter so you can follow along and see the interface as it will actually appear.  Refer to the earlier section for several methods for opening this file in a Jupyter instance.</p>
+<p>First, as described, notebooks are made up of a  series of <em>cells</em>. For example, the text you are reading is in what is called a “Markdown cell”. The following cell is a “code cell”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this is a code cell</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can tell what the type of a cell is by selecting the cell, and looking at the toolbar at the top of the page. For example, try clicking on this cell. You should see the cell type menu displaying “Markdown”, like this:</p>
+<div class="figure align-default" id="celltype">
+<a class="reference internal image-reference" href="../../_images/cell-type-menu1.png"><img alt="../../_images/cell-type-menu1.png" src="../../_images/cell-type-menu1.png" style="height: 100px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.8 </span><span class="caption-text">The menu option that lets you control which “type” a cell is.</span><a class="headerlink" href="#celltype" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="command-mode-and-edit-mode">
+<h2><span class="section-number">3.8. </span>Command mode and edit mode<a class="headerlink" href="#command-mode-and-edit-mode" title="Permalink to this headline">¶</a></h2>
+<p>In the notebook, there are two modes: <em>edit mode</em> and <em>command mode</em>. By default the notebook begins in <em>command mode</em>. In order to edit a cell, you need to be in <em>edit mode</em>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Command Mode</p>
+<p><strong>When you are in command mode</strong>, you can press <strong>enter</strong> to switch to edit mode. The outline of the cell you currently have selected will turn green, and a cursor will appear.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Edit Mode</p>
+<p><strong>When you are in edit mode</strong>, you can press <strong>escape</strong> to switch to command mode. The outline of the cell you currently have selected will turn gray, and the cursor will disappear.</p>
+</div>
+<div class="section" id="markdown-cells">
+<h3><span class="section-number">3.8.1. </span>Markdown cells<a class="headerlink" href="#markdown-cells" title="Permalink to this headline">¶</a></h3>
+<p>For example, a markdown cell might look like this in <strong>command mode</strong> (Note: the following few cells are not actually cells – they are images and just look like cells! This is for demonstration purposes only.)</p>
+<div class="figure align-default" id="id4">
+<a class="reference internal image-reference" href="../../_images/command-mode-markdown-rendered1.png"><img alt="../../_images/command-mode-markdown-rendered1.png" src="../../_images/command-mode-markdown-rendered1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.9 </span><span class="caption-text">A Markdown cell in command mode.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>Then, when you press enter, it will change to <strong>edit mode</strong>:</p>
+<div class="figure align-default" id="id5">
+<a class="reference internal image-reference" href="../../_images/edit-mode-markdown1.png"><img alt="../../_images/edit-mode-markdown1.png" src="../../_images/edit-mode-markdown1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.10 </span><span class="caption-text">A Markdown cell in edit mode.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>Now, when we press escape, it will change back to <strong>command mode</strong>:</p>
+<div class="figure align-default" id="id6">
+<a class="reference internal image-reference" href="../../_images/command-mode-markdown-unrendered1.png"><img alt="../../_images/command-mode-markdown-unrendered1.png" src="../../_images/command-mode-markdown-unrendered1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.11 </span><span class="caption-text">A Markdown cell based in command mode, but not it is not rendered into HTML.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>However, you’ll notice that the cell no longer looks like it did originally. This is because IPython will only <em>render</em> the markdown when you tell it to. To do this, we need to “run” the cell by pressing <strong><code class="docutils literal notranslate"><span class="pre">Ctrl-Enter</span></code></strong>, and then it will go back to looking like it did originally:</p>
+<div class="figure align-default" id="id7">
+<a class="reference internal image-reference" href="../../_images/command-mode-markdown-rendered1.png"><img alt="../../_images/command-mode-markdown-rendered1.png" src="../../_images/command-mode-markdown-rendered1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.12 </span><span class="caption-text">A Markdown cell “executed” to that it renders into HTML.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will frequently use Markdown cells to give answers to homework questions so it is useful to learn a little bit of the Markdown syntax.</p>
+</div>
+</div>
+<div class="section" id="code-cells">
+<h3><span class="section-number">3.8.2. </span>Code cells<a class="headerlink" href="#code-cells" title="Permalink to this headline">¶</a></h3>
+<p>For code cells, it is pretty much the same thing. This is what a code cell looks like in command mode (again, the next few cells LOOK like cells, but are just images):</p>
+<div class="figure align-default" id="id8">
+<a class="reference internal image-reference" href="../../_images/command-mode-outline1.png"><img alt="../../_images/command-mode-outline1.png" src="../../_images/command-mode-outline1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.13 </span><span class="caption-text">A code cell in command mode.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>If we press enter, it will change to <strong>edit mode</strong>:</p>
+<div class="figure align-default" id="id9">
+<a class="reference internal image-reference" href="../../_images/edit-mode-outline1.png"><img alt="../../_images/edit-mode-outline1.png" src="../../_images/edit-mode-outline1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.14 </span><span class="caption-text">A code cell in edit mode.</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<p>And pressing escape will also go back to <strong>command mode</strong>:</p>
+<div class="figure align-default" id="id10">
+<a class="reference internal image-reference" href="../../_images/command-mode-outline1.png"><img alt="../../_images/command-mode-outline1.png" src="../../_images/command-mode-outline1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.15 </span><span class="caption-text">A code cell in command mode again after pressing escape.</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>If we were to press <strong><code class="docutils literal notranslate"><span class="pre">Ctrl-Enter</span></code></strong> like we did for the markdown cell, this would actually <em>run</em> the code in the code cell:</p>
+<div class="figure align-default" id="id11">
+<a class="reference internal image-reference" href="../../_images/code-cell-run1.png"><img alt="../../_images/code-cell-run1.png" src="../../_images/code-cell-run1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.16 </span><span class="caption-text">Pressing ctrl-enter executes the cell by sending the code to the kernel associated with the notebook.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="executing-cells">
+<h2><span class="section-number">3.9. </span>Executing cells<a class="headerlink" href="#executing-cells" title="Permalink to this headline">¶</a></h2>
+<p>Code cells can contain any valid Python code in them. When you run the cell, the code is executed and any output is displayed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can execute cells with <b><code>Ctrl-Enter</code></b> (which will keep the cell selected), or <b><code>Shift-Enter</code></b> (which will select the next cell).</p>
+</div>
+<p>Try running the following cell and see what it prints out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Printing cumulative sum from 1-10:&quot;</span><span class="p">)</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of 1 to &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done printing numbers.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You’ll notice that the output beneath the cell corresponds to the <code class="docutils literal notranslate"><span class="pre">print</span></code> statements in the code. Here is another example, which only prints out the final sum:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another way to print something out is to have that thing be the last line in the cell. For example, we could rewrite our example above to be:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="n">total</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, this <em>will not work</em> unless the thing to be displayed is on the last line. For example, if we wanted to print the total sum and then a message after that, this will not do what we want (it will only print “Done computing total.”, and not the total sum itself).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
+<span class="n">total</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done computing total.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are accustomed to Python 2, note that the parentheses are obligatory for the <code class="docutils literal notranslate"><span class="pre">print</span></code> function in Python 3.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="the-ipython-kernel">
+<h2><span class="section-number">3.10. </span>The IPython kernel<a class="headerlink" href="#the-ipython-kernel" title="Permalink to this headline">¶</a></h2>
+<p>When you first start a notebook, you are also starting what is called a <em>kernel</em>. This is a special program that runs in the background and executes code (by default, this is Python, but it could be other languages too, like R!). Whenever you run a code cell, you are telling the kernel to execute the code that is in the cell, and to print the output (if any).</p>
+<p>Just like if you were typing code at the Python interpreter, you need to make sure your variables are declared before you can use them. What will happen when you run the following cell? Try it and see:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The issue is that the variable <code class="docutils literal notranslate"><span class="pre">a</span></code> does not exist. Modify the cell above so that <code class="docutils literal notranslate"><span class="pre">a</span></code> is declared first (for example, you could set the value of <code class="docutils literal notranslate"><span class="pre">a</span></code> to 1 – or pick whatever value you want). Once you have modified the above cell, you should be able to run the following cell (if you haven’t modified the above cell, you’ll get the same error!):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of &#39;a&#39; is: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Running the above cell should work, because <code class="docutils literal notranslate"><span class="pre">a</span></code> has now been declared. To see what variables have been declared, you can use the <code class="docutils literal notranslate"><span class="pre">%whos</span></code> command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">whos</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you ran the summing examples from the previous section, you’ll notice that <code class="docutils literal notranslate"><span class="pre">total</span></code> and <code class="docutils literal notranslate"><span class="pre">i</span></code> are listed under the <code class="docutils literal notranslate"><span class="pre">%whos</span></code> command. That is because when we ran the code for those examples, they also modified the kernel state.</p>
+<p>(Note that commands beginning with a percent (%) or double percent (%%) are special IPython commands called <em>magics</em>. They will <strong>only</strong> work in IPython.)</p>
+<div class="section" id="restarting-the-kernel">
+<h3><span class="section-number">3.10.1. </span>Restarting the kernel<a class="headerlink" href="#restarting-the-kernel" title="Permalink to this headline">¶</a></h3>
+<p>It is generally a good idea to periodically restart the kernel and start fresh, because you may be using some variables that you declared at some point, but at a later point deleted that declaration.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Your code should <b>always</b> be able to work if you run every cell in the notebook, in order, starting from a new kernel.</p>
+</div>
+<p>To test that your code can do this, first restart the kernel by clicking the restart button:</p>
+<div class="figure align-default" id="kernel-restart">
+<a class="reference internal image-reference" href="../../_images/restart-kernel-button1.png"><img alt="../../_images/restart-kernel-button1.png" src="../../_images/restart-kernel-button1.png" style="height: 40px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3.17 </span><span class="caption-text">The button to restart the kernel</span><a class="headerlink" href="#kernel-restart" title="Permalink to this image">¶</a></p>
+</div>
+<p>Then, run all cells in the notebook in order by choosing <strong>Cell<span class="math notranslate nohighlight">\(\rightarrow\)</span>Run All</strong> from the menu above.</p>
+<div class="tip admonition">
+<p class="admonition-title">Keyboard Shortcuts</p>
+<p>There are many keyboard shortcuts for the notebook. To see a full list of these, go to <b>Help<span class="math notranslate nohighlight">\(\rightarrow\)</span>Keyboard Shortcuts</b>.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">User Interface Tour</p>
+<p>To learn a little more about what things are what in the IPython Notebook, check out the user interface tour, which you can access by going to <b>Help<span class="math notranslate nohighlight">\(\rightarrow\)</span>User Interface Tour</b>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="markdown-and-latex-cheatsheet">
+<h2><span class="section-number">3.11. </span>Markdown and LaTeX Cheatsheet<a class="headerlink" href="#markdown-and-latex-cheatsheet" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned above, Markdown is a special way of writing text in order to specify formatting, like whether text should be bold, italicized, etc.
+In a homework you will get some practice with this.  However, you can always come back and use the following website as a reference: <a class="reference external" href="https://help.github.com/articles/markdown-basics">https://help.github.com/articles/markdown-basics</a></p>
+<ul class="simple">
+<li><p>Hint #1: after editing the Markdown, you will need to run the cell so that the formatting appears.</p></li>
+<li><p>Hint #2: try selecting <em>this</em> cell so you can see what the Markdown looks like when you’re editing it. Remember to run the cell again to see what it looks like when it is formatted.</p></li>
+</ul>
+<p>Markdown is a useful tool in Jupyter for making things look nice but you don’t have to be a Markdown expert to succeed at this class.</p>
+</div>
+<div class="section" id="additional-resources">
+<h2><span class="section-number">3.12. </span>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<p>This chapter gives you a basic introduction to the Jupyter Notebook system we will be using more or less daily in this class.  It is something you will get more familiar with through experience.  However, if you want additional resources here are some useful guides and videos introducing Jupyter:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=q_BzsPxwLOE">What is Jupyter Notebook? (youtube)</a></p></li>
+<li><p><a class="reference external" href="https://realpython.com/jupyter-notebook-introduction/">Jupyter Notebook: An Introduction (Mike Driscoll, RealPython.com)</a></p></li>
+<li><p><a class="reference external" href="https://jupyter.org">Project Jupyter homepage</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">List of other programming languages/kernels you can use with Jupyter</a></p></li>
+</ul>
+</div>
+<div class="section" id="references">
+<h2><span class="section-number">3.13. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id12"><dl class="citation">
+<dt class="label" id="id75"><span class="brackets"><a class="fn-backref" href="#id2">Per18</a></span></dt>
+<dd><p>J.M.&quot; Perkel. Why jupyter is data scientists' computational notebook of choice. <em>Nature</em>, 563:145–146, 2018.</p>
+</dd>
+</dl>
+</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="spss"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Note that some point and click analysis programs do allow some types of scripting.  However, the primary way people use and are taught these tools is through the graphical interface (in fact this is primarily why these programs are popular!)</p>
+</dd>
+<dt class="label" id="format"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>The book chapters have some additional formatting for the web that you might not see in a regular notebook.  However most of this just looks like more complex Markdown.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../01/00-whystats.html" title="previous page"><span class="section-number">2. </span>Why do we have to learn statistics?</a>
+    <a class='right-next' id="next-link" href="../03/00-python.html" title="next page"><span class="section-number">4. </span>Intro to Python for Psychology Undergrads</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

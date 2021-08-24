@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 1: Mental Rotation &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/labs/LabReg-MentalRotation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/labs/LabReg-MentalRotation.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<img src="./images/shepard_stims.png" width="400"><div class="section" id="lab-1-mental-rotation">
+<h1>Lab 1: Mental Rotation<a class="headerlink" href="#lab-1-mental-rotation" title="Permalink to this headline">¶</a></h1>
+<p>As described in the reading, in the Shepard &amp; Metzler (1971) experiments, the time it took people to decide if an object was the same (just rotated) or different (a mirror reflection) depended on the angle of rotation:</p>
+<img src="./images/shepardresult.png" width="300">
+<p>In other words, it would take you longer to decide if the 30 degree rotated version of your cup was the same as the upright version relative to the 15 degree rotated version. The idea is that in order to make the same/mirror judgement, people actually mentally rotate the object. Bigger angles require more time to “rotate” in your mind just as they would in the real world (see Figure below). As mentioned in class, Cooper (1976) performed an even more interesting followup which provided even stronger evidence that people rotate objects when doing the matching task. Thus, most people agree that people do seem to perform some kind of mental rotation.</p>
+<div class="alert alert-info" role="alert">
+  <strong>Question 1</strong> <br>
+    Picking up from last time, read in all the files from the lab session and combine them into one larger pandas data frame using the `pd.concat()` command.  Or you can simply read the combined file that you saved at the end of the last lab session.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this is an example list comprehension which reads in the all the files.</span>
+<span class="c1"># the f.startswith() part just gets rid of any junk files in that folder </span>
+<span class="n">filenames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lab1-data/&#39;</span><span class="o">+</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;lab1-data&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 2</strong> <br>
+   The data from our experiment is conceptually a replication of <a href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.ai/">this paper</a> using the same stimuli.  Jump to the methods section of this paper and determine what quality control measures they applied to their data.  For instance what kind of trials were analyzed and which were excluded.  Where there any basis for excluding an entire participant?  In a markdown cell describe the set of exclusion criterion that the authors used.  Next, create a new data frame of the data from our experiment applying the same exclusion criterion. 
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 3</strong> <br>
+    Use the pandas 'groupby' function to compute the average reaction time as a function of the angle of the stimulus.  It may help to go back to the <a href="http://gureckislab.org/courses/fall19/labincp/labs/dataframesplotting.html">notebook on dataframes</a> and plotting and searching for the groupby example.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 4</strong> <br>
+    Use the pandas 'groupby' function to compute the average accuracy per participant.  Again, it may help to go back to the <a href="http://gureckislab.org/courses/fall19/labincp/labs/dataframesplotting.html">notebook on dataframes</a> and plotting and searching for the groupby example.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 5</strong> <br>
+    Together question 3 and 4 allow you to essentially re-create Table 1 from the paper.  Recreate this table for our dataset using a pandas dataframe. Although this table has a heirarchical, two layer column label it is fine if you just label the columns using "Mean RT" and "Mean error", etc...
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 6</strong> <br>
+    Using the seaborn 'scatterplot()' function (<a href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot">docs</a>), create a plot of angle versus reaction time collapsing across all the subjects in the task.  You should restrict you analysis the same trials that were analyzed in the target reading.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 7</strong> <br>
+    As you have seen the regplot() and scatterplot() types in seaborn are quite related.  Replot the data from above this time using regplot so you can get a sense of the best fit regression line fit to the overall dataset.  Again, you should restrict you analysis the same trials that were analyzed in the target reading.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 8</strong> <br>
+    Using the statsmodels ordinary least squares regression peform a regression of angle (predictor) onto reaction time (outcome) for the entire class data.  Compare the cofficients you obtained to the ones reported in the results section of the paper.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 9</strong> <br>
+    Although in the previous step we might see evidence of the increase of reaction time with angle we averaged across a number of other relevant aspects of our data frame.  For instance we averaged across both the subjects (participants column) and the type of stimuli (if it was 'same' or 'different' - this is in the 'corrAns' column).  Using the example groupby command displayed in class, find the average reaction time as a function of angle and same/different for each individual subject.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 10</strong> <br>
+    Using the dataframe you constructed in the last step recreate Figure 3 from the paper.  Hint: the plot in Figure three is akin to the 'catplot' in seaborn.  Consult the seaborn documentation for information on this plot type.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><div class="alert alert-info" role="alert">
+  <strong>Question 11</strong> <br>
+    The analyses we have considered so far combine across subjects.  However we would often like to analyze the effect in terms of individuals.  Does every individual show this pattern or only some?  Let's approach this two ways.  One, graphically by making a plot of every individual subject.  Two, analytically but running a separate regression model for each subject.  For the plot use the seaborn `regplot`.  Some code is provided to show and example of iterating with a for loop over individual subjects in the data frame.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div><p>This gives a list of all the unique subjects in our data frame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_df</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;todd&#39;, &#39;db12&#39;, &#39;MC24&#39;, &#39;iw44&#39;, &#39;SK36&#39;, &#39;nd24&#39;, &#39;si13&#39;, &#39;so30&#39;,
+       &#39;AB29&#39;, &#39;bk90&#39;, &#39;Monishee Matin&#39;, &#39;j98&#39;, &#39;kc10&#39;, &#39;ml98&#39;, &#39;vt15&#39;,
+       &#39;Cc01&#39;, &#39;de24&#39;, &#39;ek87&#39;, &#39;pr27&#39;, &#39;kd27&#39;, &#39;JL29&#39;], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This selects only the data from the second subject (db12)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subs</span> <span class="o">=</span> <span class="n">all_df</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">subs</span><span class="p">))</span>
+<span class="n">part_df</span><span class="o">=</span><span class="n">all_df</span><span class="p">[</span><span class="n">all_df</span><span class="o">.</span><span class="n">participant</span><span class="o">==</span><span class="n">subs</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">part_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>trialResp.keys</th>
+      <th>trialResp.corr</th>
+      <th>trialResp.rt</th>
+      <th>loop.thisRepN</th>
+      <th>loop.thisTrialN</th>
+      <th>loop.thisN</th>
+      <th>loop.thisIndex</th>
+      <th>loop.ran</th>
+      <th>loop.order</th>
+      <th>imagefile</th>
+      <th>corrAns</th>
+      <th>angle</th>
+      <th>participant</th>
+      <th>session</th>
+      <th>date</th>
+      <th>expName</th>
+      <th>psychopyVersion</th>
+      <th>frameRate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>s</td>
+      <td>1</td>
+      <td>2.970</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100</td>
+      <td>36</td>
+      <td>1</td>
+      <td>99</td>
+      <td>i17_50.jpg</td>
+      <td>s</td>
+      <td>50</td>
+      <td>db12</td>
+      <td>1</td>
+      <td>2019-10-16_10h07.25.323</td>
+      <td>MentalRotationFinal</td>
+      <td>3.1.2</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>s</td>
+      <td>1</td>
+      <td>5.654</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100</td>
+      <td>11</td>
+      <td>1</td>
+      <td>99</td>
+      <td>i5_100.jpg</td>
+      <td>s</td>
+      <td>100</td>
+      <td>db12</td>
+      <td>1</td>
+      <td>2019-10-16_10h07.25.323</td>
+      <td>MentalRotationFinal</td>
+      <td>3.1.2</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>d</td>
+      <td>1</td>
+      <td>7.175</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100</td>
+      <td>93</td>
+      <td>1</td>
+      <td>99</td>
+      <td>i43_100_R.jpg</td>
+      <td>d</td>
+      <td>100</td>
+      <td>db12</td>
+      <td>1</td>
+      <td>2019-10-16_10h07.25.323</td>
+      <td>MentalRotationFinal</td>
+      <td>3.1.2</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>s</td>
+      <td>1</td>
+      <td>2.922</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100</td>
+      <td>77</td>
+      <td>1</td>
+      <td>99</td>
+      <td>i35_150.jpg</td>
+      <td>s</td>
+      <td>150</td>
+      <td>db12</td>
+      <td>1</td>
+      <td>2019-10-16_10h07.25.323</td>
+      <td>MentalRotationFinal</td>
+      <td>3.1.2</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>d</td>
+      <td>1</td>
+      <td>4.004</td>
+      <td>1</td>
+      <td>0</td>
+      <td>100</td>
+      <td>96</td>
+      <td>1</td>
+      <td>99</td>
+      <td>i45_100_R.jpg</td>
+      <td>d</td>
+      <td>100</td>
+      <td>db12</td>
+      <td>1</td>
+      <td>2019-10-16_10h07.25.323</td>
+      <td>MentalRotationFinal</td>
+      <td>3.1.2</td>
+      <td>60</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This plot reaction time as a function of angle separately for the same and different trial for this one participant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">subs</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">part_df</span> <span class="o">=</span> <span class="n">all_df</span><span class="p">[</span><span class="n">all_df</span><span class="o">.</span><span class="n">participant</span><span class="o">==</span><span class="n">s</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">part_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" role="alert">
+  <strong>Question 12</strong> <br>
+    In your own word summarize the results of the analyses you conducted above.  Specifically you should mention what the regresssion results imply about the data.  How consistent is the pattern across subjects?  Does the experiment we ran in class replicate the finding in the target paper?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.  The code for your analysis should appear in the cells below.
+</div></div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

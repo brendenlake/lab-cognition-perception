@@ -1,0 +1,664 @@
+{
+  "chapters/14/00-logisticregression": {
+    "sigmoid_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "sigmoid_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/14/00-logisticregression_29_0.png"
+        }
+      },
+      "output_type": "display_data"
+    }
+  },
+  "chapters/01/00-whystats": {
+    "simpsontable": {
+      "data": {
+        "application/papermill.record/text/html": "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>Male Applicants</th>\n      <th>Male Percent Admitted</th>\n      <th>Female Applicants</th>\n      <th>Female Percent admitted</th>\n    </tr>\n    <tr>\n      <th>Department</th>\n      <th></th>\n      <th></th>\n      <th></th>\n      <th></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>A</th>\n      <td>825</td>\n      <td>62%</td>\n      <td>108</td>\n      <td>82%</td>\n    </tr>\n    <tr>\n      <th>B</th>\n      <td>560</td>\n      <td>63%</td>\n      <td>25</td>\n      <td>68%</td>\n    </tr>\n    <tr>\n      <th>C</th>\n      <td>325</td>\n      <td>37%</td>\n      <td>593</td>\n      <td>34%</td>\n    </tr>\n    <tr>\n      <th>D</th>\n      <td>417</td>\n      <td>33%</td>\n      <td>375</td>\n      <td>35%</td>\n    </tr>\n    <tr>\n      <th>E</th>\n      <td>191</td>\n      <td>28%</td>\n      <td>393</td>\n      <td>24%</td>\n    </tr>\n    <tr>\n      <th>F</th>\n      <td>272</td>\n      <td>6%</td>\n      <td>341</td>\n      <td>7%</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+        "application/papermill.record/text/plain": "            Male Applicants Male Percent Admitted  Female Applicants  \\\nDepartment                                                             \nA                       825                   62%                108   \nB                       560                   63%                 25   \nC                       325                   37%                593   \nD                       417                   33%                375   \nE                       191                   28%                393   \nF                       272                    6%                341   \n\n           Female Percent admitted  \nDepartment                          \nA                              82%  \nB                              68%  \nC                              34%  \nD                              35%  \nE                              24%  \nF                               7%  "
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "simpsontable"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "berkeley_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 465.5x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "berkeley_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/01/00-whystats_12_0.png"
+        }
+      },
+      "output_type": "display_data"
+    }
+  },
+  "chapters/07/00-describingdata": {
+    "cor_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 432x864 with 8 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "cor_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/07/00-describingdata_87_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "grades_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 576x432 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "grades_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/07/00-describingdata_95_0.png"
+        }
+      },
+      "output_type": "display_data"
+    }
+  },
+  "chapters/09/00-hypothesistesting": {
+    "power_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 864x576 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "power_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/09/00-hypothesistesting_48_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "crit4_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 864x576 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "crit4_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/09/00-hypothesistesting_45_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "critregion_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 864x576 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "critregion_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/09/00-hypothesistesting_20_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "critregiononeside_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 864x576 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "critregiononeside_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/09/00-hypothesistesting_26_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "crit3_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 864x576 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "crit3_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/09/00-hypothesistesting_42_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "powern_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 864x576 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "powern_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/09/00-hypothesistesting_53_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "sampdist_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 864x432 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "sampdist_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/09/00-hypothesistesting_14_0.png"
+        }
+      },
+      "output_type": "display_data"
+    }
+  },
+  "chapters/10/00-ttest": {
+    "ttestdist_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 720x288 with 2 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "ttestdist_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_47_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "bernadette_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "bernadette_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_65_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "chicogrades_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "chicogrades_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_101_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "twosamplewelchtestdist_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 720x288 with 2 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "twosamplewelchtestdist_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_89_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "zeppo_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "zeppo_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_12_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "twosamplettestdist_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 720x288 with 2 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "twosamplettestdist_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_71_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "effect_size_tab": {
+      "data": {
+        "application/papermill.record/text/html": "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>rough interpretation</th>\n    </tr>\n    <tr>\n      <th>d-value</th>\n      <th></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>about 0.2</th>\n      <td>small effect</td>\n    </tr>\n    <tr>\n      <th>about 0.5</th>\n      <td>moderate effect</td>\n    </tr>\n    <tr>\n      <th>about 0.8</th>\n      <td>large effect</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+        "application/papermill.record/text/plain": "          rough interpretation\nd-value                       \nabout 0.2         small effect\nabout 0.5      moderate effect\nabout 0.8         large effect"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "effect_size_tab"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "ztest_oneside_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 720x432 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "ztest_oneside_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_22_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "chicogradesscatter_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "chicogradesscatter_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_105_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "ttest_hypo_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 720x288 with 2 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "ttest_hypo_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_44_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "chicoimprove_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "chicoimprove_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_112_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "qqplot_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "qqplot_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_158_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "anastasia_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "anastasia_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_63_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "exp2_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 1440x432 with 2 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "exp2_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_170_1.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "exp1_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 1440x432 with 2 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "exp1_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_167_1.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "ztest_hypo_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 720x288 with 2 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "ztest_hypo_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_15_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "normaldata_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "normaldata_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_156_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "teachers_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 360x360 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "teachers_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_68_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "exp3_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 1440x432 with 2 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "exp3_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_172_1.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "ztest_twoside_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 720x432 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "ztest_twoside_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/10/00-ttest_20_0.png"
+        }
+      },
+      "output_type": "display_data"
+    }
+  },
+  "chapters/13/00-linearregression": {
+    "influenceplot_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 864x576 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "influenceplot_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_101_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "regplot2_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "regplot2_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_9_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "fitsqrresid_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "fitsqrresid_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_119_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "scatter_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "scatter_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_5_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "resid_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 648x432 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "resid_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_13_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "regplot_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "regplot_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_7_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "residdist_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "residdist_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_107_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "resid2_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 648x432 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "resid2_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_15_0.png"
+        }
+      },
+      "output_type": "display_data"
+    },
+    "fitobs_fig": {
+      "data": {
+        "application/papermill.record/image/png": null,
+        "application/papermill.record/text/plain": "<Figure size 432x288 with 1 Axes>"
+      },
+      "metadata": {
+        "scrapbook": {
+          "mime_prefix": "application/papermill.record/",
+          "name": "fitobs_fig"
+        },
+        "filenames": {
+          "image/png": "/Users/Brenden/Documents/NYU/teaching/teaching-2021-2022/lab-cognition/jupyter-book/_build/jupyter_execute/chapters/13/00-linearregression_112_0.png"
+        }
+      },
+      "output_type": "display_data"
+    }
+  }
+}

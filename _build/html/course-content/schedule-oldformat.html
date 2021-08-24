@@ -1,0 +1,551 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/course-content/schedule-oldformat.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/course-content/schedule-oldformat.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="schedule">
+<h1>Schedule<a class="headerlink" href="#schedule" title="Permalink to this headline">¶</a></h1>
+<p>This is the schedule for the semester.  This page will be frequently updated based on how we progress and everything is subject to change. Homeworks and links to the lecture will be provided here for easy reference to the calendar.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p><strong>Date</strong></p></th>
+<th class="text-align:left head"><p><strong>Lecture</strong></p></th>
+<th class="text-align:left head"><p><strong>Lab</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Sept 2</em></p></td>
+<td class="text-align:left"><p>Introductions, course policies <br>[<a href=../chapters/00/00-cogsci.html>Chapter 1</a>] - read before next class<br></p></td>
+<td class="text-align:left"><p>[<a href=https://forms.gle/Nqqm2LhR1x3Z53Kj7>HW1: Pre-class Survey</a>]<br></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>~~<em>Mon, Sept 7</em>~~</p></td>
+<td class="text-align:left"><p><strong>No class, Labor Day</strong></p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Sept 9</em></p></td>
+<td class="text-align:left"><p>Introduction to Jupyter<br>[<a href="https://www.nature.com/articles/d41586-018-07196-1">Article about Jupyter</a>] - read before next class</p></td>
+<td class="text-align:left"><p>Quick intro to JupyerHub, Accessing JupyterHub, basics of Jupyter, python, and markdown<br></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Sept 14</em></p></td>
+<td class="text-align:left"><p>What is Cognitive Science?<br> [<a href=../lectures/lecture1.html data-turbolinks=false>Lecture 1</a>] <br> [<a href=../chapters/03/00-python.html>Chapter 2</a>] - read before next class</p></td>
+<td class="text-align:left"><p>Intro to Python: Numbers, variables, indenting, using existing functions, importing libraries<br>[<a href=../labs/pythonintro.html>Lab: Python Intro</a>]<br>[<a href=../homeworks/homework2.html>HW2: Intro to Jupyter</a>]- Due Mon Septh 21st</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Sept 16</em></p></td>
+<td class="text-align:left"><p>What is an experiment?  How does science use experiments to advance knowledge? Why do we do statistics?<br>[<a href=../lectures/lecture2.html data-turbolinks=false>Lecture 2</a>]<br>[<a href=../chapters/01/00-whystats>Chapter 3</a>] - read before next class<br></p></td>
+<td class="text-align:left"><p>Lists and dictionaries, Loops, and other control structures</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Sept 21</em></p></td>
+<td class="text-align:left"><p>Basic experiment Design: Randomization, stratification, counter-balancing, factorial designs<br>[<a href=../lectures/lecture3.html data-turbolinks=false>Lecture 3</a>]<br>[<a href=../chapters/03/00-python>Chapter 4</a>] - read before next class</p></td>
+<td class="text-align:left"><p>Intro to Python continued: Functions and organizing code blocks<br></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Sept 23</em></p></td>
+<td class="text-align:left"><p>Measure, Reliability, and Validity <br>[<a href=../lectures/lecture4.html data-turbolinks=false>Lecture 4</a>]<br>[<a href=../chapters/04/00-describingdata>Chapter 5</a>] - read before next class</p></td>
+<td class="text-align:left"><p>Intro to Python continued<br>[<a href=../labs/fortyforloops.html>Tips: Tons of Python Loops</a>]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Sept 28</em></p></td>
+<td class="text-align:left"><p>Measures of central tendency, variance<br>[<a href=../lectures/lecture5.html data-turbolinks=false>Lecture 5</a>]   <br>[<a href=../chapters/05/00-data>Chapter 6</a>] - read before next class<br>[<a href=https://www.npr.org/2019/08/28/755191639/episode-936-the-modal-american>Podcast</a>] - listen before class</p></td>
+<td class="text-align:left"><p><br>Intro to Dataframe and Plotting<br>[<a href=../labs/dataframesplotting.html>Lab: DataFrames and plotting</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Sept 30</em></p></td>
+<td class="text-align:left"><p>Random processes, probabilities, distributions, and sampling<br>[<a href=../lectures/lecture6.html data-turbolinks=false>Lecture 6</a>]<br>[<a href=../chapters/06/00-probability>Chapter 7.1</a>] - read before next class</p></td>
+<td class="text-align:left"><p>Visualizing data with Seaborn<br>[<a href=../labs/exploringdata.html>Lab: Exploring Data</a>]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Oct 5</em></p></td>
+<td class="text-align:left"><p>Exploratory Data Analysis<br>[<a href=../chapters/06/01-sampling>Chapter 7.2</a>] - read before next class</p></td>
+<td class="text-align:left"><p>Accessing existing data sets<br>[<a href=../homeworks/hw3/homework3.html>HW3: Python for Data Analysis</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Oct 7</em></p></td>
+<td class="text-align:left"><p>Sampling and Estimation<br>[<a href=../lectures/lecture6.html#84 data-turbolinks=false>Lecture 6 (Cont)</a>] <br>[<a href=../chapters/06/02-estimation>Chapter 7.3</a>] - read before next class</p></td>
+<td class="text-align:left"><p>Overview of writing a scientific paper</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Oct 12</em></p></td>
+<td class="text-align:left"><p>Signal Detection Theory<br>[<a href=../lectures/lecture11.html data-turbolinks=false>Lecture 11</a>] <br>[<a href=../chapters/07/00-hypothesistesting.html>Chapter 8</a>] - read before thurs<br>[<a href=../chapters/08/00-ttest.html>Chapter 9</a>] - read before thurs</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labsdt-ttest.html>Lab 2: T-test lecture</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Oct 14</em></p></td>
+<td class="text-align:left"><p>Signal Detection Theory - Perception<br>[<a href=../lectures/lecture10.html#1 data-turbolinks=false>Lecture 10</a>]<br>[<a href=../chapters/09/00-plots.html>Chapter 10</a>] - read before tues<br>[<a href=../chapters/10/00-sdt.html>Chapter 11</a>] - read before tues</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labsdt-pt1.html>Lab 2: Signal Detection Theory</a>]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Oct 19</em></p></td>
+<td class="text-align:left"><p>Signal Detection Theory - Perception</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labsdt-pt2.html>Lab 2: Signal Detection Theory (perception)</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Oct 21</em></p></td>
+<td class="text-align:left"><p>Signal Detection Theory - Perception</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Oct 26</em></p></td>
+<td class="text-align:left"><p>Signal Detection Theory - Perception</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Oct 28</em></p></td>
+<td class="text-align:left"><p>Signal Detection Theory - Perception</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Nov 2</em></p></td>
+<td class="text-align:left"><p>Relating multiple variables (correlation) and Regression<br>[<a href=../lectures/lecture7.html data-turbolinks=false>Lecture 7</a>]<br>[<a href=../chapters/11/00-correlation>Chapter 12</a>] - read before next class</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Nov 4</em></p></td>
+<td class="text-align:left"><p>Begin Lab 2 on regression<br>[<a href=../chapters/12/00-linearregression>Chapter 13</a>] - read before next class</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labreg-introtoregression.html>Lab: Intro to Regression</a>]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Nov 9</em></p></td>
+<td class="text-align:left"><p>Mental Rotation/Simulation<br>[<a href=../lectures/lecture8.html data-turbolinks=false>Lecture 8</a>]<br>[<a href=../chapters/15/00-mentalsimulation>Chapter 14</a>] - read before next class</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labreg-advancedregression.html>Lab: Advanced Regression</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Nov 11</em></p></td>
+<td class="text-align:left"><p>Mental rotation lab</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labreg-advancedregression.html>Lab: Advanced Regression</a>]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Nov 16</em></p></td>
+<td class="text-align:left"><p>No lecture<br>[<a href=../chapters/16/00-mri>Chapter 15</a>] - read before next class</p></td>
+<td class="text-align:left"><p>[<a href=../labs/lab1mentalrotation.html>Lab: Mental Rotation</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Nov 18</em></p></td>
+<td class="text-align:left"><p>Functional Magnetic Resonance Imaging (fMRI) part 1</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labreg-mri-pt1.html>Lab: fMRI</a>]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Nov 23</em></p></td>
+<td class="text-align:left"><p>Hypothesis testing and Multiple Comparisons</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labreg-mri-pt2.html>Lab: fMRI pt2</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Nov 25</em></p></td>
+<td class="text-align:left"><p>Computational modeling, intro to RL, final projects</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labrl-pt1.html>Lab 3: Reinforcement Learning</a>]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Nov 30</em></p></td>
+<td class="text-align:left"><p>Computational modeling, intro to RL, final projects</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labrl-pt1.html>Lab 3: Reinforcement Learning</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Dec 2</em></p></td>
+<td class="text-align:left"><p>Computational modeling, intro to RL, final projects</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labrl-pt2.html>Lab 3: Reinforcement Learning</a>]</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Mon, Dec 7</em></p></td>
+<td class="text-align:left"><p>Literature reviews, findings papers online, reference managers and citations</p></td>
+<td class="text-align:left"><p>[<a href=../labs/labrl-pt2.html>Lab 3: Reinforcement Learning</a>]</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p><em>Wed, Dec 9</em></p></td>
+<td class="text-align:left"><p>Replication crisis, HARKing, p-hacking, blinding, preregistration, open science</p></td>
+<td class="text-align:left"><p>Final projects</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p><em>Scheduled Final Example Time</em></p></td>
+<td class="text-align:left"><p>Final oral presentation, final papers due</p></td>
+<td class="text-align:left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./course-content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,1699 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MRI part 2: MRI data manipulation and regression &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/labs/LabReg-MRI-Pt2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/labs/LabReg-MRI-Pt2.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#review-of-lab1mri-pt1">
+   Review of Lab1MRI-Pt1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-key-terms-and-concepts">
+   Some key terms and concepts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-data">
+   Loading data.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#checking-the-shape-of-the-data">
+   Checking the shape of the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accessing-data-in-the-numpy-arrays">
+   Accessing data in the numpy arrays
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#slicing-in-a-multi-dimensional-array">
+   Slicing in a multi-dimensional array
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accessing-data-from-our-mri-data-arrays">
+   Accessing data from our MRI data arrays
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#slicing-the-3d-brain-volumes">
+   Slicing the 3D brain volumes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-bold-activation-timeseries">
+   Analyzing BOLD activation timeseries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#voxel-timecourses-and-correlation">
+   Voxel timecourses and correlation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relating-brain-data-to-the-experimental-protocol">
+   Relating brain data to the experimental protocol
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correlating-the-stimulus-timecourse-with-the-brain">
+   Correlating the stimulus timecourse with the brain
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-results">
+   Visualizing results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-comparison-corrections-with-bonferroni">
+   Multiple comparison corrections with Bonferroni
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#masking-and-mri-analysis">
+   “Masking” and MRI analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-fmri-data-with-regression">
+   Analyzing fMRI data with regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-introducing-regression">
+     (Re-)introducing regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-our-regression-knowledge-to-fmri-data">
+   Applying our regression knowledge to fMRI data
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">nibabel</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">gamma</span>
+
+<span class="c1"># Enable plots inside the Jupyter Notebook</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mri-part-2-mri-data-manipulation-and-regression">
+<h1>MRI part 2: MRI data manipulation and regression<a class="headerlink" href="#mri-part-2-mri-data-manipulation-and-regression" title="Permalink to this headline">¶</a></h1>
+<p>Authored by <em>Shannon Tubridy</em>, <em>Hillary Raab</em>, and <em>Todd Gureckis</em><br />
+Aspects borrowed from <a class="reference external" href="https://github.com/akcarsten/fMRI_data_analysis">Carsten Klein’s Intro to fMRI analysis in Python</a>.</p>
+<p>This lab continues the exercises from Lab1MRI-Pt1</p>
+<div class="section" id="review-of-lab1mri-pt1">
+<h2>Review of Lab1MRI-Pt1<a class="headerlink" href="#review-of-lab1mri-pt1" title="Permalink to this headline">¶</a></h2>
+<p>Last week we learned about the shape of structural and functional MRI data; we saw how to load MRI data into numpy arrays and how we index numpy arrays to extract data; and we conducted a correlation analysis to see which parts of the brain had a BOLD activation timecourse that was correlated with the timecourse of auditory stimulation presented to a participant.</p>
+<img src="./images/brain_basics.svg"></div>
+<div class="section" id="some-key-terms-and-concepts">
+<h2>Some key terms and concepts<a class="headerlink" href="#some-key-terms-and-concepts" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><em><strong>volume</strong></em>: The three dimensional array covering the brain. Volumes are composed of <em><strong>voxels</strong></em> and each volume has one number (the MRI signal level) per voxel. Structural data has a single volume. Functional data has a volume for each timepoint of the experiment.</p></li>
+<li><p><em><strong>voxel</strong></em>: A three-dimensional pixel and the basic unit of spatial measurement in MRI.</p></li>
+<li><p><em><strong>slice</strong></em>: A two-dimensional ‘view’ of the three-dimensional volume obtained by taking all of the elements in two of the dimensions for a fixed location in the third dimension. We can slice the three dimensional volume in three different ways. In the illustration above the orange slice is a single position in the X direction and all of the voxels in the Z (pointing up/down in our illustration) and Y (pointing left/right in the image) dimensions.</p></li>
+<li><p><em><strong>TR</strong></em>: The <em><strong>T</strong></em>ime to <em><strong>R</strong></em>epetition and the basic unit of time in functional MRI. A new measurement is made for each voxel in a volume every TR. TR length in fMRI is usually around 1-3 seconds.</p></li>
+<li><p><em><strong>Timecourse</strong></em> or <em><strong>Timeseries</strong></em>: a set of numbers representing a measurement (like BOLD activation) taken over time.</p></li>
+</ul>
+</div>
+<div class="section" id="loading-data">
+<h2>Loading data.<a class="headerlink" href="#loading-data" title="Permalink to this headline">¶</a></h2>
+<p>First we start with importing the libraries for downloading, organizing and visualizing the data which comes from the SPM homepage (http://www.fil.ion.ucl.ac.uk/spm/). SPM is a popular Matlab Toolbox for analyzing fMRI brain imaging data and on their homepage some example datasets are provided.</p>
+<p>(There are a number of data pre-processing steps involved in going from the MRI scanner to the data we’re going to download here. These primarily have to do with accounting for distortions, artifacts, or other unwanted contaminations of the signal of interest. Although those preprocessing steps are crucial for the kinds of data examined in this notebook, they tend to be less related to questions about cognition and perception and so we’ll jump ahead.)</p>
+<p>Run the cell below to get all of the functional and structural data loaded into numpy arrays.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run this cell to load in the structural and functional data-- Depending on download speeds it could take a minute</span>
+
+<span class="c1"># Define the URL of the data and download it using the Requests libary</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://www.fil.ion.ucl.ac.uk/spm/download/data/MoAEpilot/MoAEpilot.zip&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fetching remote data&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;finished fetching remote data&#39;</span><span class="p">)</span>
+
+<span class="c1"># Check if the targed folder for storing the data already exists. If not create it and save the zip file.</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./fMRI_data/&#39;</span><span class="p">):</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s1">&#39;./fMRI_data/&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./fMRI_data/&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;./fMRI_data/&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;./fMRI_data/&#39;</span> <span class="o">+</span> <span class="s1">&#39; doesn&#39;&#39;t exist and/or it can&#39;&#39;t be created&#39;</span><span class="p">)</span>    
+    
+<span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./fMRI_data/&#39;</span> <span class="o">+</span> <span class="s1">&#39;data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="c1"># Un-zip the file</span>
+<span class="n">zip_ref</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;./fMRI_data/&#39;</span> <span class="o">+</span> <span class="s1">&#39;data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;./fMRI_data/&#39;</span><span class="p">)</span>
+<span class="n">zip_ref</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="c1"># Find all files in the structural data folder</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;./fMRI_data/&#39;</span> <span class="o">+</span> <span class="s1">&#39;sM00223/&#39;</span>
+<span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_path</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">data_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">data_file</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;hdr&#39;</span> <span class="ow">and</span> <span class="n">data_file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>
+        <span class="n">structural_data</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="n">data_file</span><span class="p">)</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>    
+
+        <span class="n">structural_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">structural_data</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># -------------        </span>
+        
+<span class="c1"># Basic information about the data acquisition</span>
+<span class="n">x_size</span><span class="p">,</span> <span class="n">y_size</span><span class="p">,</span> <span class="n">z_size</span><span class="p">,</span> <span class="n">n_volumes</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">98</span>
+
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;./fMRI_data/&#39;</span> <span class="o">+</span> <span class="s1">&#39;/fM00223/&#39;</span>
+<span class="n">files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_path</span><span class="p">))</span>
+
+<span class="n">data_all</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">data_file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">data_file</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;hdr&#39;</span> <span class="ow">and</span> <span class="n">data_file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_path</span> <span class="o">+</span> <span class="n">data_file</span><span class="p">)</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>        
+        <span class="n">data_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_size</span><span class="p">,</span> <span class="n">y_size</span><span class="p">,</span> <span class="n">z_size</span><span class="p">))</span>
+        
+<span class="n">functional_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_all</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">functional_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">functional_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fetching remote data
+finished fetching remote data
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="checking-the-shape-of-the-data">
+<h2>Checking the shape of the data<a class="headerlink" href="#checking-the-shape-of-the-data" title="Permalink to this headline">¶</a></h2>
+<p>We have loaded our MRI data and we have stored them in numpy arrays. The structural data are contained in the array called <code class="docutils literal notranslate"><span class="pre">structural_data</span></code> and the functional_data are stored in the <code class="docutils literal notranslate"><span class="pre">functional_data</span></code> array.</p>
+<p>We can check the number of dimensions and the number of elements in each dimension by using the shape() method.</p>
+<p>First we’ll look at the structural_data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># store the shape in a variable</span>
+<span class="n">struct_shape</span> <span class="o">=</span> <span class="n">structural_data</span><span class="o">.</span><span class="n">shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">struct_shape</span><span class="p">)</span>
+
+<span class="c1"># That shows us that there are three dimensions in the structural_data array, the first two dimensions </span>
+<span class="c1"># have 256 elements in them, and the third dimension has 54 elements.</span>
+
+<span class="c1"># This means that our structural data is in a 3D box of size 256 x 256 x 54</span>
+
+<span class="c1"># We can also access the size of the individual dimensions by indexing the struct_shape variable</span>
+<span class="c1"># DONT FORGET THAT PYTHON STARTS INDEXING FROM 0!!!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The first element of struct_shape is: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">struct_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(256, 256, 54)
+The first element of struct_shape is: 
+256
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" role="alert">
+  <strong>Question 1</strong> <br>
+   How many dimensions are in the functional data? Why is it different than the structural data? Get the shape of the "functional_data" variable and output it to a new variable. Use numpy indexing to get the size of the second dimension as stored in your output variable. Take a look at how we did the structural data dimension checking in the previous cell for some hints.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div></div>
+<div class="section" id="accessing-data-in-the-numpy-arrays">
+<h2>Accessing data in the numpy arrays<a class="headerlink" href="#accessing-data-in-the-numpy-arrays" title="Permalink to this headline">¶</a></h2>
+<p>In the last lab you also learned a little bit about accessing data stored in numpy arrays. Let’s review some of those details now.</p>
+<p>Our MRI data are in 3D and 4D data arrays but a numpy array can be any number of dimensions. In some ways you can think about a pandas data frame as being a two-dimensional array (rows and columns).</p>
+<p>Let’s take a look at a 1-dimensional array to remind ourselves of how to interact with the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a numpy array of sequential numbers</span>
+<span class="c1"># the range() function takes two numbers as arguments and returns a </span>
+<span class="c1"># list of numbers running from the first number to the second number minus 1</span>
+<span class="n">my_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># check the shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the &#39;&#39;my_array&#39;&#39; shape is:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the my_array shape is:
+(12,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you look at the output of my_array.shape you’ll see that it is 1-dimensional and there are 12 elements
+in the first dimension, as expected because we made the array to be that size.</p>
+<p>You can access the values stored in the array by “indexing” the array, or telling python
+from where in the array you would like to retrieve the stored value(s)</p>
+<p>The basic way of doing this in numpy is to use square brackets to tell the array which element(s) you want.</p>
+<p><em><strong>IMPORTANT</strong></em>
+In python the elements in each dimension are indexed starting at ZERO</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s take a look at the first element of my_array</span>
+<span class="n">first_element</span> <span class="o">=</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the first element is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">first_element</span><span class="p">))</span>
+
+<span class="c1"># how about the fifth element?</span>
+<span class="n">fifth_element</span> <span class="o">=</span> <span class="n">my_array</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the fifth element is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fifth_element</span><span class="p">))</span>
+
+<span class="c1"># and now let&#39;s take all of the elements using the `:` indexer</span>
+<span class="n">all_elements</span> <span class="o">=</span> <span class="n">my_array</span><span class="p">[:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;all the elements in the array:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_elements</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the first element is 0
+the fifth element is 4
+all the elements in the array:
+[ 0  1  2  3  4  5  6  7  8  9 10 11]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Take a look at what happened at the end of that last code cell where retrieved all the values.</p>
+<p>We used my_array[:] and got back all of the numbers in the array.</p>
+<p>The ‘:’ indexer tells python that it should give back all the values along whichever dimension
+was indexed with ‘:’.</p>
+<p>Make sure you take a minute to understand what we did in the previous couple of cells to access data in our data array.</p>
+<p>Those examples were using a 1-dimensional array, but as you’ve already determined by using the <code class="docutils literal notranslate"><span class="pre">structural_data.shape</span></code> and <code class="docutils literal notranslate"><span class="pre">functional_data.shape</span></code> commands, our MRI data are stored in 3D and 4D arrays.</p>
+<p>How do we access data in multi-dimensional arrays?</p>
+<p>The logic is the same as before: we need to give the index, or the address, of locations we’d like data from.</p>
+<p>Let’s build towards that by moving on to a 2-dimensional array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use np.array to make a 2-dimensional array</span>
+<span class="n">my_2d_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is a 2d array:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The shape of the 2d array:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is a 2d array:
+[[1 2 3]
+ [4 5 6]]
+The shape of the 2d array:
+(2, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" role="alert">
+  <strong>Question 2</strong> <br>
+   Take a look at what the 2d array looks like and at the reported shape that tells us the number of dimensions and the size of each of those dimensions. Can you figure out whether the first dimension of the 2d array refers to the rows or to the columns?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div><p>The question above previewed what’s coming next.</p>
+<p>In order to get data from a multi-dimensional array we have to give a coordinate for each dimension. For the 2D array you might find it useful to think about <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> coordinates for the location of points in a grid.</p>
+<p>In a 2D array the first dimension is the rows and the second dimension is the columns, and as you can see from <code class="docutils literal notranslate"><span class="pre">my_2d_array.shape</span></code> we have two rows and three columns.</p>
+<p>To get the value from a particular location we simply need to give the <span class="math notranslate nohighlight">\(x,y\)</span> (or row, column) coordinates or indexes that we want keeping two things in mind:</p>
+<p><em><strong>Python indexes from zero</strong></em>: this means that the first entry is the index position [0] and not [1]</p>
+<p><em><strong>The ‘origin’, or zero point for a 2d array is the upper left entry</strong></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the value from the first row and first column:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># take another look at the array so we can see that this is true:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">)</span>
+
+<span class="c1"># we can also store the index coordinate in a variable:</span>
+<span class="n">x_coordinate</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y_coordinate</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">[</span><span class="n">x_coordinate</span><span class="p">,</span> <span class="n">y_coordinate</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+[[1 2 3]
+ [4 5 6]]
+1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="slicing-in-a-multi-dimensional-array">
+<h2>Slicing in a multi-dimensional array<a class="headerlink" href="#slicing-in-a-multi-dimensional-array" title="Permalink to this headline">¶</a></h2>
+<p>Earlier in this notebook you saw how to get all of the elements from a 1-dimensional array using the ‘:’ indexer</p>
+<p><code class="docutils literal notranslate"><span class="pre">my_array[:]</span></code></p>
+<p>We can also use this in a multi-dimensional array.</p>
+<p>Let’s get all of the values in the first row our 2d array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The first row: &#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> The whole array:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_2d_array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The first row: 
+[1 2 3]
+
+ The whole array:
+[[1 2 3]
+ [4 5 6]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" role="alert">
+  <strong>Question 3</strong> <br>
+   Take a look at how we used ':' indexing for our 2d array in the previous example. What do you think would happen if we used the ':' indexer for both the first and second dimensions of our 2d array?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div></div>
+<div class="section" id="accessing-data-from-our-mri-data-arrays">
+<h2>Accessing data from our MRI data arrays<a class="headerlink" href="#accessing-data-from-our-mri-data-arrays" title="Permalink to this headline">¶</a></h2>
+<p>Our MRI data are in 3D (structural) and 4D (functional) arrays, but the indexing works the same as with 1- and 2D arrays.</p>
+<p>If we want to query data from a single voxel in a 3D array we need to give its’ x,y, AND z (or dimensions one, two and three) coordinate and use those to index the numpy array.</p>
+<p>For example, our structural data has three dimensions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set x, y, and z coordinate:</span>
+<span class="n">x_coord</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">y_coord</span> <span class="o">=</span> <span class="mi">35</span>
+<span class="n">z_coord</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># use coordinates to get a value for one voxel</span>
+<span class="n">structural_data</span><span class="p">[</span><span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span><span class="p">,</span> <span class="n">z_coord</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>What about the functional data? How do we index that?</p>
+<div class="alert alert-info" role="alert">
+  <strong>Question 4</strong> <br>
+   For this question we will use the 'functional_data' array that was created when we loaded the MRI data. Building on what you just read about indexing, can you get all of the data in the fourth dimension for a single x,y,z location in the 'functional_data'? Looking back at the schematic figure at the start of this notebook, what does the data you extracted represent?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div></div>
+<div class="section" id="slicing-the-3d-brain-volumes">
+<h2>Slicing the 3D brain volumes<a class="headerlink" href="#slicing-the-3d-brain-volumes" title="Permalink to this headline">¶</a></h2>
+<p>Last week we also saw that in order to view the MRI data as in image we need to take a “slice” from the 3D volume.</p>
+<p>We did this by taking all of the voxels (elements) in two of the dimensions for a single location in the third dimension. This is illustrated in orange in the schematic figure.</p>
+<p>Take a look at the code in the next cell at the line starting with <code class="docutils literal notranslate"><span class="pre">ax.imshow</span></code> and see if you can figure out what’s going on with the structural_data array.</p>
+<p>In that line we are taking all of the elements in the first two dimensions for a single position in the third dimension. The position for the third dimension is specified in the variable <code class="docutils literal notranslate"><span class="pre">slice</span></code>, and moving the slider is changing the value of the <code class="docutils literal notranslate"><span class="pre">slice</span></code> variable.</p>
+<p>Give it a try.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="nb">slice</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_struct</span><span class="p">(</span><span class="nb">slice</span><span class="p">):</span>
+    <span class="c1">#setup the figure:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+    
+    <span class="c1"># index the structural_data:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">structural_data</span><span class="p">[:,:,</span><span class="nb">slice</span><span class="p">],</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "81fb87a602034716b8886f0cdb910666", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>We can do something similar to view images of the functional data, but now we have to think about how to handle the fourth dimension.</p>
+<p>The functional data can be thought of as a stack of 3D volumes.</p>
+<p>The stack of 3D volumes represents the data recorded during fMRI scanning, with one volume (and the BOLD signal for each of its’ voxels) recorded every TR. The number of volumes in our stack is the number of timepoints in the experiment and is also the size of the fourth dimension in the <code class="docutils literal notranslate"><span class="pre">functional_data</span></code> array.</p>
+<p>So if we want to plot the functional data as a 2D slice of the brain we need to choose one of the spatial dimensions to slice through and also a single timepoint for which we’d like to see that plane. Once we choose a single timepoint we have one 3D volume, and then we can choose one of the dimensions to slice through, just like the structural data.</p>
+<p>Here is a version of the slider image we looked at before using the structural data, but now using the functional data. If you take a close look at the <code class="docutils literal notranslate"><span class="pre">ax.imshow</span></code> line in our plotting function you’ll see that it’s indexing the <code class="docutils literal notranslate"><span class="pre">functional_data</span></code> in the same way that we did the structural data above except we also have to specify a timepoint to plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="nb">slice</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_functional</span><span class="p">(</span><span class="nb">slice</span><span class="p">):</span>
+    <span class="c1"># setup the figure:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+    
+    <span class="c1"># index the functional_data:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="nb">slice</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Functional data&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "38fae19f27cc425ab1a9e340a8e4407a", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<div class="alert alert-info" role="alert">
+  <strong>Question 5</strong> <br>
+   Take a look at how we are indexing the 'functional_data' array in the plotting function we just used. Can you tell which timepoint we are using to plot?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div></div>
+<div class="section" id="analyzing-bold-activation-timeseries">
+<h2>Analyzing BOLD activation timeseries<a class="headerlink" href="#analyzing-bold-activation-timeseries" title="Permalink to this headline">¶</a></h2>
+<p>We have looked at 2D slices of our functional data and we have extracted the timeseries for a single voxel (Question 4).</p>
+<p>The MRI data we are looking at was collected while the participant was listening to alternative periods of silence and speech.</p>
+<p>Let’s take a look at the timeseries of activation for 500 voxels to see if we can get some insights into what this person’s brain was doing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an empty plot with defined aspect ratio</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="n">n_voxels_to_plot</span><span class="o">=</span><span class="mi">500</span>
+
+<span class="c1"># do a loop, once for every number between 0 and the number of voxels to plot</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_voxels_to_plot</span><span class="p">):</span>
+    
+    <span class="c1"># set random x,y,z coordinates by asking numpy to give us random numbers between 0 and 64</span>
+    <span class="c1"># using np.random.randint()</span>
+    <span class="n">x_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+    <span class="n">y_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+    <span class="n">z_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+    
+    <span class="c1"># get all of the timepoints for the current x,y,z coordinate and plot it</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[</span><span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span><span class="p">,</span> <span class="n">z_coord</span><span class="p">,</span> <span class="p">:],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">functional_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [s]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;signal strength&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;voxel time course&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/LabReg-MRI-Pt2_38_0.png" src="../_images/LabReg-MRI-Pt2_38_0.png" />
+</div>
+</div>
+<p>This is the timecourse of BOLD signal for 500 voxels in our participant’s brain.</p>
+<p>It looks kind of interesting but it doesn’t give us much insight into how this person’s brain was processing the auditory stimulus they were hearing during the experiment.</p>
+<p>One thing to note here, however, is that even with the relatively small number of voxels plotted above we can see that the activation timecourses differ in their average level of signal as well as their dynamics over time.</p>
+<p>This might not be surprising given that we know that not every part of the brain does the same thing, but it also previews a difference between what we did before with correlation and regression and how we’re going to use it to analyze MRI data.</p>
+<p>Previously we looked at whether two sets of numbers were correlated, or whether the values of one set of numbers moved in a predictable way relative to another set of numbers like in the sleepy and grumpy dataset. In those analyses we wanted to know whether there was a relationship between the two sets of numbers and we did this by assessing whether the numbers covaried.</p>
+<p>For fMRI data we can use the same correlation or regression calculations, but now we are going to run many analyses (one for each voxel in our data) with the hopes of understanding which, if any, parts of the brain are related to the set of predictor values we are testing.</p>
+</div>
+<div class="section" id="voxel-timecourses-and-correlation">
+<h2>Voxel timecourses and correlation<a class="headerlink" href="#voxel-timecourses-and-correlation" title="Permalink to this headline">¶</a></h2>
+<p>One of the most direct ways to understand fMRI data is to see whether different voxel timecourses correlate with some predictor variable of interest. We will unpack this throughout the rest of this MRI lab, but it should seem familiar: we have already seen examples of computing the correlation between two sets of numbers to understand whether there is a relationship between them.</p>
+<p>We also saw that in some ways regression operates in a related way where we’d like to find the closest match between predictor variable (sleep) and the values of some measured outcomes (grumpiness).</p>
+</div>
+<div class="section" id="relating-brain-data-to-the-experimental-protocol">
+<h2>Relating brain data to the experimental protocol<a class="headerlink" href="#relating-brain-data-to-the-experimental-protocol" title="Permalink to this headline">¶</a></h2>
+<p>The general approach to analyzing fMRI data builds on this approach by measuring whether there is a relationship between a predictor variable representing the cognitive or perceptual context over the coures of the experiment and any individual voxel timecourses of BOLD activation.</p>
+<p>If the predictor variable composed from the cognitive or perceptual design of the experiment can <em><strong>explain</strong></em> the variation in a voxel timeseries we would have some evidence on which to make inferences about what that part of the brain is doing.</p>
+<p>The data we have been playing with in this notebook come from an experiment in which the participant alternated between listening to spoken words or hearing nothing.</p>
+<p>So let’s think:</p>
+<p>How would you imagine the brain signal response to look in a study like this? If a part of the brain was involved in processing spoken verbal stimuli what would we predict its’ activation to look?</p>
+<p>For now, lets keep things simple and just assume that without a stimulus (the playing of “bi-syllabic words”) the signal in a sound-sensitive part of the brain is at a baseline level and during the auditory stimulation the signal goes up.</p>
+<p>Let’s make a simple “model” of what that would look like.</p>
+<p>In order to do it we will need some details about the experiment and MRI scanning. We’ll come back to this later, but for now let’s use them to make a timecourse of what we think it would like for a brain region to be “active” during auditory stimulation and “silent” during rest (no stimulation).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These are the main parameters of the fMRI scan and experimental design</span>
+<span class="n">block_design</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rest&#39;</span><span class="p">,</span> <span class="s1">&#39;stim&#39;</span><span class="p">]</span>
+<span class="n">block_size</span>      <span class="o">=</span> <span class="mi">6</span>
+<span class="n">block_RT</span>        <span class="o">=</span> <span class="mi">7</span>
+<span class="n">block_total</span>     <span class="o">=</span> <span class="mi">16</span>
+<span class="n">block_length</span>    <span class="o">=</span> <span class="n">block_size</span><span class="o">*</span><span class="n">block_RT</span>
+
+<span class="n">acq_num</span>         <span class="o">=</span> <span class="n">block_size</span><span class="o">*</span><span class="n">block_total</span>
+<span class="n">data_time</span>       <span class="o">=</span> <span class="n">block_length</span><span class="o">*</span><span class="n">block_total</span>
+<span class="n">data_time_vol</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">acq_num</span><span class="p">)</span><span class="o">*</span><span class="n">block_RT</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we can use the experimental parameters to make timecourse plot showing when the auditory stimulation happened</span>
+<span class="n">rest</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+<span class="n">stim</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+<span class="n">block</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">rest</span><span class="p">,</span> <span class="n">stim</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">predicted_response</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">block</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">block_total</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">predicted_response</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acq_num</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;predicted response&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [volumes]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;auditory stimulation on (1) or off (0)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># fig.subplots_adjust(wspace=0, hspace=0.5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/LabReg-MRI-Pt2_43_0.png" src="../_images/LabReg-MRI-Pt2_43_0.png" />
+</div>
+</div>
+<p>Let’s take a moment to look at this plot. This represents the timecourse of auditory stimulation in the experiment. The x-axis represents time and the y-axis shows whether sound was on (<span class="math notranslate nohighlight">\(y=1\)</span>) or off (<span class="math notranslate nohighlight">\(y=0\)</span>).</p>
+<p>This is the set of values, one for each point in time that we will use to try to understand the fMRI data collected in this experiment. We will search through the brain, looking to see whether any voxel timeseries are well explained by this predicted response and if they are we might conclude that they are involved in hearing.</p>
+</div>
+<div class="section" id="correlating-the-stimulus-timecourse-with-the-brain">
+<h2>Correlating the stimulus timecourse with the brain<a class="headerlink" href="#correlating-the-stimulus-timecourse-with-the-brain" title="Permalink to this headline">¶</a></h2>
+<p>Let’s see what happens if we try correlating the auditory stimulation timecourse with each of the voxel BOLD timecourses.</p>
+<p>First we need to do some bookkeeping and turn our 4D functional data into a 2D array for ease of use with some stats functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make the 4D data 2D (nvox X ntimepoints)</span>
+<span class="n">all_data_2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">functional_data</span><span class="p">,(</span><span class="n">functional_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">functional_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">functional_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">functional_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we will loop over our array of voxel timeseries and for each one we will compute the correlation with the auditory stimulation timecourse.</p>
+<p>Note that this looping procedure is somewhat inefficient and the next cell may take up to 30 seconds to run</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># DO THE CORRELATION OF EACH VOXEL BOLD TIMECOURSE WITH THE PREDICTOR TIMECOURSE</span>
+
+<span class="c1"># initialize some empty variables for storing our </span>
+<span class="n">r_values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">p_values</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># loop over every timeseries in our data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;doing lots of correlation calculations...&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">all_data_2d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+    <span class="n">r</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">predicted_response</span><span class="p">,</span> <span class="n">all_data_2d</span><span class="p">[</span><span class="n">idx</span><span class="p">,:])</span>
+    <span class="n">r_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">p_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;finished with correlations&#39;</span><span class="p">)</span>
+    
+<span class="c1"># The r and p values are stored in 1d arrays (n voxels). Reshape back into a 3D array for visualization</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="n">functional_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ny</span> <span class="o">=</span> <span class="n">functional_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">nz</span> <span class="o">=</span> <span class="n">functional_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">r_values_vol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">r_values</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">))</span>
+<span class="n">p_values_vol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">p_values</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>doing lots of correlation calculations
+finished with correlations
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualizing-results">
+<h2>Visualizing results<a class="headerlink" href="#visualizing-results" title="Permalink to this headline">¶</a></h2>
+<p>Our results are stored in the variables <code class="docutils literal notranslate"><span class="pre">r_values_vol</span></code> and <code class="docutils literal notranslate"><span class="pre">p_values_vol</span></code>.</p>
+<div class="alert alert-info" role="alert">
+  <strong>Question 6</strong> <br>
+    Check the shape of the 'r_values_vol' array. How do the dimensions compare to the shape of the 'functional_data' array? What's the same and what's different? Why is there this difference?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div><p>Now that we have the r (and associated p) value that tells us how much each voxel timeseries correlates with the auditory stimulation predictor timecourse we can look and see whether there are any parts of the brain that respond in the way we predicted.</p>
+<p>To do this we will look at our array of computed <span class="math notranslate nohighlight">\(r\)</span> values and find the maximum value using a convenient numpy method called <code class="docutils literal notranslate"><span class="pre">argmax</span></code>.</p>
+<p>We use argmax on a data array like this: <code class="docutils literal notranslate"><span class="pre">my_array.argmax()</span></code></p>
+<p>Doing that will give us the index position where the maximum value appears.</p>
+<p>This next cell will find that voxel and plot its’ timeseries overlaid on our predictor timeseries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the index position of the maximum value in the r_value array</span>
+<span class="n">max_idx</span> <span class="o">=</span> <span class="n">r_values_vol</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+<span class="c1"># argmax returns the linear index, so turn into x/y/z index values</span>
+<span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span> <span class="n">max_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">max_idx</span><span class="p">,</span> <span class="n">r_values_vol</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># use the max_x, _y, and _z indices to get the timecourse of the best correlated voxel</span>
+<span class="n">max_corr_timecourse</span> <span class="o">=</span> <span class="n">functional_data</span><span class="p">[</span><span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span><span class="n">max_z</span><span class="p">,:]</span>
+
+<span class="c1"># Define the min-max scaling function to put the voxel timecourse and predictor timecourse on the same slace</span>
+<span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">data</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="c1"># Create the plots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scale</span><span class="p">(</span><span class="n">max_corr_timecourse</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;scaled voxel tc&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">predicted_response</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;predictor tc&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acq_num</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [volumes]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/LabReg-MRI-Pt2_53_0.png" src="../_images/LabReg-MRI-Pt2_53_0.png" />
+</div>
+</div>
+<p>Hey that looks pretty good!</p>
+<p>OK now we can see that the timecourse for this voxel looks similar to our assumed response if a voxel was to respond to sound like in the predicted timecourse.</p>
+<p>But how are voxels that correlate with our idealized timecourse distributed across the brain? Lets check.<br></p>
+<p>We will make a figure that has three panels:</p>
+<p>One will show the image of the brain like before, the next will show an image where each voxel is colored according to the pearsons <span class="math notranslate nohighlight">\(r\)</span> value calculated in the correlation above, and the third image will show a “thresholded” map of the correlation values, showing only those voxels whose correlation value is significant according to a chosen threshold (i.e., <span class="math notranslate nohighlight">\(p &lt;\)</span> chosen_treshold)</p>
+<p>To do this we will first take a slice of our r and p volumes because we can’t look at the 3D array all at once.</p>
+<p>Taking the 2D slice of our 3D <code class="docutils literal notranslate"><span class="pre">r_values_vol</span></code> and <code class="docutils literal notranslate"><span class="pre">p_values_vol</span></code> arrays is just like doing it for the brain views we did at the beginning of this notebook:</p>
+<p><code class="docutils literal notranslate"><span class="pre">r_values_slice</span> <span class="pre">=</span> <span class="pre">r_values_vol[:,:,slice]</span></code></p>
+<p>Then we can either plot the slice of r_values directly, which will produce an image where each voxel has a color indicating the magnitude of the r value for that voxel, or we can <em><strong>theshold</strong></em> our map, and only color those voxels whose correlation was stronger than a cutoff level.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make thresholded versions of the r and p volumes</span>
+<span class="c1"># use numpy to set voxels that don&#39;t meet the cutoff to &quot;not a number&quot; (nan)</span>
+<span class="n">p_val_cutoff</span> <span class="o">=</span> <span class="mf">.001</span>
+<span class="n">p_thresholded</span> <span class="o">=</span> <span class="n">p_values_vol</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">p_thresholded</span><span class="p">[</span><span class="n">p_thresholded</span> <span class="o">&gt;</span> <span class="n">p_val_cutoff</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="n">r_val_cutoff</span> <span class="o">=</span> <span class="mf">.01</span>
+<span class="n">r_thresholded</span> <span class="o">=</span> <span class="n">r_values_vol</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">r_thresholded</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">r_thresholded</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">r_val_cutoff</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="c1"># Ok now lets visualize all the maps</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># we will plot views through our data using the max_z index we found above</span>
+<span class="n">slice_to_plot</span><span class="o">=</span><span class="n">max_z</span>
+<span class="n">slice_to_plot</span> <span class="o">=</span> <span class="mi">36</span>
+
+<span class="c1"># First plot a view of the functional data</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[:,:,</span><span class="n">slice_to_plot</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;brain slice&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+<span class="c1"># Now let&#39;s look at the correlation values with no threshold</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">r_values_vol</span><span class="p">[:,:,</span><span class="n">slice_to_plot</span><span class="p">],</span>  <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;afmhot&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;un-thresholded map&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+<span class="c1"># Plot a thresholded map, coloring only those voxels that are signficant at p &lt; p_val_cutoff</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[:,:,</span><span class="n">slice_to_plot</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">p_thresholded</span><span class="p">[:,:,</span><span class="n">slice_to_plot</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot_r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;thresholded map (p &lt; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p_val_cutoff</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+<img alt="../_images/LabReg-MRI-Pt2_56_1.png" src="../_images/LabReg-MRI-Pt2_56_1.png" />
+</div>
+</div>
+<p>Look at that, we made some brain maps!</p>
+<p>And it looks like there is some structure to the data.</p>
+<p>The data we’re looking at is oriented so that the front of the participant head is pointing up and the left/right of their head is in the left/right of the figure.</p>
+<p>The un-thresholded map in the middle is showing correlation value for each voxel.</p>
+<p>The thresholded map is made by finding the voxels in the untresholded map whose correlation values are significant in the sense that the <span class="math notranslate nohighlight">\(p\)</span> value was less than or equal to our threshold.</p>
+<p>The analysis we did was to measure whether any voxels correlated with our the predicted response (the timeseries of auditory activation) and it seems like the voxels with the highest values are on the side of the head, possibly near the ears. Very cool!</p>
+<p>But you also might notice that there are other voxels that are colored here. What do they mean? Are they real or are they just due to random chance?</p>
+<p>Let’s play with the significance threshold for plotting brain maps.</p>
+<p>This next cell will define a convenience function to wrap up the thresholded plotting code we used to make the figure above, except we will adjust the <em><strong>p</strong></em> value associated with the calculated correlation coeffecients (<span class="math notranslate nohighlight">\(r\)</span>).</p>
+<p>The <em><strong>p</strong></em> value corresponds to the “signifiance” of a single correlation test and represents the chances of observing an <span class="math notranslate nohighlight">\(r\)</span> value that high by chance.</p>
+<p>This is the value that is used for the classic <span class="math notranslate nohighlight">\(p &lt; 0.05\)</span> threshold for deciding whether a statistical result is significant.</p>
+<p>In the next cell we can use the slider to change the p value threshold, and only those voxels whose correlation had a p value <em><strong>less than</strong></em> the slider value will be plotted.</p>
+<p>The voxels will be colored according to their <span class="math notranslate nohighlight">\(p\)</span> value, with more significant voxels (lower <span class="math notranslate nohighlight">\(p\)</span> values) plotted in brighter colors and the most significant voxels will be colored white (white &lt; yellow &lt; red).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">p_val_cutoff</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">.0000000000001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_thresholded_brains</span><span class="p">(</span><span class="n">p_val_cutoff</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">p_val_cutoff</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">p_val_cutoff</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">,</span><span class="s1">&#39;p_reshold should be between 0 and 1&#39;</span>
+    
+    <span class="c1"># make thresholded versions of the r and p volumes</span>
+    <span class="c1"># use numpy to set voxels that don&#39;t meet the cutoff to &quot;not a number&quot; (nan)</span>
+<span class="c1">#     p_val_cutoff = .001</span>
+    <span class="n">p_thresholded</span> <span class="o">=</span> <span class="n">p_values_vol</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">p_thresholded</span><span class="p">[</span><span class="n">p_thresholded</span> <span class="o">&gt;</span> <span class="n">p_val_cutoff</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="n">r_val_cutoff</span> <span class="o">=</span> <span class="mf">.01</span>
+    <span class="n">r_thresholded</span> <span class="o">=</span> <span class="n">r_values_vol</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">r_thresholded</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">r_thresholded</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">r_val_cutoff</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="c1"># Ok now lets visualize all the maps</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+    <span class="c1"># we will plot views through our data using the max_z index we found above</span>
+    <span class="n">slice_to_plot</span><span class="o">=</span><span class="n">max_z</span>
+    <span class="n">slice_to_plot</span> <span class="o">=</span> <span class="mi">36</span>
+
+    <span class="c1"># First plot a view of the functional data</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[:,:,</span><span class="n">slice_to_plot</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;brain slice&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+    <span class="c1"># Now let&#39;s look at the correlation values with no threshold</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">r_values_vol</span><span class="p">[:,:,</span><span class="n">slice_to_plot</span><span class="p">],</span>  <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;afmhot&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;un-thresholded map&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+    <span class="c1"># Plot a thresholded map, coloring only those voxels that are signficant at p &lt; p_val_cutoff</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[:,:,</span><span class="n">slice_to_plot</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">p_thresholded</span><span class="p">[:,:,</span><span class="n">slice_to_plot</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot_r&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;thresholded map (p &lt; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p_val_cutoff</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "c1ffa15b3cfa4709928f00bfd65fb07a", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<div class="alert alert-info" role="alert">
+  <strong>Question 7</strong> <br>
+    Play with the slider, trying out different significance thresholds. What happens if you make the threshold very lenient (higher p_val_cutoff)? What happens if you make it very strict? Pay particular attention to the spatial distribution of the voxels in the thresholded map. What do you notice about the spatial arrangement of the voxels who have the most significant correlation with the predictor timecourse? Where are those voxels compared to each other? What about the voxels that are significant at p < .05? Do you notice anything funny about where some of these voxels are relative to the underlying gray brain image?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div></div>
+<div class="section" id="multiple-comparison-corrections-with-bonferroni">
+<h2>Multiple comparison corrections with Bonferroni<a class="headerlink" href="#multiple-comparison-corrections-with-bonferroni" title="Permalink to this headline">¶</a></h2>
+<p>The traditional p &lt; .05 threshold indicates that we could expect the statistical result that is significant at p &lt; .05 to occur by chance less than 5% of the time. If we observe a correlation that has a significance value of p &lt; .05 we would reject the null hypothesis that the two sets of values are unrelated with the caveat that we might be wrong up to 5% of the time.</p>
+<p>This works pretty well when we run a single test like the sleepy and grumpy example.</p>
+<p>But in our MRI analysis we have run <em><strong>many</strong></em> individual correlations, each with their own r and p value.</p>
+<p>Adding up the 5% chance of being wrong on each test across thousands of voxels means that at p &lt; .05 we almost certainly are finding voxel correlations that are just due to chance.</p>
+<p>One approach to the problem of identifying significant results when running multiple statistica tests is the <em>Bonferroni correction</em>.</p>
+<p>The Bonferroni correction adjusts the p value (or the alpha level corresponding to the number of Type I errors we will accept in our results) to take account of the number of tests being run:</p>
+<p><span class="math notranslate nohighlight">\(p_{bonferroni} = \frac{\alpha}{m}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span>: desired overall false positive rate</p>
+<p><span class="math notranslate nohighlight">\(m\)</span>: the number of comparisons (e.g., the number of voxels)</p>
+<p>To compute the appropriate p level using the Bonferroni correction we divide our desired false positive rate (e.g., <span class="math notranslate nohighlight">\(.05\)</span>) by the number of separate tests being conducted. In our fMRI data the number of tests is equal to the number of voxels since we are running one correlation for every voxel timeseries.</p>
+<div class="alert alert-info" role="alert">
+  <strong>Question 8</strong> <br>
+    In order to do an appropriate Bonferroni correction to the significance level of our MRI data we need to know how many voxels there are in our functional_data. Using the shape() function that you learned about in this notebook, calculate the number of voxels in the functional data (hint: the volume of a 3D box is the length x width x height). Then, calculate the Bonferroni corrected p value if our desired alpha level is .05.
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div><p>If you want to see which voxels throughout the brain are significant at a particular p value you can play with the next cell. First set the p value you want using the <code class="docutils literal notranslate"><span class="pre">p_val_cutoff</span></code> variable and then run the cell. The slider will move you up and down through the brain and you can see the voxels with correlation p &lt; p_val_cutoff overlaid with color.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_val_cutoff</span> <span class="o">=</span> <span class="mf">.05</span>
+<span class="n">p_thresholded</span> <span class="o">=</span> <span class="n">p_values_vol</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">p_thresholded</span><span class="p">[</span><span class="n">p_thresholded</span> <span class="o">&gt;</span> <span class="n">p_val_cutoff</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+
+<span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="nb">slice</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_thresholded_slices</span><span class="p">(</span><span class="nb">slice</span><span class="p">):</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[:,:,</span><span class="nb">slice</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">p_thresholded</span><span class="p">[:,:,</span><span class="nb">slice</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;afmhot_r&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;thresholded map (p &lt; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p_val_cutoff</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "11386e63e3684034bb504448135ffe8b", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>The Bonferroni correction is a valid statistical procedure, but it is often overly strict and can make it difficult to observe interesting true effects.</p>
+<p>Another approach to dealing with the problem of multiple comparisons is to reduce the number of comparisons!</p>
+<p>That sounds kind of simple and when stated like that it is, but this approach is where knowledge of the domain you are working in becomes crucial. It is often the case that there are things that are measured (or could be measured) that we don’t really think are relevant.</p>
+<p>In the sleepy and grumpy example this was done implicitly by the construction of our ‘experiment’: we went into the question with pre-existing knowledge that sleepiness might be related to grumpiness and so we focused on a single statistical test.</p>
+<p>In theory we could have tested any number of measurements about dad and what makes him grumpy and run correlations between every aspect of the world and dad’s grumpiness. But using prior knowledge, we were able to focus on a reasonable set of things to correlate with each other and we didn’t consider whether, for example, the number of dogs in Golden Gate Park in Calfornia between 10am and 11am each morning is correlated with the grumpiness of dad in NYC.</p>
+<p>We can use a similar kind of focused testing in thinking about our MRI data. You might not think you’re an expert on fMRI right now but you probably know enough about the brain to step in the right direction.</p>
+<p>Take another look at one of the thresholded correlation maps you plotted above. Now think back to when you calculated the number of voxels in the functional data.</p>
+<p>One thing you might have already noticed is that 3D box that contains each volume of the functional data includes voxels that are not inside the brain. This is what shows up as black when we plot slices of the structural and functional data.</p>
+<p>The MRI scanner doesn’t know what it’s making an image of. It just measures a 3D grid of voxels and saves those numbers. It’s up to us as researchers to focus on the interesting parts of the image.</p>
+<p>So just like we can restrict our analysis of dad’s grumpiness and not consider things that are almost certainly unrelated to what we’re analyzing, we can do the same with the brain by not even looking at voxels that aren’t inside the brain. Our question with these fMRI data is how the person’s brain responded to auditory stimulation so it doesn’t really make sense to look outside of the person’s brain.</p>
+</div>
+<div class="section" id="masking-and-mri-analysis">
+<h2>“Masking” and MRI analysis<a class="headerlink" href="#masking-and-mri-analysis" title="Permalink to this headline">¶</a></h2>
+<p>In order to restrict our MRI analysis to voxels of interest (like voxels that are actually in the brain) we need a way of identifying those voxels.</p>
+<p>In MRI this is commonly done by using “masks”.</p>
+<p>Masks are arrays of the same size and shape as the MRI data, but each voxel is labeled with a 1 or a 0 indicating whether that voxel should be included or not. The voxels with a 1 in them are part of the “mask”.</p>
+<p>Let’s take a look at what a “brain mask” looks like for our data.</p>
+<p>The brain mask was created by making a volume where all of the voxels inside the brain were set to 1 and all the voxels outside were set to 0.</p>
+<p>Let’s load the mask data and take a look:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the mask_data and check the shape</span>
+<span class="n">mask_path</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
+<span class="n">mask_data</span> <span class="o">=</span> <span class="n">nibabel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mask_path</span> <span class="o">+</span> <span class="s1">&#39;fbrain_mask.nii&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>        
+<span class="n">mask_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">mask_data</span><span class="p">)</span>
+<span class="n">mask_data</span><span class="p">[</span><span class="n">mask_data</span><span class="o">&lt;</span><span class="mf">.9</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">mask_data</span><span class="p">[</span><span class="n">mask_data</span><span class="o">&gt;=</span><span class="mf">.9</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">mask_data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(64, 64, 64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>That shape should look familiar: it’s the same as the 3D shape of our functional data.</p>
+<p>Here’s what the mask looks like side by side with our functional_data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="nb">slice</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_struct</span><span class="p">(</span><span class="nb">slice</span><span class="p">):</span>
+    <span class="c1">#setup the figure:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[:,:,</span><span class="nb">slice</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;brain slice (functional_data)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    
+    <span class="c1"># index the structural_data:</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask_data</span><span class="p">[:,:,</span><span class="nb">slice</span><span class="p">],</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;brain slice (brain_mask)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "a56b9cea3002476da7de65ee8755c508", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>The brain mask looks sort of like the functional_data but there is no internal structure visible. Instead, all the brain voxels are white (you’ll notice occasional holes in the mask – this comes from the automated masking procedure which uses an activation-based heuristic for identifying voxels as brain or not; we can ignore those holes for now as they are likely to indicate places where the MRI signal was compromised).</p>
+<p>The mask lets us focus our analysis on only those voxels that are in the brain, and this will dramatically decrease the number of voxels we are considering.</p>
+<p>To get the number of voxels included in the mask we can use <code class="docutils literal notranslate"><span class="pre">np.sum()</span></code></p>
+<p>np.sum gives the sum of values in a data array. Our brain_mask has a 1 in any voxel that we should consider and a zero everywhere else, so the sum of the brain_mask array is the number of voxels included in the mask</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_mask_voxels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mask_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n_mask_voxels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60733.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" role="alert">
+  <strong>Question 9</strong> <br>
+    What is the Bonferroni corrected p < .05 threshold if we only consider the voxels in the mask?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div></div>
+<div class="section" id="analyzing-fmri-data-with-regression">
+<h2>Analyzing fMRI data with regression<a class="headerlink" href="#analyzing-fmri-data-with-regression" title="Permalink to this headline">¶</a></h2>
+<p>In the previous parts of this notebook we used a correlation analysis to try to understand which parts of the brain were responding to auditory stimulation.</p>
+<p>Altough they are related approaches, in fMRI research it is more common to use regression than correlation and in the next part of this notebook we will remind ourselves about regression and then apply a regression analysis to our brain data.</p>
+<div class="section" id="re-introducing-regression">
+<h3>(Re-)introducing regression<a class="headerlink" href="#re-introducing-regression" title="Permalink to this headline">¶</a></h3>
+<p>In the following cells we will create a “design matrix” which represents the hypothesis that there are voxels in the brain whose timecourse of activation is related to the presence or absence of auditory stimulation as specified in our predicted response variable that we plotted above. The design matrix also contains a constant part which we will need later on to create our general linear model.</p>
+<p>This isn’t our first encounter with a <em>design matrix</em>. We saw it in the chapter on linear regression where the design matrix was represented as <span class="math notranslate nohighlight">\(X\)</span> and contained the value of the variables (<em>sleep</em> and <em>baby sleep</em>) we were testing for the outcome variable <em>grumpy</em> (<span class="math notranslate nohighlight">\(Y\)</span>).</p>
+<p>In the regression chapter example we were interested in whether the amount of sleep each day (<span class="math notranslate nohighlight">\(X\)</span> in our equation) could explain the level of grumpiness each day.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{Y_i} = b_1 X_i + b_0
+\]</div>
+<p>To do this we conducted a regression analysis in which we identified the <span class="math notranslate nohighlight">\(b_1\)</span> and <span class="math notranslate nohighlight">\(b_0\)</span> values such that multiplying <span class="math notranslate nohighlight">\(b_1\)</span> times the sleep levels stored in <span class="math notranslate nohighlight">\(X\)</span> and then adding the intercept (<span class="math notranslate nohighlight">\(b_0\)</span>) gave us the line that <em>best fit</em> the observed grumpiness data. This best fitting line is notated as <span class="math notranslate nohighlight">\(\hat{Y_i}\)</span>. We determined whether sleep explained grumpiness by comparing the actual grumpiness values in <span class="math notranslate nohighlight">\(Y\)</span> to the model’s estimate of grumpiness <span class="math notranslate nohighlight">\(\hat{Y_i}\)</span>.</p>
+<p>And we learned that <em>best fit</em> had a specific meaning: we want a line that goes through the observed data points in a way that <em>minimizes the squared distance from each observed data point to the nearest point on the line</em>. We quantified this by calculating <span class="math notranslate nohighlight">\(\epsilon_i = Y_i - \hat{Y}_i\)</span>, which is the difference between the true data point <span class="math notranslate nohighlight">\(Y_i\)</span> and the model’s estimate of that datapoint <span class="math notranslate nohighlight">\(\hat{Y}_i\)</span>. In <em><strong>ordinary least squares</strong></em> regression the best values of <span class="math notranslate nohighlight">\(b_1\)</span> and <span class="math notranslate nohighlight">\(b_0\)</span> are those that minimize the sum of squared errors (or differences) for each true datapoint and its’ closest model-based estimate. This “sum of the squared residuals” can be expressed as:</p>
+<div class="math notranslate nohighlight">
+\[\mbox{SS}_{res} = \sum_i (Y_i - \hat{Y}_i)^2$$ or as $$\mbox{SS}_{res} = \sum_i {\epsilon_i}^2\]</div>
+<p>And finally we determined whether the regression model was a good fit for the data by comparing the sum of the squared residuals to the total sum of squared difference individual data points to the mean of the data:</p>
+<div class="math notranslate nohighlight">
+\[
+\mbox{SS}_{tot} = \sum_i (Y_i - \bar{Y})^2
+\]</div>
+<p>(Note that for <span class="math notranslate nohighlight">\(\mbox{SS}_{res}\)</span> we take the difference from each true data point to the nearest point in the estimated data (<span class="math notranslate nohighlight">\(\hat{Y_i}\)</span>)whereas <span class="math notranslate nohighlight">\(\mbox{SS}_{tot}\)</span> is the difference of each actual data point and the mean (<span class="math notranslate nohighlight">\(\bar{Y}\)</span>) of the actual data.</p>
+<p>One minus the ratio of these numbers gives us <span class="math notranslate nohighlight">\(R_2\)</span> which is the proportion of the variability in the original outcome data <span class="math notranslate nohighlight">\(Y\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+R^2 = 1 - \frac{\mbox{SS}_{res}}{\mbox{SS}_{tot}}
+\]</div>
+<p>Let’s remind ourselves what this looks like graphically by loading the sleepy and grumpy data, fitting the regression model, and plot the best fitting line and the residuals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load in the sleep/grump data, fit the regression, and plot the best fitting line and the residuals</span>
+<span class="n">parenthood_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://gureckislab.org/courses/fall19/labincp/data/parenthood.csv&#39;</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">)</span>
+<span class="n">parenthood_df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sleep&#39;</span><span class="p">,</span><span class="s1">&#39;babysleep&#39;</span><span class="p">,</span><span class="s1">&#39;grump&#39;</span><span class="p">,</span><span class="s1">&#39;day&#39;</span><span class="p">]</span>
+
+<span class="n">lr</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;grump ~ sleep&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">parenthood_df</span><span class="p">)</span>
+<span class="n">fit</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span> <span class="c1"># fit</span>
+<span class="n">params</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">resid</span> <span class="o">=</span> <span class="n">fit</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">fit</span><span class="o">.</span><span class="n">resid</span>
+<span class="c1">#display(fit.summary())</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">parenthood_df</span><span class="o">.</span><span class="n">sleep</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">parenthood_df</span><span class="o">.</span><span class="n">sleep</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;sleep&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">x1</span><span class="o">+</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">parenthood_df</span><span class="o">.</span><span class="n">sleep</span><span class="p">,</span> <span class="n">parenthood_df</span><span class="o">.</span><span class="n">grump</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">parenthood_df</span><span class="o">.</span><span class="n">sleep</span><span class="p">,</span> <span class="n">parenthood_df</span><span class="o">.</span><span class="n">grump</span><span class="o">-</span><span class="n">resid</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mf">.4</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">parenthood_df</span><span class="o">.</span><span class="n">sleep</span><span class="p">,</span> <span class="n">parenthood_df</span><span class="o">.</span><span class="n">grump</span><span class="p">,</span> <span class="n">parenthood_df</span><span class="o">.</span><span class="n">grump</span><span class="o">-</span><span class="n">resid</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;My sleep (hours)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;My grumpiness (0-100)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/LabReg-MRI-Pt2_77_0.png" src="../_images/LabReg-MRI-Pt2_77_0.png" />
+</div>
+</div>
+<p>The figure shows a depiction of the residuals associated with the best fitting regression line through the sleepy and grumpy data.</p>
+<p>More specifically this is the best fitting line because it minimizes the summed squared distance of each point to the line <span class="math notranslate nohighlight">\(\mbox{SS}_{res} = \sum_i (Y_i - \hat{Y}_i)^2\)</span></p>
+</div>
+</div>
+<div class="section" id="applying-our-regression-knowledge-to-fmri-data">
+<h2>Applying our regression knowledge to fMRI data<a class="headerlink" href="#applying-our-regression-knowledge-to-fmri-data" title="Permalink to this headline">¶</a></h2>
+<p>For MRI data what we would like to explain is the fluctuation in the signal level over time for each voxel to help us understand how the brain is related to behavior. For example, if we see that a part of the brain has fMRI signal that is correlated with our “expected response” timecourse that we plotted above, we might infer that this part of the brain is involved in processing speech or auditory stimuli.</p>
+<p>So whereas previously we were interested in whether the amount of sleep (the values in <span class="math notranslate nohighlight">\(X\)</span>, scaled by the best fitting <span class="math notranslate nohighlight">\(b_1\)</span> parameter and with an intercept specified by <span class="math notranslate nohighlight">\(b_0\)</span>) could account for the variation in grumpiness over time, now we’re going to see whether there are any voxels whose activation is related to a scaled and/or shifted version of our expected response.</p>
+<p>In terms of the equation above, each voxel has a timeseries of activation <span class="math notranslate nohighlight">\(Y\)</span> that we would like to understand. For each voxel we will find a <span class="math notranslate nohighlight">\(b_1\)</span> and <span class="math notranslate nohighlight">\(b_0\)</span> that when combined with the expected response in <span class="math notranslate nohighlight">\(X\)</span> produces the closest match to the voxel’s timecourse.</p>
+<p>There is no guarantee that the <em>best fit</em> line for a particular voxel is actually a <em><strong>good</strong></em> fit, so we will further explore which voxels have signal are well accounted for by our expected response model by (1) examining the magnitude and sign (positive or negative) of the estimated <span class="math notranslate nohighlight">\(b\)</span> which tells us how much a change in our predictor (<span class="math notranslate nohighlight">\(X\)</span>) causes a change in our outcome (<span class="math notranslate nohighlight">\(Y\)</span>); and (2) the ratio of the <span class="math notranslate nohighlight">\(\mbox{SS}_{res}\)</span> to the <span class="math notranslate nohighlight">\(\mbox{SS}_{tot}\)</span> which tells us if <span class="math notranslate nohighlight">\((b_1 \cdot \)</span>X<span class="math notranslate nohighlight">\()+b_0\)</span> fits the actual activation timecourse very well (see above).</p>
+<p>Let’s start by taking a look at different ways of modifying our predicted response.</p>
+<p>In the sleepy and grumpy data we ordered the data according to magnitude, giving <em><strong>monotonic</strong></em> a line. Our predicted response in the MRI data looks a little different: it is sorted by time and the magnitude goes up and down over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the predictor timecourse of auditory stimulation</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">predicted_response</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acq_num</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;predicted response&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [volumes]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;auditory stimulation on (1) or off (0)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># fig.subplots_adjust(wspace=0, hspace=0.5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/LabReg-MRI-Pt2_80_0.png" src="../_images/LabReg-MRI-Pt2_80_0.png" />
+</div>
+</div>
+<p>So although this predicted response doesn’t have the classic y = mx + b form of a line like you might expect, the logic of what we’re doing is the same: we will look for a <span class="math notranslate nohighlight">\(B_1\)</span> value by which we multiply each value in the predictor timecourse and a <span class="math notranslate nohighlight">\(B_0\)</span> value which we will add as the intercept.</p>
+<p>The next cell will give you a feel for what the regression is doing. Using the slider you can adjust the <span class="math notranslate nohighlight">\(b_1\)</span> value that scales the predictor response:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{Y_i} = b_1 X_i + b_0
+\]</div>
+<p>For each setting of <span class="math notranslate nohighlight">\(b_1\)</span> we multiply <span class="math notranslate nohighlight">\(b_1\)</span> times every value in the predictor timecourse.</p>
+<p>The goal of the regression is to find the setting of <span class="math notranslate nohighlight">\(b_1\)</span> that minimizes the sum of the difference between each point in the voxel timeseries and the corresponding point in the predictor time series. The best <span class="math notranslate nohighlight">\(b_1\)</span> value is the one that minimizes the summed lengths of the red lines in the next plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">b_1</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">.1</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_glm_resids</span><span class="p">(</span><span class="n">b_1</span><span class="p">):</span>
+    <span class="c1"># set the intercept to zero for now</span>
+    <span class="n">b_0</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">#setup the figure:</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+    <span class="c1"># make the predicted response for particular b_1 setting</span>
+    <span class="n">scaled_predicted_reponse</span> <span class="o">=</span> <span class="p">(</span><span class="n">b_1</span><span class="o">*</span><span class="n">predicted_response</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_0</span>
+    <span class="n">x_coord</span> <span class="o">=</span> <span class="mi">32</span> 
+    <span class="n">y_coord</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="n">z_coord</span> <span class="o">=</span> <span class="mi">34</span>
+    <span class="n">resid</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[</span><span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span><span class="p">,</span> <span class="n">z_coord</span><span class="p">,:])</span><span class="o">-</span><span class="n">scaled_predicted_reponse</span>
+        
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scale</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[</span><span class="n">x_coord</span><span class="p">,</span>  <span class="n">y_coord</span><span class="p">,</span> <span class="n">z_coord</span><span class="p">,:])</span><span class="o">-</span><span class="n">resid</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mf">.4</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scale</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[</span><span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span><span class="p">,</span> <span class="n">z_coord</span><span class="p">,:]),</span><span class="s1">&#39;ko&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scale</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[</span><span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span><span class="p">,</span> <span class="n">z_coord</span><span class="p">,:]),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;voxel timecourse&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scaled_predicted_reponse</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;predictor response scaled by b_1&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">96</span><span class="p">),</span><span class="n">scale</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[</span><span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span><span class="p">,</span> <span class="n">z_coord</span><span class="p">,:]),</span> <span class="n">scale</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[</span><span class="n">x_coord</span><span class="p">,</span> <span class="n">y_coord</span><span class="p">,</span> <span class="n">z_coord</span><span class="p">,:])</span><span class="o">-</span><span class="n">resid</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="c1"># set the intercept term to zero for now</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;voxel timecourse and residuals for best fitting line with b_1=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b_1</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "762dafc4e558459c88ddaa75ebd1a249", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>Now do that for the other 200000 voxels in the brain.</p>
+<p>Actually let’s have the computer do it for us.</p>
+<p>The next cell defines a regression function that takes in our <span class="math notranslate nohighlight">\(X\)</span> variable containing the predictor timecourses and the Y variable containing the output data we would like to predict.</p>
+<p>In sleep/grump the sleep is the <span class="math notranslate nohighlight">\(X\)</span> and grumpiness is <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>For the fMRI data the <span class="math notranslate nohighlight">\(X\)</span> will contain the timecourse of auditory stimulation (and a constant term – check the Regression chapter for more details).</p>
+<p>The regression function will give back the following variables:</p>
+<ul class="simple">
+<li><p>beta: two values for each voxel specifying the best fitting values for <span class="math notranslate nohighlight">\(b_1\)</span> and <span class="math notranslate nohighlight">\(b_0\)</span></p></li>
+<li><p>model: the best fitting line (timeseries) for this voxel (this corresponds to the black line in the figure above)</p></li>
+<li><p>e: the error, or residuals, that remain when we substract the best fitting line from the actual data</p></li>
+<li><p>r: the ratio between the residual variance and the total variance for each voxel timeseries</p></li>
+</ul>
+<p>If you’re interested in the calculation and/or have some background in linear algebra take a look at the ordinary least squares formula in the Regression chapter and the way that we build up the tmp variables in the do_brain_regression function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">do_brain_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    
+    <span class="c1"># Make sure design matrix has the right orientation</span>
+    <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    
+    <span class="c1"># Calculate the dot product of the transposed design matrix and the design matrix</span>
+    <span class="c1"># and invert the resulting matrix.</span>
+    <span class="n">tmp</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+    
+    <span class="c1"># Now calculate the dot product of the above result and the transposed design matrix</span>
+    <span class="n">tmp</span>   <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+
+    <span class="c1"># Pre-allocate variables</span>
+    <span class="n">beta</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">e</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">r</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="c1"># Find beta values for each voxel and calculate the model, error and the correlation coefficients </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+        <span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>     <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">-</span> <span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="o">/</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>
+    
+    <span class="k">return</span> <span class="n">beta</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">r</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For regression we need a “design matrix”. This is simply a 2d array that contains the predictors that we will use to try to explain the observed data. One dimension of the array corresponds to each predictor and the other is the timepoints.</p>
+<p>For the current example this will contain only the constant term and the auditory predictor timecourse, but one of the great strengths of regression is the ability to simultaneously test the explanatory effect of multiple predictor variables (see Regression chapter for more details).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the design matrix</span>
+<span class="n">constant</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">acq_num</span><span class="p">)</span>
+<span class="n">rest</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+<span class="n">stim</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">block_size</span><span class="p">)</span>
+<span class="n">block</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">rest</span><span class="p">,</span> <span class="n">stim</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">predicted_response</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">block</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">block_total</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">design_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">constant</span><span class="p">,</span> <span class="n">predicted_response</span><span class="p">))</span>
+
+
+<span class="c1"># Create the plots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acq_num</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acq_num</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;expected response&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [volumes]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/LabReg-MRI-Pt2_86_0.png" src="../_images/LabReg-MRI-Pt2_86_0.png" />
+</div>
+</div>
+<p>Now we’re ready to conduct a regression analysis for each voxel in the brain, finding the best fitting <span class="math notranslate nohighlight">\(b_1\)</span> and <span class="math notranslate nohighlight">\(b_0\)</span> values so that we can minimize the difference between each true voxel timeseries <span class="math notranslate nohighlight">\(Y\)</span> and the predicted timeseries constructed as
+$<span class="math notranslate nohighlight">\(
+\hat{Y_i} = b_1 X_i + b_0
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the regression model for each voxel</span>
+<span class="n">beta</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">do_brain_regression</span><span class="p">(</span><span class="n">design_matrix</span><span class="p">,</span> <span class="n">all_data_2d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reshape the outputs for visualization</span>
+<span class="n">r_glm_vol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">))</span>
+<span class="n">b_1</span> <span class="o">=</span> <span class="n">beta</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">b_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">b_1</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">))</span>
+
+<span class="n">b_0</span> <span class="o">=</span> <span class="n">beta</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">b_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">b_0</span><span class="p">,</span> <span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The regression analysis gives us the <span class="math notranslate nohighlight">\(b_1\)</span> value that tells us how much to scale the predictor reponse in order to best match the voxel timecourse. Higher values of <span class="math notranslate nohighlight">\(b_1\)</span> mean that for every change in the predictor timecourse there is a change in the voxel timecourse.</p>
+<p>Let’s see which voxels were best explained by this regression analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># PLOT THE REGRESSION RESULTS</span>
+<span class="n">b_1_thresh</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">b_1_thresholded</span> <span class="o">=</span> <span class="n">b_1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">b_1_thresholded</span><span class="p">[</span><span class="n">b_1_thresholded</span> <span class="o">&lt;</span> <span class="n">b_1_thresh</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="c1"># # p_thresholded[p_thresholded &gt; p_val_cutoff] = np.nan</span>
+
+<span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="nb">slice</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_glm_results</span><span class="p">(</span><span class="nb">slice</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">functional_data</span><span class="p">[:,:,</span><span class="nb">slice</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">b_1_thresholded</span><span class="p">[:,:,</span><span class="nb">slice</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;afmhot&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;thresholded map (b_1 &gt; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b_1_thresh</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "15c1ff333abf4f62995d0aa5986a20a0", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>We can also look through the regression results to find the voxel that was best fit by our analysis kind of like we did with the correlation analysis earlier in this notebook.</p>
+<p>This time we will plot the voxel timecourse and the <span class="math notranslate nohighlight">\(\hat{Y}\)</span> timecourse obtained by (<span class="math notranslate nohighlight">\(b_1\)</span>*predictor_timecourse)<span class="math notranslate nohighlight">\(+b_0\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_idx</span> <span class="o">=</span> <span class="n">r_glm_vol</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+<span class="c1"># argmax returns the linear index, so turn into x/y/z index values</span>
+<span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span> <span class="n">max_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">max_idx</span><span class="p">,</span> <span class="n">r_glm_vol</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># use the max_x, _y, and _z indices to get the timecourse of the best correlated voxel</span>
+<span class="n">max_corr_timecourse</span> <span class="o">=</span> <span class="n">functional_data</span><span class="p">[</span><span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span><span class="n">max_z</span><span class="p">,:]</span>
+
+<span class="c1"># use the b_1 and b_0 values for this voxel to compute the best fitting line</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">b_1</span><span class="p">[</span><span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span> <span class="n">max_z</span><span class="p">]</span><span class="o">*</span><span class="n">predicted_response</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_0</span><span class="p">[</span><span class="n">max_x</span><span class="p">,</span> <span class="n">max_y</span><span class="p">,</span> <span class="n">max_z</span><span class="p">]</span>
+
+
+<span class="c1"># Create the plots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">max_corr_timecourse</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;voxel tc&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;best fit line&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acq_num</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time [volumes]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/LabReg-MRI-Pt2_93_0.png" src="../_images/LabReg-MRI-Pt2_93_0.png" />
+</div>
+</div>
+<p>Not bad. It looks like this voxel has a timeseries of BOLD activation that tracks pretty well with our timecourse of auditory stimulation scaled by <span class="math notranslate nohighlight">\(b_1\)</span> and with an intercept of <span class="math notranslate nohighlight">\(b_0\)</span>. It doesn’t look perfect, but that’s OK, it would be pretty surprising if we could explain <em>everything</em> that the brain is doing throughout the course of an experiment and besides, I guarantee you cannot find a better fit for this voxel than what is shown here.</p>
+<div class="alert alert-info" role="alert">
+  <strong>Question 10</strong> <br>
+    Take a look through the slices showing the results of our regression analysis in the cell titled # PLOT THE REGRESSION RESULTS. In particular, look around slices 35 and 36. How do these results compare to the version we did using correlation? Given what you've learned about correlation and regression, should we expect these results to look similar or different and why?
+</div><div class="alert alert-warning" role="alert">
+  <strong>Your Answer</strong> <br>
+  Delete this text and put your answer here.
+</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

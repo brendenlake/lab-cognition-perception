@@ -1,0 +1,848 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab: Reinforcement Learning (Part II) &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapters/00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/labs/LabRL-Pt2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/labs/LabRL-Pt2.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-and-artificial-agent-that-learns-from-reinforcement">
+   Building and Artificial Agent that learns from reinforcement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-mental-steps-in-performing-the-multi-armed-bandit-task">
+   The mental steps in performing the multi-armed “bandit” task
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-environment">
+   The environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-basic-agent">
+   A basic agent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-smarter-agent">
+   A smarter agent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-to-learn">
+   Exploring to Learn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-incrementally">
+   Learning incrementally
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">pingouin</span> <span class="k">as</span> <span class="nn">pg</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="kn">from</span> <span class="nn">rl_exp</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># Enable plots inside the Jupyter Notebook</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="lab-reinforcement-learning-part-ii">
+<h1>Lab: Reinforcement Learning (Part II)<a class="headerlink" href="#lab-reinforcement-learning-part-ii" title="Permalink to this headline">¶</a></h1>
+<p>Authored by <em>Todd Gureckis</em> and <em>Hillary Raab</em>
+Aspects borrowed from <a class="reference external" href="https://brendenlake.github.io/CCM-site/">Computational Cognitive Modeling</a> graduate course.</p>
+<hr class="docutils" />
+<div class="section" id="building-and-artificial-agent-that-learns-from-reinforcement">
+<h2>Building and Artificial Agent that learns from reinforcement<a class="headerlink" href="#building-and-artificial-agent-that-learns-from-reinforcement" title="Permalink to this headline">¶</a></h2>
+<p>The previous part of the lab you took part in a simple <strong>reinforcement learning</strong> experiment known as the multi-armed bandit.  In addition, we analyzed some of our data to understand how our patterns of choices related to the rewards.  In this part of the lab we are going to build an artificial agent that learns to perform the same task by itself.</p>
+<p>This gives you some initial understanding of the field of computational cognitive science and computational modeling of human behavior.</p>
+</div>
+<div class="section" id="the-mental-steps-in-performing-the-multi-armed-bandit-task">
+<h2>The mental steps in performing the multi-armed “bandit” task<a class="headerlink" href="#the-mental-steps-in-performing-the-multi-armed-bandit-task" title="Permalink to this headline">¶</a></h2>
+<p>When we build a model we often have to think about the sequence of steps that are needed in order to perform a task.  What do you think those are for the multi-armed bandit?</p>
+<div class="alert alert-success" role="alert">
+  <strong>Stop and think</strong> <br>
+    Discuss with your neighbors/group for five minutes some of the ingredients you think might be needed in order to solve the task.  For example what information do you need to keep track of?  How do you make decisions about which arm of the bandit to choose?
+</div></div>
+<div class="section" id="the-environment">
+<h2>The environment<a class="headerlink" href="#the-environment" title="Permalink to this headline">¶</a></h2>
+<p>To get started, we need to define the RL environment for the agent.  Let’s apply this agent to the same task you performed.  Read in your data file from the experiment phase using the following command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rl_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;rlexp-XXX.csv&quot;</span><span class="p">)</span>
+<span class="n">rl_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>subject</th>
+      <th>trial</th>
+      <th>block</th>
+      <th>choice</th>
+      <th>reward</th>
+      <th>best_resp</th>
+      <th>max</th>
+      <th>reward0</th>
+      <th>reward1</th>
+      <th>reward2</th>
+      <th>reward3</th>
+      <th>total_reward</th>
+      <th>rt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>XXX</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>-0.457636</td>
+      <td>2</td>
+      <td>0</td>
+      <td>-0.457636</td>
+      <td>-0.210389</td>
+      <td>8.975787</td>
+      <td>0.093462</td>
+      <td>-0.457636</td>
+      <td>2095.666</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>XXX</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>-1.015812</td>
+      <td>2</td>
+      <td>0</td>
+      <td>4.647578</td>
+      <td>-1.015812</td>
+      <td>6.898189</td>
+      <td>-3.375761</td>
+      <td>-1.473447</td>
+      <td>268.223</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>XXX</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1.699317</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1.699317</td>
+      <td>-0.414074</td>
+      <td>4.219976</td>
+      <td>1.887663</td>
+      <td>0.225870</td>
+      <td>281.481</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>XXX</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>-2.582218</td>
+      <td>2</td>
+      <td>0</td>
+      <td>5.869208</td>
+      <td>-2.582218</td>
+      <td>5.883738</td>
+      <td>1.177207</td>
+      <td>-2.356349</td>
+      <td>398.100</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>XXX</td>
+      <td>4</td>
+      <td>4</td>
+      <td>2</td>
+      <td>1.674251</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1.596461</td>
+      <td>-3.899903</td>
+      <td>1.674251</td>
+      <td>0.346435</td>
+      <td>-0.682098</td>
+      <td>163.687</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Ok, in this data frame columns ‘reward0’, ‘reward1’, ‘reward2’, and ‘reward3’ define the amount of reward you <em>would</em> have gotten by selected each of the respective arms of the bandit.  As a result, we can use these rewards to test out our artificial agent.</p>
+</div>
+<div class="section" id="a-basic-agent">
+<h2>A basic agent<a class="headerlink" href="#a-basic-agent" title="Permalink to this headline">¶</a></h2>
+<p>Let’s begin by creating a very simple agent that randomly choose arms.  This bandit is going to be really simple and trivial.  It is the same as an agent that choose randomly with its eyes closed.  However, it is a useful starting point for coding smarter agents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RandomAgent</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_actions</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="c1"># you could add parameters to your agent here</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">choose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_actions</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">learn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span> <span class="c1"># this agent doesn&#39;t learn</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we use a python ‘class’ which is an object-oriented framework for combining multiple functions and variables together.  Notice that the class definition starts with the name of the agent and then includes a few functions.  These functions are tabbed over so there are “within” the definition of the agent.  We can think of these functions as adding “powers” to our agent.  We have defined three functions.  The <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> function is a special one.  It is a function that gets run when our agent is “created” or born.  Here it just intialized the number of available actions to k (k=4 in our experiment).  The other two functions are <code class="docutils literal notranslate"><span class="pre">choose()</span></code> and <code class="docutils literal notranslate"><span class="pre">learn()</span></code>.  These two functions allow us to make decisions and learn, respectively.</p>
+<p>Right now our agent is really dumb.  In the learn function it just uses the <code class="docutils literal notranslate"><span class="pre">pass</span></code> keyword which means nothing happens.  So our agent is unable to learn.  The <code class="docutils literal notranslate"><span class="pre">choose</span></code> function is similarly dumb.  It randomly chooses an action from the available set.  Thus this agent is neither strategic nor able to learn.  Let’s make it better!</p>
+<p>But first, let’s see exactly how bad this little guy is!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># keep track of a few things</span>
+<span class="n">agent_choices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">agent_rewards</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">agent_max</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># create our random agent</span>
+<span class="n">dumbagent</span> <span class="o">=</span> <span class="n">RandomAgent</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># for each row in our original data</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rl_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">dumbagent</span><span class="o">.</span><span class="n">choose</span><span class="p">()</span> <span class="c1"># have the agent choose</span>
+    <span class="n">reward</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;reward</span><span class="si">{</span><span class="n">choice</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="c1"># get the reward for that choice</span>
+    <span class="n">max_r</span> <span class="o">=</span> <span class="n">choice</span><span class="o">==</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;best_resp&#39;</span><span class="p">]</span> <span class="c1"># is it the &quot;maximizing&quot; response?</span>
+    <span class="c1">#track everything for analysis</span>
+    <span class="n">agent_choices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+    <span class="n">agent_rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+    <span class="n">agent_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">max_r</span><span class="p">)</span>
+
+<span class="c1"># add new columns to the data frame similar to our human data </span>
+<span class="c1"># that are for the agent</span>
+<span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_choice&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">agent_choices</span>
+<span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_reward&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">agent_rewards</span>
+<span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_max&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">agent_max</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great!  Now we have let our agent play the exact same game and we can compare the agent to how we performed!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="o">=</span><span class="mi">15</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">w</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">w</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Agent earned:&quot;</span><span class="p">,</span> <span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_reward&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s2">&quot;, Chose best response:&quot;</span><span class="p">,</span> <span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Human earned:&quot;</span><span class="p">,</span> <span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;reward&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s2">&quot;, Chose best response:&quot;</span><span class="p">,</span> <span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Agent earned: 295.9213494013014 , Chose best response: 0.23809523809523808
+Human earned: 751.5638874975159 , Chose best response: 0.5904761904761905
+</pre></div>
+</div>
+<img alt="../_images/LabRL-Pt2_18_1.png" src="../_images/LabRL-Pt2_18_1.png" />
+</div>
+</div>
+<p>Interesting!  The agent seemed to earn significant less and also chose the best response about 25% of the time.  That last part is expected (it chose randomly from four options).  However, the fact that it earned so much less reward than you is because it doesn’t know how to learn or make smart decisions.</p>
+</div>
+<div class="section" id="a-smarter-agent">
+<h2>A smarter agent<a class="headerlink" href="#a-smarter-agent" title="Permalink to this headline">¶</a></h2>
+<p>We would like to make our agent smarter.  One way is to keep track of the rewards it has received from each option and to choose the arm of the bandit with the most total reward</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SmarterAgent</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_actions</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">choose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">reward_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_history</span><span class="p">])</span>
+        <span class="n">max_reward</span><span class="o">=</span><span class="n">npr</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">reward_avg</span> <span class="o">==</span> <span class="n">reward_avg</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">max_reward</span>
+    
+    <span class="k">def</span> <span class="nf">learn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span> <span class="c1"># this agent doesn&#39;t learn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward_history</span><span class="p">[</span><span class="n">action</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># keep track of a few things</span>
+<span class="n">agent_choices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">agent_rewards</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">agent_max</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># create our random agent</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="n">SmarterAgent</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># for each row in our original data</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rl_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">choose</span><span class="p">()</span> <span class="c1"># have the agent choose</span>
+    <span class="n">reward</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;reward</span><span class="si">{</span><span class="n">choice</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="c1"># get the reward for that choice</span>
+    <span class="n">max_r</span> <span class="o">=</span> <span class="n">choice</span><span class="o">==</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;best_resp&#39;</span><span class="p">]</span> <span class="c1"># is it the &quot;maximizing&quot; response?</span>
+    
+    <span class="c1"># NOW THE AGENT LEARNS!!!</span>
+    <span class="n">agent</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">reward</span><span class="p">,</span> <span class="n">choice</span><span class="p">)</span>
+    <span class="c1">#track everything for analysis</span>
+    <span class="n">agent_choices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+    <span class="n">agent_rewards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+    <span class="n">agent_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">max_r</span><span class="p">)</span>
+
+<span class="c1"># add new columns to the data frame similar to our human data </span>
+<span class="c1"># that are for the agent</span>
+<span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_choice&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">agent_choices</span>
+<span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_reward&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">agent_rewards</span>
+<span class="n">rl_df</span><span class="p">[</span><span class="s1">&#39;agent_max&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">agent_max</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" role="alert">
+<h3> Problem 1</h3><br>
+Based on the way we analyzed the behavior of the RandomAgent, make a similar plot for the SmarterAgent.  How does it do?  Why do you think the outputs look like the do.  Write a few sentences describing your obsrvations.
+</div></div>
+<div class="section" id="exploring-to-learn">
+<h2>Exploring to Learn<a class="headerlink" href="#exploring-to-learn" title="Permalink to this headline">¶</a></h2>
+<p>The SmarterAgent we just considered keeps track of the average reward from each bandit arm in a list.  However, it always <strong>chooses</strong> the best action so far.  What is wrong with this strategy?</p>
+<div class="alert alert-success" role="alert">
+  <strong>Stop and think</strong> <br>
+    Discuss with your neighbors/group for five minutes what is wrong with this strategy.  Enter a markdown cell below with the notes from your discussion.
+</div><p>The agent would do better if we can inject some randomness into its decisions.  Not as much as the random agent but something close.  One common strategy for this in computer science is called Epislon-greedy or <span class="math notranslate nohighlight">\(\epsilon\)</span>-greedy.  Under this strategy, you choose the best action <strong>most</strong> of the time but with probability equal to <span class="math notranslate nohighlight">\(\epsilon\)</span> (a small number) you chose randomly.  Thus, this agent would kind of combine elements of both the random and smarter agents.</p>
+<div class="alert alert-info" role="alert">
+<h3> Problem 2</h3><br>
+Below I provided a template for a SmarterExploringAgent.  This agent is similar to the one above but I have deleted the choose function and will ask you to implement that decision rule.  Your code should use the parameter epsilon to decide to either choose randomly (see RandomAgent) or choose the best option with the highest average reward (like SmarterAgent).  After you implement it run it on the problem and see how it does.  Remember you will need to provide the epsilon parameter to the choose() function in your code.  You should make this number relatively small (like 0.01) but you can play with different numbers.</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SmarterExploringAgent</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_actions</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward_history</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">choose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+        
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">learn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span> <span class="c1"># this agent doesn&#39;t learn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward_history</span><span class="p">[</span><span class="n">action</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="learning-incrementally">
+<h2>Learning incrementally<a class="headerlink" href="#learning-incrementally" title="Permalink to this headline">¶</a></h2>
+<p>The agent we have made learns but it does this in a somewhat unrealistic way.  We could say it has a <strong>memory</strong> for every past reward it has recieved and each time it makes a choice it computes the average of those experiences.  As the amount of trials in the experiment (or episodes in life) increase, this agent will have to grow a really large memory and possibly it won’t fit in the computer anymore.  This seems unrealistic compared to how we solved the problem, right?</p>
+<p>But there is still <em>another</em> problem with this approach.  Your Smarter agent probably still didn’t do that well because it has TOO much memory…  These bandits are changing how good they are from time to time and this bandit tracks the overall average.  This means it’ll still be averaging together values from the past even when things change.  It is like even after your favorite restaurant becomes bad you still use the good experiences you had long ago to make your decision today.  The best thing to do sometimes is to forget the past and move on!</p>
+<p>A common solution to this is to track the average <em>incrementally</em>.  Incremental tracking of an average can be done with much less memory.  To do this we will calculate something called the Q value for each bandit on every trial. The Q value can be estimated by taking the Q value on the previous trial and adding the prediction error, scaled by the learning rate.</p>
+<p>Okay, don’t be scared, but let’s write this out as a mathematical equation.
+Again we have:</p>
+<ul class="simple">
+<li><p>the value of a particular machine: Q(s,a)</p></li>
+<li><p>the learning rate which can be written as alpha</p></li>
+<li><p>the prediction error</p></li>
+</ul>
+<p>The preciction error is calculate by subtracting what you expected (the value of a particular machine) from the reinforcement, which we can define as r (always 1 for reward or 0 if there is no reweard).
+Here is the prediction error equation: <span class="math notranslate nohighlight">\([r - Q(s,a)]\)</span></p>
+<p>Then we can update the Q values in Q-learning as follows:</p>
+<p><span class="math notranslate nohighlight">\(Q(s,a) = Q(s,a) + \alpha [r - Q(s,a)] \)</span></p>
+<div class="alert alert-info" role="alert">
+<h3>Problem 3</h3><br>
+Before we continue, let's get a little more experience with the prediction error. If you get a reward of 1, and the Q value is .6 (this is what you expect). Is this a positive or negative prediction error? What is the value of the prediction error?
+</div><div class="alert alert-info" role="alert">
+    Your answer here!
+</div><div class="alert alert-info" role="alert">
+<h3>Problem 4</h3><br>
+Below I provided a template for a SmarterExploringIncrementalAgent. You should first implement the learn function.  I have provided the first bit of code to help you update the value of the chose q_value.  This should be 1 line of code and you are just putting the variables together like in the quation (self.q_values[action] = Q(s,a) in the equation, reward is r, and alpha is the alpha). Next you have to adapt the choice function from above to use the q-values.</div> <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SmarterExploringIncrementalAgent</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_actions</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">choose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">):</span>
+        <span class="c1"># modify your choice rule from the previous agent to use the q_values</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">learn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span> <span class="c1"># this agent doesn&#39;t learn</span>
+        <span class="c1"># replace this line here with the q-learning equation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q_values</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="o">=</span> <span class="n">reward</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" role="alert">
+<h3>Problem 5</h3><br>
+Copy the code from above to apply this agent to the task and evaluate its performance.  How does it do?  How does learning change when you move around the learning rate? What happens when the learning rate is 0? What happens when the learning rate (alpha) is 1? What about as it approaches 0 or 1?
+</div> <div class="alert alert-info" role="alert">Your answer here!</div><div class="alert alert-info" role="alert">
+<h3>Problem 6</h3><br>
+You created a bunch of agents in this exercise, each trying to be more and more similar to humans.  What aspect do you think these agents still lack compared to the way you solved the problem?
+</div><div class="alert alert-info" role="alert">Your answer here!</div></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

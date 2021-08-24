@@ -1,0 +1,2749 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15. Logistic regression &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="16. Linear Mixed Effect Modeling" href="../15/00-mixed-effect.html" />
+    <link rel="prev" title="14. Linear regression" href="../13/00-linearregression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/14/00-logisticregression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/chapters/14/00-logisticregression.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predicting-binary-outcomes">
+   15.1. Predicting binary outcomes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-do-we-need-logistic-regression">
+   15.2. Why do we need logistic regression?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-with-probabilities">
+   15.3. Regression with probabilities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-logit-model">
+   15.4. The Logit Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#log-odds">
+   15.5. Log Odds
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-fitting">
+   15.6. Maximum Likelihood Fitting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intuition-of-computing-the-likelihood">
+     15.6.1. Intuition of computing the likelihood
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-all-the-data-with-the-joint-likelihood">
+     15.6.2. Fitting all the data with the joint likelihood
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fitting-logistic-regression-models">
+   15.7. Fitting logistic regression models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpreting-the-fits">
+   15.8. Interpreting the fits
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretting-overall-fit-quality">
+     15.8.1. Interpretting overall fit quality
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretting-coefficients">
+     15.8.2. Interpretting coefficients
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-regression-for-a-discrete-variable">
+   15.9. Logistic regression for a discrete variable
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classification">
+   15.10. Classification
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   15.11. Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   15.12. Further Reading
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="logistic-regression">
+<h1><span class="section-number">15. </span>Logistic regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This chapter authored by <a class="reference external" href="http://gureckislab.org/~gureckis">Todd M. Gureckis</a> is released under the <span class="xref myst">license</span> for the book.</p>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span> <span class="c1"># for the Jupyter book chapter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The goal in this chapter is to build upon the previous chapter on linear regression to introduce the concept of <strong><em>logistic regression</em></strong>.  A very short summary is that while linear regression is about fitting lines, logistic regression is about fitting a particular type of “squiggle” to particular kinds of data.  We are going to talk first about why logistic regression is necessary, the types of datasets it applies to, then step through some of the details on fitting a logistic regression model and interpreting it.</p>
+<p>Logistic regression is something you might not have heard about before in a psychology statistics course but it is becoming more common.  In addition, logistic regression is a very popular tool in data science and machine learning.</p>
+<div class="section" id="predicting-binary-outcomes">
+<h2><span class="section-number">15.1. </span>Predicting binary outcomes<a class="headerlink" href="#predicting-binary-outcomes" title="Permalink to this headline">¶</a></h2>
+<p>In much of the previous chapter we talked about regression in the context where we aimed to predict data that was on an interval scale (e.g., grumpiness given sleep).  However, often we are interested in a discrete, nominal outcome: a case where something happens or it doesn’t.  We sometimes call these “binary” outcomes.</p>
+<p>Examples include:</p>
+<ul class="simple">
+<li><p>predicting if someone will or will not graduate from high school</p></li>
+<li><p>predicting if someone will or will not get a disease</p></li>
+<li><p>predicting is a job applicant gets a “good” or “poor” rating on their annual review</p></li>
+<li><p>predicting if an infant will look at a stimulus or not in a looking time study</p></li>
+<li><p>predicting how a person will answer a true/false question</p></li>
+</ul>
+<p>Each of these cases the thing that is being predicted is a dichotomous outcome with two levels or values (graduate/not, disease/no disease, good/poor, look/no look, true/false, etc..). These case come up enough in psychological research it is useful to know about the best way to approach the analysis of this data.</p>
+<p>I think a lot of students, fresh off the chapter on linear regression would just get to work trying to perform a normal linear regression on data where the predicted value is binary.  Why not?  It isn’t like the statistics software (like <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>) will usually <strong>stop</strong> you from doing this.  Why do we need to learn an entirely different type of regression approach to handle these types of data?</p>
+</div>
+<div class="section" id="why-do-we-need-logistic-regression">
+<h2><span class="section-number">15.2. </span>Why do we need logistic regression?<a class="headerlink" href="#why-do-we-need-logistic-regression" title="Permalink to this headline">¶</a></h2>
+<p>I’m about to show you the <strong>wrong</strong> way to analyze data with discrete, binary outcomes.  The reason is that doing this analysis the wrong way illustrates a bit why we need a different approach.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Don’t get confused, this next section is not the right way to do things, and you will see why!</p>
+</div>
+<p>To make things concrete, imagine the following data set which contains some hypothetical data on the high school GPA of several students and if they were admitted to NYU (loaded from ‘nyu_admission_fake.csv’ in the current folder):</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nyu_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;nyu_admission_fake.csv&#39;</span><span class="p">)</span>
+<span class="n">nyu_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>student</th>
+      <th>gpa</th>
+      <th>admit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3.085283</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0.083008</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2.534593</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2.995216</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1.994028</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>0.899187</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>0.792251</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>3.042123</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>0.676443</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>0.353359</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10</td>
+      <td>2.741439</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>11</td>
+      <td>3.813573</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>12</td>
+      <td>0.015793</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>13</td>
+      <td>2.048769</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>14</td>
+      <td>3.250484</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>15</td>
+      <td>2.450104</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>16</td>
+      <td>2.887021</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>17</td>
+      <td>1.167504</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>18</td>
+      <td>3.671096</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>19</td>
+      <td>2.858303</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>20</td>
+      <td>2.170177</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21</td>
+      <td>0.568680</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>22</td>
+      <td>1.493363</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>23</td>
+      <td>2.696534</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>24</td>
+      <td>1.767333</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>25</td>
+      <td>1.736056</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>26</td>
+      <td>2.471068</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>27</td>
+      <td>2.052553</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>28</td>
+      <td>2.601589</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>29</td>
+      <td>2.404156</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>30</td>
+      <td>3.220893</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>31</td>
+      <td>2.086589</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>32</td>
+      <td>3.634596</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>33</td>
+      <td>1.276944</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>34</td>
+      <td>0.361837</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>35</td>
+      <td>1.202800</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>36</td>
+      <td>0.455937</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>37</td>
+      <td>3.314725</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>38</td>
+      <td>0.187585</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>39</td>
+      <td>2.505149</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">student</span></code> column is an anonymous identifier, <code class="docutils literal notranslate"><span class="pre">gpa</span></code> is the grade point average in high school on a 4.0 scale, and <code class="docutils literal notranslate"><span class="pre">admit</span></code> codes a binary variable about if the student was admitted to NYU (1=admit, 0=not admitted).  Taking what we learned from the last chapter let’s conduct a typical linear regression analysis to assess how GPA influences if a student was admitted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="n">lr</span><span class="o">=</span><span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;admit ~ gpa&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nyu_df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gpa&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;admit&#39;</span><span class="p">,</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">nyu_df</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gpa&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;admit&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;admit&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nyu_df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;gpa&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;admit? yes=1, no=0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+
+<span class="n">lr</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-logisticregression_12_0.png" src="../../_images/00-logisticregression_12_0.png" />
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>admit</td>      <th>  R-squared:         </th> <td>   0.598</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.587</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   56.45</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Mon, 04 Jan 2021</td> <th>  Prob (F-statistic):</th> <td>5.02e-09</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>12:38:28</td>     <th>  Log-Likelihood:    </th> <td> -10.367</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>    40</td>      <th>  AIC:               </th> <td>   24.73</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>    38</td>      <th>  BIC:               </th> <td>   28.11</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -0.2671</td> <td>    0.105</td> <td>   -2.539</td> <td> 0.015</td> <td>   -0.480</td> <td>   -0.054</td>
+</tr>
+<tr>
+  <th>gpa</th>       <td>    0.3479</td> <td>    0.046</td> <td>    7.513</td> <td> 0.000</td> <td>    0.254</td> <td>    0.442</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 3.244</td> <th>  Durbin-Watson:     </th> <td>   2.086</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.198</td> <th>  Jarque-Bera (JB):  </th> <td>   2.891</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.576</td> <th>  Prob(JB):          </th> <td>   0.236</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.360</td> <th>  Cond. No.          </th> <td>    5.43</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, so the first thing to note is that the regression worked!  The reason is that OLS linear regression is happy to regress on any numbers you give it.  However there’s a few troubling things.  First the regression plot doesn’t look like the line is doing that great a job.  Remember with linear regression we often focus on the <em>residuals</em>, how far the predictions of the line are from the real data.  If we do this for this dataset it looks like this:</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># fit a linear regression to the mpg column given hp</span>
+<span class="c1">#display(fit.summary())</span>
+
+<span class="n">predict</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">lr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;gpa&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">nyu_df</span><span class="o">.</span><span class="n">gpa</span>
+<span class="n">resid</span> <span class="o">=</span> <span class="n">nyu_df</span><span class="o">.</span><span class="n">admit</span><span class="o">-</span><span class="n">predict</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;gpa&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;gpa&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;gpa&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">x1</span><span class="o">+</span><span class="n">lr</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;Intercept&#39;</span><span class="p">]</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nyu_df</span><span class="o">.</span><span class="n">gpa</span><span class="p">,</span> <span class="n">nyu_df</span><span class="o">.</span><span class="n">admit</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nyu_df</span><span class="o">.</span><span class="n">gpa</span><span class="p">,</span> <span class="n">nyu_df</span><span class="o">.</span><span class="n">admit</span><span class="o">-</span><span class="n">resid</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mf">.4</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">nyu_df</span><span class="o">.</span><span class="n">gpa</span><span class="p">,</span> <span class="n">nyu_df</span><span class="o">.</span><span class="n">admit</span><span class="p">,</span> <span class="n">nyu_df</span><span class="o">.</span><span class="n">admit</span><span class="o">-</span><span class="n">resid</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;resid2_fig&quot;</span><span class="p">,</span><span class="n">fig</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-logisticregression_14_1.png" src="../../_images/00-logisticregression_14_1.png" />
+</div>
+</div>
+<p>Which is kind of a sign of misspecified model (another way of saying using the wrong model/statistical technique).  The reason is that remember that one assumption of linear regression is <em>homogeneity of variance</em> which is the idea that the errors should be random and the same for all values of the input variable in simple linear regression.  If we plot the predicted values versus the residuals we should get a very well mixed cloud of points with no real patterns or correlation.  However, instead we get this weird striped pattern:</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">resid</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../../_images/00-logisticregression_16_1.png" src="../../_images/00-logisticregression_16_1.png" />
+</div>
+</div>
+<p>which again looks like an error of some kind and violates on of the assumptions of the regression.</p>
+<p>Furthermore, the models makes weird predictions.  Let’s take a great student who has 2.5 GPA.  What would the predicted admission decision be for this person?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;gpa&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">]})</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0.602731
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is kind of hard to interpret.  Our model is saying if a person with a 2.5 GPA comes along our prediction about if they are admitted is 0.602.  Maybe that makes sense as a probability?  Like they have a probability of 0.6 to be admitted?  Ok but how about a student with a 4.0 GPA?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;gpa&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">]})</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    1.124653
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The probability of being admitted is 1.124!  This isn’t a probability even because probabilities stop a 1.0 (1.0 is “certain”).  Although you might be saying p=1.12 is <strong>extra</strong> certain it can’t work that way and still be a probability, sorry.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;gpa&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]})</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0   -0.26714
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>To top things off a student with a 0.0 GPA would have a -0.267 probability of admission.  This also makes no sense because probabilities can be less than 0.0.  And even if they could a negative probability means maybe they <em>do</em> have a 25% chance to get into NYU?  It’s all a big mess and encourages us to do very bad and unreasonable things with the math.  <strong>We do not want to do this, so we cannot use linear regression for this data</strong>.</p>
+<p>This is unfortunate because this kind of data is pretty common in psychology and many other areas of science as noted above.  So what can we do?</p>
+</div>
+<div class="section" id="regression-with-probabilities">
+<h2><span class="section-number">15.3. </span>Regression with probabilities<a class="headerlink" href="#regression-with-probabilities" title="Permalink to this headline">¶</a></h2>
+<p>The last section kind of anticipated our solution… we really want to organize our thinking about this issue around probabilities.</p>
+<p>Often we are not interested in predicting exactly these dichotomous outcomes but instead the <em>probability</em> of one or another outcome where there is a natural tradeoff between the two outcomes.  For instance if you are admitted to NYU you can’t also not be admitted to NYU so the probabilities of these events a inversely related to one other.  The higher the likelihood you are admitted, the less likely you are not admitted.</p>
+<p>Remember the canonical formula we had for a simple linear regression looked something like this:</p>
+<p><span class="math notranslate nohighlight">\(
+Y_i = b_1 X_i + b_0 + \epsilon_i
+\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is the random residuals.</p>
+<p>One might imagine, ok fine, let’s let <span class="math notranslate nohighlight">\(Y_i\)</span> just be the probability of some event (usually denoted <span class="math notranslate nohighlight">\(\pi\)</span>) and so we have</p>
+<p><span class="math notranslate nohighlight">\(
+\pi_i = Y_i = b_1 X_i + b_0 + \epsilon_i
+\)</span></p>
+<p>However there are a couple of problems with this approach, which is one interpretation we tried to apply above.  We didn’t like it because it makes weird predictions (probabilities less or greater than 1.0 or 0.0) and looks like a terrible OLS fit.</p>
+<p>More importantly we don’t know how to compute the difference between the predicted outcome in our data because the data is unlikely to be probabilities but just a binary indicator of what happened.  To be clear, in our example,  we are interested if high school GPA is a good predictor of if people will be admitted to NYU.  What we observe in this case is values of the GPA (<span class="math notranslate nohighlight">\(X_i\)</span> in the equation above) and also if the person is admitted (yes/no).  We do not know the <em>probability</em> that student 1 will be admitted, we only know that they did get admitted.  Thus if we tried to predict <span class="math notranslate nohighlight">\(\pi_i\)</span> from the GPA all we can say is that the person did graduate and there is no “empirical” probability we can measure the error to.</p>
+<p>You might think we could make a guess about the probability by for instance binning the GPAs into ranges (e.g., 3.5-4.0) and counting the probability of admission in that bin compared to the (e.g., 2.5-3.0).  However, this abstracts away from the raw data and as a result loses some of the subtle variation in GPA scores that might be informative.  Logistic regression offers a clean way to do regression in this context.</p>
+<p>In addition to this practical reason (no obvious ground-truth probability for least-squares regression), there are a few mathematical reasons why linear regression is inappropriate in this situation.  The first is that in a standard linear equation like this the value of <span class="math notranslate nohighlight">\(Y_i\)</span> and thus the value of <span class="math notranslate nohighlight">\(\pi_i\)</span> is not bounded between 0 and 1 (in fact it is unbounded such that the range of the predicted Y values can go from negative infinity to infinity).  As a result it is not a proper probability and thus mathematically wrong to do this.  Perhaps as a beginning student being mathematically wrong is not such a major concern for you but a key point is that choosing the “right” model for your data often pays off with cleaner and easier to interpret results.  The math is your friend here.  A second reason is that if we are truly predicting <span class="math notranslate nohighlight">\(\pi_i\)</span> we have to realize that it is a binomial random variable and the variance will be a function of the value of <span class="math notranslate nohighlight">\(\pi\)</span>.  As you remember this is a violation of the assumptions of a traditional least-squares linear regression where we assume that there is equal variance across all values of the predictors.</p>
+<p>Given these mathematical and conceptual limitations of linear regression, we need to take a slightly different approach.</p>
+</div>
+<div class="section" id="the-logit-model">
+<h2><span class="section-number">15.4. </span>The Logit Model<a class="headerlink" href="#the-logit-model" title="Permalink to this headline">¶</a></h2>
+<p>One way to model the relationship between a continuous predictor variable <span class="math notranslate nohighlight">\(X\)</span> and a probability <span class="math notranslate nohighlight">\(\pi\)</span> is with the logistic response function.  A plot of this function appears in <a class="reference internal" href="#fig-sigmoid"><span class="std std-numref">Fig. 15.1</span></a>.</p>
+<div class="cell tag_hide_cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;k--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$\pi$&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;sigmoid_fig&quot;</span><span class="p">,</span><span class="n">fig</span><span class="p">,</span><span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-logisticregression_29_1.png" src="../../_images/00-logisticregression_29_1.png" />
+</div>
+</div>
+<div class="figure align-default" id="fig-sigmoid" style="width: 550px">
+<div class="cell_output docutils container">
+<img alt="../../_images/00-logisticregression_29_0.png" src="../../_images/00-logisticregression_29_0.png" />
+</div>
+<p class="caption"><span class="caption-number">Fig. 15.1 </span><span class="caption-text">Example of a logistic response function (also known as a sigmoid).</span><a class="headerlink" href="#fig-sigmoid" title="Permalink to this image">¶</a></p>
+</div>
+<p>This is also know as a sigmoid or s-shaped curve.  Notice that the X value varies along a continuous range (here is plotted just between -10 and 10) but the y value (<span class="math notranslate nohighlight">\(\pi\)</span>) is bounded between 0 and 1.0.  As X increases the predictor value <span class="math notranslate nohighlight">\(\pi\)</span> increases gradually up to one.  The sigmoid function is very important in many aspects of computational modeling exactly because of this bounded range.  One nice way to think about it is as a function that maps the real number line to a range bounded by 0 and 1.</p>
+<p>Let’s play with it a little to make sure everyone understands, we will put “in” a x value and get a y value “out”.</p>
+<p>If we put in a zero we get 0.5 for this particular sigmoid</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_in</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">y_out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_in</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x_in is </span><span class="si">{</span><span class="n">x_in</span><span class="si">}</span><span class="s1"> and y_out is </span><span class="si">{</span><span class="n">y_out</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_in is 0 and y_out is 0.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we put in a really big number like 100 we get a number that will eventually to 1.0 but will never exceed it.  If you open this notebook chapter yourself in Jupyter you can play with it but you’ll never get a number bigger than 1.0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_in</span><span class="o">=</span><span class="mi">50</span>
+<span class="n">y_out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_in</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x_in is </span><span class="si">{</span><span class="n">x_in</span><span class="si">}</span><span class="s1"> and y_out is </span><span class="si">{</span><span class="n">y_out</span><span class="si">:</span><span class="s1">.9f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_in is 50 and y_out is 1.000000000
+</pre></div>
+</div>
+</div>
+</div>
+<p>On the other side you’ll also never get a number less than 0 even with a very negative input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_in</span><span class="o">=-</span><span class="mi">100</span>
+<span class="n">y_out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x_in</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;x_in is </span><span class="si">{</span><span class="n">x_in</span><span class="si">}</span><span class="s1"> and y_out is </span><span class="si">{</span><span class="n">y_out</span><span class="si">:</span><span class="s1">.9f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_in is -100 and y_out is 0.000000000
+</pre></div>
+</div>
+</div>
+</div>
+<p>So the logit function takes as input any number on the real number line and converts it to a number between 0.0 and 1.0 which would really be handy if you wanted to predict probabilities!</p>
+<p>We can use this to modify our regression equation:</p>
+<p><span class="math notranslate nohighlight">\(
+\pi = P(Y=1 | X=x_i) = \frac{e^{b_1 x_i + b_0}}{1.0+e^{b_1 x_i + b_0}}
+\)</span></p>
+<p>if you multiply the left hand size by a special version of the number 1, (i.e., <span class="math notranslate nohighlight">\(\frac{e^{-(b_1 x_i + b_0)}}{e^{-(b_1 x_i + b_0)}}\)</span>) then you get</p>
+<p><span class="math notranslate nohighlight">\(
+\pi = P(Y=1 | X=x_i) = \frac{e^{b_1 x_i + b_0}}{1.0+e^{b_1 x_i + b_0}} \frac{e^{-(b_1 x_i + b_0)}}{e^{-(b_1 x_i + b_0)}}
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+\pi = P(Y=1 | X=x_i) = \frac{1}{1.0+e^{-(b_1 x_i + b_0)}} 
+\)</span></p>
+<p>which is a slightly more common way to write a sigmoid function which I used above.</p>
+<p>You can extend this easily to the mulitple regression case just by including more regressors in the exponential term:</p>
+<p><span class="math notranslate nohighlight">\(
+\pi = P(Y=1 | X={x_n...x_1}) = \frac{1}{1+e^{-(b_n x_n + ... + b_1 x_1 + b_0)}} 
+\)</span></p>
+<div class="admonition-general-linear-models admonition">
+<p class="admonition-title">General Linear Models</p>
+<p>In general, we can think about what we are doing here as applying a simple <em>function</em> to the output of our normal linear regression.   If <span class="math notranslate nohighlight">\(Y_i\)</span> is our equation for the simple linear regression:</p>
+<p><span class="math notranslate nohighlight">\(
+Y_i = b_1 X_i + b_0 + \epsilon_i
+\)</span></p>
+<p>we have</p>
+<p><span class="math notranslate nohighlight">\(
+\pi_i = f(Y_i)
+\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(f()\)</span> is a function sometimes known as a <em>linking function</em> because it links the linear regression equation to the type of data we are modeling (in this case probabilities which are numbers between zero and one).</p>
+<p>In the case of logistic regression the linking function, <span class="math notranslate nohighlight">\(f(x)\)</span> is:</p>
+<p><span class="math notranslate nohighlight">\(
+f(x) = \frac{1}{1+e^{-x}} 
+\)</span></p>
+<p>which is the logistic function we just described.  There are several other linking functions that can be used depending on the type of data you are modeling.  For instance as we will encounter later, in fMRI data analysis it is common to combine linear regression with a special linking function called the <em>hemodynamic response function</em> which models the biophysical response of the fMRI signal.  In general talking about regression with this output function <span class="math notranslate nohighlight">\(f(x)\)</span> is known as the <a class="reference external" href="https://en.wikipedia.org/wiki/Generalized_linear_model">generalized linear model</a>.</p>
+</div>
+</div>
+<div class="section" id="log-odds">
+<h2><span class="section-number">15.5. </span>Log Odds<a class="headerlink" href="#log-odds" title="Permalink to this headline">¶</a></h2>
+<p>In general the equation above is somewhat bad news.  The first is that this equation is <strong>non-linear</strong> in terms of the predictors <span class="math notranslate nohighlight">\(x_n\)</span>.   This means we fall well outside the scope of linear regression!  However, this function has a special form that can be linearized by the logit transformation.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p><strong>Linearization</strong> in this case simply means rearranging the equation with algebra to solve for a slightly different form of the equation which is linear in the parameters.</p>
+</div>
+<p>Instead of prediction <span class="math notranslate nohighlight">\(\pi\)</span> directly instead we predict <span class="math notranslate nohighlight">\(\pi/(1-\pi)\)</span> which is the “odds ratio” of the predicted event happening compared to not happening (that is the <span class="math notranslate nohighlight">\(1-\pi\)</span> term).</p>
+<p>Since</p>
+<p><span class="math notranslate nohighlight">\(
+\pi = \frac{1}{1+e^{-(b_n x_n + ... + b_1 x_i + b_0)}} 
+\)</span></p>
+<p>then</p>
+<p><span class="math notranslate nohighlight">\(
+1-\pi =  \frac{1+e^{-(b_n x_n + ... + b_1 x_i + b_0)}}{1+e^{-(b_n x_n + ... + b_1 x_i + b_0)}} - \frac{1}{1+e^{-(b_n x_n + ... + b_1 x_i + b_0)}} 
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+1-\pi =  \frac{e^{-(b_n x_n + ... + b_1 x_i + b_0)}}{1+e^{-(b_n x_n + ... + b_1 x_i + b_0)}}
+\)</span></p>
+<p>and then
+<span class="math notranslate nohighlight">\(
+\frac{\pi}{1-\pi} = e^{(b_n x_n + ... + b_1 x_i + b_0)}
+\)</span></p>
+<p>(you can check the algebra yourself!)</p>
+<p>If we take the natural log of both sides we get</p>
+<p><span class="math notranslate nohighlight">\(
+ln(\frac{\pi}{1-\pi}) = b_0 + b_1 x_1 + ... + b_n x_n
+\)</span></p>
+<p>Which is now a linear function of the parameters (<span class="math notranslate nohighlight">\(b_n\)</span>) and predictors (<span class="math notranslate nohighlight">\(x_n\)</span>).   The log odd ratio is known as the <strong>logit</strong>.  Interestingly, while <span class="math notranslate nohighlight">\(\pi\)</span> ranges between 0 and 1 (a proper probability) the logit ranges between negative infinity and positive infinity making it an appropriate target for linear regression methods (we’ve fixed at least one of the math problems!).</p>
+<p>Now, if your eyes are blurry from all this math yet, you might still be a little confused.  If you think back to what we did in our linear regression, our approach was to adjust the parameters of the equations (the <span class="math notranslate nohighlight">\(b_n\)</span>s) to minimize the sum of squared errors between the predicted and actual data for each data point.  Although the previous section got us to an equation which is linear in the parameter <span class="math notranslate nohighlight">\(b_n\)</span> it is hard to imagine how we measure if this model predicts the data well.  One one hand we will have various yes/no values (i.e., yes the person with a 3.4 GPA graduated college) and this <span class="math notranslate nohighlight">\(ln(\frac{\pi}{1-\pi})\)</span> logit predictor.  How do we connect the two in the same way that we estimated the squared error in the linear regression case?</p>
+<p>The problem here is that the actual data in this case are, in log odds space, transformed to -inf and +inf.  The situation looks somewhat like this where we have our proposed “best fit line” and then when we try to compute the distance of each actual data point from the line we find that all points are infinite distance away in log odds space.  If we added them up, no matter what line we drew we would get the same sum of squared error so this approach will not work.</p>
+<img src="images/logodd-problem.png">
+<p>Lets use Python as a calculator to check what the issue is.  So imagine a person did get into NYU.  Then their log odd of addmition should be <span class="math notranslate nohighlight">\(log(\frac{1}{0}) = log(1)-log(0)\)</span> but</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inf
+</pre></div>
+</div>
+</div>
+</div>
+<p>So the log odds value of the data point here is +inf and the residual would then always be infinite. Same with the people who did not get into NYU who have <span class="math notranslate nohighlight">\(log(0/1) = log(0)\)</span>, but</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-inf
+</pre></div>
+</div>
+</div>
+</div>
+<p>This makes computing a typical “square residual” impossible in log odds space.  The solution takes advantage of the fact we are talking about probabilities.  In particular, logistic regression models are typically fit using the concept of maximum likelihood estimation (or MLE).  <a class="reference external" href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">Here</a> is a Wikipedia entry on this.  The mechanics of it actually aren’t that complex and we might as well run through them with a concrete example.</p>
+</div>
+<div class="section" id="maximum-likelihood-fitting">
+<h2><span class="section-number">15.6. </span>Maximum Likelihood Fitting<a class="headerlink" href="#maximum-likelihood-fitting" title="Permalink to this headline">¶</a></h2>
+<p>Remember when we considered ordinary least squares regression (OLS) we came up with a way of “scoring” how well the line fits the data by summing up the squared residuals.  This gave us a “number” of how good a line we had found and then we searched around in the parameters to find the line which minimized the best fit.</p>
+<p>We are going to do a similar thing with the log odds regression but instead of computing residuals we will instead convert the predicted values of the regression line into probabilities and compute the “likelihood” of the data under those probabilities.  We’ll walk through an example here to make it more clear.</p>
+<p>Let’s start by reloading the hypothetical dataset we considered from the start of the chapter on admissions into NYU.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nyu_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;nyu_admission_fake.csv&#39;</span><span class="p">)</span>
+<span class="n">nyu_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>student</th>
+      <th>gpa</th>
+      <th>admit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3.085283</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0.083008</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2.534593</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2.995216</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1.994028</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>0.899187</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>0.792251</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>3.042123</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>0.676443</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>0.353359</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10</td>
+      <td>2.741439</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>11</td>
+      <td>3.813573</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>12</td>
+      <td>0.015793</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>13</td>
+      <td>2.048769</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>14</td>
+      <td>3.250484</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>15</td>
+      <td>2.450104</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>16</td>
+      <td>2.887021</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>17</td>
+      <td>1.167504</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>18</td>
+      <td>3.671096</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>19</td>
+      <td>2.858303</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>20</td>
+      <td>2.170177</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21</td>
+      <td>0.568680</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>22</td>
+      <td>1.493363</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>23</td>
+      <td>2.696534</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>24</td>
+      <td>1.767333</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>25</td>
+      <td>1.736056</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>26</td>
+      <td>2.471068</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>27</td>
+      <td>2.052553</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>28</td>
+      <td>2.601589</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>29</td>
+      <td>2.404156</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>30</td>
+      <td>3.220893</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>31</td>
+      <td>2.086589</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>32</td>
+      <td>3.634596</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>33</td>
+      <td>1.276944</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>34</td>
+      <td>0.361837</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>35</td>
+      <td>1.202800</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>36</td>
+      <td>0.455937</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>37</td>
+      <td>3.314725</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>38</td>
+      <td>0.187585</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>39</td>
+      <td>2.505149</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now lets plot the admission decision as a function of high school GPA:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gpa&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;admit&#39;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;admit&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">nyu_df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-logisticregression_55_0.png" src="../../_images/00-logisticregression_55_0.png" />
+</div>
+</div>
+<p>As expected that data on the y-axis fall into a dichtomous variable, but generally it looks like a higher GPA makes it more likely you are admitted.</p>
+<p>As mentioned before we actually will be fitting the line not in the space of <span class="math notranslate nohighlight">\(p(admitted)\)</span> but in the <em>log odds</em> of being admitted (i.e., <span class="math notranslate nohighlight">\(log(p/1-p)\)</span>).</p>
+<p>To begin with let’s propose a particular linear regression line in the log-odds space.  To do this we need to chose values of the slope and intercept for the line.  For now lets just throw out a first pass of setting the slope to 2.0 and the intercept to -3.  Just like how when we started with linear regression we said we could try particular values of the parameters of the line and kind of “wiggle” them around to find a proper setting.</p>
+<p>So here is our line plotted in log-odds space:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">4.0</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;high school gpa&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;log odds of admissions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-logisticregression_58_0.png" src="../../_images/00-logisticregression_58_0.png" />
+</div>
+</div>
+<p>Rather than compute the residuals (as above we said those were all infinite).  Instead what we do is project the data onto our log odds line to compute the predicted log odds of admissions for each data point under our current linear regression model.  Then we transform this back into probability space as shown in the following figure:</p>
+<img src="images/logodd-transform.png"><p>The panel on the right show a proposed line in our log odds space.  This function is used to get a predicted log odds value for each data point (only four are shown here through the linear projection).  Then the log odds value is converted into a probability using the equation shown</p>
+<p><span class="math notranslate nohighlight">\(
+p = \frac{e^{log(odds)}}{1+e^{log(odds)}}
+\)</span></p>
+<p>which is basically just an inversion of the logic we used above to get the log odds in the first place.  We can then plot this in the original probability space (left panel) and it has this nice sigmoid shape which looks like a roughly nice fit to the data at least to start.</p>
+<p>The reason it looks nice is that it assigned higher probability to admissions when the GPA is higher.  Of course it misses a few cases for example the person with the extremely low GPA who still was admitted and the few cases of a very high GPA where people still were not admitted.</p>
+<div class="admonition-inverting-the-log-odds admonition">
+<p class="admonition-title">Inverting the log odds</p>
+<p>For those that want more proof about the equation for converting log odds into probabilities…</p>
+<p>We started with defining log odds as:
+<span class="math notranslate nohighlight">\(
+log(\frac{\pi}{1-\pi}) = log(odds)
+\)</span></p>
+<p>first exponentiate both sides
+<span class="math notranslate nohighlight">\(
+\frac{\pi}{1-\pi} = e^{log(odds)}
+\)</span></p>
+<p>then multiply both sides by <span class="math notranslate nohighlight">\((1-\pi)\)</span>:
+<span class="math notranslate nohighlight">\(
+\pi = (1-\pi)*e^{log(odds)}
+\)</span></p>
+<p>then distribute the <span class="math notranslate nohighlight">\(e^{log(odds)}\)</span>:
+<span class="math notranslate nohighlight">\(
+\pi = (e^{log(odds)}-\pi*e^{log(odds)})
+\)</span></p>
+<p>move one term to the other side:
+<span class="math notranslate nohighlight">\(
+\pi + \pi*e^{log(odds)} = e^{log(odds)}
+\)</span></p>
+<p>pull the <span class="math notranslate nohighlight">\(\pi\)</span> out:</p>
+<p><span class="math notranslate nohighlight">\(
+\pi * (1 + e^{log(odds)}) = e^{log(odds)}
+\)</span></p>
+<p>then divide both sides:
+<span class="math notranslate nohighlight">\(
+\pi = \frac{e^{log(odds)}}{(1 + e^{log(odds)})}
+\)</span></p>
+</div>
+<p>Let’s try this with python.  So our linear equation is <span class="math notranslate nohighlight">\(y = 2.0*x-3\)</span> in log odds space.  So we can use this to get a predicted log odd for each student.  We will add this as a new column to our dataframe:</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;log_odds&#39;</span><span class="p">]</span><span class="o">=</span><span class="mf">2.0</span><span class="o">*</span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;gpa&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">3</span>
+<span class="n">nyu_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>student</th>
+      <th>gpa</th>
+      <th>admit</th>
+      <th>log_odds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3.085283</td>
+      <td>1</td>
+      <td>3.170565</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0.083008</td>
+      <td>0</td>
+      <td>-2.833984</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2.534593</td>
+      <td>1</td>
+      <td>2.069186</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2.995216</td>
+      <td>1</td>
+      <td>2.990431</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1.994028</td>
+      <td>0</td>
+      <td>0.988056</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>0.899187</td>
+      <td>0</td>
+      <td>-1.201627</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>0.792251</td>
+      <td>0</td>
+      <td>-1.415497</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>3.042123</td>
+      <td>1</td>
+      <td>3.084246</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>0.676443</td>
+      <td>0</td>
+      <td>-1.647113</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>0.353359</td>
+      <td>0</td>
+      <td>-2.293281</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10</td>
+      <td>2.741439</td>
+      <td>1</td>
+      <td>2.482879</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>11</td>
+      <td>3.813573</td>
+      <td>1</td>
+      <td>4.627147</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>12</td>
+      <td>0.015793</td>
+      <td>0</td>
+      <td>-2.968414</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>13</td>
+      <td>2.048769</td>
+      <td>0</td>
+      <td>1.097538</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>14</td>
+      <td>3.250484</td>
+      <td>1</td>
+      <td>3.500968</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>15</td>
+      <td>2.450104</td>
+      <td>0</td>
+      <td>1.900209</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>16</td>
+      <td>2.887021</td>
+      <td>0</td>
+      <td>2.774043</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>17</td>
+      <td>1.167504</td>
+      <td>0</td>
+      <td>-0.664991</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>18</td>
+      <td>3.671096</td>
+      <td>1</td>
+      <td>4.342193</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>19</td>
+      <td>2.858303</td>
+      <td>1</td>
+      <td>2.716606</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>20</td>
+      <td>2.170177</td>
+      <td>1</td>
+      <td>1.340355</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21</td>
+      <td>0.568680</td>
+      <td>0</td>
+      <td>-1.862640</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>22</td>
+      <td>1.493363</td>
+      <td>0</td>
+      <td>-0.013274</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>23</td>
+      <td>2.696534</td>
+      <td>1</td>
+      <td>2.393069</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>24</td>
+      <td>1.767333</td>
+      <td>0</td>
+      <td>0.534665</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>25</td>
+      <td>1.736056</td>
+      <td>0</td>
+      <td>0.472112</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>26</td>
+      <td>2.471068</td>
+      <td>1</td>
+      <td>1.942136</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>27</td>
+      <td>2.052553</td>
+      <td>0</td>
+      <td>1.105106</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>28</td>
+      <td>2.601589</td>
+      <td>1</td>
+      <td>2.203177</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>29</td>
+      <td>2.404156</td>
+      <td>0</td>
+      <td>1.808312</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>30</td>
+      <td>3.220893</td>
+      <td>1</td>
+      <td>3.441786</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>31</td>
+      <td>2.086589</td>
+      <td>0</td>
+      <td>1.173177</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>32</td>
+      <td>3.634596</td>
+      <td>1</td>
+      <td>4.269191</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>33</td>
+      <td>1.276944</td>
+      <td>0</td>
+      <td>-0.446111</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>34</td>
+      <td>0.361837</td>
+      <td>0</td>
+      <td>-2.276325</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>35</td>
+      <td>1.202800</td>
+      <td>0</td>
+      <td>-0.594400</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>36</td>
+      <td>0.455937</td>
+      <td>0</td>
+      <td>-2.088125</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>37</td>
+      <td>3.314725</td>
+      <td>1</td>
+      <td>3.629451</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>38</td>
+      <td>0.187585</td>
+      <td>0</td>
+      <td>-2.624829</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>39</td>
+      <td>2.505149</td>
+      <td>1</td>
+      <td>2.010297</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Next we want to convert the log-odds into a probability using the equation we just described.  Let’s make a new column for “predicted probability”:</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;pred_p&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;log_odds&#39;</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;log_odds&#39;</span><span class="p">]))</span>
+<span class="n">nyu_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>student</th>
+      <th>gpa</th>
+      <th>admit</th>
+      <th>log_odds</th>
+      <th>pred_p</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3.085283</td>
+      <td>1</td>
+      <td>3.170565</td>
+      <td>0.959711</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0.083008</td>
+      <td>0</td>
+      <td>-2.833984</td>
+      <td>0.055515</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2.534593</td>
+      <td>1</td>
+      <td>2.069186</td>
+      <td>0.887872</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>2.995216</td>
+      <td>1</td>
+      <td>2.990431</td>
+      <td>0.952140</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1.994028</td>
+      <td>0</td>
+      <td>0.988056</td>
+      <td>0.728704</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>0.899187</td>
+      <td>0</td>
+      <td>-1.201627</td>
+      <td>0.231186</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>0.792251</td>
+      <td>0</td>
+      <td>-1.415497</td>
+      <td>0.195368</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>3.042123</td>
+      <td>1</td>
+      <td>3.084246</td>
+      <td>0.956238</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>0.676443</td>
+      <td>0</td>
+      <td>-1.647113</td>
+      <td>0.161499</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>0.353359</td>
+      <td>0</td>
+      <td>-2.293281</td>
+      <td>0.091681</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10</td>
+      <td>2.741439</td>
+      <td>1</td>
+      <td>2.482879</td>
+      <td>0.922933</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>11</td>
+      <td>3.813573</td>
+      <td>1</td>
+      <td>4.627147</td>
+      <td>0.990312</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>12</td>
+      <td>0.015793</td>
+      <td>0</td>
+      <td>-2.968414</td>
+      <td>0.048873</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>13</td>
+      <td>2.048769</td>
+      <td>0</td>
+      <td>1.097538</td>
+      <td>0.749799</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>14</td>
+      <td>3.250484</td>
+      <td>1</td>
+      <td>3.500968</td>
+      <td>0.970715</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>15</td>
+      <td>2.450104</td>
+      <td>0</td>
+      <td>1.900209</td>
+      <td>0.869915</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>16</td>
+      <td>2.887021</td>
+      <td>0</td>
+      <td>2.774043</td>
+      <td>0.941257</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>17</td>
+      <td>1.167504</td>
+      <td>0</td>
+      <td>-0.664991</td>
+      <td>0.339619</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>18</td>
+      <td>3.671096</td>
+      <td>1</td>
+      <td>4.342193</td>
+      <td>0.987159</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>19</td>
+      <td>2.858303</td>
+      <td>1</td>
+      <td>2.716606</td>
+      <td>0.937999</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>20</td>
+      <td>2.170177</td>
+      <td>1</td>
+      <td>1.340355</td>
+      <td>0.792548</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>21</td>
+      <td>0.568680</td>
+      <td>0</td>
+      <td>-1.862640</td>
+      <td>0.134396</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>22</td>
+      <td>1.493363</td>
+      <td>0</td>
+      <td>-0.013274</td>
+      <td>0.496682</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>23</td>
+      <td>2.696534</td>
+      <td>1</td>
+      <td>2.393069</td>
+      <td>0.916297</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>24</td>
+      <td>1.767333</td>
+      <td>0</td>
+      <td>0.534665</td>
+      <td>0.630571</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>25</td>
+      <td>1.736056</td>
+      <td>0</td>
+      <td>0.472112</td>
+      <td>0.615884</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>26</td>
+      <td>2.471068</td>
+      <td>1</td>
+      <td>1.942136</td>
+      <td>0.874587</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>27</td>
+      <td>2.052553</td>
+      <td>0</td>
+      <td>1.105106</td>
+      <td>0.751216</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>28</td>
+      <td>2.601589</td>
+      <td>1</td>
+      <td>2.203177</td>
+      <td>0.900534</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>29</td>
+      <td>2.404156</td>
+      <td>0</td>
+      <td>1.808312</td>
+      <td>0.859158</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>30</td>
+      <td>3.220893</td>
+      <td>1</td>
+      <td>3.441786</td>
+      <td>0.968985</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>31</td>
+      <td>2.086589</td>
+      <td>0</td>
+      <td>1.173177</td>
+      <td>0.763719</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>32</td>
+      <td>3.634596</td>
+      <td>1</td>
+      <td>4.269191</td>
+      <td>0.986200</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>33</td>
+      <td>1.276944</td>
+      <td>0</td>
+      <td>-0.446111</td>
+      <td>0.390286</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>34</td>
+      <td>0.361837</td>
+      <td>0</td>
+      <td>-2.276325</td>
+      <td>0.093103</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>35</td>
+      <td>1.202800</td>
+      <td>0</td>
+      <td>-0.594400</td>
+      <td>0.355626</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>36</td>
+      <td>0.455937</td>
+      <td>0</td>
+      <td>-2.088125</td>
+      <td>0.110256</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>37</td>
+      <td>3.314725</td>
+      <td>1</td>
+      <td>3.629451</td>
+      <td>0.974155</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>38</td>
+      <td>0.187585</td>
+      <td>0</td>
+      <td>-2.624829</td>
+      <td>0.067557</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>39</td>
+      <td>2.505149</td>
+      <td>1</td>
+      <td>2.010297</td>
+      <td>0.881874</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Ok now we can plot our predicted probabilities along with the actual data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">4.0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gpa&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;pred_p&#39;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;admit&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">nyu_df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;k--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x12daa4048&gt;]
+</pre></div>
+</div>
+<img alt="../../_images/00-logisticregression_68_1.png" src="../../_images/00-logisticregression_68_1.png" />
+</div>
+</div>
+<p>The line here is the logistic fit of our model and the colored dots show the data.  The overall fit looks reasonable because it is giving a high predicted probability (<code class="docutils literal notranslate"><span class="pre">pred_p</span></code>) to people who were admitted.  However, is this the best we can do?  To search for better parameters we need a way to “score” how good of a fit to the data this is.  We can use this using likelihood.  So lets compute the likelihood of the data given this particular logistic curve.</p>
+<div class="section" id="intuition-of-computing-the-likelihood">
+<h3><span class="section-number">15.6.1. </span>Intuition of computing the likelihood<a class="headerlink" href="#intuition-of-computing-the-likelihood" title="Permalink to this headline">¶</a></h3>
+<p>There are more formal approaches to defining maximum likelihood estimation but lets just use intuition here.  We can think of a binary prediction as predicting the outcome of a coin toss.  If we have a fair coin (i.e., one that has equal probability of heads and tails) then the probability of say “heads” is 0.5 on a single flip.  We can consider this probability the <em>likelihood</em> of getting a heads.</p>
+<img src="./images/coinflip.png" width="150">
+<p>Let’s write this down using some notation to make it easier to build up.  We will call the underlying probability of getting a heads <span class="math notranslate nohighlight">\(\theta\)</span> and we assume with a fair coin this is 0.5.  Now we can talk about the <em>likelihood</em> of getting a particular event or data <span class="math notranslate nohighlight">\(d\)</span>.  For instance the probability of getting a single coin flip to turn up heads could written:</p>
+<p><span class="math notranslate nohighlight">\(
+p(d=heads|\theta = 0.5)=\theta = 0.5
+\)</span></p>
+<p>Notice the <code class="docutils literal notranslate"><span class="pre">|</span></code> symbol in the equation which means “given”.  So what this simple line says is the probability of getting our “data” to be a single heads given the underlying probability of getting heads is 0.5 is, you guessed it, 0.5.</p>
+<p>How about if the coin flip came up tails?  Then we would have:</p>
+<p><span class="math notranslate nohighlight">\(
+p(d=tails|\theta = 0.5) = (1-\theta) = 0.5
+\)</span></p>
+<p>We talk about the expressions here <span class="math notranslate nohighlight">\(p(d|\theta)\)</span> as the <em>likelihood</em> of the event.</p>
+<p>Ok, what if <span class="math notranslate nohighlight">\(\theta\)</span> was different than 0.5?  Imagine a coin was a trick coin that was somehow modified to be slightly heavier on one side it might bias it to one or another outcome.  For example, imagine we change the coin so that it has a 0.7 probability of getting heads.  Then if we see a heads from this coin the <em>likelihood</em> of this event is 0.7 (i.e., <span class="math notranslate nohighlight">\(\theta=0.7\)</span>).  In contrast if we flip a tails the probability/likelihood of that events is (1-0.7)=0.3.  In other words, the likelihood of getting a tails is 0.3.  Formally</p>
+<p><span class="math notranslate nohighlight">\(
+p(d=heads|\theta = 0.7)=\theta = 0.7
+\)</span></p>
+<p>and</p>
+<p><span class="math notranslate nohighlight">\(
+p(d=tails|\theta = 0.7) = (1-\theta) = 0.3
+\)</span></p>
+<p>So the probability of a binary event like heads/tails is a function of the outcome and the probability we assigned to that outcome.</p>
+<p>Now, where this all comes together is that we can think of the <code class="docutils literal notranslate"><span class="pre">pred_p</span></code> value we just computed as the probability assigned to each student of being admitted. In other words <code class="docutils literal notranslate"><span class="pre">pred_p</span></code> is the <span class="math notranslate nohighlight">\(\theta\)</span> on this coin.   Imagine our model predict that student <span class="math notranslate nohighlight">\(s\)</span> has a 0.76 probability of getting into NYU given their GPA.  If they <em>do</em> get in then:</p>
+<p><span class="math notranslate nohighlight">\(
+p(d_s=admit_s | \theta_s=0.76) = 0.76
+\)</span></p>
+<p>and if they don’t get in we assign that a lower probability of happening given their GPA</p>
+<p><span class="math notranslate nohighlight">\(
+p(d_s=reject_s | \theta_s=0.76) = 0.24
+\)</span></p>
+<p>This is where the regression element come in.  We want to move the parameters of our regression line to that we <strong>maximize the likelihood</strong> of the data.  Meaning, we want to try to assign higher probabilities to things that happened and low probabilities to things that didn’t.  Our main limitation here is that we are using the sigmoid function and so generally we have this kind of s-shaped squiggle and we want to adjust it to match the data.  In an ideal case we could assign <code class="docutils literal notranslate"><span class="pre">pred_p</span></code> = 1.0 to only the student who were admitted and <code class="docutils literal notranslate"><span class="pre">pred_p</span></code>=0.0 to all the students who were not admitted only based on their GPA.  This is difficult because in our dataset there doesn’t appear to be some GPA threshold that was used for admissions, so all we can do is see that admission probabilities go up somewhat with higher GPA but we don’t know exactly how to fit this.</p>
+<p>So, to summarize where we are so far, we understand that the logistic regression curve will assign a “probability” of some event happening to each item in our dataset (using the mechanics of linear regression in log-odd space and so forth).  We want to try “wiggling” the parameters of the regression around so that we assign high probabilities to things that actually happen (i.e., students who were admitted) and low probabilities to things that didn’t actually happen (i.e., students who were not admitted).  Our hands are tied in one way which is that since we are using a logistic regression model we generally can only adjust this s-shaped probability curve.</p>
+</div>
+<div class="section" id="fitting-all-the-data-with-the-joint-likelihood">
+<h3><span class="section-number">15.6.2. </span>Fitting all the data with the joint likelihood<a class="headerlink" href="#fitting-all-the-data-with-the-joint-likelihood" title="Permalink to this headline">¶</a></h3>
+<p>Ok but there is still two pieces missing.  The first is how do we assess <em>all</em> the students at once.  The model predicts a logodds for each student in our data set, which we convert to a probability.  But then we want to do this for all the students in our data set together.  In other words we aren’t assessing the probability of one coin event we are doing it for all the coin flips associated with each student in our dataset.  Luckily the probability of a bunch of independent data is simply the multiplication of all the probabilities (you can read it in your head as what is the probability of student 1 having such and such outcome <strong>AND</strong> student 2 having such and such outcome <strong>AND</strong> student 3 having such and such outcome, etc…).</p>
+<p>Let’s denote the entire dataset as a capital <span class="math notranslate nohighlight">\(D\)</span> (as opposed to the small <span class="math notranslate nohighlight">\(d\)</span> we used for the individual data points).  Then</p>
+<p><span class="math notranslate nohighlight">\(
+p(D|model) = p(d_0 | \theta_{0,model}) * p(d_1 | \theta_{1,model}) * p(d_2 | \theta_{2,model}) ...
+\)</span></p>
+<p>here <span class="math notranslate nohighlight">\(\theta_{0,model}\)</span> means the probability that student 0 is admitted given the current regression model. If student was admitted we set the probability of that student’s outcome equal to the the probability the logistic model assigned.  If a student was not admitted, but we assigned a high probability then we set probability of them <em>not</em> being admitted is 1-<code class="docutils literal notranslate"><span class="pre">pred_p</span></code>.  This gives us the likelihood of a single data point/student given our logistic regression model.  We can write more simply like this:</p>
+<p><span class="math notranslate nohighlight">\(
+p(D|model) = \prod_s p(d_s | \theta_{s,model})
+\)</span></p>
+<p>However, more often we are interested in the log likelihood (logs really do show up a lot in this chapter!).  The log of the likelihood is nice because if we multiply a bunch of small probabilities together, Python can often return a numeric error.  Thus if we first take the log, we can instead add the numbers up.  So we end up with</p>
+<p><span class="math notranslate nohighlight">\(
+log(p(D|model)) = log(p(d_0 | \theta_{0,model})) + log(p(d_1 | \theta_{1,model})) + log(p(d_2 | \theta_{2,model})) + ...
+\)</span></p>
+<p>which can be written:</p>
+<p><span class="math notranslate nohighlight">\(
+log(p(D|model)) = \sum_s log(p(d_s | \theta_{s,model}))
+\)</span></p>
+<p>So the log likelihood in this formula plays a similar role to the least-squares error we used in standard regression.  We want to maximize this value (meaning increase the likelihood of the data given the model) by adjusting the parameters of our logistic regression.</p>
+<p>Before computing this by hand, let’s just think about a few consequences for some simple data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;student&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;outcome&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;probability&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]})</span>
+<span class="n">example_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>student</th>
+      <th>outcome</th>
+      <th>probability</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In this example data set we have six students, a binary ‘outcome’ measure, and a probability which we could assume come from some model like our logistic regression.  We want to know the likelihood of the outcomes given these probabilities.  If you look at the data closely you can see that the model is perfect… is assign 1.0 probability to each case where the actual outcome was 1 and 0 to the cases where the outcome was 0.  This is the best possible model.  What is the <span class="math notranslate nohighlight">\(log(p(D|model))\)</span>?</p>
+<p>First lets consider the cases where the outcome was 1, take the log of the probability column and add them up:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">part1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">example_df</span><span class="p">[</span><span class="n">example_df</span><span class="p">[</span><span class="s1">&#39;outcome&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;probability&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">part1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, lets do the same thing for the case where the outcome was 0.  However here we need to take the log of 1-probability because our model is predicting when the outcome will occur:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">part2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">example_df</span><span class="p">[</span><span class="n">example_df</span><span class="p">[</span><span class="s1">&#39;outcome&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;probability&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">part2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we just add these two value together to get the total log likelihood of the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alright so the log likelihood here is zero, which is the best we can possibly hope for.  To convert this back to a probability we just raise it to e:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>And so we can see the probabilty of the data given the model is 1.0 which means the data are <strong>certain</strong> under the model.  Wow!  Great job.</p>
+<p>Let’s consider another case where instead of getting the probabilities perfectly right we get them perfectly wrong (assign high probability to events that don’t happen and low probability to events that do):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;student&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;outcome&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;probability&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example_df</span><span class="p">)</span>
+<span class="n">part1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">example_df</span><span class="p">[</span><span class="n">example_df</span><span class="p">[</span><span class="s1">&#39;outcome&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;probability&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">part2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">example_df</span><span class="p">[</span><span class="n">example_df</span><span class="p">[</span><span class="s1">&#39;outcome&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;probability&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;log likelihood is: </span><span class="si">{</span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;likelihood is: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   student  outcome  probability
+0        1        0            1
+1        2        0            1
+2        3        0            1
+3        4        1            0
+4        5        1            0
+5        6        1            0
+log likelihood is: -inf
+likelihood is: 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>I did all the calculations this time in one cell block so step through and make sure you understand the output.  Notice how the log likelihood is negative infinity in this case (very far from zero which was the maximum we saw in the previous example).</p>
+<p>One final case where the model is really unsure and so just assigns 0.5 probability to everyone:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example_df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;student&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;outcome&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;probability&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example_df</span><span class="p">)</span>
+<span class="n">part1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">example_df</span><span class="p">[</span><span class="n">example_df</span><span class="p">[</span><span class="s1">&#39;outcome&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;probability&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">part2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">example_df</span><span class="p">[</span><span class="n">example_df</span><span class="p">[</span><span class="s1">&#39;outcome&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;probability&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;log likelihood is: </span><span class="si">{</span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;likelihood is: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   student  outcome  probability
+0        1        0          0.5
+1        2        0          0.5
+2        3        0          0.5
+3        4        1          0.5
+4        5        1          0.5
+5        6        1          0.5
+log likelihood is: -4.1588830833596715
+likelihood is: 0.015625000000000007
+</pre></div>
+</div>
+</div>
+</div>
+<p>So you can see there is log likelihood is -4.16 and the overall likelihood of the data remains low (0.015).  This shows how different assignments of probabilities to the data implies different likelihoods and therefore “fits”.  Let’s try it now for our regression model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">part1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nyu_df</span><span class="p">[</span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;admit&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;pred_p&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">part2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">nyu_df</span><span class="p">[</span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;admit&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;pred_p&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;log likelihood is: </span><span class="si">{</span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;likelihood is: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">part1</span><span class="o">+</span><span class="n">part2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log likelihood is: -52.62649758803535
+likelihood is: 1.395090867057656e-23
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok so here the log likelihood is -52.626.  Can we do better?  To try we need to adjust the parameters our regression to find ones that give a higher (less negative) log likelihood.</p>
+<p>As you know now we could search around for better parameters by hand (or write our own python function to do this) but it turns out the statistical packages for Python provide a simple way to fit these models so in the next section we will learn to use them.</p>
+<div class="admonition-followup-video admonition">
+<p class="admonition-title">Followup video</p>
+<p>This is a great and instructive video about maximum likelihood estimation: <a class="reference external" href="https://www.youtube.com/watch?v=BfKanl1aSG0">https://www.youtube.com/watch?v=BfKanl1aSG0</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="fitting-logistic-regression-models">
+<h2><span class="section-number">15.7. </span>Fitting logistic regression models<a class="headerlink" href="#fitting-logistic-regression-models" title="Permalink to this headline">¶</a></h2>
+<p>There are several packages that provide logistic regression fitting and summarizing routines in Python.  The one most similar to what we learned about with linear regression is <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> and so we will begin there.  However, later we will also quickly learn how to use <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> a machine learning package because of some of the issue we will explore later in the chapter.</p>
+<p>Let’s perform the logistic regression on the NYU admissions data.  It operates similar to the ordinary least square (OLS) regression.  We need to first import two modules from the <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> package.  Instead of <code class="docutils literal notranslate"><span class="pre">smf.ols()</span></code> which we used for OLS regression we just change the command to <code class="docutils literal notranslate"><span class="pre">smf.logit()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="n">logitfit</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;admit ~ gpa&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nyu_df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">logitfit</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.213802
+         Iterations 9
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>         <td>admit</td>      <th>  No. Observations:  </th>  <td>    40</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    38</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     1</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Tue, 05 Jan 2021</td> <th>  Pseudo R-squ.:     </th>  <td>0.6864</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>10:45:16</td>     <th>  Log-Likelihood:    </th> <td> -8.5521</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -27.274</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>9.406e-10</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>  -12.4491</td> <td>    4.842</td> <td>   -2.571</td> <td> 0.010</td> <td>  -21.939</td> <td>   -2.959</td>
+</tr>
+<tr>
+  <th>gpa</th>       <td>    5.1953</td> <td>    1.970</td> <td>    2.637</td> <td> 0.008</td> <td>    1.334</td> <td>    9.057</td>
+</tr>
+</table><br/><br/>Possibly complete quasi-separation: A fraction 0.17 of observations can be<br/>perfectly predicted. This might indicate that there is complete<br/>quasi-separation. In this case some parameters will not be identified.</div></div>
+</div>
+<p>A couple of notes here, about the output.  First notice the output <code class="docutils literal notranslate"><span class="pre">summary()</span></code> provides include the <code class="docutils literal notranslate"><span class="pre">Log-likelihood</span></code> which is -8.551.  This is a much better (larger) likelihood than the -52.626 we found by hand above and is not surprising because the parameters we used earlier we just randomly chosen and were not “fit” with any particular goal in mind.</p>
+</div>
+<div class="section" id="interpreting-the-fits">
+<h2><span class="section-number">15.8. </span>Interpreting the fits<a class="headerlink" href="#interpreting-the-fits" title="Permalink to this headline">¶</a></h2>
+<p>Fitting a logistic regression is fun but pointless unless we are going to interpret the fit of the model!  We learned about interpreting the coefficients, corresponding hypothesis tests, and issues in overall model fit in the chapter on linear regression.  In order to provide the same interpretation to a logistic regression we need to learn a few other things because the interpretation is a little different.</p>
+<div class="section" id="interpretting-overall-fit-quality">
+<h3><span class="section-number">15.8.1. </span>Interpretting overall fit quality<a class="headerlink" href="#interpretting-overall-fit-quality" title="Permalink to this headline">¶</a></h3>
+<p>If you remember from our discussion about linear regression, the first question we had after fitting a model is “Is this model any good?”  To answer that we turned to the <span class="math notranslate nohighlight">\(R^2\)</span> value which computes the percentage of the total variation in the output explained by the regression model.  To do this we compared the total sum of squared error of the “output” variables around their mean to the residuals from the linear regression line.  However, as the above discussion about <strong>fitting</strong> the logistic regression model anticipates, we can’t count on standard residuals in this case because they are infinite in the log-odds space.</p>
+<p>Instead there are several different metrics that people use to assess how “well” a logistic regression model accounts for a data set.  Perhaps the most common is pseudo-<span class="math notranslate nohighlight">\(R^2\)</span> which is a measure of the proportional log odds improvement of the fitted logistic regression compared to a model which only includes an intercept but no slope.</p>
+<p>You can see that in the regression we did above the pseudo-<span class="math notranslate nohighlight">\(R^2\)</span> value is 0.6864.  Generally speaking we want this value to be closer to 1.0 than to 0.0.  The formula for this value (also known as McFadden’s pseudo-<span class="math notranslate nohighlight">\(R^2\)</span>) is:</p>
+<p><span class="math notranslate nohighlight">\(
+R^2 = 1 - \frac{ln L(M_{full})}{ln L(M_{null})}
+\)</span></p>
+<p>here the term <span class="math notranslate nohighlight">\(L(M_{null})\)</span> refers to the likelihood of a model with only an intercept term but not slope.  This is computed already for us in the output of the <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> <code class="docutils literal notranslate"><span class="pre">logit()</span></code> fitting routine (see <code class="docutils literal notranslate"><span class="pre">LL-null</span></code> in the output).</p>
+<p>so in our case:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_sq</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mf">8.5521</span><span class="o">/-</span><span class="mf">27.274</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r_sq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6864376329104642
+</pre></div>
+</div>
+</div>
+</div>
+<p>which is exactly what we found for the pseudo-<span class="math notranslate nohighlight">\(R^2\)</span>.</p>
+<p>You can easily prove to yourself that <code class="docutils literal notranslate"><span class="pre">LL-null</span></code> in the output corresponds to a model with no slope by fitting such a model yourself:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logitfit</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;admit ~ 1&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nyu_df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">logitfit</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.681855
+         Iterations 4
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>         <td>admit</td>      <th>  No. Observations:  </th>  <td>    40</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    39</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     0</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Sun, 24 Jan 2021</td> <th>  Pseudo R-squ.:     </th> <td>1.708e-10</td>
+</tr>
+<tr>
+  <th>Time:</th>                <td>00:54:25</td>     <th>  Log-Likelihood:    </th> <td> -27.274</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -27.274</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th>  <td>   nan</td>  
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -0.3023</td> <td>    0.320</td> <td>   -0.945</td> <td> 0.345</td> <td>   -0.929</td> <td>    0.325</td>
+</tr>
+</table></div></div>
+</div>
+<p>Note that in this case the <code class="docutils literal notranslate"><span class="pre">Log-likelihood</span></code> and <code class="docutils literal notranslate"><span class="pre">LL-null</span></code> is the same thing.</p>
+<p>Although pseudo-<span class="math notranslate nohighlight">\(R^2\)</span> has a similar profile to the <span class="math notranslate nohighlight">\(R^2\)</span> we considered with OLS regression, the interpretation is a little more complex.  As a result, people often prefer a different measure of how good a logistic regression model “fits.”</p>
+<p>One very natural one is just to see how accurate the model is.  Imagine we find the model’s predicted probability for each data point.  Then we assume that anytime <span class="math notranslate nohighlight">\(p&gt;=0.5\)</span> we should guess “yes” and anytime is it <span class="math notranslate nohighlight">\(p&lt;0.5\)</span> we should predict “no”.  We can compare these guesses from the model to the actual data we fitted to to obtain a within-sample accuracy score.  Ideally we would want this number to be high (closer to one) and a model that, even after fitting, is getting a low accuracy would be a sign that the data is either very noisy or not a good fit to the logistic.</p>
+<p>Let’s try this for the example above:</p>
+<p>First we fit the model like above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="n">logitfit</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="s1">&#39;admit ~ gpa&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nyu_df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">logitfit</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimization terminated successfully.
+         Current function value: 0.213802
+         Iterations 9
+</pre></div>
+</div>
+<div class="output text_html"><table class="simpletable">
+<caption>Logit Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>         <td>admit</td>      <th>  No. Observations:  </th>  <td>    40</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>Logit</td>      <th>  Df Residuals:      </th>  <td>    38</td>  
+</tr>
+<tr>
+  <th>Method:</th>                 <td>MLE</td>       <th>  Df Model:          </th>  <td>     1</td>  
+</tr>
+<tr>
+  <th>Date:</th>            <td>Mon, 25 Jan 2021</td> <th>  Pseudo R-squ.:     </th>  <td>0.6864</td>  
+</tr>
+<tr>
+  <th>Time:</th>                <td>14:35:59</td>     <th>  Log-Likelihood:    </th> <td> -8.5521</td> 
+</tr>
+<tr>
+  <th>converged:</th>             <td>True</td>       <th>  LL-Null:           </th> <td> -27.274</td> 
+</tr>
+<tr>
+  <th>Covariance Type:</th>     <td>nonrobust</td>    <th>  LLR p-value:       </th> <td>9.406e-10</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>  -12.4491</td> <td>    4.842</td> <td>   -2.571</td> <td> 0.010</td> <td>  -21.939</td> <td>   -2.959</td>
+</tr>
+<tr>
+  <th>gpa</th>       <td>    5.1953</td> <td>    1.970</td> <td>    2.637</td> <td> 0.008</td> <td>    1.334</td> <td>    9.057</td>
+</tr>
+</table><br/><br/>Possibly complete quasi-separation: A fraction 0.17 of observations can be<br/>perfectly predicted. This might indicate that there is complete<br/>quasi-separation. In this case some parameters will not be identified.</div></div>
+</div>
+<p>then we just find the predictions for each data point using <code class="docutils literal notranslate"><span class="pre">logitfit.predict()</span></code> and see which of these are greated at 0.5.  Then are compare that the the <code class="docutils literal notranslate"><span class="pre">admit</span></code> column of our fitted nyu dataset and compute the mean.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">nyu_df</span><span class="p">[</span><span class="s1">&#39;admit&#39;</span><span class="p">]</span><span class="o">==</span><span class="p">(</span><span class="n">logitfit</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span><span class="o">&gt;=</span><span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this we find that the accuracy is 90% which is a good sign.  However, there is a risk with an accuracy score like this being too optimistic about how good of a model we have.  We’ll discuss the issues in evaluating the predictive performance of a model on the data it was fitted to below.</p>
+</div>
+<div class="section" id="interpretting-coefficients">
+<h3><span class="section-number">15.8.2. </span>Interpretting coefficients<a class="headerlink" href="#interpretting-coefficients" title="Permalink to this headline">¶</a></h3>
+<p>As we did for linear regression, we can also try to interpret the meaning of the fitted regression coefficients in a logistic regression model.    The interpretation of these terms is less straight forward than in regular linear regression because of the nonlinearity introduced by the sigmoid.  Usually we like to talk about how the regression coefficient means for each single unit increase in the input variable there is a corresponding increase in the output prediction.  However, the increase in predicted probability is nonlinear in a logistic regression.  A unit increase in some areas of the input space might result in a larger increase than a increase in a region closer to 0 or 1.</p>
+<p>One important thing to note about the typical output of the regression, and the approach used by <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> is that the coefficients are the ones of the linear regression in the log-odds space rather than in the original probability space.  For example, in the grade example above the intercept is -12.4491.  This means that if a person had a zero GPA, they would have a very negative log odds of being admitted to NYU.  Unfortunately the deck would be stacked against you in that case.  The standard error and z-score are what is used to compute a probability for the hypothesis test that this intercept is different than zero.  In this example we are able to reject that null hypothesis because the p value is 0.01. Typically the intercept is ignored in logistic regression, except in special cases.</p>
+<p>The estimated slope is 5.1953.  This means that for every one GPA unit gained the log odds of being admitted to NYU increases by 5.1953.  Again the output includes a hypothesis test on the coefficient asking if this is significantly different than zero (and we reject the null hypothesis of a zero slope because the p-value is 0.008 which is less than 0.05).</p>
+<p>Interpreting changes in the output prediction in terms of log odds can be difficult, and people often prefer directly in terms of probabilities (which is possible via the transformations described above).  However, due to the nonlinearity of the logistic function, the rate of change is highest near the inflection or turning point (which is near the mean of the output data) because that is the part that has the highest tangent (i.e., first derivative).  Thus often people report the change in the probability of the outcome variable as a function of the maximum possible change (basically an upper estimate of what it could be) by using the derivative at this point.  I won’t go into the details of that here, but the book on regression by Gelman and Hill provides a useful starting point.</p>
+</div>
+</div>
+<div class="section" id="logistic-regression-for-a-discrete-variable">
+<h2><span class="section-number">15.9. </span>Logistic regression for a discrete variable<a class="headerlink" href="#logistic-regression-for-a-discrete-variable" title="Permalink to this headline">¶</a></h2>
+<p>In the previous example we have focused on fitting a logistic regression model where the input predictor was continuous (gpa) and the output was discrete (accepted to NYU or not).  Another interesting use of logistic regression is to model a discrete variable, such as would be the case when predicting the effect of a experimental treatment.  For example, imagine we did an experiment where we randomly assigned high school students to a college-entrance tutoring course or to a course on improving writing skills and were are interested in which treatment results in more students being admitted to college.</p>
+</div>
+<div class="section" id="classification">
+<h2><span class="section-number">15.10. </span>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="summary">
+<h2><span class="section-number">15.11. </span>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Ok, we’ve come a long way and covered a lot of the details about regression, perhaps more than you will need for the labs but hopefully something you can come back and refer to sometime in the future.</p>
+<p>We covered:</p>
+<ul class="simple">
+<li><p>Basic ideas in linear regression and how regression models are estimated.</p></li>
+<li><p>Multiple linear regression.</p></li>
+<li><p>Measuring the overall performance of a regression model using <span class="math notranslate nohighlight">\(R^2\)</span></p></li>
+<li><p>Hypothesis tests for regression models</p></li>
+<li><p>Calculating confidence intervals for regression coefficients, and standardised coefficients</p></li>
+<li><p>The assumptions of regression and how to check them</p></li>
+<li><p>Selecting a regression model (aka variable selection)</p></li>
+</ul>
+</div>
+<div class="section" id="further-reading">
+<h2><span class="section-number">15.12. </span>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.dataschool.io/guide-to-logistic-regression/">Guide to an in-depth understanding of logistic regression</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=yIYKR4sgzI8">StatQuest: Logistic Regression</a> - nice youtube channel on many stats concepts</p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=BfKanl1aSG0">StatQuest: Maximum Likelihood</a></p></li>
+<li><p><a class="reference external" href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/">Interpreting odds ratio in logistic regression</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/14"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../13/00-linearregression.html" title="previous page"><span class="section-number">14. </span>Linear regression</a>
+    <a class='right-next' id="next-link" href="../15/00-mixed-effect.html" title="next page"><span class="section-number">16. </span>Linear Mixed Effect Modeling</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

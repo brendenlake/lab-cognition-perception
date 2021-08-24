@@ -1,0 +1,1492 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>16. Linear Mixed Effect Modeling &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="17. Mental Imagery, Mental Simulation, and Mental Rotation" href="../16/00-mentalsimulation.html" />
+    <link rel="prev" title="15. Logistic regression" href="../14/00-logisticregression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/chapters/15/00-mixed-effect.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/chapters/15/00-mixed-effect.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-case-example-bounce-time-from-a-website">
+   16.1. An case example: Bounce time from a website
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-linear-regression">
+   16.2. Simple Linear Regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quick-review-of-simple-linear-regression">
+     16.2.1. Quick Review of Simple Linear Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separate-linear-regression">
+   16.3. Separate Linear Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modelling-county-as-a-fixed-effect">
+   16.4. Modelling county as a fixed effect
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixed-effects-models">
+   16.5. Mixed effects models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fixed-vs-random">
+     16.5.1. Fixed vs random?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fitting-our-mixed-effect-lm">
+     16.5.2. Fitting our mixed effect lm
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="linear-mixed-effect-modeling">
+<h1><span class="section-number">16. </span>Linear Mixed Effect Modeling<a class="headerlink" href="#linear-mixed-effect-modeling" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This chapter written by <a class="reference external" href="http://gureckislab.org/~gureckis">Todd Gureckis</a> who adapted it from Gabriela K Hajduk and the University of Edinburgh <a class="reference external" href="https://ourcodingclub.github.io">coding club</a> tutorial on Mixed Effect Linear Models and the <a class="reference external" href="https://www.kaggle.com/ojwatson/mixed-models/comments">mixed models</a> Kaggle notebook by <a class="reference external" href="https://www.kaggle.com/ojwatson">OJ Watson</a>.  The former is release under CC BY-SA 4.0, the latter under the <a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a> license.  The text is a mashup of these two resources with various editing to connect to the rest of the book for the current class.  The notebook released under the <span class="xref myst">license</span> for the book.</p>
+</div>
+<p>The goal in this chapter is to introduce <strong><em>linear mixed effect</em></strong> modeling (aka LME).  Linear mixed effect models are among the most useful in psychological science.  While previous chapters explore the virtues of linear modeling (e.g., linear regression), this chapter deals with a very common scenario where different observations might fall into various subgroups.  For example, we might have data that are trials in an experiment which are grouped into which subject they came from.  The subjects might be grouped by which condition of an experiment they were assigned to or how old they are.  Linear mixed effect models are an useful tool for analyzing these types of data because they help to minimize the number of independent tests that are performed across groups (the multiple comparison problem) while also helping to ensure that the data is not broken into many small group (lowering power).</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import modules needed</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">sklearn</span> <span class="k">as</span> <span class="nn">sk</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Caption</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig_no</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">c_type</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig_no</span> <span class="o">=</span> <span class="n">fig_no</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="k">if</span> <span class="n">c_type</span><span class="o">==</span><span class="s1">&#39;t&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c_type</span> <span class="o">=</span> <span class="s1">&#39;Table&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c_type</span> <span class="o">=</span> <span class="s1">&#39;Figure&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">alert alert-info</span><span class="se">\&quot;</span><span class="s2"> role=</span><span class="se">\&quot;</span><span class="s2">alert</span><span class="se">\&quot;</span><span class="s2">&gt;&lt;b&gt;</span><span class="si">{</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_type</span> <span class="si">}</span><span class="s2"> </span><span class="si">{</span> <span class="bp">self</span><span class="o">.</span><span class="n">fig_no</span> <span class="si">}</span><span class="s2">&lt;/b&gt;. </span><span class="si">{</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="si">}</span><span class="s2">&lt;/div&gt;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="an-case-example-bounce-time-from-a-website">
+<h2><span class="section-number">16.1. </span>An case example: Bounce time from a website<a class="headerlink" href="#an-case-example-bounce-time-from-a-website" title="Permalink to this headline">¶</a></h2>
+<p>Rather than starting with a bunch of equations and terms lets just start with an intuitive example.  We will start by analyzing a dataset (from Kaggle) that looks at the bounce times of users of a website with cooking recipes. The bounce time is a measure of how quickly someone leaves a website, e.g. the number of seconds after which a user first accesses a webpage from the website and then leaves. The phrase bounce is like when you are at a party and the cops show up: “let’s bounce.”</p>
+<p>Most websites want individuals to stay on their websites for a long time as they are more likely to read another article, buy one of their products, click on some of the sponsored links etc. As such, it can be useful to understand why some users leave the website quicker than others.</p>
+<p>To investigate the bounce time of the website, we chose three locations in 8 counties in England, and got members of the public of all ages to undertake a survey/test questionaire. In the test we asked them to use our search engine to query for something they want to eat this evening. The search engine listed our website first, as well as other websites that would be returned. The users that clicked on our website were then timed and their bounce time recorded. We also recorded their age, and made a note of the county and location.</p>
+<p>We have been asked by the website to work out if younger individuals are more likely to leave the website quicker.</p>
+<p>Let’s begin by reading in the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read in our data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://gureckislab.org/courses/spring20/labincp/data/bounce.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bounce_time</th>
+      <th>age</th>
+      <th>county</th>
+      <th>location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>165.548520</td>
+      <td>16</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>167.559314</td>
+      <td>34</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>165.882952</td>
+      <td>6</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>167.685525</td>
+      <td>19</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>169.959681</td>
+      <td>34</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>168.688747</td>
+      <td>47</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>169.619382</td>
+      <td>7</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>164.416273</td>
+      <td>8</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>167.510430</td>
+      <td>8</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>179.606068</td>
+      <td>7</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>174.465485</td>
+      <td>40</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>164.781248</td>
+      <td>38</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>172.559467</td>
+      <td>23</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>179.000774</td>
+      <td>7</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>175.970409</td>
+      <td>18</td>
+      <td>devon</td>
+      <td>a</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As we can see, there is the bounce time in seconds, the age of the person, the county they live in, and there is a location code for the place the person was recruited inside the county.  Let’s take the approach of kind of exploring the data with descriptive statistics and plots to get a sense of what is going on.</p>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the distribution of the bounce times - this creates the object that will be plotted when matplotlib.pyplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">bounce_time</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Caption</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Histogram showing how many seconds people spent on the website.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_6_0.png" src="../../_images/00-mixed-effect_6_0.png" />
+<div class="output text_html"><div class="alert alert-info" role="alert"><b>Figure 1.0</b>. Histogram showing how many seconds people spent on the website.</div></div></div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the distribution of the ages</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Caption</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;Histogram showing the ages of people who took part in the marketing study.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_7_0.png" src="../../_images/00-mixed-effect_7_0.png" />
+<div class="output text_html"><div class="alert alert-info" role="alert"><b>Figure 2.0</b>. Histogram showing the ages of people who took part in the marketing study.</div></div></div>
+</div>
+<p>Before we carry on it is often a good idea to <strong>scale</strong> our independent (explanatory) variables so that they are <strong>standardised</strong>. This is useful as it means that any estimated coefficient from our regression model later on are all on the same scale. So, for our dataset this would be the age, and let’s create a new variable called <strong>age_scaled</strong>, which is the age scaled to have zero mean and unit variance (the z-score):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># lets use the scale function from the preprocess package within sklearn</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;age_scaled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We discussed z-scores in a previous chapter including how to compute them in python.  Here we use the scikit-learn package, a machine learning toolkit, which has a helpful scaling function built-in <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.scale.html">see here for full documentation</a>.</p>
+<p>This scaling won’t impact the statistical findings in our example but you may find in more complex models than the one in this tutorial this can be very helpful in speeding up your models fitting. It is also makes comparison between a continous variable like age, and a binary variable (0, 1) more fair.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the scaled distribution</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">age_scaled</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Caption</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="s2">&quot;Histogram showing the z-scored ages of people who took part in the marketing study.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_11_0.png" src="../../_images/00-mixed-effect_11_0.png" />
+<div class="output text_html"><div class="alert alert-info" role="alert"><b>Figure 3.0</b>. Histogram showing the z-scored ages of people who took part in the marketing study.</div></div></div>
+</div>
+</div>
+<div class="section" id="simple-linear-regression">
+<h2><span class="section-number">16.2. </span>Simple Linear Regression<a class="headerlink" href="#simple-linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>One thing we might want to do to see if the bounce time is dependent on the age is to plot this data, and then fit a linear regression to the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s use the lmplot function within seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;bounce_time&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x12ec0a390&gt;
+</pre></div>
+</div>
+<img alt="../../_images/00-mixed-effect_14_1.png" src="../../_images/00-mixed-effect_14_1.png" />
+</div>
+</div>
+<p>It would seem, from this simple analysis that older people do spend longer time on the website. To go into this further let’s look at what the coefficients estimated are within our linear model.</p>
+<div class="section" id="quick-review-of-simple-linear-regression">
+<h3><span class="section-number">16.2.1. </span>Quick Review of Simple Linear Regression<a class="headerlink" href="#quick-review-of-simple-linear-regression" title="Permalink to this headline">¶</a></h3>
+<p>We will start with the most familiar linear regression, a straight-line fit to data.
+A straight-line fit is a model of the form</p>
+<div class="math notranslate nohighlight">
+\[
+y = b_0 + b_1x 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(b_1\)</span> is commonly known as the <em>gradient</em>, and <span class="math notranslate nohighlight">\(b_0\)</span> is commonly known as the <em>intercept</em>. So for our dataset, <code class="docutils literal notranslate"><span class="pre">y</span></code> would be the bounce time, <code class="docutils literal notranslate"><span class="pre">x</span></code> their age, <code class="docutils literal notranslate"><span class="pre">b_1</span></code> the rate of change of the bounce time with respect to <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">b_0</span></code> the intercept when <code class="docutils literal notranslate"><span class="pre">age</span></code> is 0.</p>
+<div class="math notranslate nohighlight">
+\[
+time = b_0 + b_1age
+\]</div>
+<p>We can use Scikit-Learn’s <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> estimator to fit this data and construct the best-fit line:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="c1"># construct our linear regression model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">age_scaled</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">bounce_time</span>
+
+<span class="c1"># fit our model to the data</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># and let&#39;s plot what this relationship looks like </span>
+<span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">yfit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xfit</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_18_0.png" src="../../_images/00-mixed-effect_18_0.png" />
+</div>
+</div>
+<p>We can have a look at these parameters within the model object, with the relevant parameters being <code class="docutils literal notranslate"><span class="pre">coef_</span></code> and <code class="docutils literal notranslate"><span class="pre">intercept_</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model slope:    &quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model intercept:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model slope:     6.279602007970818
+Model intercept: 201.31646151854164
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># and let&#39;s store the rmse</span>
+<span class="n">y_predict</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">RMSE</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(((</span><span class="n">y</span><span class="o">-</span><span class="n">y_predict</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;Method&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Linear Regression&quot;</span><span class="p">]</span>
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;RMSE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">RMSE</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Method</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Linear Regression</td>
+      <td>14.928334</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>So from this we would say quite confidently that as age increases so does the bounce time. (To test if this increase is significant see the take home challenge 1.)</p>
+<p>However, to run a linear regression a number of assumptions about the data need to be met. One of these is that the residuals are <strong>homoscedastic</strong>, which means that the residuals are normally distributed in relation to the predicted value, i.e. are our predictions equally bad (or good) across our predicted values. We can look at this by plotting the residuals, using my new favourite package yellowbrick:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!conda install -c districtdatalabs yellowbrick</span>
+<span class="kn">import</span> <span class="nn">yellowbrick</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<span class="kn">from</span> <span class="nn">yellowbrick.regressor</span> <span class="kn">import</span> <span class="n">ResidualsPlot</span>
+
+<span class="c1"># Instantiate the linear model and visualizer</span>
+<span class="n">visualizer</span> <span class="o">=</span> <span class="n">ResidualsPlot</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">)</span>
+
+<span class="n">visualizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># Fit the training data to the model</span>
+<span class="n">visualizer</span><span class="o">.</span><span class="n">poof</span><span class="p">()</span>                    <span class="c1"># Draw/show/poof the data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_23_0.png" src="../../_images/00-mixed-effect_23_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x120cd49e8&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Actually not toooooo bad - you could say that there are more positive residuals than negative residuals at the highest and lowest predicted value ranges, e.g. predicted value &lt; 195, and &gt;210 there are more positive residuals than negative. You can have a look at this also using seaborn’s <code class="docutils literal notranslate"><span class="pre">residplot</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;age_scaled&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="s2">&quot;bounce_time&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">lowess</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Observed - Prediction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_25_0.png" src="../../_images/00-mixed-effect_25_0.png" />
+</div>
+</div>
+<p>Okay, so perhaps its not ideal…</p>
+<p>Let’s check some of the other assumptions. For a good list of the assumptions (with code in R), have a look here http://r-statistics.co/Assumptions-of-Linear-Regression.html.</p>
+<p>One of the other key assumption is that the observations of our data are independent of the other data. When we collected our data we were doing it in 8 different counties and in 3 locations within each county. So we could check this by comparing the bounce times for each county. To do this let’s use one of the categorical plots in seaborn:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;county&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bounce_time&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">kind</span> <span class="o">=</span> <span class="s2">&quot;swarm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x120ac7f98&gt;
+</pre></div>
+</div>
+<img alt="../../_images/00-mixed-effect_27_1.png" src="../../_images/00-mixed-effect_27_1.png" />
+</div>
+</div>
+<p>Ah… clearly there is substantial grouping - us Londoners seem to have short attention spans (maybe…). So we can definitely say that our data is not independent, and thus it is inappropriate to use a linear model for this data.</p>
+<p>What next? Well maybe we could do a separate regression for each county.</p>
+</div>
+</div>
+<div class="section" id="separate-linear-regression">
+<h2><span class="section-number">16.3. </span>Separate Linear Regression<a class="headerlink" href="#separate-linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>Same as before, we are going to fit a linear regression to the data, but first separating it by county. Mathematically, this now looks like:</p>
+<div class="math notranslate nohighlight">
+\[
+time_c = b_{c0} + b_{c1}age
+\]</div>
+<p>where the subscript <em>c</em> here represents the county. As a result we will be estimating 8 different intercept and 8 different gradients, one for each county. Let’s have a look at that using the facet grid options within <code class="docutils literal notranslate"><span class="pre">sns.lmplot</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s use the lmplot function within seaborn</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;age_scaled&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;bounce_time&quot;</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;county&quot;</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">col_wrap</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_31_0.png" src="../../_images/00-mixed-effect_31_0.png" />
+</div>
+</div>
+<p>So now we have 8 different analyses. This is fine, but we have started to reduce our sample size a lot already as a result, and we are now perhaps going too far in the other direction from before. Before we were saying that all counties were identical, whereas here we are saying that the impact of <code class="docutils literal notranslate"><span class="pre">age</span></code> on <code class="docutils literal notranslate"><span class="pre">bounce_time</span></code> share no similarities between counties, which is probably again not true.</p>
+<p>In addition, what about our location variable, maybe our data is also not independent when looking at location. Let’s have a look at this too, using a swarm plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bounce_time&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;county&quot;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">kind</span> <span class="o">=</span> <span class="s2">&quot;swarm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x1215b46d8&gt;
+</pre></div>
+</div>
+<img alt="../../_images/00-mixed-effect_33_1.png" src="../../_images/00-mixed-effect_33_1.png" />
+</div>
+</div>
+<p>So we could carry on and then do an individual regression for each location within each county… hopefully you can see why we can’t always just do an individual regression for each new group. If we did we would have to to estimate a slope and intercept parameter for each regression. That’s two parameters, three locations and eight counties, which means 48 parameter estimates (2 x 3 x 8 = 48).</p>
+<p>Also we would now be taking our nice dataset of 480 observations, that presumably took a long time to collect, and effectively reducing it to lots of sample sizes of 20. This really decreases our statistical power, and thus also increases our chances of a Type I Error (where you falsely reject the null hypothesis) by carrying out multiple comparisons.</p>
+<p>So what could we do? Well we could modify the model to account for the different counties, and add it to our linear model.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="modelling-county-as-a-fixed-effect">
+<h2><span class="section-number">16.4. </span>Modelling county as a fixed effect<a class="headerlink" href="#modelling-county-as-a-fixed-effect" title="Permalink to this headline">¶</a></h2>
+<p>One way to incorporate the impact of county is to bring the county in to our equation for the linear model by treating it as a fixed effect. This would look like:</p>
+<div class="math notranslate nohighlight">
+\[
+time_{c_{i}} = b_{0} + b_{1}age + c_i
+\]</div>
+<p>i.e. each county has it’s own additional term that wil change the intercept. To model this we will need to alter our dataframe to encode our counties as numeric variables. So we will use <strong>one-hot encoding</strong>, where we will make a new column for each county:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a new data frame with one hot encoded columns for the counties</span>
+<span class="n">counties</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">county</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">data_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">county</span><span class="p">)],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data_new</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bounce_time</th>
+      <th>age</th>
+      <th>county</th>
+      <th>location</th>
+      <th>age_scaled</th>
+      <th>cheshire</th>
+      <th>cumbria</th>
+      <th>devon</th>
+      <th>dorset</th>
+      <th>essex</th>
+      <th>kent</th>
+      <th>london</th>
+      <th>norfolk</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>165.548520</td>
+      <td>16</td>
+      <td>devon</td>
+      <td>a</td>
+      <td>-1.512654</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>167.559314</td>
+      <td>34</td>
+      <td>devon</td>
+      <td>a</td>
+      <td>-0.722871</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>165.882952</td>
+      <td>6</td>
+      <td>devon</td>
+      <td>a</td>
+      <td>-1.951423</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>167.685525</td>
+      <td>19</td>
+      <td>devon</td>
+      <td>a</td>
+      <td>-1.381024</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>169.959681</td>
+      <td>34</td>
+      <td>devon</td>
+      <td>a</td>
+      <td>-0.722871</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct our linear regression model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="s2">&quot;age_scaled&quot;</span><span class="p">],</span><span class="n">counties</span><span class="p">))]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">bounce_time</span>
+
+<span class="c1"># fit our model to the data</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># and let&#39;s plot what this relationship looks like </span>
+<span class="n">visualizer</span> <span class="o">=</span> <span class="n">ResidualsPlot</span><span class="p">(</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">)</span>
+<span class="n">visualizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># Fit the training data to the model</span>
+<span class="n">visualizer</span><span class="o">.</span><span class="n">poof</span><span class="p">()</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_37_0.png" src="../../_images/00-mixed-effect_37_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x122101390&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># and let&#39;s plot the predictions</span>
+<span class="n">performance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;residuals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">bounce_time</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;age_scaled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">age_scaled</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;predicted&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;age_scaled&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;residuals&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">performance</span><span class="p">,</span> <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Observed - Prediction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_38_0.png" src="../../_images/00-mixed-effect_38_0.png" />
+</div>
+</div>
+<p>The residuals are much better than before, being more evenly distributed with respect to age, and if we look at the predictions with each county:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_new</span><span class="p">[</span><span class="s2">&quot;y_predict&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;age_scaled&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;y_predict&quot;</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s2">&quot;county&quot;</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">col_wrap</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">data_new</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x122766f60&gt;
+</pre></div>
+</div>
+<img alt="../../_images/00-mixed-effect_40_1.png" src="../../_images/00-mixed-effect_40_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># and let&#39;s store the rmse</span>
+<span class="n">y_predict</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">RMSE</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(((</span><span class="n">y</span><span class="o">-</span><span class="n">y_predict</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span> <span class="n">RMSE</span><span class="p">]</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Method</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Linear Regression</td>
+      <td>14.928334</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Fixed</td>
+      <td>8.563396</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we can se that the coefficient for the gradient given to age is substantially smaller, and is likely no longer significant. Let’s just check that by making a table of the coefficients:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># coefficient for age and the counties</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="s2">&quot;age_scaled&quot;</span><span class="p">],</span><span class="n">counties</span><span class="p">)),</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>age_scaled</td>
+      <td>0.048782</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>devon</td>
+      <td>-21.381957</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cumbria</td>
+      <td>9.391460</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>norfolk</td>
+      <td>9.824419</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>kent</td>
+      <td>7.938668</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>dorset</td>
+      <td>-2.079637</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>london</td>
+      <td>-21.437323</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>cheshire</td>
+      <td>18.372916</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>essex</td>
+      <td>-0.628546</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>But what model have we actually fitted here? Is it what we wanted to investigate initially? The  model is estimating the difference in bounce times between the counties now as well, and we aren’t actually interested in that. If you were then this is correct to do so, but the website company just wanted to know whether age affects the bounce times. And by including county in we are obscuring this. So to look at the impact of age on bounce times we need to control for the variation between the different counties (as well as between the locations). So to do that, we have to treat our counties as <strong>random effects</strong>, and build a <strong>mixed effect model</strong>!</p>
+</div>
+<div class="section" id="mixed-effects-models">
+<h2><span class="section-number">16.5. </span>Mixed effects models<a class="headerlink" href="#mixed-effects-models" title="Permalink to this headline">¶</a></h2>
+<p>As we have discussed above, a mixed effects model is ideal here as it will allow us to both use all the data we have (higher sample size) and better acknowledge the correlations between data coming from the counties and locations. We will also estimate fewer parameters and avoid problems with multiple comparisons that we would encounter while using separate regressions.</p>
+<p>So in this model we treat our <code class="docutils literal notranslate"><span class="pre">age</span></code>, which is what we are interested in, as a <strong>fixed effect</strong>, and <code class="docutils literal notranslate"><span class="pre">county</span></code> and <code class="docutils literal notranslate"><span class="pre">location</span></code> as a <strong>random effect</strong>.</p>
+<p>But what does that mean? Well it’s sort of a middle ground here between assuming our coefficient for the gradient and intercept are all the same (what we did in the first regression) and assuming they are all independent and different. If we look back at our equations, we now may assume that while <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> are different for each county, the coefficients all come from a common group distribution, such as a normal distribution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+time_c = b_{c0} + b_{c1}.age  \\ \\
+b_{c0} \sim N(\mu_{b_0}, \sigma^2_{b_0}) \\
+b_{c1} \sim N(\mu_{b_1}, \sigma^2_{b_1})
+\end{align*}
+\end{split}\]</div>
+<p>So we now assume the intercepts <span class="math notranslate nohighlight">\(b_0\)</span> and gradients <span class="math notranslate nohighlight">\(b_1\)</span>  come from a normal distribution centered around their respective group mean <span class="math notranslate nohighlight">\(\mu\)</span> with a certain standard deviation <span class="math notranslate nohighlight">\(\sigma^2\)</span>, the values of which we also estimate.</p>
+<div class="section" id="fixed-vs-random">
+<h3><span class="section-number">16.5.1. </span>Fixed vs random?<a class="headerlink" href="#fixed-vs-random" title="Permalink to this headline">¶</a></h3>
+<p>So what makes a variable a fixed or random effect. Hmmm, it’s tricky and there are lots of answers out there. In brief, we view fixed effects as the variables that we are interested in. We wanted to know about age so we recorded data on that and wanted to see how it impacted the response variable. County was not we were interested in, but we recorded it as we were aware that our sampling methodology could lead to clustering in our data that could invalidate the linear model from before. If we hadn’t recorded that someone who was given this dataset to analyse may have incorrectly said that  age was an important predictor of bounce rate.</p>
+<p>Random effects are often our groups we are trying to control for, like county in our example. In particualr twe control for counties when we have not exhausted all the available groups - we only had 8 counties in England. If we wanted to make predicitons about the counties, then we would have tried to sample them better firstly, and also treat them as a fixed effect.</p>
+<p>Further reading for those who want a better answer!:</p>
+<p>https://dynamicecology.wordpress.com/2015/11/04/is-it-a-fixed-or-random-effect/</p>
+<p>And see the discussion in the paper linked in the take home challenge 3.</p>
+</div>
+<div class="section" id="fitting-our-mixed-effect-lm">
+<h3><span class="section-number">16.5.2. </span>Fitting our mixed effect lm<a class="headerlink" href="#fitting-our-mixed-effect-lm" title="Permalink to this headline">¶</a></h3>
+<p>We will now fit our model using the <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> library. In this initial model we will look at how the bounce time relates to the scaled ages, while controlling for the impact of counties by allowing for a random intercept for each country, i.e. we are saying that each county has its own random intercept but that the slopes are still the same with respect to age.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="c1"># construct our model, with our county now shown as a group</span>
+<span class="n">md</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mixedlm</span><span class="p">(</span><span class="s2">&quot;bounce_time ~ age_scaled&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;county&quot;</span><span class="p">])</span>
+<span class="n">mdf</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mdf</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Mixed Linear Model Regression Results
+=========================================================
+Model:            MixedLM Dependent Variable: bounce_time
+No. Observations: 480     Method:             REML       
+No. Groups:       8       Scale:              74.7350    
+Min. group size:  60      Log-Likelihood:     -1733.0397 
+Max. group size:  60      Converged:          Yes        
+Mean group size:  60.0                                   
+---------------------------------------------------------
+             Coef.  Std.Err.   z    P&gt;|z|  [0.025  0.975]
+---------------------------------------------------------
+Intercept   201.316    5.175 38.902 0.000 191.174 211.459
+age_scaled    0.136    0.612  0.221 0.825  -1.065   1.336
+Group Var   212.999   13.382                             
+=========================================================
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this summary of the model, we can clearly see that the <code class="docutils literal notranslate"><span class="pre">age_scaled</span></code> is having a more noticable impact than in the fixed model earlier (coefficient of 0.136 rather than 0.048), however, importantly it is still not significantly different to 0, with the 95% interval for this coefficient spanning -1.065 - 1.336.</p>
+<p>And let’s look at the predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># and let&#39;s plot the predictions</span>
+<span class="n">performance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;residuals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">values</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;age_scaled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">age_scaled</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;predicted&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;predicted&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;residuals&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x12d68ee80&gt;
+</pre></div>
+</div>
+<img alt="../../_images/00-mixed-effect_50_1.png" src="../../_images/00-mixed-effect_50_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;age_scaled&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;residuals&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">performance</span><span class="p">,</span> <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Observed - Prediction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_51_0.png" src="../../_images/00-mixed-effect_51_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># and let&#39;s store the rmse</span>
+<span class="n">y_predict</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">fittedvalues</span>
+<span class="n">RMSE</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(((</span><span class="n">y</span><span class="o">-</span><span class="n">y_predict</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mixed&quot;</span><span class="p">,</span> <span class="n">RMSE</span><span class="p">]</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-8-f30f57c37e0b&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># and let&#39;s store the rmse</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">y_predict</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">fittedvalues</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">RMSE</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(((</span><span class="n">y</span><span class="o">-</span><span class="n">y_predict</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mixed&quot;</span><span class="p">,</span> <span class="n">RMSE</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">results</span>
+
+<span class="ne">NameError</span>: name &#39;y&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Huh, that’s strange - it’s very similar. In fact the residuals plot looks alomst identical to the previous one where we were treating the county as a fixed effect. Why?</p>
+<p>Well, have a think about what we have actually just implemented. All we have done is say in the last one that the county has a randome intercept, but the same slope. This is very similar to the fixed effect approach, where county was included as a term that would impact the intercept. All we have changed is sayng that the intercepts for each county are probably drawn from a similar distribution. To ensure that each county has its own random slope we need to include this in our random effects forumla, like so:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct our model, but this time we will have a random interecept AND a random slope with respect to age</span>
+<span class="n">md</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">mixedlm</span><span class="p">(</span><span class="s2">&quot;bounce_time ~ age_scaled&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;county&quot;</span><span class="p">],</span> <span class="n">re_formula</span><span class="o">=</span><span class="s2">&quot;~age_scaled&quot;</span><span class="p">)</span>
+<span class="n">mdf</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mdf</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/gureckis/.virtualenvs/science/lib/python3.7/site-packages/statsmodels/base/model.py:568: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  ConvergenceWarning)
+/Users/gureckis/.virtualenvs/science/lib/python3.7/site-packages/statsmodels/regression/mixed_linear_model.py:2202: ConvergenceWarning: Retrying MixedLM optimization with lbfgs
+  ConvergenceWarning)
+/Users/gureckis/.virtualenvs/science/lib/python3.7/site-packages/statsmodels/base/model.py:568: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  ConvergenceWarning)
+/Users/gureckis/.virtualenvs/science/lib/python3.7/site-packages/statsmodels/regression/mixed_linear_model.py:2202: ConvergenceWarning: Retrying MixedLM optimization with cg
+  ConvergenceWarning)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               Mixed Linear Model Regression Results
+====================================================================
+Model:                 MixedLM    Dependent Variable:    bounce_time
+No. Observations:      480        Method:                REML       
+No. Groups:            8          Scale:                 72.8722    
+Min. group size:       60         Log-Likelihood:        -1733.3946 
+Max. group size:       60         Converged:             No         
+Mean group size:       60.0                                         
+--------------------------------------------------------------------
+                        Coef.  Std.Err.   z    P&gt;|z|  [0.025  0.975]
+--------------------------------------------------------------------
+Intercept              202.140    8.356 24.190 0.000 185.762 218.518
+age_scaled               0.161    1.196  0.134 0.893  -2.184   2.505
+Group Var              558.143                                      
+Group x age_scaled Cov -51.614                                      
+age_scaled Var           8.621                                      
+====================================================================
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/gureckis/.virtualenvs/science/lib/python3.7/site-packages/statsmodels/base/model.py:568: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+  ConvergenceWarning)
+/Users/gureckis/.virtualenvs/science/lib/python3.7/site-packages/statsmodels/regression/mixed_linear_model.py:2206: ConvergenceWarning: MixedLM optimization failed, trying a different optimizer may help.
+  warnings.warn(msg, ConvergenceWarning)
+/Users/gureckis/.virtualenvs/science/lib/python3.7/site-packages/statsmodels/regression/mixed_linear_model.py:2218: ConvergenceWarning: Gradient optimization failed, |grad| = 7.170191
+  warnings.warn(msg, ConvergenceWarning)
+/Users/gureckis/.virtualenvs/science/lib/python3.7/site-packages/statsmodels/regression/mixed_linear_model.py:2261: ConvergenceWarning: The Hessian matrix at the estimated parameter values is not positive definite.
+  warnings.warn(msg, ConvergenceWarning)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># and let&#39;s plot the predictions</span>
+<span class="n">performance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;residuals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">resid</span><span class="o">.</span><span class="n">values</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;age_scaled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">age_scaled</span>
+<span class="n">performance</span><span class="p">[</span><span class="s2">&quot;predicted&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;predicted&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;residuals&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">performance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x12d83b780&gt;
+</pre></div>
+</div>
+<img alt="../../_images/00-mixed-effect_55_1.png" src="../../_images/00-mixed-effect_55_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;age_scaled&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;residuals&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">performance</span><span class="p">,</span> <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Observed - Prediction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/00-mixed-effect_56_0.png" src="../../_images/00-mixed-effect_56_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># and let&#39;s store the rmse</span>
+<span class="n">y_predict</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">fittedvalues</span>
+<span class="n">RMSE</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(((</span><span class="n">y</span><span class="o">-</span><span class="n">y_predict</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mixed_Random_Slopes&quot;</span><span class="p">,</span> <span class="n">RMSE</span><span class="p">]</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-12-416cac127395&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># and let&#39;s store the rmse</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">y_predict</span> <span class="o">=</span> <span class="n">mdf</span><span class="o">.</span><span class="n">fittedvalues</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">RMSE</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(((</span><span class="n">y</span><span class="o">-</span><span class="n">y_predict</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mixed_Random_Slopes&quot;</span><span class="p">,</span> <span class="n">RMSE</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">results</span>
+
+<span class="ne">NameError</span>: name &#39;y&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>So our mixed model with the random slopes is now performing much better, with our residuals much better ditributed. Crucially though, we can see that age does not impact the bounce rate, with the confidence intervals for the gradient with respect to age spanning -2.184 - 2.505 after we have controlled for the random variation caused by the county properly, i.e. with a random slope and intercept.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--------------------------------------------------------------------------</span>
+                              <span class="n">Coef</span><span class="o">.</span>  <span class="n">Std</span><span class="o">.</span><span class="n">Err</span><span class="o">.</span>   <span class="n">z</span>    <span class="n">P</span><span class="o">&gt;|</span><span class="n">z</span><span class="o">|</span>  <span class="p">[</span><span class="mf">0.025</span>  <span class="mf">0.975</span><span class="p">]</span>
+<span class="o">--------------------------------------------------------------------------</span>
+<span class="n">Intercept</span>                    <span class="mf">202.140</span>    <span class="mf">8.356</span> <span class="mf">24.190</span> <span class="mf">0.000</span> <span class="mf">185.762</span> <span class="mf">218.518</span>
+<span class="n">age_scaled</span>                     <span class="mf">0.161</span>    <span class="mf">1.196</span>  <span class="mf">0.134</span> <span class="mf">0.893</span>  <span class="o">-</span><span class="mf">2.184</span>   <span class="mf">2.505</span>
+<span class="n">Intercept</span> <span class="n">RE</span>                 <span class="mf">558.143</span>                              
+<span class="n">Intercept</span> <span class="n">RE</span> <span class="n">x</span> <span class="n">age_scaled</span> <span class="n">RE</span> <span class="o">-</span><span class="mf">51.614</span>                                 
+<span class="n">age_scaled</span> <span class="n">RE</span>                  <span class="mf">8.621</span>                                      
+<span class="o">==========================================================================</span>
+</pre></div>
+</div>
+<p>What we have seen in our data was that individuals in certain counties took longer on the website, and that they happened to also be old. However, to get to this distinction we had to first treat county as a random effect. But what about location? Eh? Forgot about that. See the take home material 4. for that one.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters/15"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../14/00-logisticregression.html" title="previous page"><span class="section-number">15. </span>Logistic regression</a>
+    <a class='right-next' id="next-link" href="../16/00-mentalsimulation.html" title="next page"><span class="section-number">17. </span>Mental Imagery, Mental Simulation, and Mental Rotation</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

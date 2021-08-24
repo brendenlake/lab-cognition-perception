@@ -1,0 +1,1406 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework 2 - Python for data analysis &#8212; Lab in C&amp;P (Fall 2021)</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nyustyle.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/artificialintelligence.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Lab in C&P (Fall 2021)</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Overview
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../course-content/schedule.html">
+   Schedule
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://edstem.org/us/courses/8295/discussion/">
+   EdStem
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Textbook
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/00/00-cogsci.html">
+   1. What is Cognitive Science and how do we study it?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/01/00-whystats.html">
+   2. Why do we have to learn statistics?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/02/00-jupyter.html">
+   3. Introduction to Jupyter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/03/00-python.html">
+   4. Intro to Python for Psychology Undergrads
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/04/00-researchdesign.html">
+   5. A brief introduction to research design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/05/00-data.html">
+   6. The Format and Structure of Digital Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/06/00-plots.html">
+   7. Visualizing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/07/00-describingdata.html">
+   8. Describing Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/08/01-sampling.html">
+   9. Samples, populations and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/09/00-hypothesistesting.html">
+   10. Hypothesis testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/10/00-ttest.html">
+   11. Comparing one or two means
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/11/00-inferences-from-behavior.html">
+   12. Measuring Behavior
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/21/00-ethics-irb.html">
+   13. Research Ethics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/13/00-linearregression.html">
+   14. Linear regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/14/00-logisticregression.html">
+   15. Logistic regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/15/00-mixed-effect.html">
+   16. Linear Mixed Effect Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/16/00-mentalsimulation.html">
+   17. Mental Imagery, Mental Simulation, and Mental Rotation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/17/00-mri.html">
+   18. Magnetic Resonance Imaging
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/24/00-what-next.html">
+   19. What Next?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Labs &amp; Homeworks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../chapters/00/cogsci-ica.html">
+   Intro to CogSci ICA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../homeworks/Homework1.html">
+   Intro to Jupyter (HW1)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tips &amp; Tricks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/pythonresources.html">
+   Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/plottingresources.html">
+   Plotting in Python Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/fortyforloops.html">
+   Intro to For loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/nyu-jupyterhub.html">
+   NYU JupyterHub Setup
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../tips/ultimate-guide-ttest-python.html">
+   Ultimate t-test guide
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../LICENSE.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/archive-homeworks-last-year/hw2/Homework2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        <a class="jupyterhub-button" href="https://psychua-46-fall.rcnyu.org//hub/user-redirect/git-pull?repo=https://github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/archive-homeworks-last-year/hw2/Homework2.ipynb&branch=master"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch JupyterHub" data-toggle="tooltip"
+                data-placement="left"><img class="jupyterhub-button-logo"
+                    src="../../_static/images/logo_jupyterhub.svg"
+                    alt="Interact on JupyterHub">JupyterHub</button></a>
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importing-libraries">
+   Importing libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-data-dealing-with-lists-and-dictionaries">
+   Getting Data, Dealing with Lists and Dictionaries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-loops-and-other-ways-to-repeat-things">
+   For loops and other ways to repeat things
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-numbers">
+   Random numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pandas-and-data-frames">
+   Pandas and Data Frames
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#course-feedback">
+   Course feedback
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#turning-in-homeworks">
+   Turning in homeworks
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="homework-2-python-for-data-analysis">
+<h1>Homework 2 - Python for data analysis<a class="headerlink" href="#homework-2-python-for-data-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>by <a class="reference external" href="http://gureckislab.org/~gureckis">Todd M. Gureckis</a></em>  code shared under the <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> license.  Credit given where inspiration was obtained from others!</p>
+</div>
+<div class="alert alert-danger" role="alert">
+  Check the class schedule for information about homework due dates. 
+</div><img src="http://imgs.xkcd.com/comics/python.png" width="400">
+<p>The goal of Homework 2 is to make sure you understand enough python for the types of data analysis that we will be doing the rest of the semester.  At this point you should be pretty comfortable with the Jupyter notebook environment.  If you need a refresher on python there are a number of excellent resources you can explore on your own:</p>
+<ul class="simple">
+<li><p>Google for Education’s <a class="reference external" href="https://developers.google.com/edu/python/">Beginner Python course</a>.  Jump to section “Python Intro”</p></li>
+<li><p>Corey Schafer’s <a class="reference external" href="https://www.youtube.com/playlist?list=PL-osiE80TeTskrapNbzXhwoFUiLCjGgY7">Python Programming Beginner Tutorials</a> on Youtube.  These are great if you prefer to watch videos.  Also can skip the first video on installing python because you are using Jupyter and there is nothing to install!</p></li>
+</ul>
+<p>In the homework I will give you some data, give examples of how to use a key programming construct in the analysis of this data, and then give you a chance to try to perform an analysis using what you have learned.</p>
+<hr class="docutils" />
+<div class="section" id="importing-libraries">
+<h2>Importing libraries<a class="headerlink" href="#importing-libraries" title="Permalink to this headline">¶</a></h2>
+<p>As you have seen a few times now, before we start we often need to import some additional python libraries.  This is one of the key features of python because there are really amazing libraries that will let you do almost anything!  Also when you get a bit more advanced you can write your own libraries.</p>
+<p>There are several common ways of importing. Let’s say we want to import a package <code class="docutils literal notranslate"><span class="pre">foo</span></code> that defines a function <code class="docutils literal notranslate"><span class="pre">widget</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">foo</span></code> will import the <code class="docutils literal notranslate"><span class="pre">foo</span></code> package; any reference to modules/classes/functions will need to be prefixed with <code class="docutils literal notranslate"><span class="pre">foo.</span></code>; e.g. <code class="docutils literal notranslate"><span class="pre">foo.widget()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">foo</span> <span class="pre">as</span> <span class="pre">bar</span></code> will import the <code class="docutils literal notranslate"><span class="pre">foo</span></code> package with the alias <code class="docutils literal notranslate"><span class="pre">bar</span></code>; any reference to modules/classes/functions will need to be prefixed with <code class="docutils literal notranslate"><span class="pre">bar.</span></code>; e.g. <code class="docutils literal notranslate"><span class="pre">bar.widget()</span></code> This is the preferred method especially when the name of the package is long.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">foo</span> <span class="pre">import</span> <span class="pre">widget</span></code> can be used to import a specific module/class/function from <code class="docutils literal notranslate"><span class="pre">foo</span></code> and it will be available as <code class="docutils literal notranslate"><span class="pre">widget()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">foo</span> <span class="pre">import</span> <span class="pre">*</span></code> will import every item in <code class="docutils literal notranslate"><span class="pre">foo</span></code> into the current namespace; this is bad practice, don’t do it.</p></li>
+</ul>
+<p>As you have seen from past notebooks we often want to import <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, and <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline 
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success" role="alert">
+  <strong>Problem 1 (2 points)</strong> <br>
+  Ooops I forgot to import our favorite plotting library `seaborn`.  Import it below with the shorthand name `sns` and run the code so that this library is available to you later!
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># put your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are many great libraries for python.  How do you learn about them?  Check out <a class="reference external" href="https://pypi.org">pypi.org</a> which lets you search for different libraries.  Of course not all the libraries are installed on our class JupyterHub but all of the <a class="reference external" href="https://docs.python.org/3/library/">standard ones are</a>.  One example of a standard library is the <code class="docutils literal notranslate"><span class="pre">math</span></code> library.  This library implements a bunch of simple math functions (<a class="reference external" href="https://docs.python.org/3/library/math.html">full list</a>).  For example, <code class="docutils literal notranslate"><span class="pre">math.sqrt(x)</span></code> will take the square root of <code class="docutils literal notranslate"><span class="pre">x</span></code>.  Try to execute the folowing cell:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-warning" role="alert">
+  <strong>Oops!</strong><br> 
+    Did this not work?  Don't worry that is expected!
+</div><div class="alert alert-success" role="alert">
+  <strong>Problem 2 (2 points)</strong> <br>
+  What is wrong with the previous cell?  Why did it not run?  Write the code necessary so it works.  You can copy the command again below.  Keep in mind the advice above about libraries!
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># put your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-data-dealing-with-lists-and-dictionaries">
+<h2>Getting Data, Dealing with Lists and Dictionaries<a class="headerlink" href="#getting-data-dealing-with-lists-and-dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>As we explored in the labs so far, the most common way to read in data for analysis is from a CSV (comma separate values) file.  This is like a simple version of an excel spreadsheet.  Indeed you can export files from Excel as a CSV and also from Google Sheets.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;http://myurl.edu/mydata.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However there are many ways to get data into Python.  For example, another approach is to use what is known as a data API (or application programming interfaces).  Very simply APIs are ways of getting access to data using code.  Many websites including Twitter, Yelp, Strava, etc.. provide APIs that let you access and process at least parts of the data on their websites.  Often companies release python libraries to make this easier.</p>
+<p>In the rest of the homework we are going to explore one example of this using the <a class="reference external" href="https://petfinder.com">Petfinder.com</a> website.  Petfinder is a website that helps people locate pets for adoption.  It maintains a searchable database of pets from many different shelters and makes the data on the pets searchable.  There is also a cool python library call <code class="docutils literal notranslate"><span class="pre">petpy</span></code> which help you to interact with the Petfinder website.</p>
+<p>To get started let’s import the <code class="docutils literal notranslate"><span class="pre">petpy</span></code> library.  Here I am not using the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">X</span> <span class="pre">as</span> <span class="pre">Y</span></code> syntax because petpy is pretty easy to type.  I am also importing a few other libraries for displaying images in the Jupyter notebook and downloading files over the internet.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">petpy</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To access Petfinder you have to signup on their website.  I have already done this for you so you can use my creditials for class (provided on the class Piazza):</p>
+<div class="alert alert-danger" role="alert">
+  <strong>Warning!</strong><br> 
+    The following code (and the rest of this homework) will not work unless you get the API keys from the class message board (e.g., piazza or edstem) and paste it into your notebook.  Check the website or ask the instructor before continuing!
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MYKEY</span> <span class="o">=</span> <span class="s1">&#39;ski1ECR0y8TeW1aiVxOy7fR36ERlAn6GrrX1E9tNllr2B4HRuH&#39;</span>
+<span class="n">MYSECRET</span> <span class="o">=</span> <span class="s1">&#39;mEL8xgY4MN1EggFCDqoMFUzASvLk8w1cSKD5h3eq&#39;</span>
+<span class="n">pf</span> <span class="o">=</span> <span class="n">petpy</span><span class="o">.</span><span class="n">Petfinder</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">MYKEY</span><span class="p">,</span> <span class="n">secret</span><span class="o">=</span><span class="n">MYSECRET</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">pf</span></code> now contains an API interface to the Petfinder website.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animal_types</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">animal_types</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The new variable we created must contain something but honestly I have no idea what it is right at first.  So I will put it in a cell by itself so I can see what it contains.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animal_types</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A cool, ok so <code class="docutils literal notranslate"><span class="pre">animal_types</span></code> looks like a <a class="reference external" href="https://www.w3schools.com/python/python_dictionaries.asp">python dictionary</a> which you learned about in a prior lab session.  How do I know this? Well I notice that the entire output of the cell above is wrapped in <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code> which is how you denote a dictionary in python.  For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_dictionary</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;pasta&quot;</span><span class="p">:</span> <span class="s2">&quot;a type of italian food&quot;</span><span class="p">,</span> <span class="s2">&quot;pizza&quot;</span><span class="p">:</span> <span class="s2">&quot;another type of italian food&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the cell above, I just created a new variable called <code class="docutils literal notranslate"><span class="pre">my_dictionary</span></code> which has two <em>keys</em> (‘pasta’ and ‘pizza’) and two corresponding values/descriptions.  I can lookup the description of each of the key like this</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_dictionary</span><span class="p">[</span><span class="s1">&#39;pasta&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_dictionary</span><span class="p">[</span><span class="s1">&#39;pizza&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_dictionary</span><span class="p">[</span><span class="s1">&#39;salad&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oops, that was expected..  ‘salad’ wasn’t defined in our original dictionary so it can’t be looked up (we got an exception called ‘KeyError’ because the key ‘salad’ could not be found in the dictionary.</p>
+<p>The idea with dictionaries is that you can store stuff and easily look it up by name.</p>
+<p>Getting back to these pets!  What are the keys of this dictionary?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animal_types</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok so there is one key, <code class="docutils literal notranslate"><span class="pre">types</span></code>.  This must just mean that the API wraps everything up so lets look inside that key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animal_types</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok this is weird but this contains a <span class="xref myst">python list</span>.  How do I know that?  Because it is wrapped in <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code>.  How many things are in the list?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">animal_types</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ok, what is in the first slot or position of the list?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animal_types</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ah! Another dictionary (indicated by the <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code>).  But now I can kind of understand what is going on.  What are the keys of this dictionary?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animal_types</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, so the keys are things that are describing a type of pet!  We have a field called <code class="docutils literal notranslate"><span class="pre">name</span></code> and one called <code class="docutils literal notranslate"><span class="pre">coats</span></code> which sounds fascinating, and <code class="docutils literal notranslate"><span class="pre">colors</span></code> and <code class="docutils literal notranslate"><span class="pre">genders</span></code>.  Cool!</p>
+<p>So what is the first type of animal in this list?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animal_types</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, so it is good-boy pups.  What are the possible colors?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animal_types</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;colors&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Really cool stuff.  I think a Merle color dog might really suit me!  Although I don’t know that that is actually.  Let me consult wikipedia really quick!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">wikipedia</span>
+<span class="n">wikipedia</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="s2">&quot;Merle (dog coat)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Isn’t python so cool?  You can grab wikipedia entiries with one line just by typing <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">wikipedia</span></code>.  Now you might start understanding the cartoon at the beginning of the homework!</p>
+<p>Ok, so let’s challenge our understanding of working with lists and dictionaries.  What are the possible colors for cats according to the petfinder website?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Try to access the different colors of cats here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Did you get stuck?  Give it your best shot but if you really get fustrated you can run the cell below to reveal my solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment and run next line for a sample solution</span>
+<span class="c1"># %load hw2-hint1.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success" role="alert">
+  <strong>Problem 3 (2 points)</strong> <br>
+  What are the colors for the "small and furry" animals (mice, gerbils, etc...)?
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># put your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="for-loops-and-other-ways-to-repeat-things">
+<h2>For loops and other ways to repeat things<a class="headerlink" href="#for-loops-and-other-ways-to-repeat-things" title="Permalink to this headline">¶</a></h2>
+<p>So far we have kind of been playing with dictionaries and list by accessing individual elements.  However sometimes we want to know more general stuff like what is the name of all the types of animals?  To do this we kind of want to use the methods we developed above to look inside this data frame but to repeat this for each element within the structure.  This brings us to the dreaded <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.  Many students are afraid of for loops because they can get a bit complex.  However, they are also a super critial tool for working with data effectively and open up so many more interesting types of analyses to you.</p>
+<p>The most common use for a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop in data analysis is to repeat at step for each record of some data.  For instance you might want to print out the value of each item in a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a
+b
+c
+d
+</pre></div>
+</div>
+</div>
+</div>
+<p>you can use features of list to reverse the printout.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>or each item in a dictionary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weapon_strengths</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;tomahawk&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s1">&#39;katana&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="s1">&#39;hand of god&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">weapon</span> <span class="ow">in</span> <span class="n">weapon_strengths</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;I have a </span><span class="si">{</span><span class="n">weapon</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">---</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">weapon</span><span class="p">,</span> <span class="n">strength</span> <span class="ow">in</span> <span class="n">weapon_strengths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;My </span><span class="si">{</span><span class="n">weapon</span><span class="si">}</span><span class="s2"> has a strength of </span><span class="si">{</span><span class="n">strength</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I have a tomahawk!
+I have a katana!
+I have a hand of god!
+
+---
+
+My tomahawk has a strength of 20!
+My katana has a strength of 60!
+My hand of god has a strength of 100!
+</pre></div>
+</div>
+</div>
+</div>
+<p>This second example shows how you can repeat the printing command for each key in the dictionary <code class="docutils literal notranslate"><span class="pre">weapon_strengths.keys()</span></code> or all the items (like a list): <code class="docutils literal notranslate"><span class="pre">weapon_strengths.items()</span></code>.</p>
+<p>Lets try it out for the animals!  What are the types of animals in the Petfinder system?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animal_types</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">animal</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dog
+Cat
+Rabbit
+Small &amp; Furry
+Horse
+Bird
+Scales, Fins &amp; Other
+Barnyard
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here I am repeating the same code for each entry in the <code class="docutils literal notranslate"><span class="pre">animal_types['types']</span></code> list.  Each entry in that list is first assigned to the variable <code class="docutils literal notranslate"><span class="pre">animal</span></code> and then I look inside that dictionary and access the <code class="docutils literal notranslate"><span class="pre">name</span></code> key.</p>
+<div class="alert alert-success" role="alert">
+  <strong>Problem 4 (2 points)</strong> <br>
+  Write a for loop that print out the name of each animal category and the coats they have.  Your output should look like this:
+<pre>
+Dog: ['Hairless', 'Short', 'Medium', 'Long', 'Wire', 'Curly']
+Cat: ['Hairless', 'Short', 'Medium', 'Long']
+Rabbit: ['Short', 'Long']
+Small & Furry: ['Hairless', 'Short', 'Long']
+Horse: []
+Bird: []
+Scales, Fins & Other: []
+Barnyard: ['Short', 'Long']
+</pre>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># put your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So far we have been exploring repeating loops for each entry in a dataset that we obtained via an API.  However, sometimes we just want to repeat things a few times in order to do other stuff.  For instance, as you will see you can use python and <code class="docutils literal notranslate"><span class="pre">for</span></code> loops to draw simple pictures!</p>
+<p>In order to use <code class="docutils literal notranslate"><span class="pre">for</span></code> loops in this way we have to <em>create data</em>.  One of the easiest ways to create data is the <code class="docutils literal notranslate"><span class="pre">range()</span></code> command which creates a list with a sequence of numbers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So if we wanted to repeat the same thing 5 times we could do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also place <code class="docutils literal notranslate"><span class="pre">for</span></code> loops inside another <code class="docutils literal notranslate"><span class="pre">for</span></code> loop if you tab is over appropriately.  If this happens you can repeat things in more complex ways.  For instance you can print out a square like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success" role="alert">
+  <strong>Problem 5 (4 points)</strong> <br>
+  Modify the code for the square above to write a nested for loop that prints out a triangle with height 5 and width 5.  Your output should look like this:
+<pre>
+* 
+* * 
+* * * 
+* * * * 
+* * * * * 
+</pre>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">for</span></code> loops are really interesting when combined with <code class="docutils literal notranslate"><span class="pre">if</span></code> statement.  This means while you are repeating the loop you can skip thing or do something different.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example the code above prints out the stars for each square only if the row (i) is less than 2 or greater than 7 (otherwise it prints a empty space instead due to the <code class="docutils literal notranslate"><span class="pre">else</span></code>).  Think about this one for a bit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success" role="alert">
+  <strong>Problem 6 (4 points)</strong> <br>
+  Modify your code for the triangle to write a nested for loop that prints out a diamond with height 7 and width 7.  You'll probably want to combined nested loops with if/else statements.  Your output should look like this:
+<pre>
+      *
+    * * *
+  * * * * *
+* * * * * * *
+  * * * * * 
+    * * *
+      *
+</pre>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success" role="alert">
+    <strong>BONUS Problem 1 "The Wave"(4 points)</strong> <br>
+<p>Create a list called ‘people’ which is full of zeros, except the first number is a 1. Then write a simple program that steps through each element of the vector. If the “person” to the left is standing (i.e., is set to 1.0) then have this current person stand up too. If the current person is already standing then have them sit back down. On each pass through print the contents of the people list. Bonus points for making the wave go forwards and backwards (i.e., left to right then back right to left).</p>
+<pre>
+people = [1,0,0,0,0,0,0,0,0,0]
+for each number "i"" in between 0 (the start) and the length of people (minus 1):
+    if person "i" is standing up:
+        make the person one to the right of person "i" stand up
+        make person "i" sit down
+        print people
+<pre>
+also remember,
+<pre>
+len(people)   # gives you the length of the "stadium" of people        
+people[0] # this is how  you select individual "people"
+people[1]
+people[2]
+</pre>
+</div>  <img src="https://media.giphy.com/media/Zl0dYeDrDjmms/giphy.gif" width="550"><p>Enough of this programming!  As a reward for completing these tough new problems, we’ll look at some cute pets using <code class="docutils literal notranslate"><span class="pre">for</span></code> loops.  The petfinder API has a function which will return the set of pets currently available for adoption.  This takes a number of options but by default will return 20 pet listings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animals</span> <span class="o">=</span> <span class="n">pf</span><span class="o">.</span><span class="n">animals</span><span class="p">(</span><span class="n">return_df</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a pandas dataframe that contains lots of information about the pet including if it is declawed, house trained, etc…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animals</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animals</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+
+<span class="k">def</span> <span class="nf">show_animal</span><span class="p">(</span><span class="n">animals</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+    <span class="n">record</span><span class="o">=</span><span class="n">animals</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">number</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">photos</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">photos</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="s1">&#39;medium&#39;</span> <span class="ow">in</span> <span class="n">record</span><span class="o">.</span><span class="n">photos</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">photo</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">photos</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;medium&#39;</span><span class="p">]</span>
+                <span class="n">img</span><span class="o">=</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">photo</span><span class="p">)</span>
+                <span class="n">ax</span><span class="p">[</span><span class="n">number</span><span class="p">]</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+                <span class="n">ax</span><span class="p">[</span><span class="n">number</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+                
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>  <span class="c1"># check out my for loop!</span>
+    <span class="n">show_animal</span><span class="p">(</span><span class="n">animals</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The previous cell requires a bit of <a class="reference external" href="https://matplotlib.org">matplotlib</a> magic to create a grid of images but the key is that there is a for loop that steps through and displays each image.  Try to understand this code and compare it to the loops described above.</p>
+</div>
+<div class="section" id="random-numbers">
+<h2>Random numbers<a class="headerlink" href="#random-numbers" title="Permalink to this headline">¶</a></h2>
+<p>In many aspects of analysis you need to generate random numbers.  You need this for a few reasons</p>
+<ol class="simple">
+<li><p>to create data from a distibution to check your intuitions about randomness (simulation)</p></li>
+<li><p>to create cognitive models that have “noise” in them so that their behavior is not deterministic</p></li>
+<li><p>to test your code by providing “fake” data that looks realistic</p></li>
+</ol>
+<p>One of the useful libraries for this is numpy’s <code class="docutils literal notranslate"><span class="pre">random</span></code> submodule.  The full list of available functions in this library is <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.14.0/reference/routines.random.html">here</a> and reading through can give you a good sense of what is possible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy.random</span> <span class="k">as</span> <span class="nn">npr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">randn()</span></code> gives you a random number of a standard normal distribution (one with the mean = 0 and standard deviation equal to 1.0:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>you can get more than one like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>lets get even more (1000) and plot them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>if you want the numbers to be uniform you can use <code class="docutils literal notranslate"><span class="pre">rand()</span></code> which draws random numbers from 0 to 1 (but not including exactly 1.0).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>as you can see the maximum value even of 1000 random <code class="docutils literal notranslate"><span class="pre">rand()</span></code> numbers is less than 1.0.  while for <code class="docutils literal notranslate"><span class="pre">randn()</span></code> it can be much higher:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">randint()</span></code> will only include the integers between the given range.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>you can also choose a random element of an array or list so that only certain values can be chosen:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>notice that even in 100 draws you never see 0 or 9 because they are not in the given array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]),</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also use random to randomly “shuffle” a list (meaning changing the order of things like you would a deck of playing cards).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+<span class="n">npr</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second list is the same as the first just randomly shuffled.</p>
+<p>There are lots of distributions you can draw random numbers from:</p>
+<p><strong>Chi-square</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">chisquare</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>lognormal</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>F</strong><br />
+you’ll see this again when we get to ANOVA!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">10000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">cumsum()</span></code> command computes the cumulative sum of a list.  Meaning it is the sum created by adding each entry to the list to the values of all the ones that come before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So the result is <code class="docutils literal notranslate"><span class="pre">array([1,</span> <span class="pre">2+1,</span> <span class="pre">3+2+1,</span> <span class="pre">4+3+2+1])</span></code>.  Now we can start adding up random numbers.  For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is sometimes called a “random walk” because you are taking small steps either up or down each time you add a number (the value from <code class="docutils literal notranslate"><span class="pre">npr.randn()</span></code>) but how far you move depends on the current sum.  You can get a sense of this by plotting the sum as it evolves:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Try running the above cell a few times to get a sense of the range of random walks that are possible.</p>
+<p>You can also plot a few random walks on the same plot together:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s change the code to plot even more of these… maybe like 500!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(),</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s interesting… the sum start at zero (makes sense) and then kind of grows to get bigger as time goes on.  Not all paths get bigger of course but some randomly add up a bunch of positive or negative numbers and tend to drift further and further from the starting point.</p>
+<p>Now instead of computing the sum, let’s compute the average at each step.  So for each step we need to divide by the number of things we have added together so far.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">50</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice we needed to use <code class="docutils literal notranslate"><span class="pre">np.arange(1,50+1)</span></code> because we want to start with value 1 for the first number (<code class="docutils literal notranslate"><span class="pre">np.arange(50)</span></code> would count from 0 to 49 and we would then be dividing by zero on the first sum.</p>
+<p>Let’s plot a bunch of these random averages:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s interesting, you can see that early on the average is quite variable but as you add more and more numbers the averages seem to converge around a particular value.  As it turns out you are looking at the sampling distribution of the mean for different values of N.  If you took a slice out of the plot at say 10 sums and made a histogram of the averages you would get a histogram of the sampling distribution of the mean.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Interestingly the “envelope” of the sampling distribution of the mean seems to be shrinking according to a particular mathematical relationship which is <span class="math notranslate nohighlight">\(1/\sqrt N\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the number of numbers you have added to the sum.</p>
+<p>In fact we can plot the sqrt(N) on the same plot to see the relationship</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">50</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">50</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span><span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, the thick black line is <span class="math notranslate nohighlight">\(1/\sqrt N\)</span> which is how the variance of the sampling distribution changes as the sample size increases!  (remember the formulat for the standard error fo the mean is the standard devision of the sample divided by the square root of N).  Now you can see why!</p>
+<div class="alert alert-success" role="alert">
+  <strong>Problem 7 (4 points)</strong> <br>
+  Modify the code above to plot the sampling distribution for number drawn from a random uniform distribution and from the chi-sq distribution (see above, you have all the ingredients you need).  Does the shape of the curves look that same?  Why is that?
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># your code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<img src="https://i.redd.it/u8j4x4jiz1q31.jpg" width="400"></div>
+<div class="section" id="pandas-and-data-frames">
+<h2>Pandas and Data Frames<a class="headerlink" href="#pandas-and-data-frames" title="Permalink to this headline">¶</a></h2>
+<p>A DataFrame is like a dictionary where the keys are column names and the values are Series that share the same index and hold the column values. The first “column” is actually the shared Series index (there are some exceptions to this where the index can be multi-level and span more than one column but in most cases it is flat).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Carol&#39;</span><span class="p">])</span>
+<span class="n">phones</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;555-123-4567&#39;</span><span class="p">,</span> <span class="s1">&#39;555-987-6543&#39;</span><span class="p">,</span> <span class="s1">&#39;555-245-6789&#39;</span><span class="p">])</span>
+<span class="n">dept</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;Marketing&#39;</span><span class="p">,</span> <span class="s1">&#39;Accounts&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">])</span>
+
+<span class="n">staff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="n">names</span><span class="p">,</span> <span class="s1">&#39;Phone&#39;</span><span class="p">:</span> <span class="n">phones</span><span class="p">,</span> <span class="s1">&#39;Department&#39;</span><span class="p">:</span> <span class="n">dept</span><span class="p">})</span>  <span class="c1"># &#39;Name&#39;, &#39;Phone&#39;, &#39;Department&#39; are the column names</span>
+<span class="n">staff</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note above that the first column with values 0, 1, 2 is actually the shared index, and there are three series keyed off the three names “Department”, “Name” and “Phone”.</p>
+<p>Like <code class="docutils literal notranslate"><span class="pre">Series,</span> <span class="pre">DataFrame</span></code> has an index for rows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> also has an index for columns:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The index operator actually selects a column in the DataFrame, while the .iloc and .loc attributes still select rows (actually, we will see in the next section that they can select a subset of the DataFrame with a row selector and column selector, but the row selector comes first so if you supply a single argument to .loc or .iloc you will select rows):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span>  <span class="c1"># Acts similar to dictionary; returns a column&#39;s Series</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can get a transpose of the DataFrame with the .T attribute:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also access columns like this, with dot-notation. Occasionally this breaks if there is a conflict with a UFunc name, like ‘count’:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">Name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can add new columns. Later we’ll see how to do this as a function of existing columns:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="p">[</span><span class="s1">&#39;Fulltime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">staff</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">.describe()</span></code> to get summary statistics:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">.quantile()</span></code> to get quantiles:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">.drop()</span></code> to remove rows. This will return a copy with the modifications and leave the original untouched unless you include the argument <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that because we didn&#39;t say inplace=True,</span>
+<span class="c1"># the original is unchanged</span>
+<span class="n">staff</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are many ways to construct a DataFrame. For example, from a Series or dictionary of Series, from a list of Python dicts, or from a 2-D NumPy array. There are also utility functions to read data from disk into a DataFrame, e.g. from a .csv file or an Excel spreadsheet. We’ll cover some of these later.</p>
+<p>Many DataFrame operations take an axis argument which defaults to zero. This specifies whether we want to apply the operation by rows (axis=0) or by columns (axis=1).</p>
+<p>You can drop columns if you specify <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;Fulltime&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another way to remove a column in-place is to use <code class="docutils literal notranslate"><span class="pre">del</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">staff</span><span class="p">[</span><span class="s2">&quot;Department&quot;</span><span class="p">]</span>
+<span class="n">staff</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can change the index to be some other column. If you want to save the existing index, then first add it as a new column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span><span class="p">[</span><span class="s1">&#39;Number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">staff</span><span class="o">.</span><span class="n">index</span>
+<span class="n">staff</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we can set the new index. This is a destructive</span>
+<span class="c1"># operation that discards the old index, which is</span>
+<span class="c1"># why we saved it as a new column first.</span>
+<span class="n">staff</span> <span class="o">=</span> <span class="n">staff</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">)</span>
+<span class="n">staff</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alternatively you can promote the index to a column and go back to a numeric index with <code class="docutils literal notranslate"><span class="pre">reset_index()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">staff</span> <span class="o">=</span> <span class="n">staff</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">staff</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success" role="alert">
+  <strong>Problem 8 (2 points)</strong> <br>
+  Create a data frame from the disctionary called `example_data` below.  Then generate a summary of the data.  Calculate the sum of all the visits (i.e., the total number of visits).
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">example_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;animal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;snake&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;snake&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">],</span>
+           <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+           <span class="s1">&#39;visits&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+           <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;no&#39;</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put your code to create the DataFrame here</span>
+<span class="c1"># Generate a summary of the data</span>
+<span class="c1"># Calculate the sum of all the visits (the total number of visits)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="course-feedback">
+<h2>Course feedback<a class="headerlink" href="#course-feedback" title="Permalink to this headline">¶</a></h2>
+<div class="alert alert-success" role="alert">
+  <strong>Give us some feedback</strong> <br>
+    How is the course going for you so far?  What can we try to work on in future?  Please remember that professors and TAs have feelings to but if you have a constructive idea to make the class work better for you please share in a markdown cell below!
+</div><p><strong>Your thoughts here please</strong></p>
+</div>
+<div class="section" id="turning-in-homeworks">
+<h2>Turning in homeworks<a class="headerlink" href="#turning-in-homeworks" title="Permalink to this headline">¶</a></h2>
+<p>When you are finished with this notebook. Save your work in order to turn it in.  To do this select <em>File</em>-&gt;<em>Download As…</em>-&gt;<em>HTML</em>.</p>
+<img src="images/save-pdf.png" width="300">
+<p>Homeworks will be submitted according to the instructions provided in class.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./archive-homeworks-last-year/hw2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Todd Gureckis<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
