@@ -13,6 +13,8 @@ parts:
     title: JupyterHub
   - url: https://edstem.org/us/courses/8295/discussion/
     title: EdStem
+  - url: https://github.com/brendenlake/lab-cognition-perception
+    title: GitHub
 - caption: Textbook
   numbered: true
   chapters:
