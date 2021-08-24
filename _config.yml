@@ -26,7 +26,7 @@ parse:
 repository:
   url: https://github.com/gureckis/nyu_lab_in_cognition
   path_to_book: book/
-  branch: master
+  branch: main
 
 launch_buttons:
   notebook_interface: "classic"
