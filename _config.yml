@@ -25,11 +25,10 @@ parse:
 
 repository:
   url: https://github.com/brendenlake/lab-cognition-perception
-  path_to_book: /
   branch: main
 
 launch_buttons:
   notebook_interface: "classic"
-  jupyterhub_url: "https://psychua-46-fall.rcnyu.org/"  # The URL for your JupyterHub. (e.g., https://datahub.berkeley.edu)
+  jupyterhub_url: "https://psychua-46-fall.rcnyu.org"  # The URL for your JupyterHub. (e.g., https://datahub.berkeley.edu)
   binderhub_url: ""
   # colab_url: "https://colab.research.google.com"

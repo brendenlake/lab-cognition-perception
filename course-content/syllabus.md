@@ -9,11 +9,11 @@
 
 **Professor**: [Brenden M. Lake](https://cims.nyu.edu/~brenden/)<br>
 **Email**: brenden@nyu.edu<br>
-**Office Hours**: TBD<br>
+**Office Hours**: Wednesdays, 4:30-5:30pm; 6 Washington Place, Room 858. I can also accommodate you on zoom if you let me know in advance.<br>
 
 **Teaching Assistant**: Peiling Jiang<br>
 **Email**:  goodjpl@nyu.edu<br>
-**Office Hours**: TBD<br>
+**Office Hours**: Thursday, 1-2pm; Zoom (see EdStem for details).<br>
 
 ### Place and Time
 Monday and Wednesday, 10-11:40am<br>
@@ -37,7 +37,7 @@ You are looking at it! The current website includes an online textbook developed
 PSYCH-UA 10 (Statistical reasoning for the behavioral sciences), PSYCH-UA 11 (Adavance psychological statistics) and one of the following: PSYCH-UA 22 (Perception), PSYCH-UA 25 (Cognitive Neuroscience), or PSYCH-UA 29 (COGNITION). Permission of the instructor may be obtained in certain cases.
 
 ## Computing Environment
-The course will rely on a online computing environment called Jupyter.  Each student will have their own JupyterHub instance and can connect to this from a variety of devices over the internet.  The address of the class JupyterHub is [TBD](TBD). You will log in with your normal NYUHome credentials.
+The course will rely on a online computing environment called Jupyter.  Each student will have their own JupyterHub instance and can connect to this from a variety of devices over the internet. The address of the class JupyterHub is [here](https://psychua-46-fall.rcnyu.org/). You will log in with your normal NYUHome credentials.
 
 ## Communication
 We will use [EdStem](https://edstem.org/us/join/MvmwM8) to facilitate discussion outside of class.  You can post questions about any of the course content and the TA or instructor will try their best to respond quickly. By asking your question on the public forum you can learn from the questions and answers of your fellow students. 
@@ -71,8 +71,11 @@ The course builds to a final project which will be completed in groups.  The fin
 
 ## Classroom Policies
 
+### Pandemic
+We are all going through difficult times during the pandemic  These include changes in our normal ways of doing things, living arrangements, family responsibilities, concerns about health and wellbeing, etc...   None of us is really OK all the time.  If you tell me you're having trouble, I will not judge you or think less of you but will work with you to come up with a pathway forward. I hope you can extend me and the TA the same grace.  You never owe me personal information about your health. You are always welcome to talk to me about things that you are going through. If I can't help you I might be able to direct you to someone who can.  If you need extra help or need to miss a class or need more time please just ask. We will work with you.
+
 ### Attendance and tardiness
-Attendance at all classes is required. The course is cumulative and so that the information you learn on one day will be important for the following day's learning.  Thus, it is not something you can catch up easily with notes from a friend.  If you have to be away for a class please let the instructor or TA know in advance. Also, students should aim to arrive at class on time as much as possible. Frequent tardiness will be reflected in the participation grade due to missed quizzes.
+Attendance is necessary, with exceptions made for health and other issues mentioned in the above paragraph. The course is cumulative and so that the information you learn on one day will be important for the following day's learning. Thus, it is not something you can catch up easily with notes from a friend. If you have to be away for a class please let the instructor or TA know in advance. Also, students should aim to arrive at class on time as much as possible. Frequent tardiness will cause you to miss the quizzes.
 
 ### Honor code and plagiarism
 All work that students turn in must be their own work. For group assignments, all work must have been done by the students on the team and must include an acknowledgements section detailing the contribution of each team member. Any outside sources (articles, books, people) must be appropriately cited in written assignments. Turning in someone else's work as your own is unacceptable and will result in a failing grade. Most importantly, such behavior is academically dishonest and lazy. Submit only your own ideas and words.
@@ -85,7 +88,6 @@ Although the experiments performed in this class are for educational purposes, a
 A substantial aspect of the class is learning to use Python software packages for data analysis. We will be teaching these skills in the class. However, if you find that you need extra assistance, the Bobst library provide statistical consultants who are familiar with these packages. According to their webpage: Consultation information will be available on the 6th floor in rooms 620 and 621* via e- mail
 (data.service@nyu.edu), telephone 212-998-3434, by appointment or on a walk-in basis. Staff and student consultants will offer free tutorials and workshops on a variety of statistical packages. Sign up for fall software tutorials on the library's
 classes page: http://www.library.nyu.edu/forms/research/classes.html
-
 
 ### Accommodation
 Students requesting academic accommodations are advised to reach out to the Moses Center for Students with Disabilities as early as possible in the semester for assistance.
@@ -108,6 +110,3 @@ Any student with a documented disability needing academic adjustments or accommo
 
 ### Religious observances
 Some students may wish to take part in religious observances that occur during this academic term. If you have a religious observance which conflicts with your participation in the course, please meet with me by the end of the second week of the term to discuss appropriate accommodations.
-
-### Pandemic
-We are all going through difficult times during the pandemic.  These include changes in our normal ways of doing things, living arrangements, family responsibilities, concerns about health and wellbeing, etc...   None of us is really OK all the time.  If you tell me you're having trouble, I will not judge you or think less of you but will work with you to come up with a pathway forward. I hope you can extend me and the TA the same grace.  You never owe me personal information about your health.  You are always welcome to talk to me about things that you are going through.  If I can't help you I might be able to direct you to someone who can.  If you need extra help or need to miss a class or need more time please just ask.  I will try to work with you.

@@ -10,7 +10,6 @@ In addition to methods, the course will expose students to key concepts in cogni
 
 This course is useful for undergraduate students interested in getting actively involved in research at NYU or another university.  In addition, this course provides a strong background for graduate work in psychological science, particularly cognitive science, cognitive neuroscience, and perception.  Even if you plan to not continue to do scientific research, the course should arm you with some of the necessary skills to be an effective worker in a world awash with data.
 
-
 ## Goals
 
 - Learn the basics of using Python to explore and analyze data
