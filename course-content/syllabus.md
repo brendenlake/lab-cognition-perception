@@ -8,12 +8,17 @@
 ### Instructors
 
 **Professor**: [Brenden M. Lake](https://cims.nyu.edu/~brenden/)<br>
-**Email**: brenden@nyu.edu<br>
+**Email**: [instructors-labcp-fall2021@googlegroups.com](mailto:instructors-labcp-fall2021@googlegroups.com)<br>
 **Office Hours**: Wednesdays, 4:30-5:30pm; 6 Washington Place, Room 858. I can also accommodate you on zoom if you let me know in advance.<br>
 
 **Teaching Assistant**: Peiling Jiang<br>
-**Email**:  goodjpl@nyu.edu<br>
+**Email**:  [instructors-labcp-fall2021@googlegroups.com](mailto:instructors-labcp-fall2021@googlegroups.com)<br>
 **Office Hours**: Thursday, 1-2pm; Zoom (see EdStem for details).<br>
+
+### Getting in touch
+Questions should be posted in EdStem, which is your first point of contact. Use EdStem if you think there's even a small chance someone has the same question. This will also get you the fastest answer.<br>
+
+If you need to contact the instructors directly or about something more specific to you, please use this email [instructors-labcp-fall2021@googlegroups.com](mailto:instructors-labcp-fall2021@googlegroups.com).
 
 ### Place and Time
 Monday and Wednesday, 10-11:40am<br>
@@ -56,7 +61,7 @@ Attendance and participation is important given the hands on nature of the cours
 Short quizzes on the assigned reading and videos will be assigned at the start of each class.
 
 ### Presentation (10% of grade)
-Students will be assigned to a working group that they will keep throughout the entire semester (2-4 people). You will use this group for in-class work and labs. Additionally, each group will be in charge of presenting a summary of the reading/chapter assigned for one of the classes. Presentations involve a few slides describing the overall content of the class, and a list of questions that your group had about the reading that we can discuss as a group.
+Students will be assigned to a working group that they will keep throughout the entire semester (3 people). You will use this group for in-class work and labs. Additionally, each group will be in charge of presenting a summary of the reading/chapter assigned for one of the classes. Presentations involve a few slides describing the overall content of the class, and a list of questions that your group had about the reading that we can discuss as a group.
 
 ### Homework (15% of grade)
 We will have semi-regular homeworks. These should not be too long or onerous and should let you develop your skill and practice material covered in class. Often you will complete these assignments by filling out a webform or by completing some exercises on the class Jupyterhub instance and submitting your completed notebooks.  Some are written assignments which give you practice summarizing research results in paper form, writing the various parts of an academic paper, and communicating the results of statistical tests.
