@@ -18,6 +18,8 @@
 ### Getting in touch
 Questions should be posted in EdStem, which is your first point of contact. Use EdStem if you think there's even a small chance someone has the same question. This will also get you the fastest answer.<br>
 
+[LINK TO JOIN EDSTEM](https://edstem.org/us/join/MvmwM8)<br>
+
 If you need to contact the instructors directly or about something more specific to you, please use this email [instructors-labcp-fall2021@googlegroups.com](mailto:instructors-labcp-fall2021@googlegroups.com).
 
 ### Place and Time
