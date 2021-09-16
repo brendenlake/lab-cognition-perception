@@ -4,7 +4,7 @@
 
 **Instructor**: [Brenden M. Lake](https://cims.nyu.edu/~brenden/)<br>
 
-This course provides hands-on experience with the tools, practices, and computer programming techniques used in psychological research. Students learn how to collect, analyze, and report psychological data concerning a variety aspects of human cognition and perception. By the end of the course students will have an first hand understanding of how to run psychological experiments, collect and analyze data, and write research reports. Students will also get substantial practice with computer programming in Python.
+This course provides good hands-on experience with the tools, practices, and computer programming techniques used in psychological research. Students learn how to collect, analyze, and report psychological data concerning a variety aspects of human cognition and perception. By the end of the course students will have an first hand understanding of how to run psychological experiments, collect and analyze data, and write research reports. Students will also get substantial practice with computer programming in Python.
 
 In addition to methods, the course will expose students to key concepts in cognition and perception including intelligence, learning, memory, attention, visual perception, mental imagery and imagination, and cognitive neuroscience.  Data analyzed include choice data, reaction time, eye-movement data, and functional magnetic resonance imaging (fMRI). The course culminates in an intensive final project involving the design and analysis of a novel experiment.
 

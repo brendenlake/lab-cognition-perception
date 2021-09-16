@@ -3,3 +3,4 @@ Makefile
 _build
 .ipynb*
 *.ipynb_*
+*-checkpoint.ipynb
