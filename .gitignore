@@ -1,6 +1,4 @@
 *.sublime-*
 Makefile
 _build
-.ipynb*
-*.ipynb_*
-*-checkpoint.ipynb
+.ipynb_checkpoints
