@@ -45,12 +45,12 @@ parts:
     title: Intro to CogSci ICA
   - file: homeworks/Homework1
     title: Intro to Jupyter (HW1)
-  # - file: chapters/03/python-ica.ipynb
-  #   title: Python ICA (Ch 4)
-  # - file: chapters/04/design-ica.ipynb
-  #   title: Design ICA (Ch 5)
-  # - file: homeworks/hw2/Homework2
-  #   title: Python for data (HW2)
+  - file: chapters/03/python-ica.ipynb
+    title: Python ICA (Ch 4)
+  - file: chapters/04/design-ica.ipynb
+    title: Design ICA (Ch 5)
+  - file: homeworks/hw2/Homework2
+    title: Python for data (HW2)
   # - file: chapters/05/data-ica-1.ipynb
   #   title: Data ICA (Ch 6)
   # - file: chapters/06/plots-ica.ipynb
