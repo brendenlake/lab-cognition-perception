@@ -51,6 +51,8 @@ parts:
     title: Design ICA (Ch 5)
   - file: homeworks/hw2/Homework2
     title: Python for data (HW2)
+    - file: homeworks/hw3/Homework3
+    title: Exploring data (HW3)
   # - file: chapters/05/data-ica-1.ipynb
   #   title: Data ICA (Ch 6)
   # - file: chapters/06/plots-ica.ipynb
