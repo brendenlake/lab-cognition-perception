@@ -16,23 +16,13 @@
 name: title
 class:  middle, center, dark
 
-<center>
-<embed src="images/title.svg" type="image/svg+xml" height="100px" align="center" style="border: 0px solid lightgray;"/>
-</center>
-
----
-
-
-
-class: light, center, middle, clear
-
-# Chance does things
+# Samples, populations, and sampling
 
 ---
 
 class: light
 
-# Big ideas for this course
+# The problem
 
 1. Psychology interpets patterns in data to draw conclusions about psychological processes
 
@@ -42,14 +32,14 @@ class: light
 
 --
 
-3. **Problem**: How can we know if the pattern is real, or simply a random accident produced by chance
+3. **Problem**: How can we know if the pattern is real, or simply a random accident produced by chance?
 
 ---
 
 class: light
 
 
-# Solutions
+# Steps to a solution
 
 1. Need to understand what chance is
 
@@ -69,7 +59,7 @@ class: light
 
 1. **Probability Basics** 
 
-2. **Distributions**
+2. **Aributions**
 
 3. **Sampling from distributions**
 
@@ -88,22 +78,7 @@ class: light
 
 - A number bounded between 0 and 1
 
-- Describes the "chances" or "likelihood" of an event
-
----
-
-class: light
-
-# Proportions and Percentages
-
-- Percentage (%) : A ratio between event frequency, and total frequency, expressed in units of 100.
-- Proportion : a decimal version (range between 0-1)
-
-`\(100\% = \frac{100}{100} = 1 = 1*100 = 100\%\)`
-
-`\(50\% = \frac{50}{100} = .5 = .5*100 = 50\%\)`
-
-`\(\frac{2}{4} = .5 = .5*100 = 50\%\)`
+- Describes the "chances" or "likelihood" of an event occuring
 
 ---
 
@@ -119,72 +94,6 @@ class: light
 
 - There is a 10% chance of rain tomorrow
   - p(rain tomorrow) = .1
-
----
-
-class: light
-
-# Frequentist vs. Bayesian
-
-Probability is defined differently depending on philosophical tradition.
-
-1. Frequentist: The long-run chances (odds) of an event occurring
-
-2. Bayesian: Degree of belief
-
----
-
-class: light
-
-# A fair coin
-
-A fair coin has a 50% chance of landing heads or tails
-
-- Frequentist: If you flip this coin an infinity of times, **in the long run** half of the outcome will be heads, and half will be tails
-
-- Bayesian: I am uncertain about the outcome, I can't predict what it will be.
-
----
-
-class: light
-
-# 10% chance of rain tomorrow
-
-10% chance of rain tomorrow refers to a single event that hasn't yet occurred
-
-- Frequentist: I don't know what to say. Tomorrow it will rain or not rain, so there will be a 0% or 100% chance of rain, we'll find out after tomorrow happens
-
-- Bayesian: It is unlikely to rain tomorrow, I won't bring an umbrella.
-
----
-
-class: light, center, middle, clear
-
-# 50% chance
-
----
-
-class: light
-
-# Coin flipping
-
-I made Python flip a fair coin 100 times:
-
-
-```
-##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-##  [1,] "H"  "H"  "T"  "T"  "H"  "H"  "H"  "T"  "H"  "T"  
-##  [2,] "T"  "H"  "T"  "H"  "H"  "H"  "H"  "H"  "T"  "H"  
-##  [3,] "H"  "H"  "H"  "T"  "T"  "T"  "H"  "T"  "H"  "T"  
-##  [4,] "T"  "T"  "H"  "T"  "H"  "H"  "T"  "T"  "H"  "T"  
-##  [5,] "H"  "T"  "T"  "H"  "T"  "T"  "H"  "H"  "T"  "T"  
-##  [6,] "H"  "H"  "H"  "T"  "T"  "T"  "T"  "H"  "T"  "T"  
-##  [7,] "H"  "H"  "H"  "T"  "T"  "T"  "H"  "T"  "T"  "H"  
-##  [8,] "T"  "T"  "H"  "T"  "H"  "H"  "H"  "T"  "H"  "H"  
-##  [9,] "T"  "T"  "T"  "T"  "T"  "H"  "H"  "H"  "T"  "H"  
-## [10,] "T"  "H"  "H"  "T"  "T"  "H"  "T"  "T"  "H"  "T"
-```
-
 
 ---
 
@@ -220,15 +129,14 @@ class: light
 
 2. When sample size (number of flips) is small, you can "randomly" get more or less than 50% heads
 
-3. Chance is lumpy
-
 ---
 
 class: light
 
 # Discrete probability distributions
 
-1. Defines the probability of each item in a set. 
+1. Defines the probability of each possible outcome/event in a set. 
+
 2. All probabilities must add up to 1
 
 ---
@@ -255,17 +163,6 @@ class: light
 
 ![](4a_Distribution_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
-
----
-
-class: light
-
-# flipping a coin 10 times
-
-1. We expect to get 5 heads and 5 tails on average
-2. But, we often do not get exactly 5 heads and 5 tails
-3. Randomly sampling from the distribution can produce a variety of answers
-
 ---
 
 class: light
@@ -276,14 +173,14 @@ Steps:
 
 1. Flip a coin 10 times
 2. count the number of heads, save the number
-3. Repeat above 1,000 times or more
+3. Repeat above experiment 1,000 times or more
 4. plot the histogram of number of heads
 
 ---
 
 class: light
 
-# Distribution of heads (10 flips)
+# Distribution of heads (10 flips; "sample distribution")
 
 ![](4a_Distribution_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
@@ -303,21 +200,6 @@ class: light
 
 ---
 
-class: light
-
-# flipping a coin 100 times
-
-What if we simulated flipping a coin 100 times, what would the range of outcomes be?
-
----
-
-class: light
-
-# flipping a coin 100 times
-
-![](4a_Distribution_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
-
----
 
 class: light, center, middle, clear
 
@@ -327,17 +209,9 @@ class: light, center, middle, clear
 
 class: light
 
-# Distributions
+# Probability density functions
 
-1. A tool to define the chances of getting particular numbers
-2. Distributions have shapes
-3. Higher values indicate higher chance of getting a value
-
----
-
-class: light
-
-# Distributions have shapes
+A tool to define the chances of getting particular values
 
 &lt;img src="figs-crump/distribution/d1.png" width="80%" /&gt;
 
@@ -354,7 +228,7 @@ class: light
 
 class: light
 
-# Interpreting distributions
+# Interpreting densities
 
 &lt;img src="figs-crump/distribution/d3.png" width="80%" /&gt;
 
@@ -362,7 +236,7 @@ class: light
 
 class: light
 
-# Point Estimates
+# Single values
 
 &lt;img src="figs-crump/distribution/d4.png" width="80%" /&gt;
 
@@ -402,7 +276,7 @@ Python let's you sample numbers from a uniform distribution
 
 
 ```
-np.random.uniform(0,1,25)
+np.random.uniform(0,1,3 )
 ```
 
 ```
@@ -531,7 +405,7 @@ class: light
 
 - The histogram shows that each sample is different
 - But, the mean of each sample is always around 5.5
-- We have measured a property of the sample (the mean), each time.
+- We have measured a property of the sample (the mean), for each sample.
 
 ---
 
@@ -539,57 +413,18 @@ class: light
 
 # Something Curious
 
+If we repeat this 10K times, producing 10K sample means...
+
 &lt;img src="figs-crump/distribution/4unifmany-1.png" width="592" /&gt;
 
 ---
 
-
-
 class: light, center, middle, clear
 
-# Make sure you understand sampling distributions
-
----
-
-class: light, center, middle, clear
-
-# Make sure you understand this next graph
-
----
-
-class: light, center, middle, clear
+# Key graph
 
 &lt;img src="figs-crump/distribution/pop_samp.png" width="545" /&gt;
 
-
----
-
-
-class: light
-
-# Big ideas for this course
-
-1. Psychology interpets patterns in data to draw conclusions about psychological processes
-
---
-
-2. Chance can produce "patterns" in data
-
---
-
-3. **Problem**: How can we know if the pattern is real, or simply a random accident produced by chance
-
----
-
-class: light
-
-# Issues for this class
-
-1. **Sampling distributions**
-
-2. **Normal distributions and central limit theorem**
-
-3. **Estimation**
 
 ---
 
@@ -616,10 +451,7 @@ class: light
 - A process for generating a sample (taking things from a population)
 
 --
-- Random samples ensure that each value in a sample is drawn **independently** from other values
-
---
-- all values in the population have a chance of being in the sample
+- Good sampling ensure that each value in a sample is drawn **independently** from other values
 
 ---
 
@@ -693,13 +525,13 @@ We take samples, and use them to estimate things. This works well when we have l
 
 But, how do we know if the sample we obtained is "normal", or happens to be "weird"?
 
-Solution: We need to learn how the process of sampling works. We can use R to simulate the process of sampling. Then we can see how samples behave.
+Solution: We need to learn how the process of sampling works. We can use python to simulate the process of sampling. Then we can see how samples behave.
 
 ---
 
 class: light
 
-# Samples become populations
+# Samples become more like population
 
 - As sample-size increases, the sample becomes more like the population. 
 
@@ -758,7 +590,7 @@ class: light
   - Many samples are drawn from the same distribution
   - A statistic (e.g., mean, standard deviation) is computed for each sample, and saved
   - The sampling distribution is the distribution of the measured statistic for each sample
-  - Sampling distributions can be simulated in R
+  - Sampling distributions can be simulated in python
 
 ---
 
@@ -794,448 +626,17 @@ class: light
 
 Notice that the sampling distribution of the mean is bell-shaped, also called a **Normal Distribution**.
 
+It doesn't matter if the original distribution is bell-shaped, the sample mean will always be bell-shaped (**central limit theorem**)
+
+This allows us to see if a pattern in our sample is "typical" or not, given distributions expected by chance
+
 &lt;img src="figs-crump/distribution/4unifmany-1.png" width="50%" /&gt;
 
 ---
 
 class: light
 
-# Sampling distributions for anything
-
-A sampling distribution can be found for any sample statistic.
-
-1. Choose a statistic to measure (e.g., mean, median, variance, standard deviations, max, min, etc.)
-2. Measure statistics for each sample
-3. Plot the sampling distribution
-
----
-
-class: light
-
-# A few sampling distributions
-
-&lt;img src="figs-crump/distribution/4samplestats-1.png" width="592" /&gt;
-
-
----
-
-class: light
-
-# Use for sampling distributions?
-
-Question: What does a sampling distribution tell us?
-
-Answer: 
-
-- The distribution of values a sample statistic can take, for a sample of a particular size
-
-In other words,
-
-- Gives us information about range and probability of obtaining particular sample statistics
-
----
-
-class: light
-
-# Sampling distribution of the mean
-
-&lt;img src="figs-crump/distribution/4unifmany-1.png" width="592" /&gt;
-
----
-
-class: light
-
-# Standard error of the mean (SEM)
-
-- Definition: the standard deviation of the sampling distribution of the sample means
-
-Formulas: Can be computed directly for samples of any size if you know the standard deviation of the population distribution.
-
-`\(\text{SEM}=\frac{\text{standard deviation}}{\sqrt{N}}\)`
-
-`\(\text{SEM}=\frac{\sigma}{\sqrt{N}}\)`
-
-`\(\sigma\)` = population standard deviation
-
----
-
-class: light
-
-# SEM
-
-What does the SEM (standard error of the mean) tell you.
-
-- Let's say your sample mean was 5, and the SEM was 2.
-
-- The SEM is the standard deviation of the sampling distribution of the sample mean
-
-- Now you know that your sample mean is 5, but as an estimate of the population mean, that number varies a little bit. SEM tells you how much in standard deviation units.
-
-
----
-
-class: light
-
-# Central limit theorem
-
-With enough samples, sampling distributions are approximately **normal distributions**
-
-- Sampling distributions have the same shape as a normal distribution, even when the distribution that the sample came from does not have a normal shape.
-
----
-
-class: light, center, middle, clear
-
-# Normal Distributions
-
----
-
-class: light
-
-# Normal distributions are bell-shaped
-
-&lt;img src="figs-crump/distribution/standardNormal-eps-converted-to.png" width="80%" /&gt;
-
----
-
-class: light
-
-# Normal distribution formula
-
-&lt;img src="figs-crump/distribution/Normal_formula.png" width="715" /&gt;
-
----
-
-class: light
-
-# Normal distribution parameters
-
-Normal distributions have two important parameters that change their shape:
-
-1. The mean (where the peak of the distribution is centered)
-2. The standard deviation (how spread out the distribution is)
-
----
-
-class: light
-
-# Normal: Changing the mean
-
-![](figs-crump/distribution/normalMovingMean-1.gif)&lt;!-- --&gt;
-
----
-
-class: light
-
-# Normal: Changing standard deviation
-
-![](figs-crump/distribution/normalMovingSD-1.gif)&lt;!-- --&gt;
-
----
-
-class: light
-
-# rnorm()
-
-R has a function for generating numbers from a normal distribution.
-
-- n = number of samples
-- mean = mean of distribution
-- sd = standard deviation of distribution
-
-
-```r
-rnorm(n=100, mean = 50, sd = 25)
-```
-
----
-
-class: light
-
-# plotting a sample from a normal
-
-
-```r
-hist(rnorm(n=100, mean=50, sd=25))
-```
-
-&lt;img src="4b_Sampling_files/figure-html/unnamed-chunk-14-1.png" width="60%" /&gt;
-
----
-
-class: light
-
-# increasing N
-
-
-```r
-hist(rnorm(n=1000, mean=50, sd=25))
-```
-
-&lt;img src="4b_Sampling_files/figure-html/unnamed-chunk-15-1.png" width="60%" /&gt;
-
-
----
-
-class: light
-
-# Animating the central limit theorem
-
-![](figs-crump/distribution/sampleDistNormal-1.gif)&lt;!-- --&gt;
-
----
-
-class: light
-
-# Normal &amp; central limit
-
-&lt;img src="figs-crump/distribution/4sampledistmeannorm-1.png" width="592" /&gt;
-
----
-
-class: light
-
-# Uniform &amp; central limit
-
-&lt;img src="figs-crump/distribution/4samplemeanunif-1.png" width="592" /&gt;
-
----
-
-class: light
-
-# exponential &amp; Central limit
-
-&lt;img src="figs-crump/distribution/4samplemeanExp-1.png" width="592" /&gt;
-
----
-
-class: light
-
-# Importance of central limit theorem
-
-1. We see that our sample statistics are distributed normally
-
-2. We can use our knowledge of normal distributions to help us make inferences about our samples.
-
-Question:
-
-A. What do we need to know about the normal distribution to make use of it?
-
----
-
-class: light
-
-# Normal distributions and probability
-
-&lt;img src="figs-crump/distribution/4normalSDspercents-1.png" width="592" /&gt;
-
----
-
-class: light
-
-# Normal distributions and probability
-
-&lt;img src="figs-crump/distribution/4normalSDspercentsB-1.png" width="592" /&gt;
-
----
-
-class: light
-
-# pnorm()
-
-Use the `pnorm()` function to determine the proportion of numbers up to a particular value
-
-q = quantile
-
-What proportion of values are smaller than 0, for a normal distribution with mean =0, and sd= 1?
-
-
-```r
-pnorm(q=0, mean= 0, sd =1)
-```
-
-```
-## [1] 0.5
-```
-
-
----
-
-class: light
-
-# pnorm() continued
-
-What proportion of values are between 0 and 1, for a normal distribution with mean =0, and sd =1?
-
-
-```r
-lower_value &lt;- pnorm(q=0, mean= 0, sd =1)
-higher_value &lt;- pnorm(q=1,mean=0, sd=1)
-higher_value-lower_value
-```
-
-```
-## [1] 0.3413447
-```
-
----
-
-class: light, center, middle, clear
-
-# Estimation
-
----
-
-class: light
-
-# Goals of estimation
-
-- Use statistics of samples to estimate the statistics of the population (parent distribution) they came from
-
-- Use statistics of samples to estimate "error" in the sample
-
----
-
-class: light
-
-# Biased vs. unbiased estimators
-
-Biased estimators: Sample statistics that are give systematically wrong estimates of a population parameter
-
-Unbiased estimators: Sample statistics that are not biased estimates of a population parameter
-
----
-
-class: light
-
-# Sample means are unbiased
-
-- The mean of a sample is an unbiased estimator of the population mean
-
----
-
-class: light
-
-# Sample demonstration
-
-![](4b_Sampling_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
-
-
----
-
-class: light
-
-# Standard deviation is biased
-
-- The standard deviation formula (dividing by N) is a **biased** when applied to a sample, is a biased estimator of the population standard deviation.
-
-Formula for Population Standard Deviation
-
-`\(\text{Standard Deviation} = \sqrt{\frac{\sum{(x_{i}-\bar{X})^2}}{N}}\)`
-
----
-
-class: light
-
-# Sample demonstration
-
-![](4b_Sampling_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
-
----
-
-class: light
-
-# Sample Standard Deviation
-
-- If we divide by N-1, which is the formula for a sample standard deviation, we get an **unbiased** estimate of the population standard deviation
-
-Formula for **Sample Standard Deviation**
-
-`\(\text{Standard Deviation} = \sqrt{\frac{\sum{(x_{i}-\bar{X})^2}}{N-1}}\)`
-
-
----
-
-class: light
-
-# Sample demonstration
-
-![](4b_Sampling_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
-
----
-
-
-class: light, center, middle, clear
-
-&lt;img src="figs-crump/distribution/pop_samp.png" width="645" /&gt;
-
----
-
-class: light
-
-# sd() and SEM in R
-
-`sd()` computes the standard deviation using N-1
-
-
-```r
-x &lt;- c(4,6,5,7,8)
-sd(x)
-```
-
-```
-## [1] 1.581139
-```
-
-SEM is estimate of standard deviation divided by square root of N
-
-
-```r
-sd(x)/sqrt(length(x))
-```
-
-```
-## [1] 0.7071068
-```
-
-
----
-
-class: light
-
-# Questions for yourself
-
-1. What is the difference between a population mean and sample mean?
-
-2. What is the difference between a population standard deviation and sample standard deviation?
-
-3. There are two standard deviation formulas for a sample, one divides by N, and the other divided by N-1. What is the difference between the two?
-
----
-
-class: light
-
-# More questions
-
-1. What is a sampling distribution, how is it different from a single sample?
-
-2. What is the sampling distribution of the sample means?
-
-3. What is the standard error of the mean (SEM), and how does it relate to the sampling distribution of the sample means?
-
----
-
-class: light
-
-# Even more questions
-
-1. What is the difference between the standard error of the mean, and the estimated standard error of the mean?
-
----
-
-class: light
-
-Thanks to Matt Crump (Brooklyn College) for some of the slides.
+Thanks to Matt Crump and Todd Gureckis for slides.
 
     </textarea>
     <div id="slideshow"></div>
