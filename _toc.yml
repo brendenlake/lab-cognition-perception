@@ -65,7 +65,7 @@ parts:
     title: Signal Detection Theory (Lab 1.2)
   - file: labs/LabReg-IntroToRegression
     title: Intro to Regression (Lab 2.A)
- - file: labs/LabReg-AdvancedRegression
+  - file: labs/LabReg-AdvancedRegression
     title: Intro to Regression (Lab 2.B)
   - file: labs/LabReg-MentalRotation
     title: Intro to Regression (Lab 2.C)
