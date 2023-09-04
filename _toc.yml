@@ -11,7 +11,7 @@ parts:
   chapters:
   - url: https://psychua-46-fall.rcnyu.org/
     title: JupyterHub
-  - url: https://edstem.org/us/courses/8295/discussion/
+  - url: https://edstem.org/us/courses/45898/discussion/
     title: EdStem
   - url: https://github.com/brendenlake/lab-cognition-perception
     title: GitHub

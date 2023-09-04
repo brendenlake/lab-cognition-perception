@@ -1,4 +1,4 @@
-## Lab in cognition and perception -- Fall 2021
+## Lab in cognition and perception -- Fall 2023
 
 The course website is available [here](https://cims.nyu.edu/~brenden/courses/labincp/intro.html).
 

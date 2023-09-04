@@ -1,6 +1,6 @@
 # LAB IN COGNITION AND PERCEPTION
 
-### PSYCH-UA.46 - Fall 2021
+### PSYCH-UA.46 - Fall 2023
 
 **Instructor**: [Brenden M. Lake](https://cims.nyu.edu/~brenden/)<br>
 
