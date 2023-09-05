@@ -9,11 +9,11 @@
 
 **Professor**: [Brenden M. Lake](https://cims.nyu.edu/~brenden/)<br>
 **Email**: [instructors-labcp-fall2023@googlegroups.com](mailto:instructors-labcp-fall2023@googlegroups.com)<br>
-**Office Hours**: TBD. I can also accommodate you on zoom if you let me know in advance.<br>
+**Office Hours**: Thursdays 4:30-5:30pm. 6 Washington Place, Room 589. I can also accommodate you on zoom if you let me know in advance.<br>
 
 **Teaching Assistant**: Marianne Azar<br>
 **Email**:  [instructors-labcp-fall2023@googlegroups.com](mailto:instructors-labcp-fall2023@googlegroups.com)<br>
-**Office Hours**: TBD.<br>
+**Office Hours**: Wed. 11am-12. Conference room, 6th floor (neurolinguistics lab), NYU Department of Linguistics, 10 Washington Place. (Sometimes this doesn't show on Google maps. It's right across the street from NYU Public Safety and next to the Leslie eLab)<br>
 
 ### Getting in touch
 Questions should be posted in [EdStem](https://edstem.org/us/courses/45898/discussion/), which is your first point of contact. Use EdStem if you think there's even a small chance someone has the same question. This will also get you the fastest answer.<br>
